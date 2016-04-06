@@ -51,11 +51,12 @@ public class HomeworkQuizScoreSheetService implements IScoreSheetService {
                 .stream()
                 .map(homeworkPostHistory -> {
                     Map<String, Object> homeworkPostHistoryUri = new HashMap<>();
-                    homeworkPostHistoryUri.put("homeworkURL", homeworkPostHistory.getHomeworkURL());
+                    homeworkPostHistoryUri.put("userAnswerRepo", homeworkPostHistory.getUserAnswerRepo());
                     homeworkPostHistoryUri.put("branch", homeworkPostHistory.getBranch());
                     homeworkPostHistoryUri.put("version", homeworkPostHistory.getVersion());
                     homeworkPostHistoryUri.put("commitTime", homeworkPostHistory.getCommitTime());
                     homeworkPostHistoryUri.put("status", homeworkPostHistory.getStatus());
+                    homeworkPostHistoryUri.put("result", homeworkPostHistory.getResult());
                     return homeworkPostHistoryUri;
                 })
                 .collect(Collectors.toList());
@@ -84,13 +85,14 @@ public class HomeworkQuizScoreSheetService implements IScoreSheetService {
 
                 homeworkPostHistory.setBranch((String) h.get("branch"));
                 homeworkPostHistory.setVersion((String) h.get("version"));
-                homeworkPostHistory.setHomeworkURL((String) h
-                        .get("homeworkURL"));
+                homeworkPostHistory.setUserAnswerRepo((String) h
+                        .get("userAnswerRepo"));
                 homeworkPostHistory.setStatus((Integer) h.get("status"));
                 homeworkPostHistory.setHomeworkSubmitId(homeworkSubmit.getId());
                 homeworkPostHistory.setStartTime(startTime);
                 homeworkPostHistory.setCommitTime(
                         (Integer) h.get("commitTime"));
+                homeworkPostHistory.setResult((String) h.get("result"));
 
                 homeworkPostHistoryMapper.insertHomeworkPostHistory(homeworkPostHistory);
             });

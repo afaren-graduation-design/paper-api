@@ -6,16 +6,17 @@
 
     <resultMap id="homeworkPostHistoryListMap" type="com.thoughtworks.twars.bean.HomeworkPostHistory">
         <id property="id" column="id"></id>
-        <result column="homeworkURL" property="homeworkURL"></result>
+        <result column="userAnswerRepo" property="userAnswerRepo"></result>
         <result column="homeworkSubmitId" property="homeworkSubmitId"></result>
         <result column="version" property="version"></result>
         <result column="branch" property="branch"></result>
         <result column="startTime" property="startTime"></result>
+        <result column="result" property="result"></result>
     </resultMap>
 
     <insert id="insertHomeworkPostHistory" parameterType="com.thoughtworks.twars.bean.HomeworkPostHistory" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO homeworkPostHistory(homeworkSubmitId,homeworkURL,branch,version,status,commitTime,startTime)
-        VALUES (#{homeworkSubmitId},#{homeworkURL},#{branch},#{version},#{status},#{commitTime},#{startTime});
+        INSERT INTO homeworkPostHistory(homeworkSubmitId,userAnswerRepo,branch,version,status,commitTime,startTime,result)
+        VALUES (#{homeworkSubmitId},#{userAnswerRepo},#{branch},#{version},#{status},#{commitTime},#{startTime},#{result});
     </insert>
 
     <select id="findByHomeworkSubmitId" resultMap="homeworkPostHistoryListMap">

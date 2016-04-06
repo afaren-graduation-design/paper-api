@@ -63,7 +63,7 @@ public class HomeworkQuizScoreSheetTest {
         when(homeworkPostHistory.getVersion()).thenReturn("ghjkl");
         when(homeworkPostHistory.getStatus()).thenReturn(7);
         when(homeworkPostHistory.getCommitTime()).thenReturn(5678);
-        when(homeworkPostHistory.getHomeworkURL())
+        when(homeworkPostHistory.getUserAnswerRepo())
                 .thenReturn("github.com/jingjing");
         when(homeworkPostHistory.getStartTime()).thenReturn(123456);
         Gson gson = new GsonBuilder().create();
@@ -71,7 +71,7 @@ public class HomeworkQuizScoreSheetTest {
                 .findByHomeworkSubmitId(1);
         String homeworkPostHistoryStr = gson.toJson(homeworkPostHistoryList);
         assertThat(homeworkPostHistoryStr,
-                is("[{\"commitTime\":5678,\"homeworkURL\":\"github.com/jingjing\"," +
+                is("[{\"commitTime\":5678,\"userAnswerRepo\":\"github.com/jingjing\"," +
                         "\"branch\":\"dev\",\"version\":\"ghjkl\",\"status\":7}]"));
     }
 
