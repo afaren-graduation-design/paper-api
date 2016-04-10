@@ -9,6 +9,7 @@ public class Paper {
     private int id;
     private int makerId;
     private List<Section> sections;
+    private String paperName;
 
     public int getId() {
         return id;
@@ -32,6 +33,14 @@ public class Paper {
 
     public void setSections(List<Section> sections) {
         this.sections = sections;
+    }
+
+    public String getPaperName() {
+        return paperName;
+    }
+
+    public void setPaperName(String paperName) {
+        this.paperName = paperName;
     }
 
     public Map getResponseInfo() {

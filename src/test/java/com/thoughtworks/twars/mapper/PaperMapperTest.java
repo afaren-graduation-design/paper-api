@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder;
 import com.thoughtworks.twars.bean.Paper;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
