@@ -15,6 +15,7 @@ import java.util.*;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.when;
 
@@ -46,15 +47,20 @@ public class PaperResourceTest extends TestBase {
 
         when(paperMapper.findAll()).thenReturn(Arrays.asList(firstPaper, secondPaper));
         when(firstPaper.getId()).thenReturn(1);
+        when(firstPaper.getPaperName()).thenReturn("简单的试卷");
         when(secondPaper.getId()).thenReturn(5);
+        when(secondPaper.getPaperName()).thenReturn("普通的试卷");
 
 
         Response response = target(basePath).request().get();
         assertThat(response.getStatus(), is(200));
 
         List<Map> result = response.readEntity(List.class);
-        assertThat((String) result.get(0).get("uri"), is("papers/1"));
-        assertThat((String) result.get(1).get("uri"), is("papers/5"));
+        assertThat((Integer) result.get(0).get("id"), is(1));
+        assertThat((String) result.get(0).get("paperName"), is("简单的试卷"));
+        assertThat((Integer) result.get(1).get("id"), is(5));
+        assertThat((String) result.get(1).get("paperName"), is("普通的试卷"));
+
     }
 
     @Test
