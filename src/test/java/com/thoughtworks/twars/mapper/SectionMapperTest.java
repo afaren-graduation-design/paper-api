@@ -29,13 +29,12 @@ public class SectionMapperTest extends TestBase{
     @Test
     public void should_return_id_when_insert_section(){
         Section section = new Section();
-        section.setId(1);
         section.setPaperId(1);
         section.setType("blankQuizze");
         section.setDescription("这是描述");
 
         sectionMapper.insertSection(section);
 
-        assertThat(section.getId(), is(3));
+        assertThat(section.getId(), is(8));
     }
 }
