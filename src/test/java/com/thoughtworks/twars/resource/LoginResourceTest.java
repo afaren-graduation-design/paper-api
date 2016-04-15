@@ -1,6 +1,5 @@
 package com.thoughtworks.twars.resource;
 
-import com.thoughtworks.twars.bean.ThirdParty;
 import com.thoughtworks.twars.bean.LoginDetail;
 import com.thoughtworks.twars.bean.User;
 import org.junit.Test;
@@ -17,9 +16,7 @@ import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 
@@ -28,9 +25,6 @@ public class LoginResourceTest extends TestBase {
     String basePath = "/login";
     @Mock
     User resultUser;
-
-    @Mock
-    ThirdParty githubUser;
 
     @Test
     public void should_create_user_when_login_with_email() throws Exception {

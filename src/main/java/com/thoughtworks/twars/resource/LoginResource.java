@@ -2,7 +2,6 @@ package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.bean.LoginDetail;
 import com.thoughtworks.twars.bean.User;
-import com.thoughtworks.twars.mapper.GithubUserMapper;
 import com.thoughtworks.twars.mapper.LoginDetailMapper;
 import com.thoughtworks.twars.mapper.UserMapper;
 import io.swagger.annotations.*;
@@ -29,9 +28,6 @@ public class LoginResource extends Resource {
 
     @Inject
     private LoginDetailMapper loginDetailMapper;
-
-    @Inject
-    private GithubUserMapper githubUserMapper;
 
     @POST
     @ApiResponses(value = {@ApiResponse(code = 201, message = "successful",
