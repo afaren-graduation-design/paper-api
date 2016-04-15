@@ -6,4 +6,5 @@ import com.thoughtworks.twars.bean.ThirdParty;
 public interface ThirdPartyMapper {
     int insertThirdPartyUser(ThirdParty thirdParty);
 
+    ThirdParty getByThirdPartyUserIdAndType(ThirdParty thirdParty);
 }
