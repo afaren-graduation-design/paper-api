@@ -5,7 +5,7 @@
 <mapper namespace="com.thoughtworks.twars.mapper.ThirdPartyMapper">
 
   <insert id="insertThirdPartyUser" parameterType="com.thoughtworks.twars.bean.ThirdParty" useGeneratedKeys="true" keyProperty="id">
-    INSERT INTO thirdParty(thirdPartyId, userId) VALUES (#{thirdPartyId}, #{userId});
+    INSERT INTO thirdParty(thirdPartyId, userId, thirdType) VALUES (#{thirdPartyId}, #{userId}, #{thirdType});
   </insert>
 
 </mapper>

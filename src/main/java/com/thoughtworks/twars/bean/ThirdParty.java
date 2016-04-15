@@ -4,6 +4,7 @@ public class ThirdParty {
     int id;
     int thirdPartyId;
     int userId;
+    String thirdType;
 
     public int getId() {
         return id;
@@ -29,4 +30,11 @@ public class ThirdParty {
         this.userId = userId;
     }
 
+    public String getThirdType() {
+        return thirdType;
+    }
+
+    public void setThirdType(String thirdType) {
+        this.thirdType = thirdType;
+    }
 }

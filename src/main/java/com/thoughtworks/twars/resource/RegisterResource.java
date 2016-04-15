@@ -58,6 +58,7 @@ public class RegisterResource extends Resource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/auth/github")
     public Response createUser(ThirdParty thirdParty) {
+        thirdParty.setThirdType("github");
         thirdPartyMapper.insertThirdPartyUser(thirdParty);
         Map result = new HashMap<>();
         result.put("id", thirdParty.getId());
