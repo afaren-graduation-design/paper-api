@@ -4,8 +4,17 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.thoughtworks.twars.mapper.ThirdPartyMapper">
 
+  <resultMap id="ThirdPartyMap" type="com.thoughtworks.twars.bean.ThirdParty">
+    <result column="userId" property="userId"></result>
+    <result column="thirdPartyUserId" property="thirdPartyUserId"></result>
+    <result column="type" property="type"></result>
+  </resultMap>
+
   <insert id="insertThirdPartyUser" parameterType="com.thoughtworks.twars.bean.ThirdParty" useGeneratedKeys="true" keyProperty="id">
-    INSERT INTO thirdParty(thirdPartyId, userId, thirdType) VALUES (#{thirdPartyId}, #{userId}, #{thirdType});
+    INSERT INTO thirdParty(thirdPartyUserId, userId, `type`) VALUES (#{thirdPartyUserId}, #{userId}, #{type});
   </insert>
 
+  <select id="getByThirdPartyUserIdAndType" parameterType="com.thoughtworks.twars.bean.ThirdParty" resultType="com.thoughtworks.twars.bean.ThirdParty">
+    SELECT * FROM thirdParty WHERE thirdPartyUserId = #{thirdPartyUserId} AND `type` = #{type} LIMIT 1;
+  </select>
 </mapper>
