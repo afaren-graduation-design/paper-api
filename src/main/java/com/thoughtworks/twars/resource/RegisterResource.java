@@ -2,7 +2,7 @@ package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.bean.ThirdParty;
 import com.thoughtworks.twars.bean.User;
-import com.thoughtworks.twars.mapper.GithubUserMapper;
+import com.thoughtworks.twars.mapper.ThirdPartyMapper;
 import com.thoughtworks.twars.mapper.UserMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
@@ -28,7 +28,7 @@ public class RegisterResource extends Resource {
     private UserMapper userMapper;
 
     @Inject
-    private GithubUserMapper githubUserMapper;
+    private ThirdPartyMapper thirdPartyMapper;
 
     @POST
     @ApiResponses(value = {@ApiResponse(code = 200, message = "register successfully")})
@@ -54,14 +54,14 @@ public class RegisterResource extends Resource {
     }
 
     @POST
-    @Path("/third-party")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+    @Path("/auth/github")
     public Response createUser(ThirdParty thirdParty) {
-
-        githubUserMapper.insertGithubUser(thirdParty);
+        thirdPartyMapper.insertThirdPartyUser(thirdParty);
         Map result = new HashMap<>();
-        result.put("thirdPartyId", thirdParty.getId());
+        result.put("id", thirdParty.getId());
+
         return Response.status(Response.Status.CREATED).entity(result).build();
     }
 }

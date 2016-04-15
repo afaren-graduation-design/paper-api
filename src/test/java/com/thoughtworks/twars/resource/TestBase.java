@@ -33,6 +33,7 @@ public class TestBase extends JerseyTest {
     protected PasswordRetrieveDetailMapper passwordRetrieveDetailMapper = mock(PasswordRetrieveDetailMapper.class);
     protected HomeworkPostHistoryMapper homeworkPostHistoryMapper = mock(HomeworkPostHistoryMapper.class);
     protected GithubUserMapper githubUserMapper = mock(GithubUserMapper.class);
+    protected ThirdPartyMapper thirdPartyMapper = mock(ThirdPartyMapper.class);
     protected HomeworkQuizDefinitionService homeworkQuizDefinition = mock(HomeworkQuizDefinitionService.class);
     protected BlankQuizDefinitionService blankQuizDefinition = mock(BlankQuizDefinitionService.class);
     protected BlankQuizScoreSheetService blankQuizScoreSheet = mock(BlankQuizScoreSheetService.class);
@@ -67,6 +68,7 @@ public class TestBase extends JerseyTest {
                 bind(blankQuizScoreSheet).to(BlankQuizScoreSheetService.class);
                 bind(homeworkQuizScoreSheet).to(HomeworkQuizScoreSheetService.class);
                 bind(sqlSessionManager).to(SqlSessionManager.class);
+                bind(thirdPartyMapper).to(ThirdPartyMapper.class);
             }
         }).packages("com.thoughtworks.twars.resource");
     }

@@ -40,18 +40,18 @@ public class RegisterResourceTest extends TestBase {
     }
 
     @Test
-    public void should_create_user_when_register_with_third_part_user() throws Exception {
+    public void should_create_user_when_register_with_github_user() throws Exception {
         ThirdParty thirdParty = new ThirdParty();
 
-        when(githubUserMapper.insertGithubUser(thirdParty)).thenReturn(1);
+        when(thirdPartyMapper.insertThirdPartyUser(thirdParty)).thenReturn(1);
         thirdParty.setThirdPartyId(2);
         thirdParty.setUserId(4);
         thirdParty.setId(3);
 
         Entity entity = Entity.entity(thirdParty, MediaType.APPLICATION_JSON);
-        Response response = target(basePath + "/third-party").request().post(entity);
+        Response response = target(basePath + "/auth/github").request().post(entity);
         Map result = response.readEntity(Map.class);
         assertThat(response.getStatus(), is(201));
-        assertThat(result.get("thirdPartyId"), is(3));
+        assertThat(result.get("id"), is(3));
     }
 }

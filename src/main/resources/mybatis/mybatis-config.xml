@@ -46,5 +46,6 @@
         <mapper resource="mybatis/LoginDetailMapper.xml"></mapper>
         <mapper resource="mybatis/PasswordRetrieveDetailMapper.xml"></mapper>
         <mapper resource="mybatis/GithubUserMapper.xml"></mapper>
+        <mapper resource="mybatis/ThirdPartyMapper.xml"></mapper>
     </mappers>
 </configuration>
