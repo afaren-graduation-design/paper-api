@@ -140,6 +140,7 @@ public class PaperResourceTest extends TestBase {
 
         Map map = new HashMap<>();
         map.put("makerId", 1);
+        map.put("paperName", "思沃特训营第n次测验");
         map.put("sections", sections);
 
         Entity entity = Entity.entity(map, MediaType.APPLICATION_JSON_TYPE);

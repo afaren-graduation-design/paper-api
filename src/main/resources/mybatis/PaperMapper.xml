@@ -44,9 +44,7 @@
 
 
     <insert id="insertPaper" parameterType="com.thoughtworks.twars.bean.Paper" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO paper(makerId)
-        VALUES (#{makerId});
+        INSERT INTO paper(makerId, paperName)
+        VALUES (#{makerId}, #{paperName});
     </insert>
-
-
 </mapper>

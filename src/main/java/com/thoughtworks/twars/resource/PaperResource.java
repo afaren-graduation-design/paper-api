@@ -77,11 +77,14 @@ public class PaperResource extends Resource {
     public Response insertPaper(
             @ApiParam(name = "data", value = "include all info when insert paper", required = true)
             Map data) {
-        Paper insertPaper = new Paper();
         int makerId = (int) data.get("makerId");
+        String paperName = (String) data.get("paperName");
         List<Map> sections = (List<Map>) data.get("sections");
-        insertPaper.setMakerId(makerId);
         if(sections == null) {
+            Paper insertPaper = new Paper();
+            insertPaper.setMakerId(makerId);
+            insertPaper.setPaperName(paperName);
+
             paperMapper.insertPaper(insertPaper);
             Map result = new HashMap<>();
             result.put("paperId", insertPaper.getId());
@@ -91,6 +94,7 @@ public class PaperResource extends Resource {
         try {
             Paper paper = new Paper();
             paper.setMakerId(makerId);
+            paper.setPaperName(paperName);
 
             paperMapper.insertPaper(paper);
             int paperId = paper.getId();
