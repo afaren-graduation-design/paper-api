@@ -1,25 +1,16 @@
 package com.thoughtworks.twars.bean;
 
 public class ThirdParty {
-    int id;
-    int thirdPartyId;
+    int thirdPartyUserId;
     int userId;
-    String thirdType;
+    String type;
 
-    public int getId() {
-        return id;
+    public int getThirdPartyUserId() {
+        return thirdPartyUserId;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getThirdPartyId() {
-        return thirdPartyId;
-    }
-
-    public void setThirdPartyId(int thirdPartyId) {
-        this.thirdPartyId = thirdPartyId;
+    public void setThirdPartyUserId(int thirdPartyUserId) {
+        this.thirdPartyUserId = thirdPartyUserId;
     }
 
     public int getUserId() {
@@ -30,11 +21,11 @@ public class ThirdParty {
         this.userId = userId;
     }
 
-    public String getThirdType() {
-        return thirdType;
+    public String getType() {
+        return type;
     }
 
-    public void setThirdType(String thirdType) {
-        this.thirdType = thirdType;
+    public void setType(String type) {
+        this.type = type;
     }
 }
