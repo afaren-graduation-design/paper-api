@@ -20,12 +20,12 @@ public class ThirdPartyMapperTest extends TestBase{
     public void should_add_third_party_user() throws Exception {
         ThirdParty thirdParty = new ThirdParty();
 
-        thirdParty.setThirdPartyId(1);
+        thirdParty.setThirdPartyUserId(1);
         thirdParty.setUserId(1);
+        thirdParty.setType("github");
 
         thirdPartyMapper.insertThirdPartyUser(thirdParty);
 
-        assertThat(thirdParty.getId(), is(1));
-
+        assertThat(thirdParty.getUserId(), is(1));
     }
 }
