@@ -287,6 +287,4 @@ public class UserResource extends Resource {
 
         return Response.status(Response.Status.OK).entity(map).build();
     }
-
-
 }
