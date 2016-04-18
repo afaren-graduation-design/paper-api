@@ -32,7 +32,7 @@ public class ThirdPartyResource extends  Resource{
     @GET
     @Path("/github")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response findThirdPartyUserById(@PathParam("thirdPartyUserId") int thirdPartyUserId) {
+    public Response findThirdPartyUserById(@QueryParam("thirdPartyUserId") int thirdPartyUserId) {
         ThirdParty thirdParty = new ThirdParty();
         thirdParty.setType("github");
         thirdParty.setThirdPartyUserId(thirdPartyUserId);
