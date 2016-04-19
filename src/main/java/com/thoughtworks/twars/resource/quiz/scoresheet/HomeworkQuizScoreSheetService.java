@@ -51,7 +51,8 @@ public class HomeworkQuizScoreSheetService implements IScoreSheetService {
                 .stream()
                 .map(homeworkPostHistory -> {
                     Map<String, Object> homeworkPostHistoryUri = new HashMap<>();
-                    homeworkPostHistoryUri.put("userAnswerRepo", homeworkPostHistory.getUserAnswerRepo());
+                    homeworkPostHistoryUri.put("userAnswerRepo",
+                            homeworkPostHistory.getUserAnswerRepo());
                     homeworkPostHistoryUri.put("branch", homeworkPostHistory.getBranch());
                     homeworkPostHistoryUri.put("version", homeworkPostHistory.getVersion());
                     homeworkPostHistoryUri.put("commitTime", homeworkPostHistory.getCommitTime());

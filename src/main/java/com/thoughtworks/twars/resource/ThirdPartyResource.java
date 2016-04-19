@@ -12,7 +12,7 @@ import java.util.Map;
 
 @Path("/auth/thirdParty")
 
-public class ThirdPartyResource extends  Resource{
+public class ThirdPartyResource extends  Resource {
     @Inject
     private ThirdPartyMapper thirdPartyMapper;
 
