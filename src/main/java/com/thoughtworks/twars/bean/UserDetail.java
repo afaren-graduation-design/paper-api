@@ -7,6 +7,8 @@ public class UserDetail {
     private String degree;
     private String gender;
     private int userId;
+    private String schoolProvince;
+    private String schoolCity;
 
     public void setSchool(String school) {
         this.school = school;
@@ -54,5 +56,21 @@ public class UserDetail {
 
     public int getUserId() {
         return userId;
+    }
+
+    public String getSchoolProvince() {
+        return schoolProvince;
+    }
+
+    public void setSchoolProvince(String schoolProvince) {
+        this.schoolProvince = schoolProvince;
+    }
+
+    public String getSchoolCity() {
+        return schoolCity;
+    }
+
+    public void setSchoolCity(String schoolCity) {
+        this.schoolCity = schoolCity;
     }
 }

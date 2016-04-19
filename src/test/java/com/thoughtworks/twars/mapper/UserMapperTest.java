@@ -79,10 +79,13 @@ public class UserMapperTest extends TestBase {
         userDetail.setMajor("cs");
         userDetail.setSchool("xi'an");
         userDetail.setName("purple");
+        userDetail.setSchoolProvince("陕西");
+        userDetail.setSchoolCity("西安");
 
         userMapper.updateUserDetail(userDetail);
 
         assertThat(userDetail.getUserId(),is(1));
+        assertThat(userDetail.getSchoolCity(), is("西安"));
     }
 
     @Test
@@ -95,10 +98,13 @@ public class UserMapperTest extends TestBase {
         userDetail.setUserId(5);
         userDetail.setMajor("sc");
         userDetail.setName("purple");
+        userDetail.setSchoolProvince("陕西");
+        userDetail.setSchoolCity("西安");
 
         userMapper.updateUserDetail(userDetail);
 
         assertThat(userDetail.getUserId(),is(5));
+        assertThat(userDetail.getSchoolProvince(), is("陕西"));
     }
 
     @Test
@@ -111,6 +117,8 @@ public class UserMapperTest extends TestBase {
         assertThat(detail.getMajor(), is("计算机"));
         assertThat(detail.getDegree(), is("本科"));
         assertThat(detail.getGender(), is("F"));
+        assertThat(detail.getSchoolProvince(), is("陕西"));
+        assertThat(detail.getSchoolCity(), is("西安"));
     }
 
     @Test
@@ -171,6 +179,7 @@ public class UserMapperTest extends TestBase {
         assertThat(userDetails.size(), is(2));
         assertThat(userDetails.get(0).getUserId(), is(1));
         assertThat(userDetails.get(0).getSchool(), is("思沃学院"));
+        assertThat(userDetails.get(0).getSchoolCity(), is("西安"));
         assertThat(userDetails.get(1).getUserId(), is(2));
     }
 
