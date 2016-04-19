@@ -35,6 +35,6 @@ public class SectionMapperTest extends TestBase{
 
         sectionMapper.insertSection(section);
 
-        assertThat(section.getId(), is(8));
+        assertThat(section.getId(), is(13));
     }
 }

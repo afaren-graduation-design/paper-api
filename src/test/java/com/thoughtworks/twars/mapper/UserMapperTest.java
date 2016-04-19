@@ -183,6 +183,6 @@ public class UserMapperTest extends TestBase {
 
         List<User> users = userMapper.findUsersByUserIds(userIds);
 
-        assertThat(userIds.size(), is(3));
+        assertThat(users.size(), is(3));
     }
 }
