@@ -126,6 +126,8 @@ public class UserResourceTest extends TestBase {
         when(theDetail.getDegree()).thenReturn("博士");
         when(theDetail.getName()).thenReturn("狗剩");
         when(theDetail.getGender()).thenReturn("男");
+        when(theDetail.getSchoolProvince()).thenReturn("陕西");
+        when(theDetail.getSchoolCity()).thenReturn("西安");
 
         Response response = target(basePath + "/1/detail").request().get();
 
@@ -141,6 +143,8 @@ public class UserResourceTest extends TestBase {
         assertThat(result.get("gender"), is("男"));
         assertThat(result.get("mobilePhone"), is("123456"));
         assertThat(result.get("email"), is("11@qq.com"));
+        assertThat(result.get("schoolProvince"), is("陕西"));
+        assertThat(result.get("schoolCity"), is("西安"));
     }
 
     @Test
@@ -171,6 +175,8 @@ public class UserResourceTest extends TestBase {
         insertUserDetail.setMajor("cs");
         insertUserDetail.setName("purple");
         insertUserDetail.setSchool("shannxi");
+        insertUserDetail.setSchoolProvince("陕西");
+        insertUserDetail.setSchoolCity("西安");
 
         Entity<UserDetail> entityUserDetail = Entity.entity(insertUserDetail,
                 MediaType.APPLICATION_JSON_TYPE);

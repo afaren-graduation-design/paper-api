@@ -80,7 +80,7 @@ public class PaperResource extends Resource {
         int makerId = (int) data.get("makerId");
         String paperName = (String) data.get("paperName");
         List<Map> sections = (List<Map>) data.get("sections");
-        if(sections == null) {
+        if(sections == null){
             Paper insertPaper = new Paper();
             insertPaper.setMakerId(makerId);
             insertPaper.setPaperName(paperName);
@@ -108,7 +108,7 @@ public class PaperResource extends Resource {
                     .collect(Collectors.toList());
 
             return Response.status(Response.Status.OK).entity(result.get(0)).build();
-        } catch (Exception e) {
+        } catch (Exception e){
             session.rollback();
         }
         return Response.status(Response.Status.UNSUPPORTED_MEDIA_TYPE).build();
@@ -208,10 +208,6 @@ public class PaperResource extends Resource {
 
             int paperId = item.getPaperId();
             BlankQuiz blankQuiz = blankQuizMapper.findOne(paperId);
-            int itemCount = blankQuiz.getEasyCount()
-                    + blankQuiz.getNormalCount()
-                    + blankQuiz.getHardCount();
-
 
             List<String> correctList = new ArrayList<>();
             itemPostList.forEach(val -> {
@@ -221,10 +217,13 @@ public class PaperResource extends Resource {
                 }
             });
 
+            int itemCount = blankQuiz.getEasyCount()
+                    + blankQuiz.getNormalCount()
+                    + blankQuiz.getHardCount();
             Map map = new HashMap();
+            map.put("itemNumber", itemCount);
             map.put("userId", item.getExamerId());
             map.put("correctNumber", correctList.size());
-            map.put("itemNumber", itemCount);
             map.put("startTime", blankQuizSubmit.getStartTime());
             map.put("endTime", blankQuizSubmit.getEndTime());
 
