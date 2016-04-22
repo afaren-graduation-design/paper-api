@@ -1,0 +1,1 @@
+ALTER TABLE `users` CHANGE `role` `role` ENUM("1", "2", "9") NULl;
