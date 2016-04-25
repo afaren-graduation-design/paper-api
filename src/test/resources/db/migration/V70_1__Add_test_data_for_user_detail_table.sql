@@ -1,0 +1,1 @@
+UPDATE `userDetail` SET `entranceYear`="2016" WHERE `userId`=1;
