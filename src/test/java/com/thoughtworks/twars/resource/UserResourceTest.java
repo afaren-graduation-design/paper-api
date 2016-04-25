@@ -130,6 +130,7 @@ public class UserResourceTest extends TestBase {
         when(theDetail.getGender()).thenReturn("男");
         when(theDetail.getSchoolProvince()).thenReturn("陕西");
         when(theDetail.getSchoolCity()).thenReturn("西安");
+        when(theDetail.getEntranceYear()).thenReturn("2016");
 
         Response response = target(basePath + "/1/detail").request().get();
 
@@ -147,6 +148,7 @@ public class UserResourceTest extends TestBase {
         assertThat(result.get("email"), is("11@qq.com"));
         assertThat(result.get("schoolProvince"), is("陕西"));
         assertThat(result.get("schoolCity"), is("西安"));
+        assertThat(result.get("entranceYear"), is("2016"));
     }
 
     @Test
@@ -179,6 +181,7 @@ public class UserResourceTest extends TestBase {
         insertUserDetail.setSchool("shannxi");
         insertUserDetail.setSchoolProvince("陕西");
         insertUserDetail.setSchoolCity("西安");
+        insertUserDetail.setEntranceYear("2016");
 
         Entity<UserDetail> entityUserDetail = Entity.entity(insertUserDetail,
                 MediaType.APPLICATION_JSON_TYPE);

@@ -66,7 +66,7 @@ public class UserMapperTest extends TestBase {
 
         userMapper.insertUser(user);
 
-        assertThat(user.getId(), is(7));
+        assertThat(user.getId(), is(8));
     }
 
     @Test
@@ -81,11 +81,13 @@ public class UserMapperTest extends TestBase {
         userDetail.setName("purple");
         userDetail.setSchoolProvince("陕西");
         userDetail.setSchoolCity("西安");
+        userDetail.setEntranceYear("2016");
 
         userMapper.updateUserDetail(userDetail);
 
         assertThat(userDetail.getUserId(),is(1));
         assertThat(userDetail.getSchoolCity(), is("西安"));
+        assertThat(userDetail.getEntranceYear(), is("2016"));
     }
 
     @Test
@@ -100,11 +102,13 @@ public class UserMapperTest extends TestBase {
         userDetail.setName("purple");
         userDetail.setSchoolProvince("陕西");
         userDetail.setSchoolCity("西安");
+        userDetail.setEntranceYear("2015");
 
         userMapper.updateUserDetail(userDetail);
 
         assertThat(userDetail.getUserId(),is(5));
         assertThat(userDetail.getSchoolProvince(), is("陕西"));
+        assertThat(userDetail.getEntranceYear(), is("2015"));
     }
 
     @Test
@@ -119,6 +123,7 @@ public class UserMapperTest extends TestBase {
         assertThat(detail.getGender(), is("F"));
         assertThat(detail.getSchoolProvince(), is("陕西"));
         assertThat(detail.getSchoolCity(), is("西安"));
+        assertThat(detail.getEntranceYear(),is("2016"));
     }
 
     @Test
