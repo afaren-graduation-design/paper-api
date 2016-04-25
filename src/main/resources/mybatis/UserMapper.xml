@@ -13,6 +13,7 @@
         <result column="gender" property="gender"></result>
         <result column="schoolProvince" property="schoolProvince"></result>
         <result column="schoolCity" property="schoolCity"></result>
+        <result column="entranceYear" property="entranceYear"></result>
     </resultMap>
 
     <resultMap id="userMap" type="com.thoughtworks.twars.bean.User">
@@ -50,7 +51,7 @@
 
     <insert id="updateUserDetail" parameterType="com.thoughtworks.twars.bean.UserDetail" useGeneratedKeys="true"
             keyProperty="userId">
-       REPLACE INTO userDetail(userId,name,major,school,gender,degree,schoolProvince,schoolCity) values(#{userId}, #{name},#{major}, #{school}, #{gender}, #{degree},#{schoolProvince},#{schoolCity})
+       REPLACE INTO userDetail(userId,name,major,school,gender,degree,schoolProvince,schoolCity,entranceYear) values(#{userId}, #{name},#{major}, #{school}, #{gender}, #{degree},#{schoolProvince},#{schoolCity},#{entranceYear})
     </insert>
 
     <select id="getUserDetailById" resultType="com.thoughtworks.twars.bean.UserDetail">

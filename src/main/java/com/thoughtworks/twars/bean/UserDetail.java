@@ -9,6 +9,7 @@ public class UserDetail {
     private int userId;
     private String schoolProvince;
     private String schoolCity;
+    private String entranceYear;
 
     public void setSchool(String school) {
         this.school = school;
@@ -73,4 +74,13 @@ public class UserDetail {
     public void setSchoolCity(String schoolCity) {
         this.schoolCity = schoolCity;
     }
+
+    public String getEntranceYear() {
+        return entranceYear;
+    }
+
+    public void setEntranceYear(String entranceYear) {
+        this.entranceYear = entranceYear;
+    }
+
 }
