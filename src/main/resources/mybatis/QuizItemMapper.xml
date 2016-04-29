@@ -26,7 +26,7 @@
     </select>
 
     <select id="getEasyItems" resultMap="quizItemListMap" flushCache="true" useCache="false">
-        select * from quizItem where count between 0 and 25 order by rand() limit #{easyCount}
+        select * from quizItem where count between 21 and 25 order by rand() limit #{easyCount}
     </select>
 
     <select id="getNormalItems" resultMap="quizItemListMap" flushCache="true" useCache="false">
