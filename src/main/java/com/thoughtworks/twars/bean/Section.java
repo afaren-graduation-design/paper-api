@@ -56,7 +56,7 @@ public class Section {
         Map result = new HashMap<>();
         result.put("id", id);
         result.put("description", description);
-        result.put("type", type);
+        result.put("sectionType", type);
 
         List<Map> quizzesInfo = quizzes.stream()
                 .map(id -> {
