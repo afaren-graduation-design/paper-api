@@ -34,4 +34,16 @@ public class HomeWorkQuizMapperTest extends TestBase {
         assertThat(homeworkQuiz.getTemplateRepository(), is(""));
     }
 
+    @Test
+    public void should_insert_homework_quiz() {
+        HomeworkQuiz homeworkQuiz = new HomeworkQuiz();
+
+        homeworkQuiz.setDescription("找出两个数组相同的数据");
+        homeworkQuiz.setEvaluateScript("https://github.com/zhangsan/pos_inspection");
+        homeworkQuiz.setTemplateRepository("https://github.com/zhangsan/pos_template");
+        homeworkQuizMapper.insertHomeworkQuiz(homeworkQuiz);
+
+        assertThat(homeworkQuiz.getId(), is(9));
+    }
+
 }
