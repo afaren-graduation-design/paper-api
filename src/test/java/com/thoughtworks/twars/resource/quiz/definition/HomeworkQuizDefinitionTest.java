@@ -10,10 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -38,7 +35,7 @@ public class HomeworkQuizDefinitionTest {
     SectionQuizMapper sectionQuizMapper;
 
     @InjectMocks
-    HomeworkQuizDefinitionService definition;
+    HomeworkQuizDefinitionService homeworkQuizDefinitionService;
 
     @Test
     public void should_return_correct_uri_list() throws Exception {
@@ -47,7 +44,7 @@ public class HomeworkQuizDefinitionTest {
         when(firstQuiz.getId()).thenReturn(1);
         when(secondQuiz.getId()).thenReturn(2);
 
-        List<Map> result = definition.getQuizDefinition(1);
+        List<Map> result = homeworkQuizDefinitionService.getQuizDefinition(1);
 
         assertThat(result.get(0).get("id"), is(1));
         assertThat(result.get(0).get("definition_uri"), is("homeworkQuizzes/1"));
@@ -59,13 +56,18 @@ public class HomeworkQuizDefinitionTest {
     @Test
     public void should_return_uri_when_insert_paper_definition(){
         Map quiz = new HashMap<>();
-        quiz.put("quizId", 1);
+        List<Map> definitions = new ArrayList<>();
+        Map definition = new HashMap<>();
+        definition.put("description", "找出数组 A 中与对象 B 中相同的数据");
+        definition.put("evaluateScript","https://github.com/zhangsan/pos_inspection");
+        definition.put("templateRepository", "https://github.com/zhangsan/pos_template");
+        definitions.add(definition);
         quiz.put("quizType", "blankQuizzes");
+        quiz.put("definitions",definitions);
         String description = "这是描述";
-
         int paperId = 2;
 
-        int returnId = definition.insertQuizDefinition(quiz, description, paperId);
+        int returnId = homeworkQuizDefinitionService.insertQuizDefinition(quiz, description, paperId);
         assertThat(returnId, is(2));
     }
 }
