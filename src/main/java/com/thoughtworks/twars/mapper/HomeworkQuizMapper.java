@@ -10,4 +10,6 @@ public interface HomeworkQuizMapper {
 
     HomeworkQuiz findById(int id);
 
+    int insertHomeworkQuiz(HomeworkQuiz homeworkQuiz);
+
 }
