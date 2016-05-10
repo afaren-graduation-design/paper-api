@@ -15,7 +15,6 @@ import java.util.*;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.when;
 
@@ -120,11 +119,28 @@ public class PaperResourceTest extends TestBase {
 
     @Test
     public void should_return_uri_when_insert_paper_definition() {
+        Map item = new HashMap<>();
+        item.put("easyCount", 1);
+        item.put("normalCount", 2);
+        item.put("hardCount", 7);
+
+        List<Map> items = new ArrayList<>();
+        items.add(item);
+
         Map map1 = new HashMap<>();
-        map1.put("quizId", 1);
+        map1.put("items", items);
         map1.put("quizType", "blankQuizzes");
+
+        Map definition = new HashMap<>();
+        definition.put("description","找出数组 A 中与对象 B 中相同的数据");
+        definition.put("evaluateScript", "https://github.com/zhangsan/pos_inspection");
+        definition.put("templateRepository", "https://github.com/zhangsan/pos_template");
+
+        List<Map> definitions = new ArrayList<>();
+        definitions.add(definition);
+
         Map map2 = new HashMap<>();
-        map2.put("quizId", 2);
+        map2.put("definitions", definitions);
         map2.put("quizType", "homeworkQuizzes");
 
         List quizzes = new ArrayList<>();
