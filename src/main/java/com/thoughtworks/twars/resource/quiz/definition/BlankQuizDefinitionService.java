@@ -53,7 +53,7 @@ public class BlankQuizDefinitionService implements IDefinitionService {
                     blankQuiz.setEasyCount((Integer) item.get("easyCount"));
                     blankQuiz.setNormalCount((Integer) item.get("normalCount"));
                     blankQuiz.setHardCount((Integer) item.get("hardCount"));
-                    blankQuiz.setExampleCount((Integer) item.get("exampleCount"));
+                    blankQuiz.setExampleCount(2);
                     SectionQuiz sectionQuiz = new SectionQuiz();
                     sectionQuiz.setSectionId(section.getId());
                     sectionQuiz.setQuizId(blankQuiz.getId());
