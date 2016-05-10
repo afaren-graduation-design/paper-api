@@ -21,4 +21,8 @@
         SELECT * FROM homeworkQuiz WHERE id = #{id};
     </select>
 
+    <insert id="insertHomeworkQuiz" parameterType="com.thoughtworks.twars.bean.HomeworkQuiz" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO homeworkQuiz(description, evaluateScript, templateRepository) VALUES(#{description}, #{evaluateScript}, #{templateRepository});
+    </insert>
+
 </mapper>
