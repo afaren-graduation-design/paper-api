@@ -315,8 +315,17 @@ baseUri: http://api.bronzesword.com/
                 # description: Markdown String to discribe what happen in the future
               quizzes[]:
                 properties:
-                  quizId: integer
                   quizType: string
+                  items[]:
+                    properties:
+                      easyCount: integer
+                      normalCount: integer
+                      hardCount: integer
+                  definitions[]:
+                    properties:
+                      templateRepository: string
+                      evaluateScript: string
+                      description: string
     responses:
       201:
         body:
