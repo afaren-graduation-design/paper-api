@@ -10,10 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -65,7 +62,14 @@ public class BlankQuizDefinitionTest {
     @Test
     public void should_update_blank_quiz() {
         Map quiz = new HashMap<>();
-        quiz.put("quizId", 1);
+        Map item = new HashMap<>();
+        item.put("easyCount", 8);
+        item.put("normalCount", 9);
+        item.put("hardCount", 10);
+        item.put("exampleCount", 2);
+        List<Map> items = new ArrayList<>();
+        items.add(item);
+        quiz.put("items", items);
         quiz.put("quizType", "blankQuizzes");
         String description = "这是描述";
 
