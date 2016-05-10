@@ -37,20 +37,34 @@ public class HomeworkQuizDefinitionService implements IDefinitionService {
     }
 
     @Override
-    public int insertQuizDefinition(Map quiz, String decription, int paperId) {
+    public int insertQuizDefinition(Map quiz, String description, int paperId) {
 
         Section section = new Section();
         section.setPaperId(paperId);
-        section.setDescription(decription);
+        section.setDescription(description);
         section.setType((String) quiz.get("quizType"));
 
         sectionMapper.insertSection(section);
 
-        SectionQuiz sectionQuiz = new SectionQuiz();
-        sectionQuiz.setSectionId(section.getId());
-        sectionQuiz.setQuizId((Integer) quiz.get("quizId"));
+        List<Map> definitions = (List<Map>) quiz.get("definitions");
 
-        sectionQuizMapper.insertSectionQuiz(sectionQuiz);
+        definitions.stream()
+                .forEach(definition -> {
+                    HomeworkQuiz insertHomework = new HomeworkQuiz();
+                    insertHomework.setDescription((String) definition.get("description"));
+                    insertHomework.setTemplateRepository((String) definition.get("templateRepository"));
+                    insertHomework.setEvaluateScript((String) definition.get("evaluateScript"));
+
+                    mapper.insertHomeworkQuiz(insertHomework);
+                    
+                    SectionQuiz sectionQuiz = new SectionQuiz();
+                    sectionQuiz.setSectionId(section.getId());
+                    sectionQuiz.setQuizId(insertHomework.getId());
+
+                    sectionQuizMapper.insertSectionQuiz(sectionQuiz);
+
+                });
+
 
         return paperId;
     }
