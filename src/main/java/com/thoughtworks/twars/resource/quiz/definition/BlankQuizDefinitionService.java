@@ -38,19 +38,27 @@ public class BlankQuizDefinitionService implements IDefinitionService {
     }
 
     @Override
-    public int insertQuizDefinition(Map quiz, String decription, int paperId) {
+    public int insertQuizDefinition(Map quiz, String description, int paperId) {
         Section section = new Section();
         section.setPaperId(paperId);
-        section.setDescription(decription);
+        section.setDescription(description);
         section.setType((String) quiz.get("quizType"));
 
         sectionMapper.insertSection(section);
 
-        SectionQuiz sectionQuiz = new SectionQuiz();
-        sectionQuiz.setQuizId((Integer) quiz.get("quizId"));
-        sectionQuiz.setSectionId(section.getId());
-
-        sectionQuizMapper.insertSectionQuiz(sectionQuiz);
+        List<Map> items = (List<Map>) quiz.get("items");
+        items.stream()
+                .forEach(item -> {
+                    BlankQuiz blankQuiz = new BlankQuiz();
+                    blankQuiz.setEasyCount((Integer) item.get("easyCount"));
+                    blankQuiz.setNormalCount((Integer) item.get("normalCount"));
+                    blankQuiz.setHardCount((Integer) item.get("hardCount"));
+                    blankQuiz.setExampleCount((Integer) item.get("exampleCount"));
+                    SectionQuiz sectionQuiz = new SectionQuiz();
+                    sectionQuiz.setSectionId(section.getId());
+                    sectionQuiz.setQuizId(blankQuiz.getId());
+                    sectionQuizMapper.insertSectionQuiz(sectionQuiz);
+                });
 
         return paperId;
     }
