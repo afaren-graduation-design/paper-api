@@ -130,6 +130,7 @@ public class PaperResourceTest extends TestBase {
         Map map1 = new HashMap<>();
         map1.put("items", items);
         map1.put("quizType", "blankQuizzes");
+        map1.put("description", "blankQuizzes描述");
 
         Map definition = new HashMap<>();
         definition.put("description","找出数组 A 中与对象 B 中相同的数据");
@@ -139,20 +140,20 @@ public class PaperResourceTest extends TestBase {
         List<Map> definitions = new ArrayList<>();
         definitions.add(definition);
 
+        Map quiz = new HashMap<>();
+        quiz.put("definitions", definitions);
+
+        List<Map> quizzes = new ArrayList<>();
+        quizzes.add(quiz);
+
         Map map2 = new HashMap<>();
-        map2.put("definitions", definitions);
+        map2.put("description", "homework 描述");
         map2.put("quizType", "homeworkQuizzes");
+        map2.put("quizzes", quizzes);
 
-        List quizzes = new ArrayList<>();
-        quizzes.add(map1);
-        quizzes.add(map2);
-
-        Map section = new HashMap<>();
-        section.put("description", "这是一个描述");
-        section.put("quizzes", quizzes);
-
-        List sections = new ArrayList<>();
-        sections.add(section);
+        Map sections = new HashMap<>();
+        sections.put("blankQuizzes", map1);
+        sections.put("homeworkQuizzes", map2);
 
         Map map = new HashMap<>();
         map.put("makerId", 1);

@@ -75,7 +75,7 @@ public class BlankQuizDefinitionTest {
 
         int paperId = 2;
 
-        int result = definition.insertQuizDefinition(quiz, description, paperId);
+        int result = definition.insertQuizDefinition(quiz, paperId);
         assertThat(result, is(2));
     }
 }

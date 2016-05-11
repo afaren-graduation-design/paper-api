@@ -55,19 +55,25 @@ public class HomeworkQuizDefinitionTest {
 
     @Test
     public void should_return_uri_when_insert_paper_definition(){
-        Map quiz = new HashMap<>();
         List<Map> definitions = new ArrayList<>();
         Map definition = new HashMap<>();
         definition.put("description", "找出数组 A 中与对象 B 中相同的数据");
         definition.put("evaluateScript","https://github.com/zhangsan/pos_inspection");
         definition.put("templateRepository", "https://github.com/zhangsan/pos_template");
         definitions.add(definition);
-        quiz.put("quizType", "blankQuizzes");
-        quiz.put("definitions",definitions);
-        String description = "这是描述";
-        int paperId = 2;
 
-        int returnId = homeworkQuizDefinitionService.insertQuizDefinition(quiz, description, paperId);
+        Map quiz = new HashMap<>();
+        quiz.put("definitions",definitions);
+
+        List<Map> quizzes = new ArrayList<>();
+        quizzes.add(quiz);
+
+        Map homeworkQuiz = new HashMap<>();
+        homeworkQuiz.put("quizType", "homeworkQuizzes");
+        homeworkQuiz.put("description","homework 描述");
+        homeworkQuiz.put("quizzes", quizzes);
+        int paperId = 2;
+        int returnId = homeworkQuizDefinitionService.insertQuizDefinition(homeworkQuiz, paperId);
         assertThat(returnId, is(2));
     }
 }
