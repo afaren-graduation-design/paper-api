@@ -37,31 +37,36 @@ public class HomeworkQuizDefinitionService implements IDefinitionService {
     }
 
     @Override
-    public int insertQuizDefinition(Map quiz, String description, int paperId) {
+    public int insertQuizDefinition(Map homeworkQuizzes, int paperId) {
 
         Section section = new Section();
         section.setPaperId(paperId);
-        section.setDescription(description);
-        section.setType((String) quiz.get("quizType"));
+        section.setDescription((String) homeworkQuizzes.get("description"));
+        section.setType((String) homeworkQuizzes.get("quizType"));
 
         sectionMapper.insertSection(section);
 
-        List<Map> definitions = (List<Map>) quiz.get("definitions");
+        List<Map> quizzes = (List<Map>) homeworkQuizzes.get("quizzes");
 
-        definitions.stream()
-                .forEach(definition -> {
-                    HomeworkQuiz insertHomework = new HomeworkQuiz();
-                    insertHomework.setDescription((String) definition.get("description"));
-                    insertHomework.setTemplateRepository((String) definition.get("templateRepository"));
-                    insertHomework.setEvaluateScript((String) definition.get("evaluateScript"));
+        quizzes.stream()
+                .forEach(quiz -> {
+                    List<Map> definitions = (List<Map>) quiz.get("definitions");
+                    definitions.stream()
+                            .forEach(definition-> {
+                                HomeworkQuiz insertHomeworkQuiz = new HomeworkQuiz();
+                                insertHomeworkQuiz.setDescription((String) definition.get("description"));
+                                insertHomeworkQuiz.setTemplateRepository((String) definition.get("templateRepository"));
+                                insertHomeworkQuiz.setEvaluateScript((String) definition.get("evaluateScript"));
 
-                    mapper.insertHomeworkQuiz(insertHomework);
-                    
-                    SectionQuiz sectionQuiz = new SectionQuiz();
-                    sectionQuiz.setSectionId(section.getId());
-                    sectionQuiz.setQuizId(insertHomework.getId());
+                                mapper.insertHomeworkQuiz(insertHomeworkQuiz);
 
-                    sectionQuizMapper.insertSectionQuiz(sectionQuiz);
+                                SectionQuiz sectionQuiz = new SectionQuiz();
+                                sectionQuiz.setSectionId(section.getId());
+                                sectionQuiz.setQuizId(insertHomeworkQuiz.getId());
+
+                                sectionQuizMapper.insertSectionQuiz(sectionQuiz);
+
+                            });
 
                 });
 

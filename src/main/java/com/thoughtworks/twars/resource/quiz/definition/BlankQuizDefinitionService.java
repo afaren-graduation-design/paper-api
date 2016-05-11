@@ -38,10 +38,10 @@ public class BlankQuizDefinitionService implements IDefinitionService {
     }
 
     @Override
-    public int insertQuizDefinition(Map quiz, String description, int paperId) {
+    public int insertQuizDefinition(Map quiz, int paperId) {
         Section section = new Section();
         section.setPaperId(paperId);
-        section.setDescription(description);
+        section.setDescription((String) quiz.get("description"));
         section.setType((String) quiz.get("quizType"));
 
         sectionMapper.insertSection(section);
