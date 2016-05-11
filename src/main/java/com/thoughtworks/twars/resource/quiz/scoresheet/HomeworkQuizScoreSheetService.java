@@ -69,7 +69,6 @@ public class HomeworkQuizScoreSheetService implements IScoreSheetService {
 
         homeworkSubmits.forEach(item -> {
             int homeworkQuizId = (int) item.get("homeworkQuizId");
-//            int startTime = (int) item.get("startTime");
 
             HomeworkSubmit homeworkSubmit = homeworkSubmitMapper.findByScoreSheetIdAndQuizId(scoreSheetId, homeworkQuizId);
 

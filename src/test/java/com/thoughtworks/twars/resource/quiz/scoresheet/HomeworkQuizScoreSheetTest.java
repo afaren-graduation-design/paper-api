@@ -52,7 +52,7 @@ public class HomeworkQuizScoreSheetTest {
 
         List<Map> homeworkList = homeworkQuizScoreSheet.getQuizScoreSheet(1);
         String str = gson.toJson(homeworkList);
-        assertThat(str, is("[{\"homeworkQuiz\":{\"uri\":\"homeworkQuiz/3\"},\"startTime\":123,\"homeworkSubmitPostHistory\":[{\"commitTime\":123,\"status\":2}]}]"));
+        assertThat(str, is("[{\"homeworkQuiz\":{\"uri\":\"3\"},\"homeworkSubmitPostHistory\":[{\"commitTime\":123,\"startTime\":123,\"status\":2}]}]"));
     }
 
     @Test
@@ -71,8 +71,7 @@ public class HomeworkQuizScoreSheetTest {
                 .findByHomeworkSubmitId(1);
         String homeworkPostHistoryStr = gson.toJson(homeworkPostHistoryList);
         assertThat(homeworkPostHistoryStr,
-                is("[{\"commitTime\":5678,\"userAnswerRepo\":\"github.com/jingjing\"," +
-                        "\"branch\":\"dev\",\"version\":\"ghjkl\",\"status\":7}]"));
+                is("[{\"commitTime\":5678,\"startTime\":123456,\"userAnswerRepo\":\"github.com/jingjing\",\"branch\":\"dev\",\"version\":\"ghjkl\",\"status\":7}]"));
     }
 
     @Test
@@ -83,6 +82,7 @@ public class HomeworkQuizScoreSheetTest {
         homeworkSubmitPostHistory.put("branch","dev");
         homeworkSubmitPostHistory.put("status", 9);
         homeworkSubmitPostHistory.put("commitTime", 56789);
+        homeworkSubmitPostHistory.put("startTime", 90739);
         homeworkSubmitPostHistory.put("resultURL", "twer");
 
         Map homeworkSubmit = new HashMap<>();
@@ -91,7 +91,6 @@ public class HomeworkQuizScoreSheetTest {
         homeworkPostHistoryList.add(homeworkSubmitPostHistory);
 
         homeworkSubmit.put("homeworkQuizId", 8);
-        homeworkSubmit.put("startTime", 123456);
         homeworkSubmit.put("homeworkSubmitPostHistory",homeworkPostHistoryList);
 
         List<Map> homeworkSubmits = new ArrayList<>();

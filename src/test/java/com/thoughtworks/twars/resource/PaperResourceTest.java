@@ -112,7 +112,7 @@ public class PaperResourceTest extends TestBase {
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
 
-        assertThat(jsonStr, is("{\"id\":1,\"sections\":[{\"description\":\"it is a description!\",\"id\":3,\"quizzes\":[{\"definition_uri\":\"blankQuizzes/1\",\"id\":1,\"items_uri\":\"blankQuizzes/1/items\"},{\"definition_uri\":\"blankQuizzes/2\",\"id\":2,\"items_uri\":\"blankQuizzes/2/items\"}],\"type\":\"blankQuizzes\"}]}"));
+        assertThat(jsonStr, is("{\"id\":1,\"sections\":[{\"description\":\"it is a description!\",\"id\":3,\"quizzes\":[{\"definition_uri\":\"blankQuizzes/1\",\"id\":1,\"items_uri\":\"blankQuizzes/1/items\"},{\"definition_uri\":\"blankQuizzes/2\",\"id\":2,\"items_uri\":\"blankQuizzes/2/items\"}],\"sectionType\":\"blankQuizzes\"}]}"));
 
     }
 

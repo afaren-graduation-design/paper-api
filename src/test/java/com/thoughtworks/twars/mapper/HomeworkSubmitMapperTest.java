@@ -4,6 +4,8 @@ import com.thoughtworks.twars.bean.HomeworkSubmit;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -24,6 +26,20 @@ public class HomeworkSubmitMapperTest extends TestBase{
 
         homeworkSubmitMapper.insertHomeworkSubmit(homeworkSubmit);
         assertThat(homeworkSubmit.getId(), is(8));
+    }
+
+    @Test
+    public void should_return_one_homework_submit_by_quiz_id_and_scoresheet_id() {
+        HomeworkSubmit homeworkSubmit = homeworkSubmitMapper.findByScoreSheetIdAndQuizId(1,1);
+
+        assertThat(homeworkSubmit.getId(), is(1));
+    }
+
+    @Test
+    public void should_return_homework_submit_list_by_scoresheet_id() {
+        List<HomeworkSubmit> homeworkSubmitList = homeworkSubmitMapper.findByScoreSheetId(1);
+
+        assertThat(homeworkSubmitList.size(), is(3));
     }
 
 }
