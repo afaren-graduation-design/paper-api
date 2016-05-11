@@ -316,17 +316,17 @@ baseUri: http://api.bronzesword.com/
               blankQuizzes:
                 properties:
                   description: string
-                  quizzes[]:
+                  quizType: string
+                  items[]:
                     properties:
-                      items[]:
-                        properties:
-                          easyCount: integer
-                          normalCount: integer
-                          hardCount: integer
-                      quizType: string
+                      easyCount: integer
+                      normalCount: integer
+                      hardCount: integer
+
               homeworkQuizzes:
                 properties:
                   description: string
+                  quizType: string
                   quizzes[]:
                     properties:
                       definitions[]:
@@ -334,7 +334,7 @@ baseUri: http://api.bronzesword.com/
                           templateRepository: string
                           evaluateScript: string
                           description: string
-                      quizType: string
+
     responses:
       201:
         body:
