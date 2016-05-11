@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 
 @Path("/papers")
@@ -79,8 +78,8 @@ public class PaperResource extends Resource {
             Map data) {
         int makerId = (int) data.get("makerId");
         String paperName = (String) data.get("paperName");
-        List<Map> sections = (List<Map>) data.get("sections");
-        if(sections == null){
+        Map section = (Map) data.get("sections");
+        if (section == null) {
             Paper insertPaper = new Paper();
             insertPaper.setMakerId(makerId);
             insertPaper.setPaperName(paperName);
@@ -99,34 +98,28 @@ public class PaperResource extends Resource {
             paperMapper.insertPaper(paper);
             int paperId = paper.getId();
 
-            List<Map> result = sections.stream()
-                    .map(item -> {
-                        Map map = new HashMap();
-                        map.put("uri", insertDefinitionByQuizType(item, paperId));
-                        return map;
-                    })
-                    .collect(Collectors.toList());
+            Map map = new HashMap();
+            map.put("uri", insertDefinitionByQuizType(section, paperId));
 
-            return Response.status(Response.Status.OK).entity(result.get(0)).build();
-        } catch (Exception e){
+            return Response.status(Response.Status.OK).entity(map).build();
+        } catch (Exception e) {
             session.rollback();
         }
         return Response.status(Response.Status.UNSUPPORTED_MEDIA_TYPE).build();
     }
 
 
-    public String insertDefinitionByQuizType(Map item, int paperId) {
-        List<Map> quizzes = (List<Map>) item.get("quizzes");
-        String description = (String) item.get("description");
+    public String insertDefinitionByQuizType(Map section, int paperId) {
 
-        quizzes.forEach(h -> {
-            if ("blankQuizzes".equals(h.get("quizType"))) {
-                blankQuizDefinition.insertQuizDefinition(h, description, paperId);
-            } else if ("homeworkQuizzes".equals(h.get("quizType"))) {
-                homeworkQuizDefinition.insertQuizDefinition(h, description, paperId);
-            }
-        });
+        Map blankQuizzes = (Map) section.get("blankQuizzes");
+        Map homeworkQuizzes = (Map) section.get("homeworkQuizzes");
 
+        if ("blankQuizzes".equals(blankQuizzes.get("quizType"))) {
+            blankQuizDefinition.insertQuizDefinition(blankQuizzes,paperId);
+        }
+        if ("homeworkQuizzes".equals(homeworkQuizzes.get("quizType"))) {
+            homeworkQuizDefinition.insertQuizDefinition(homeworkQuizzes,paperId);
+        }
         return "papers/" + paperId;
     }
 
