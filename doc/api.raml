@@ -310,23 +310,31 @@ baseUri: http://api.bronzesword.com/
       application/json:
         properties:
           makerId: integer
-          sections[]:
+          paperName: string
+          sections:
             properties:
-              description: string
-                # description: Markdown String to discribe what happen in the future
-              quizzes[]:
+              blankQuizzes:
                 properties:
-                  quizType: string
-                  items[]:
+                  description: string
+                  quizzes[]:
                     properties:
-                      easyCount: integer
-                      normalCount: integer
-                      hardCount: integer
-                  definitions[]:
+                      items[]:
+                        properties:
+                          easyCount: integer
+                          normalCount: integer
+                          hardCount: integer
+                      quizType: string
+              homeworkQuizzes:
+                properties:
+                  description: string
+                  quizzes[]:
                     properties:
-                      templateRepository: string
-                      evaluateScript: string
-                      description: string
+                      definitions[]:
+                        properties:
+                          templateRepository: string
+                          evaluateScript: string
+                          description: string
+                      quizType: string
     responses:
       201:
         body:
