@@ -122,8 +122,8 @@ public class ScoreSheetResource extends Resource {
 
         Map<String, Object> examerUri = new HashMap<>();
         Map<String, Object> paperUri = new HashMap<>();
-        examerUri.put("uri", "examer/" + scoreSheet.getExamerId());
-        paperUri.put("uri", "paper/" + scoreSheet.getPaperId());
+        examerUri.put("uri", "users/" + scoreSheet.getExamerId());
+        paperUri.put("uri", "papers/" + scoreSheet.getPaperId());
 
         Map map = new HashMap<>();
         map.put("examer", examerUri);

@@ -14,6 +14,10 @@
         SELECT * FROM homeworkSubmit WHERE scoreSheetId = #{scoreSheetId}
     </select>
 
+    <select id="findByScoreSheetIdAndQuizId" resultType="com.thoughtworks.twars.bean.HomeworkSubmit">
+        SELECT * FROM homeworkSubmit WHERE scoreSheetId = #{scoreSheetId} and homeworkQuizId = #{homeworkQuizId} limit 1
+    </select>
+
     <insert id="insertHomeworkSubmit" parameterType="com.thoughtworks.twars.bean.HomeworkSubmit" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO homeworkSubmit(scoreSheetId,homeworkQuizId)
         VALUES (#{scoreSheetId},#{homeworkQuizId});

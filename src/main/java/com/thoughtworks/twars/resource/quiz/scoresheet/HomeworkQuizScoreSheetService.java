@@ -34,13 +34,11 @@ public class HomeworkQuizScoreSheetService implements IScoreSheetService {
                     Map<String, Object> homeworkQuizUri = new HashMap<>();
                     homeworkQuizUri.put("uri", "homeworkQuiz/"
                             + homeworkQuizSubmit.getHomeworkQuizId());
+                    homeworkQuizUri.put("uri", "" + homeworkQuizSubmit.getHomeworkQuizId());
                     Map<String, Object> homeworkQuizSubmitUri = new HashMap<>();
                     homeworkQuizSubmitUri.put("homeworkQuiz", homeworkQuizUri);
                     homeworkQuizSubmitUri.put("homeworkSubmitPostHistory",
                             findByHomeworkSubmitId(homeworkQuizSubmit.getId()));
-                    homeworkQuizSubmitUri.put("startTime", homeworkPostHistoryMapper
-                            .findByHomeworkSubmitId(homeworkQuizSubmit.getId())
-                            .get(0).getStartTime());
                     return homeworkQuizSubmitUri;
                 })
                 .collect(Collectors.toList());
@@ -56,6 +54,7 @@ public class HomeworkQuizScoreSheetService implements IScoreSheetService {
                     homeworkPostHistoryUri.put("branch", homeworkPostHistory.getBranch());
                     homeworkPostHistoryUri.put("version", homeworkPostHistory.getVersion());
                     homeworkPostHistoryUri.put("commitTime", homeworkPostHistory.getCommitTime());
+                    homeworkPostHistoryUri.put("startTime", homeworkPostHistory.getStartTime());
                     homeworkPostHistoryUri.put("status", homeworkPostHistory.getStatus());
                     homeworkPostHistoryUri.put("result", homeworkPostHistory.getResult());
                     return homeworkPostHistoryUri;
@@ -70,13 +69,20 @@ public class HomeworkQuizScoreSheetService implements IScoreSheetService {
 
         homeworkSubmits.forEach(item -> {
             int homeworkQuizId = (int) item.get("homeworkQuizId");
-            int startTime = (int) item.get("startTime");
+//            int startTime = (int) item.get("startTime");
 
-            HomeworkSubmit homeworkSubmit = new HomeworkSubmit();
-            homeworkSubmit.setScoreSheetId(scoreSheetId);
-            homeworkSubmit.setHomeworkQuizId(homeworkQuizId);
+            HomeworkSubmit homeworkSubmit = homeworkSubmitMapper.findByScoreSheetIdAndQuizId(scoreSheetId, homeworkQuizId);
 
-            homeworkSubmitMapper.insertHomeworkSubmit(homeworkSubmit);
+            if(null == homeworkSubmit) {
+                homeworkSubmit = new HomeworkSubmit();
+                homeworkSubmit.setScoreSheetId(scoreSheetId);
+                homeworkSubmit.setHomeworkQuizId(homeworkQuizId);
+
+                homeworkSubmitMapper.insertHomeworkSubmit(homeworkSubmit);
+            }
+
+            final HomeworkSubmit existHomeworkSubmit = homeworkSubmit;
+
 
             List<Map> homeworkSubmitPostHistoryList =
                     (List<Map>) item.get("homeworkSubmitPostHistory");
@@ -89,8 +95,8 @@ public class HomeworkQuizScoreSheetService implements IScoreSheetService {
                 homeworkPostHistory.setUserAnswerRepo((String) h
                         .get("userAnswerRepo"));
                 homeworkPostHistory.setStatus((Integer) h.get("status"));
-                homeworkPostHistory.setHomeworkSubmitId(homeworkSubmit.getId());
-                homeworkPostHistory.setStartTime(startTime);
+                homeworkPostHistory.setHomeworkSubmitId(existHomeworkSubmit.getId());
+                homeworkPostHistory.setStartTime((Integer) h.get("startTime"));
                 homeworkPostHistory.setCommitTime(
                         (Integer) h.get("commitTime"));
                 homeworkPostHistory.setResult((String) h.get("result"));
