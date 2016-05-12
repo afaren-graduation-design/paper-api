@@ -12,7 +12,7 @@ fi
 
 if [ -z $CONFIG_FILE_DIR ]
 then
-  echo "Please Set the REMOTE_SERVER_IP"
+  echo "Please Set the CONFIG_FILE_DIR"
   exit 1
 fi
 
@@ -24,6 +24,5 @@ fi
 cp $CONFIG_FILE_DIR/config.properties src/main/resources/config.properties
 ./gradlew clean
 ./gradlew war
-cp paper-api/build/libs/paper-api.war
 
 scp paper-api/build/libs/paper-api.war $REMOTE_SERVER_IP:/home/ubuntu/twars/paper-api
