@@ -25,4 +25,4 @@ cp $CONFIG_FILE_DIR/config.properties src/main/resources/config.properties
 ./gradlew clean
 ./gradlew war
 
-scp paper-api/build/libs/paper-api.war $REMOTE_SERVER_IP:/home/ubuntu/twars/paper-api
+scp build/libs/paper-api.war $REMOTE_SERVER_IP:/home/ubuntu/twars/paper-api
