@@ -16,13 +16,26 @@ then
   exit 1
 fi
 
-if [ -f $CONFIG_FILE_DIR/gradle.properties ]
+if [ -f $CONFIG_FILE_DIR/config.properties ]
 then
-	echo "Failed with no gradle.properties in $CONFIG_FILE_DIR"
+	echo "Failed with no config.properties in $CONFIG_FILE_DIR"
 fi
+
+if [ -f $CONFIG_FILE_DIR/$REMOTE_SERVER_IP.gradle.properties ]
+then
+	echo "Failed with no $REMOTE_SERVER_IP.gradle.properties in $CONFIG_FILE_DIR"
+fi
+
+ssh -T $REMOTE_SERVER_IP 'docker stop assembly_paper-api_1'
 
 cp $CONFIG_FILE_DIR/config.properties src/main/resources/config.properties
 ./gradlew clean
 ./gradlew war
-
 scp build/libs/paper-api.war $REMOTE_SERVER_IP:/home/ubuntu/twars/paper-api
+
+cp $CONFIG_FILE_DIR/$REMOTE_SERVER_IP.gradle.properties ./config.properties
+rm -rf src/test/resources/db/migration/*
+./gradlew flywaymigrate
+
+ssh -T $REMOTE_SERVER_IP 'docker start assembly_paper-api_1'
+
