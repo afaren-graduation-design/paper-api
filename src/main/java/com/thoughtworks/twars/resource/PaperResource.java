@@ -159,6 +159,10 @@ public class PaperResource extends Resource {
             userMap.put("degree", userDetails.get(i).getDegree());
             userMap.put("gender", userDetails.get(i).getGender());
             userMap.put("name", userDetails.get(i).getName());
+            userMap.put("school", userDetails.get(i).getSchool());
+            userMap.put("schoolProvince", userDetails.get(i).getSchoolProvince());
+            userMap.put("schoolCity", userDetails.get(i).getSchoolCity());
+            userMap.put("entranceYear", userDetails.get(i).getEntranceYear());
             result.add(userMap);
         }
         return Response.status(Response.Status.OK).entity(result).build();
