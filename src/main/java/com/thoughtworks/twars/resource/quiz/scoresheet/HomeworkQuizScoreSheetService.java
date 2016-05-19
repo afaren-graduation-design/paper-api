@@ -70,8 +70,8 @@ public class HomeworkQuizScoreSheetService implements IScoreSheetService {
         homeworkSubmits.forEach(item -> {
             int homeworkQuizId = (int) item.get("homeworkQuizId");
 
-            HomeworkSubmit homeworkSubmit = homeworkSubmitMapper.findByScoreSheetIdAndQuizId(scoreSheetId, homeworkQuizId);
-
+            HomeworkSubmit homeworkSubmit =
+                    homeworkSubmitMapper.findByScoreSheetIdAndQuizId(scoreSheetId, homeworkQuizId);
             if(null == homeworkSubmit) {
                 homeworkSubmit = new HomeworkSubmit();
                 homeworkSubmit.setScoreSheetId(scoreSheetId);

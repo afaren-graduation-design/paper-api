@@ -54,9 +54,12 @@ public class HomeworkQuizDefinitionService implements IDefinitionService {
                     definitions.stream()
                             .forEach(definition-> {
                                 HomeworkQuiz insertHomeworkQuiz = new HomeworkQuiz();
-                                insertHomeworkQuiz.setDescription((String) definition.get("description"));
-                                insertHomeworkQuiz.setTemplateRepository((String) definition.get("templateRepository"));
-                                insertHomeworkQuiz.setEvaluateScript((String) definition.get("evaluateScript"));
+                                insertHomeworkQuiz.setDescription((String) definition
+                                        .get("description"));
+                                insertHomeworkQuiz.setTemplateRepository((String) definition
+                                        .get("templateRepository"));
+                                insertHomeworkQuiz.setEvaluateScript((String) definition
+                                        .get("evaluateScript"));
 
                                 mapper.insertHomeworkQuiz(insertHomeworkQuiz);
 

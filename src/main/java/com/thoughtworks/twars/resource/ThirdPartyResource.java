@@ -12,7 +12,7 @@ import java.util.Map;
 
 @Path("/auth/thirdParty")
 
-public class ThirdPartyResource extends  Resource {
+public class ThirdPartyResource extends Resource {
     @Inject
     private ThirdPartyMapper thirdPartyMapper;
 
@@ -38,10 +38,10 @@ public class ThirdPartyResource extends  Resource {
         thirdParty.setThirdPartyUserId(thirdPartyUserId);
         ThirdParty result = thirdPartyMapper.getByThirdPartyUserIdAndType(thirdParty);
 
-        if(result == null) {
+        if (result == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        return  Response.status(Response.Status.OK).entity(thirdParty).build();
+        return Response.status(Response.Status.OK).entity(thirdParty).build();
     }
 }
