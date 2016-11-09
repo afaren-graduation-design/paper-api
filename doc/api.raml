@@ -630,3 +630,17 @@ baseUri: http://api.bronzesword.com/
                   # description: git url, contain dockerFile in repository
                 templateRepository: string
                   # description: git url, contain dockerFile in repositor
+
+/papers:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            properties:
+              id: integer
+              makeId: integer
+              paperName: string
+              description: string
+              createTime: string
+              isDistribution: boolean
