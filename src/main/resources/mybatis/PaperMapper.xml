@@ -41,7 +41,9 @@
         SELECT quizId  FROM sectionQuiz WHERE sectionId=#{sectionId}
     </select>
 
-
+    <select id="getPapers" parameterType="com.thoughtworks.twars.bean.Paper">
+        select * from papers limit 2
+    </select>
 
     <insert id="insertPaper" parameterType="com.thoughtworks.twars.bean.Paper" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO paper(makerId, paperName)
