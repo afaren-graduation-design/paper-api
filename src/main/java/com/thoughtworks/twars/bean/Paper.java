@@ -81,9 +81,19 @@ public class Paper {
         return isDistribution;
     }
 
-    public void setIsDistribution(boolean createTime) {
+    public void setIsDistribution(boolean isDistribution) {
         this.isDistribution = isDistribution;
     }
+
+//    public void getPapers(int page, int pageCount) {
+        // xxx
+
+//    }
+
+    // wrapper function
+//    public void getPapers() {
+//        getPapers(1, 15);
+//    }
 }
 
 

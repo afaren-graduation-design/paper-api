@@ -42,7 +42,7 @@
     </select>
 
     <select id="getAllPapers" parameterType="com.thoughtworks.twars.bean.Paper">
-        select * from paper limit 2
+        select * from paper
     </select>
 
     <insert id="insertPaper" parameterType="com.thoughtworks.twars.bean.Paper" useGeneratedKeys="true" keyProperty="id">
