@@ -633,6 +633,9 @@ baseUri: http://api.bronzesword.com/
 
 /papers:
   get:
+    queryParameters:
+      page: integer
+      pageCount: integer
     responses:
       200:
         body:
