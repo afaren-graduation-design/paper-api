@@ -61,7 +61,12 @@ public class PaperResource extends Resource {
             Paper item = papers.get(i);
             Map map = new HashMap<>();
             map.put("uri", "papers/" + item.getId());
+            map.put("makerId",item.getMakerId());
             map.put("paperName", item.getPaperName());
+            map.put("description", item.getDescription());
+            map.put("createTime", item.getCreateTime());
+            map.put("isDistribution", item.getIsDistribution());
+
             result.add(map);
         }
 

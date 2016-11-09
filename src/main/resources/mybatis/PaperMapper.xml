@@ -41,8 +41,8 @@
         SELECT quizId  FROM sectionQuiz WHERE sectionId=#{sectionId}
     </select>
 
-    <select id="getPapers" parameterType="com.thoughtworks.twars.bean.Paper">
-        select * from papers limit 2
+    <select id="getAllPapers" parameterType="com.thoughtworks.twars.bean.Paper">
+        select * from paper limit 2
     </select>
 
     <insert id="insertPaper" parameterType="com.thoughtworks.twars.bean.Paper" useGeneratedKeys="true" keyProperty="id">
