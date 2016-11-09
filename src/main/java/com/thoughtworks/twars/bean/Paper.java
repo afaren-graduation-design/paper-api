@@ -10,6 +10,9 @@ public class Paper {
     private int makerId;
     private List<Section> sections;
     private String paperName;
+    private String description;
+    private String createTime;
+    private boolean isDistribution;
 
     public int getId() {
         return id;
@@ -35,14 +38,6 @@ public class Paper {
         this.sections = sections;
     }
 
-    public String getPaperName() {
-        return paperName;
-    }
-
-    public void setPaperName(String paperName) {
-        this.paperName = paperName;
-    }
-
     public Map getResponseInfo() {
         Map result = new HashMap<>();
 
@@ -56,4 +51,39 @@ public class Paper {
 
         return result;
     }
+
+
+    public String getPaperName() {
+        return paperName;
+    }
+
+    public void setPaperName(String paperName) {
+        this.paperName = paperName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    public boolean getIsDistribution() {
+        return isDistribution;
+    }
+
+    public void setIsDistribution(boolean createTime) {
+        this.isDistribution = isDistribution;
+    }
 }
+
+
