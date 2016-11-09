@@ -16,12 +16,12 @@ then
   exit 1
 fi
 
-if [ -f $CONFIG_FILE_DIR/config.properties ]
+if [ ! -f $CONFIG_FILE_DIR/config.properties ]
 then
 	echo "Failed with no config.properties in $CONFIG_FILE_DIR"
 fi
 
-if [ -f $CONFIG_FILE_DIR/$REMOTE_SERVER_IP.gradle.properties ]
+if [ ! -f $CONFIG_FILE_DIR/$REMOTE_SERVER_IP.gradle.properties ]
 then
 	echo "Failed with no $REMOTE_SERVER_IP.gradle.properties in $CONFIG_FILE_DIR"
 fi
