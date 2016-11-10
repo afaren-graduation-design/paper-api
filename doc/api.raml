@@ -635,13 +635,13 @@ baseUri: http://api.bronzesword.com/
   get:
     queryParameters:
       page: integer
-      pageCount: integer
+      pageSize: integer
     responses:
       200:
         body:
           application/json:
             properties:
-              id: integer
+              uri: string
               makeId: integer
               paperName: string
               description: string
