@@ -5,10 +5,7 @@ import com.thoughtworks.twars.bean.*;
 import com.thoughtworks.twars.mapper.*;
 import com.thoughtworks.twars.resource.quiz.definition.BlankQuizDefinitionService;
 import com.thoughtworks.twars.resource.quiz.definition.HomeworkQuizDefinitionService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -43,16 +40,21 @@ public class PaperResource extends Resource {
     @Inject
     private BlankQuizMapper blankQuizMapper;
 
-
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @ApiImplicitParams(value = {
+            @ApiImplicitParam(name = "page",value ="page",required = true),
+            @ApiImplicitParam(name = "pageSize",value = "pageSize",required = true)})
     @ApiResponses(value = {@ApiResponse(code = 200, message = "successful"),
             @ApiResponse(code = 404, message = "get all papers failed")})
-    public Response getAllPapers() {
 
-        List<Paper> papers = paperMapper.findAll();
+    public Response getAllPapers(
+            @QueryParam("page") int page,
+            @QueryParam("pageSize") int pageSize
+    ) {
+
+        List<Paper> papers = paperMapper.getAllPapers(page,pageSize);
         List<Map> result = new ArrayList<>();
-
         if (papers == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
