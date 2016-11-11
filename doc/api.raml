@@ -641,12 +641,13 @@ baseUri: http://api.bronzesword.com/
         body:
           application/json:
           properties:
-            type[]:
-              properties:
-                uri: string
-                makeId: integer
-                paperName: string
-                description: string
-                createTime: string
-                isDistribution: boolean
-              pageCount:integer
+            papers:
+               type[]:
+                 properties:
+                   uri: string
+                   makeId: integer
+                   paperName: string
+                   description: string
+                   createTime: string
+                   isDistribution: boolean
+            pageCount: integer
