@@ -42,23 +42,41 @@ public class PaperResourceTest extends TestBase {
     HomeworkQuiz firstHomeworkQuiz;
 
     @Test
-    public void should_list_all_papers() throws Exception {
+    public void should_list_all_papers_by_page_and_pageSize() throws Exception {
 
-        when(paperMapper.findAll()).thenReturn(Arrays.asList(firstPaper, secondPaper));
+        when(paperMapper.getAllPapers(0,2)).thenReturn(Arrays.asList(firstPaper, secondPaper));
         when(firstPaper.getId()).thenReturn(1);
         when(firstPaper.getPaperName()).thenReturn("简单的试卷");
+        when(firstPaper.getDescription()).thenReturn("easy");
+        when(firstPaper.getCreateTime()).thenReturn("2016-11-11");
+        when(firstPaper.getMakerId()).thenReturn(3);
+        when(firstPaper.getIsDistribution()).thenReturn(true);
+
         when(secondPaper.getId()).thenReturn(5);
         when(secondPaper.getPaperName()).thenReturn("普通的试卷");
+        when(secondPaper.getDescription()).thenReturn("common");
+        when(secondPaper.getCreateTime()).thenReturn("2016-11-12");
+        when(secondPaper.getMakerId()).thenReturn(2);
+        when(secondPaper.getIsDistribution()).thenReturn(false);
 
-
-        Response response = target(basePath).request().get();
+        Response response = target(basePath).queryParam("page",1).queryParam("pageSize",2).request().get();
         assertThat(response.getStatus(), is(200));
 
         List<Map> result = response.readEntity(List.class);
+
         assertThat((String) result.get(0).get("uri"), is("papers/1"));
         assertThat((String) result.get(1).get("uri"), is("papers/5"));
         assertThat((String) result.get(0).get("paperName"), is("简单的试卷"));
         assertThat((String) result.get(1).get("paperName"), is("普通的试卷"));
+        assertThat((String) result.get(0).get("description"), is("easy"));
+        assertThat((String) result.get(1).get("description"), is("common"));
+        assertThat((String) result.get(0).get("createTime"), is("2016-11-11"));
+        assertThat((String) result.get(1).get("createTime"), is("2016-11-12"));
+        assertThat((int) result.get(0).get("makerId"), is(3));
+        assertThat((int) result.get(1).get("makerId"), is(2));
+        assertThat((Boolean) result.get(0).get("isDistribution"), is(true));
+        assertThat((Boolean) result.get(1).get("isDistribution"), is(false));
+
 
     }
 

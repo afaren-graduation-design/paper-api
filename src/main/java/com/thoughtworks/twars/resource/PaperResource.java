@@ -49,12 +49,14 @@ public class PaperResource extends Resource {
             @ApiResponse(code = 404, message = "get all papers failed")})
 
     public Response getAllPapers(
-            @QueryParam("page") int page,
-            @QueryParam("pageSize") int pageSize
+            @DefaultValue("1") @QueryParam("page") int page,
+            @DefaultValue("15") @QueryParam("pageSize") int pageSize
     ) {
-
-        List<Paper> papers = paperMapper.getAllPapers(page,pageSize);
+        int startPage = page - 1;
+        List<Paper> papers = paperMapper.getAllPapers(startPage,pageSize);
+        System.out.println(papers);
         List<Map> result = new ArrayList<>();
+
         if (papers == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
@@ -80,6 +82,7 @@ public class PaperResource extends Resource {
     @ApiResponses(value = {@ApiResponse(code = 200, message = "insert paper successfully"),
             @ApiResponse(code = 415, message = "insert paper failed")})
     @Produces(MediaType.APPLICATION_JSON)
+
     public Response insertPaper(
             @ApiParam(name = "data", value = "include all info when insert paper", required = true)
             Map data) {
