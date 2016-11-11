@@ -52,10 +52,12 @@ public class PaperResource extends Resource {
             @DefaultValue("1") @QueryParam("page") int page,
             @DefaultValue("15") @QueryParam("pageSize") int pageSize
     ) {
-        int startPaper = (page-1)*pageSize;
-        List<Paper> papers = paperMapper.getAllPapers(startPaper,pageSize);
-        System.out.println(papers);
-        List<Map> result = new ArrayList<>();
+        int paperCount = paperMapper.findAll().size();
+
+        int startPage = page - 1;
+        List<Paper> papers = paperMapper.getAllPapers(startPage,pageSize);
+        List<Map> paperInfo = new ArrayList<>();
+        Map result = new HashMap<>();
 
         if (papers == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -71,8 +73,10 @@ public class PaperResource extends Resource {
             map.put("createTime", item.getCreateTime());
             map.put("isDistribution", item.getIsDistribution());
 
-            result.add(map);
+            paperInfo.add(map);
         }
+        result.put("paperInfo", paperInfo);
+        result.put("paperCount", paperCount);
 
         return Response.status(Response.Status.OK).entity(result).build();
     }
