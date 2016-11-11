@@ -640,10 +640,13 @@ baseUri: http://api.bronzesword.com/
       200:
         body:
           application/json:
-            properties:
-              uri: string
-              makeId: integer
-              paperName: string
-              description: string
-              createTime: string
-              isDistribution: boolean
+          properties:
+            type[]:
+              properties:
+                uri: string
+                makeId: integer
+                paperName: string
+                description: string
+                createTime: string
+                isDistribution: boolean
+              pageCount:integer
