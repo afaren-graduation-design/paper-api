@@ -52,8 +52,8 @@ public class PaperResource extends Resource {
             @DefaultValue("1") @QueryParam("page") int page,
             @DefaultValue("15") @QueryParam("pageSize") int pageSize
     ) {
-        int startPage = page - 1;
-        List<Paper> papers = paperMapper.getAllPapers(startPage,pageSize);
+        int startPaper = (page-1)*pageSize;
+        List<Paper> papers = paperMapper.getAllPapers(startPaper,pageSize);
         System.out.println(papers);
         List<Map> result = new ArrayList<>();
 
