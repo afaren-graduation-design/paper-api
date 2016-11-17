@@ -6,11 +6,12 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static com.sun.xml.internal.ws.dump.LoggingDumpTube.Position.Before;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
-public class HomeworkSubmitMapperTest extends TestBase{
-    private HomeworkSubmitMapper homeworkSubmitMapper;
+public class HomeworkSubmitMapperTest extends com.thoughtworks.twars.mapper.TestBase {
+    private com.thoughtworks.twars.mapper.HomeworkSubmitMapper homeworkSubmitMapper;
 
     @Before
     public void setUp() throws Exception {

@@ -12,7 +12,16 @@ public class Paper {
     private String paperName;
     private String description;
     private String createTime;
+    private Integer programId;
     private boolean isDistribution;
+
+    public Integer getProgramId() {
+        return programId;
+    }
+
+    public void setProgramId(Integer programId) {
+        this.programId = programId;
+    }
 
     public int getId() {
         return id;
@@ -84,16 +93,7 @@ public class Paper {
     public void setIsDistribution(boolean isDistribution) {
         this.isDistribution = isDistribution;
     }
-
-//    public void getPapers(int page, int pageCount) {
-        // xxx
-
-//    }
-
-    // wrapper function
-//    public void getPapers() {
-//        getPapers(1, 15);
-//    }
+    
 }
 
 

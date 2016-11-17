@@ -90,13 +90,17 @@ public class PaperResource extends Resource {
     public Response insertPaper(
             @ApiParam(name = "data", value = "include all info when insert paper", required = true)
             Map data) {
+
         int makerId = (int) data.get("makerId");
+        int programId = (int) data.get("programId");
         String paperName = (String) data.get("paperName");
         Map section = (Map) data.get("sections");
+
         if (section == null) {
             Paper insertPaper = new Paper();
             insertPaper.setMakerId(makerId);
             insertPaper.setPaperName(paperName);
+            insertPaper.setProgramId(programId);
 
             paperMapper.insertPaper(insertPaper);
             Map result = new HashMap<>();
@@ -104,14 +108,16 @@ public class PaperResource extends Resource {
             return Response.status(Response.Status.OK).entity(result).build();
         }
 
+
+
         try {
             Paper paper = new Paper();
             paper.setMakerId(makerId);
             paper.setPaperName(paperName);
+            paper.setProgramId(programId);
 
             paperMapper.insertPaper(paper);
             int paperId = paper.getId();
-
             Map map = new HashMap();
             map.put("uri", insertDefinitionByQuizType(section, paperId));
 
@@ -124,7 +130,6 @@ public class PaperResource extends Resource {
 
 
     public String insertDefinitionByQuizType(Map section, int paperId) {
-
         Map blankQuizzes = (Map) section.get("blankQuizzes");
         Map homeworkQuizzes = (Map) section.get("homeworkQuizzes");
 
@@ -134,6 +139,7 @@ public class PaperResource extends Resource {
         if ("homeworkQuizzes".equals(homeworkQuizzes.get("quizType"))) {
             homeworkQuizDefinition.insertQuizDefinition(homeworkQuizzes,paperId);
         }
+
         return "papers/" + paperId;
     }
 
