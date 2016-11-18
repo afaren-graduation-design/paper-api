@@ -631,6 +631,19 @@ baseUri: http://api.bronzesword.com/
                   # description: git url, contain dockerFile in repository
                 templateRepository: string
                   # description: git url, contain dockerFile in repositor
+  /ids/{homeworkQuizIds}
+      get:
+          # description: 获得指定 id 列表的homework题目定义
+          queryParameters:
+                ids: string
+            responses:
+                200:
+                  body:
+                    application/json:
+                      properties:
+                        homeworkQuizzes[]:
+                          properties:
+                            uri: string
 
 /papers:
   get:
