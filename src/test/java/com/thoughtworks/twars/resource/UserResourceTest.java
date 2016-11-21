@@ -9,6 +9,7 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Arrays;
+import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -149,6 +150,75 @@ public class UserResourceTest extends TestBase {
         assertThat(result.get("schoolProvince"), is("陕西"));
         assertThat(result.get("schoolCity"), is("西安"));
         assertThat(result.get("entranceYear"), is("2016"));
+    }
+
+    @Test
+    public void should_return_user_detail_by_user_ids() throws Exception {
+
+        UserDetail theDetail = mock(UserDetail.class);
+
+        when(userMapper.getUserDetailById(1)).thenReturn(theDetail);
+        when(userMapper.getUserById(1)).thenReturn(user);
+        when(user.getMobilePhone()).thenReturn("123456");
+        when(user.getEmail()).thenReturn("11@qq.com");
+
+        when(theDetail.getUserId()).thenReturn(1);
+        when(theDetail.getSchool()).thenReturn("哈佛");
+        when(theDetail.getMajor()).thenReturn("宗教");
+        when(theDetail.getDegree()).thenReturn("博士");
+        when(theDetail.getName()).thenReturn("狗剩");
+        when(theDetail.getGender()).thenReturn("男");
+        when(theDetail.getSchoolProvince()).thenReturn("陕西");
+        when(theDetail.getSchoolCity()).thenReturn("西安");
+        when(theDetail.getEntranceYear()).thenReturn("2016");
+
+        when(userMapper.getUserDetailById(2)).thenReturn(theDetail);
+        when(userMapper.getUserById(1)).thenReturn(user);
+        when(user.getMobilePhone()).thenReturn("78910");
+        when(user.getEmail()).thenReturn("22@qq.com");
+
+        when(theDetail.getUserId()).thenReturn(2);
+        when(theDetail.getSchool()).thenReturn("麻省理工");
+        when(theDetail.getMajor()).thenReturn("计算机科学");
+        when(theDetail.getDegree()).thenReturn("硕士");
+        when(theDetail.getName()).thenReturn("李明");
+        when(theDetail.getGender()).thenReturn("男");
+        when(theDetail.getSchoolProvince()).thenReturn("陕西");
+        when(theDetail.getSchoolCity()).thenReturn("西安");
+        when(theDetail.getEntranceYear()).thenReturn("2016");
+
+        Response response = target(basePath + "/1,2/detail").request().get();
+        Map result = response.readEntity(Map.class);
+        List<Map> userDetailList = (List) result.get("userList");
+        Map userDetail_01 = userDetailList.get(0);
+        Map userDetail_02 = userDetailList.get(1);
+
+        assertThat(response.getStatus(), is(200));
+        assertThat(userDetailList.size(), is(2));
+
+        assertThat(userDetail_01.get("userId"), is(1));
+        assertThat(userDetail_01.get("school"), is("哈佛"));
+        assertThat(userDetail_01.get("major"), is("宗教"));
+        assertThat(userDetail_01.get("degree"), is("博士"));
+        assertThat(userDetail_01.get("name"), is("狗剩"));
+        assertThat(userDetail_01.get("gender"), is("男"));
+        assertThat(userDetail_01.get("mobilePhone"), is("123456"));
+        assertThat(userDetail_01.get("email"), is("11@qq.com"));
+        assertThat(userDetail_01.get("schoolProvince"), is("陕西"));
+        assertThat(userDetail_01.get("schoolCity"), is("西安"));
+        assertThat(userDetail_01.get("entranceYear"), is("2016"));
+
+        assertThat(userDetail_02.get("userId"), is(2));
+        assertThat(userDetail_02.get("school"), is("麻省理工"));
+        assertThat(userDetail_02.get("major"), is("计算机科学"));
+        assertThat(userDetail_02.get("degree"), is("硕士"));
+        assertThat(userDetail_02.get("name"), is("李明"));
+        assertThat(userDetail_02.get("gender"), is("男"));
+        assertThat(userDetail_02.get("mobilePhone"), is("123456"));
+        assertThat(userDetail_02.get("email"), is("11@qq.com"));
+        assertThat(userDetail_02.get("schoolProvince"), is("陕西"));
+        assertThat(userDetail_02.get("schoolCity"), is("西安"));
+        assertThat(userDetail_02.get("entranceYear"), is("2016"));
     }
 
     @Test
