@@ -36,6 +36,28 @@ public class HomeworkQuizResource {
             @PathParam("param") String ids) {
         List homeworkQuizzes = new ArrayList();
         String[] idList = ids.split(",");
+
+        if(idList.length==1){
+            Integer id = Integer.parseInt(idList[0]);
+            HomeworkQuiz homeworkQuiz = homeworkQuizMapper.findById(id);
+
+            if (homeworkQuiz == null) {
+                return Response.status(Response.Status.NOT_FOUND).build();
+            }
+
+            Map homeworkItem = new HashMap<>();
+
+            homeworkItem.put("id", id);
+            homeworkItem.put("description", homeworkQuiz.getDescription());
+            homeworkItem.put("evaluateScript", homeworkQuiz.getEvaluateScript());
+            homeworkItem.put("templateRepository", homeworkQuiz.getTemplateRepository());
+
+            Map result = new HashMap<>();
+            result.put("homeworkItem", homeworkItem);
+            return Response.status(Response.Status.OK).entity(result).build();
+
+        }
+
         for (String i : idList) {
             Integer id = Integer.parseInt(i);
             HomeworkQuiz homeworkQuiz = homeworkQuizMapper.findById(id);

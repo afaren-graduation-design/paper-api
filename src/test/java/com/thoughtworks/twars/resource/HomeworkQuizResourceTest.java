@@ -71,6 +71,26 @@ public class HomeworkQuizResourceTest extends TestBase {
         Assert.assertThat(homeworkItem_02.get("description"), is("这是一道普通难度的题目"));
         Assert.assertThat(homeworkItem_02.get("evaluateScript"), is("www.baidu.com"));
         Assert.assertThat(homeworkItem_02.get("templateRepository"), is("templateRepository"));
+    }
 
+    @Test
+    public void should_return_homework_quiz_by_id() {
+        when(homeworkQuizMapper.findById(1)).thenReturn(homeworkQuiz);
+        when(homeworkQuiz.getDescription()).thenReturn("这是一道比较简单的题目");
+        when(homeworkQuiz.getEvaluateScript()).thenReturn("www.baidu.com");
+        when(homeworkQuiz.getTemplateRepository()).thenReturn("templateRepository");
+
+        Response response = target(basePath + "/1").request().get();
+
+        assertThat(response.getStatus(), is(200));
+
+        Map result = response.readEntity(Map.class);
+
+        Map homeworkItem = (Map)result.get("homeworkItem");
+
+        Assert.assertThat(homeworkItem.get("id"), is(1));
+        Assert.assertThat(homeworkItem.get("description"), is("这是一道比较简单的题目"));
+        Assert.assertThat(homeworkItem.get("evaluateScript"), is("www.baidu.com"));
+        Assert.assertThat(homeworkItem.get("templateRepository"), is("templateRepository"));
     }
 }

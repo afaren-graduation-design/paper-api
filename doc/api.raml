@@ -177,6 +177,7 @@ baseUri: http://api.bronzesword.com/
                 properties:
                   status: number
 
+
 /scoresheets:
   get:
     description: 得到所有的成绩单
@@ -616,7 +617,18 @@ baseUri: http://api.bronzesword.com/
             properties:
               uri: string
 
- /{homeworkQuizIds}
+     /{homeworkQuizId}
+           get:
+               # description: 获得指定 id 的homework题目定义
+               queryParameters:
+                     ids: string
+                 responses:
+                     200:
+                       body:
+                         application/json:
+                           properties:
+                                 uri: string
+    /{homeworkQuizIds}
       get:
           # description: 获得指定 id 列表的homework题目定义
           queryParameters:
