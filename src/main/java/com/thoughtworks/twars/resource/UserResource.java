@@ -103,30 +103,70 @@ public class UserResource extends Resource {
     @Path("/{param}/detail")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserDetail(
-            @ApiParam(name = "userId", value = "int", required = true)
-            @PathParam("param") int userId) {
+            @ApiParam(name = "userId", value = "String", required = true)
+            @PathParam("param") String userIds) {
 
-        UserDetail detail = userMapper.getUserDetailById(userId);
-        User user = userMapper.getUserById(userId);
+        String[] ids = userIds.split(",");
 
-        if (null == user || null == detail) {
-            return Response.status(Response.Status.NOT_FOUND).build();
+        if (ids.length == 1) {
+            Integer userId = Integer.parseInt(ids[0]);
+            UserDetail detail = userMapper.getUserDetailById(userId);
+            User user = userMapper.getUserById(userId);
+
+            if (null == user || null == detail) {
+                return Response.status(Response.Status.NOT_FOUND).build();
+            }
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("userId", detail.getUserId());
+            map.put("school", detail.getSchool());
+            map.put("major", detail.getMajor());
+            map.put("degree", detail.getDegree());
+            map.put("name", detail.getName());
+            map.put("gender", detail.getGender());
+            map.put("email", user.getEmail());
+            map.put("mobilePhone", user.getMobilePhone());
+            map.put("schoolProvince", detail.getSchoolProvince());
+            map.put("schoolCity", detail.getSchoolCity());
+            map.put("entranceYear", detail.getEntranceYear());
+
+            return Response.status(Response.Status.OK).entity(map).build();
         }
 
-        Map<String, Object> map = new HashMap<>();
-        map.put("userId", detail.getUserId());
-        map.put("school", detail.getSchool());
-        map.put("major", detail.getMajor());
-        map.put("degree", detail.getDegree());
-        map.put("name", detail.getName());
-        map.put("gender", detail.getGender());
-        map.put("email", user.getEmail());
-        map.put("mobilePhone", user.getMobilePhone());
-        map.put("schoolProvince",detail.getSchoolProvince());
-        map.put("schoolCity", detail.getSchoolCity());
-        map.put("entranceYear", detail.getEntranceYear());
 
-        return Response.status(Response.Status.OK).entity(map).build();
+        List userList = new ArrayList();
+        for (String i : ids) {
+
+            Integer userId = Integer.parseInt(i);
+
+            UserDetail detail = userMapper.getUserDetailById(userId);
+            User user = userMapper.getUserById(userId);
+
+            if (null == user || null == detail) {
+                return Response.status(Response.Status.NOT_FOUND).build();
+            }
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("userId", detail.getUserId());
+            map.put("school", detail.getSchool());
+            map.put("major", detail.getMajor());
+            map.put("degree", detail.getDegree());
+            map.put("name", detail.getName());
+            map.put("gender", detail.getGender());
+            map.put("email", user.getEmail());
+            map.put("mobilePhone", user.getMobilePhone());
+            map.put("schoolProvince", detail.getSchoolProvince());
+            map.put("schoolCity", detail.getSchoolCity());
+            map.put("entranceYear", detail.getEntranceYear());
+
+            userList.add(map);
+        }
+
+        Map result = new HashMap<>();
+        result.put("userList", userList);
+        return Response.status(Response.Status.OK).entity(result).build();
+
+
     }
 
     @PUT
@@ -258,7 +298,7 @@ public class UserResource extends Resource {
     public Response resetPassword(
             @ApiParam(name = "data", value = "include all info when reset password",
                     required = true)
-            Map data) {
+                    Map data) {
         String newPasword = (String) data.get("newPassword");
         String token = (String) data.get("token");
         int timeLimit = 86400;

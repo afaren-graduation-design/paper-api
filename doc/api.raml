@@ -90,6 +90,7 @@ baseUri: http://api.bronzesword.com/
                 id: integer
                 email: string
                 mobilePhone: string
+
     /logicPuzzle:
       get:
         responses:
@@ -116,6 +117,23 @@ baseUri: http://api.bronzesword.com/
               birthday: integer
               email: string
               mobilePhone: string
+
+      get:
+         description: 获取用户信息
+           body:
+            application/json:
+            userList:
+             properties:[]
+               userId: integer
+               school: string
+               name: string
+               gender: string
+               major: string
+               degree: string
+               birthday: integer
+               email: string
+               mobilePhone: string
+
       put:
         description: 提交用户的详细信息
         body:
