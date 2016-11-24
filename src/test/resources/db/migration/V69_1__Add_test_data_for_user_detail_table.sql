@@ -1,1 +1,0 @@
-INSERT INTO `users` values(null, "admin@admin.com", "18711110000", "550e1bafe077ff0b0b67f4e32f29d751", 1452491001, "9");
