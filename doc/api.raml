@@ -681,5 +681,29 @@ baseUri: http://api.bronzesword.com/
                    isDistribution: boolean
             paperCount: integer
 
+/program:
+    /{programId}:
+        /paper:
+            /{paperId}:
+                get:
+                  description: 获取指定 program 下的指定 paper
+                  responses:
+                    200:
+                      body:
+                        application/json:
+                        properties:
+                          id: integer
+                          programId: integer
+                          properties:
+                            sections[]:
+                                properties:
+                                   description: string
+                                   properties:
+                                        quizzes[]:
+                                            properties:
+                                               definition_uri: string
+                                               items_uri: string
+                                        sectionType: string
+
 
 
