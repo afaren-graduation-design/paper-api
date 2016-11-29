@@ -23,7 +23,7 @@ public class PaperMapperTest extends TestBase {
     @Test
     public void should_return_all_papers() throws Exception {
         List<Paper> papers = paperMapper.findAll();
-        assertThat(papers.size(), is(4));
+        assertThat(papers.size(), is(11));
         assertThat(papers.get(0).getMakerId(), is(1));
     }
 
@@ -48,7 +48,7 @@ public class PaperMapperTest extends TestBase {
 
         paperMapper.insertPaper(paper);
 
-        assertThat(paper.getId(), is(5));
+        assertThat(paper.getId(), is(12));
     }
 
     @Test
