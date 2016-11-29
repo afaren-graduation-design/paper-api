@@ -704,8 +704,14 @@ baseUri: http://api.bronzesword.com/
                                                definition_uri: string
                                                items_uri: string
                                         sectionType: string
-                  delete:
-                    description: 删除指定 program 下的指定 paper
+                  post:
+                    description: 对指定 program 下的指定 paper 进行操作
+                    body:
+                          application/json:
+                            properties:
+                              operationType: string
+                              operatorId: integer
+                              operatingTime: integer
                     responses:
                       204:
 
