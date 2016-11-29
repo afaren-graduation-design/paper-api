@@ -11,6 +11,9 @@
         <result column="evaluateScript" property="evaluateScript"></result>
         <result column="templateRepository" property="templateRepository"></result>
         <result column="sectionId" property="sectionId"></result>
+        <result column="makerId" property="makerId"></result>
+        <result column="createTime" property="createTime"></result>
+        <result column="homeworkName" property="homeworkName"></result>
     </resultMap>
 
     <select id="findBySectionId" resultMap="homeworkQuizListMap">
@@ -21,8 +24,12 @@
         SELECT * FROM homeworkQuiz WHERE id = #{id};
     </select>
 
+    <select id="findAllHomeworkQuizzes" resultMap="homeworkQuizListMap">
+        SELECT * FROM homeworkQuiz;
+    </select>
+
     <insert id="insertHomeworkQuiz" parameterType="com.thoughtworks.twars.bean.HomeworkQuiz" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO homeworkQuiz(description, evaluateScript, templateRepository) VALUES(#{description}, #{evaluateScript}, #{templateRepository});
+        INSERT INTO homeworkQuiz(description, evaluateScript, templateRepository,makerId,createTime,homeworkName) VALUES(#{description}, #{evaluateScript}, #{templateRepository},#{makerId},#{createTime},#{homeworkName});
     </insert>
 
 </mapper>
