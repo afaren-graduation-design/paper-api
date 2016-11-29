@@ -620,6 +620,13 @@ baseUri: http://api.bronzesword.com/
                 properties:
                   homeworkQuizzes[]:
                     properties:
+                      id:int
+                      description:String
+                      evaluateScript:String
+                      templateRepository:String
+                      makerName:String
+                      createTime:int
+                      homeworkName:String
                       uri: string
   post:
     description: 提交一份homework题目定义
