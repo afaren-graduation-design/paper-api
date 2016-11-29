@@ -56,22 +56,25 @@ public class ProgramResource extends Resource {
             @PathParam("paperId") int paperId,
             @ApiParam(name = "data", value = "include all info about paper operation when delete paper", required = true)
                     Map data) {
+        try{
 
-        String operationType = (String) data.get("operationType");
-        int operatorId = (int) data.get("operatorId");
-        int operatingTime = (int) data.get("operatingTime");
+            String operationType = (String) data.get("operationType");
+            int operatorId = (int) data.get("operatorId");
+            int operatingTime = (int) data.get("operatingTime");
 
-        PaperOperation paperOperation = new PaperOperation();
-        paperOperation.setOperationType(operationType);
-        paperOperation.setOperatorId(operatorId);
-        paperOperation.setOperatingTime(operatingTime);
-        paperOperation.setPaperId(paperId);
+            PaperOperation paperOperation = new PaperOperation();
+            paperOperation.setOperationType(operationType);
+            paperOperation.setOperatorId(operatorId);
+            paperOperation.setOperatingTime(operatingTime);
+            paperOperation.setPaperId(paperId);
 
-        int result = paperOperationMapper.insertPaperOperation(paperOperation);
-        if (result == 0){
-            return Response.status(Response.Status.NOT_FOUND).build();
+            int result = paperOperationMapper.insertPaperOperation(paperOperation);
+            if (result == 0){
+                return Response.status(Response.Status.NOT_FOUND).build();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return Response.status(Response.Status.NO_CONTENT).build();
-
     }
 }
