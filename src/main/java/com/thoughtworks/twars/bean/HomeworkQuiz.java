@@ -5,6 +5,33 @@ public class HomeworkQuiz {
     private String description;
     private String evaluateScript;
     private String templateRepository;
+    private int makerId;
+    private int createTime;
+    private String homeworkName;
+
+    public int getMakerId() {
+        return makerId;
+    }
+
+    public void setMakerId(int makerId) {
+        this.makerId = makerId;
+    }
+
+    public int getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(int createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getHomeworkName() {
+        return homeworkName;
+    }
+
+    public void setHomeworkName(String homeworkName) {
+        this.homeworkName = homeworkName;
+    }
 
     public int getId() {
         return id;
