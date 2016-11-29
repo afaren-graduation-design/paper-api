@@ -38,7 +38,7 @@ public class HomeworkQuizResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllHomeworkQuiz() {
         List<HomeworkQuiz> homeworkQuizzes = homeworkQuizMapper.findAllHomeworkQuizzes();
-        
+
         Map result = new HashMap<>();
         result.put("homeworkQuizzes", homeworkQuizzes);
         return Response.status(Response.Status.OK).entity(result).build();
