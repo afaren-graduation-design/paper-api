@@ -37,7 +37,24 @@ public class HomeworkQuizResource {
             @ApiResponse(code = 404, message = "not found")})
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllHomeworkQuiz() {
-        List<HomeworkQuiz> homeworkQuizzes = homeworkQuizMapper.findAllHomeworkQuizzes();
+        List<HomeworkQuiz> allHomeworkQuizzes = homeworkQuizMapper.findAllHomeworkQuizzes();
+        List homeworkQuizzes = new ArrayList();
+
+        for (HomeworkQuiz homeworkQuiz : allHomeworkQuizzes) {
+            Map homeworkItem = new HashMap<>();
+
+            homeworkItem.put("id", homeworkQuiz.getMakerId());
+            homeworkItem.put("description", homeworkQuiz.getDescription());
+            homeworkItem.put("evaluateScript", homeworkQuiz.getEvaluateScript());
+            homeworkItem.put("templateRepository", homeworkQuiz.getTemplateRepository());
+            UserDetail userDetail = userMapper.getUserDetailById(homeworkQuiz.getMakerId());
+            homeworkItem.put("makerName", userDetail.getName());
+            homeworkItem.put("createTime", homeworkQuiz.getCreateTime());
+            homeworkItem.put("homeworkName", homeworkQuiz.getCreateTime());
+
+            homeworkQuizzes.add(homeworkItem);
+
+        }
 
         Map result = new HashMap<>();
         result.put("homeworkQuizzes", homeworkQuizzes);
