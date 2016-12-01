@@ -50,7 +50,7 @@ public class HomeworkQuizResource {
             UserDetail userDetail = userMapper.getUserDetailById(homeworkQuiz.getMakerId());
             homeworkItem.put("makerName", userDetail.getName());
             homeworkItem.put("createTime", homeworkQuiz.getCreateTime());
-            homeworkItem.put("homeworkName", homeworkQuiz.getCreateTime());
+            homeworkItem.put("homeworkName", homeworkQuiz.getHomeworkName());
 
             homeworkQuizzes.add(homeworkItem);
 
@@ -90,7 +90,7 @@ public class HomeworkQuizResource {
             UserDetail userDetail = userMapper.getUserDetailById(homeworkQuiz.getMakerId());
             homeworkItem.put("makerName", userDetail.getName());
             homeworkItem.put("createTime", homeworkQuiz.getCreateTime());
-            homeworkItem.put("homeworkName", homeworkQuiz.getCreateTime());
+            homeworkItem.put("homeworkName", homeworkQuiz.getHomeworkName());
 
             Map result = new HashMap<>();
             result.put("homeworkItem", homeworkItem);
@@ -115,7 +115,7 @@ public class HomeworkQuizResource {
             UserDetail userDetail = userMapper.getUserDetailById(homeworkQuiz.getMakerId());
             homeworkItem.put("makerName", userDetail.getName());
             homeworkItem.put("createTime", homeworkQuiz.getCreateTime());
-            homeworkItem.put("homeworkName", homeworkQuiz.getCreateTime());
+            homeworkItem.put("homeworkName", homeworkQuiz.getHomeworkName());
 
             homeworkQuizzes.add(homeworkItem);
         }
