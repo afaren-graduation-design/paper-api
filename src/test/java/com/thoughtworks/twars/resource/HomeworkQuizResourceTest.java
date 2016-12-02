@@ -40,8 +40,6 @@ public class HomeworkQuizResourceTest extends TestBase {
         when(userDetail.getName()).thenReturn("Rose");
         when(userMapper.getUserDetailById(homeworkQuiz.getMakerId())).thenReturn(userDetail);
 
-// FIXME: 16-12-1 加上前面四条语句，错误是 500，注释掉的话是404。五百嘛，
-// 就是因为mapper没有定制行为，返回的对象为null，后续的操作是 NullPointerException，于是就500了
         Response response = target(basePath + "/1").request().get();
         assertThat(response.getStatus(), is(200));
 
