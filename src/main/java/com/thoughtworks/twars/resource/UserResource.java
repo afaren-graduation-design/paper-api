@@ -169,6 +169,28 @@ public class UserResource extends Resource {
 
     }
 
+    @GET
+    @Path("/{param}/programs")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "get one user's programIds successful"),
+            @ApiResponse(code = 404, message = "get one user's programIds failed")})
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getProgramdById(
+            @ApiParam(name = "userId", value = "int", required = true)
+            @PathParam("param") int userId) {
+
+        List<Integer> programIds = userMapper.findProgramsById(userId);
+
+        if (programIds == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("programIds", programIds);
+
+        return Response.status(Response.Status.OK).entity(map).build();
+    }
+
+
     @PUT
     @Path("/{param}/detail")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "update one userDetail successful")})
