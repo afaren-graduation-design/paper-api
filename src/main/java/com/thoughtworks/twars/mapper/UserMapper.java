@@ -34,4 +34,6 @@ public interface UserMapper {
     List<UserDetail> findUserDetailsByUserIds(List<Integer> userIds);
 
     List<User> findUsersByUserIds(List<Integer> userIds);
+
+    List<Integer> findProgramsById(Integer id);
 }
