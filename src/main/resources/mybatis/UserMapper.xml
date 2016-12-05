@@ -79,4 +79,8 @@
             #{userIds}
         </foreach>
     </select>
+
+    <select id="findProgramsById" resultType="java.lang.Integer">
+        SELECT programId FROM userProgram WHERE userId = #{id}
+    </select>
 </mapper>
