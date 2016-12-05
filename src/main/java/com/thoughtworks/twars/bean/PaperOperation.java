@@ -49,12 +49,18 @@ public class PaperOperation {
 
     @Override
     public String toString() {
-        return "PaperOperation{" +
-                "id=" + id +
-                ", operationType='" + operationType + '\'' +
-                ", operatorId=" + operatorId +
-                ", operatingTime=" + operatingTime +
-                ", paperId=" + paperId +
+        return "PaperOperation{"
+                +
+                "id=" + id
+                +
+                ", operationType='" + operationType + '\''
+                +
+                ", operatorId=" + operatorId
+                +
+                ", operatingTime=" + operatingTime
+                +
+                ", paperId=" + paperId
+                +
                 '}';
     }
 }
