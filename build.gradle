@@ -77,3 +77,16 @@ task createCoberturaReport(type: Exec) {
     executable "bash"
     args "-c", "mkdir ./build/reports/cobertura && ./tools/cover2cover.py ./build/reports/jacoco/test/jacocoTestReport.xml src/main/java > ./build/reports/cobertura/coverage.xml"
 }
+
+
+tasks.withType(Checkstyle).each { checkstyleTask ->
+    checkstyleTask.doLast {
+        reports.all { report ->
+            def outputFile = report.destination
+            if (outputFile.exists() && outputFile.text.contains("<error ")) {
+                outputs.upToDateWhen { false }
+                throw new GradleException("There were checkstyle warnings! For more info check $outputFile")
+            }
+        }
+    }
+}
