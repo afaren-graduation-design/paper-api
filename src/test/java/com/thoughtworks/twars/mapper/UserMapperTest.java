@@ -85,7 +85,7 @@ public class UserMapperTest extends TestBase {
 
         userMapper.updateUserDetail(userDetail);
 
-        assertThat(userDetail.getUserId(),is(1));
+        assertThat(userDetail.getUserId(), is(1));
         assertThat(userDetail.getSchoolCity(), is("西安"));
         assertThat(userDetail.getEntranceYear(), is("2016"));
     }
@@ -106,7 +106,7 @@ public class UserMapperTest extends TestBase {
 
         userMapper.updateUserDetail(userDetail);
 
-        assertThat(userDetail.getUserId(),is(5));
+        assertThat(userDetail.getUserId(), is(5));
         assertThat(userDetail.getSchoolProvince(), is("陕西"));
         assertThat(userDetail.getEntranceYear(), is("2015"));
     }
@@ -123,11 +123,11 @@ public class UserMapperTest extends TestBase {
         assertThat(detail.getGender(), is("F"));
         assertThat(detail.getSchoolProvince(), is("陕西"));
         assertThat(detail.getSchoolCity(), is("西安"));
-        assertThat(detail.getEntranceYear(),is("2016"));
+        assertThat(detail.getEntranceYear(), is("2016"));
     }
 
     @Test
-    public void should_encrypt_password_when_create_new_user () throws Exception {
+    public void should_encrypt_password_when_create_new_user() throws Exception {
         User newUser = new User();
         newUser.setEmail("jingjing@qq.com");
         newUser.setMobilePhone("13576826262");
@@ -198,5 +198,13 @@ public class UserMapperTest extends TestBase {
         List<User> users = userMapper.findUsersByUserIds(userIds);
 
         assertThat(users.size(), is(3));
+    }
+
+    @Test
+    public void should_return_programs() {
+        Integer userId = 1;
+        List programs = userMapper.findProgramsById(userId);
+
+        assertThat(programs.size(), is(2));
     }
 }
