@@ -8,7 +8,7 @@ import com.thoughtworks.twars.resource.quiz.definition.BlankQuizDefinitionServic
 import com.thoughtworks.twars.resource.quiz.definition.HomeworkQuizDefinitionService;
 import com.thoughtworks.twars.resource.quiz.scoresheet.BlankQuizScoreSheetService;
 import com.thoughtworks.twars.resource.quiz.scoresheet.HomeworkQuizScoreSheetService;
-import com.thoughtworks.twars.util.DBUtil;
+import com.thoughtworks.twars.util.DatabaseUtil;
 import org.apache.ibatis.session.SqlSessionManager;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -20,7 +20,7 @@ public class App extends ResourceConfig {
 
     public App() {
 
-        SqlSessionManager session = DBUtil.getSession();
+        SqlSessionManager session = DatabaseUtil.getSession();
 
         final UserMapper userMapper = session
                 .getMapper(UserMapper.class);

@@ -75,8 +75,8 @@ public class ProgramResource extends Resource {
             if (result == 0) {
                 return Response.status(Response.Status.NOT_FOUND).build();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
         return Response.status(Response.Status.NO_CONTENT).build();
     }

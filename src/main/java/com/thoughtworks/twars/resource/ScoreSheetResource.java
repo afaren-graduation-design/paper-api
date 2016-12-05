@@ -95,13 +95,13 @@ public class ScoreSheetResource extends Resource {
 
             return Response.status(Response.Status.CREATED).entity(result).build();
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception exception) {
+            exception.printStackTrace();
             if (session != null) {
                 try {
                     session.rollback();    
                 } catch (Exception ex) {
-
+                    ex.printStackTrace();
                 }
 
             }
