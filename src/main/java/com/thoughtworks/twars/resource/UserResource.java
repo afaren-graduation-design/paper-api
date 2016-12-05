@@ -171,7 +171,8 @@ public class UserResource extends Resource {
 
     @GET
     @Path("/{param}/programs")
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "get one user's programIds successful"),
+    @ApiResponses(value = {@ApiResponse(code = 200,
+            message = "get one user's programIds successful"),
             @ApiResponse(code = 404, message = "get one user's programIds failed")})
     @Produces(MediaType.APPLICATION_JSON)
     public Response getProgramdById(
