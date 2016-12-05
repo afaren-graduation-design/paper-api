@@ -31,8 +31,8 @@ public class InspectorResource {
             Statement st = conn.createStatement();
             st.execute("show tables");
             result.put("mysql", "connected");
-        } catch(Exception e) {
-            result.put("mysql", e.getMessage());
+        } catch (Exception exception) {
+            result.put("mysql", exception.getMessage());
         }
 
         return Response.status(javax.ws.rs.core.Response
