@@ -8,10 +8,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.Arrays;
-import java.util.List;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
@@ -334,4 +331,23 @@ public class UserResourceTest extends TestBase {
         Response response = target(basePath + "/1/logicPuzzle").request().get();
         assertThat(response.getStatus(), is(200));
     }
+
+    @Test
+    public void should_return_programIds() throws Exception {
+
+        List<Integer> programsIds = new ArrayList<>();
+        programsIds.add(1);
+        programsIds.add(2);
+        when(userMapper.findProgramsById(1)).thenReturn(programsIds);
+
+        Response response = target(basePath + "/1/programs").request().get();
+        assertThat(response.getStatus(), is(200));
+
+        Map map = response.readEntity(Map.class);
+        List result = (List) map.get("programIds");
+
+        assertThat(result.size(), is(2));
+    }
+
+
 }
