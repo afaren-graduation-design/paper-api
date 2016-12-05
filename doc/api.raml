@@ -118,6 +118,14 @@ baseUri: http://api.bronzesword.com/
               email: string
               mobilePhone: string
 
+    /programs:
+      get:
+          description: 获取指定用户对应的program列表
+                body:
+                  application/json:
+                  programIds: Integer[]
+
+
       get:
          description: 获取用户信息
            body:
@@ -620,14 +628,14 @@ baseUri: http://api.bronzesword.com/
                 properties:
                   homeworkQuizzes[]:
                     properties:
-                      id:int
-                      description:String
-                      evaluateScript:String
-                      templateRepository:String
-                      makerName:String
-                      createTime:int
-                      homeworkName:String
-                      uri: string
+                      id: int
+                      description: String
+                      evaluateScript: String
+                      templateRepository: String
+                      makerName: String
+                      createTime: int
+                      homeworkName: String
+                      uri:  string
   post:
     description: 提交一份homework题目定义
     body:
@@ -721,6 +729,7 @@ baseUri: http://api.bronzesword.com/
                               operatingTime: integer
                     responses:
                       204:
+
 
 
 
