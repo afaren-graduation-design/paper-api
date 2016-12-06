@@ -724,12 +724,8 @@ baseUri: http://api.bronzesword.com/
                     body:
                           application/json:
                             properties:
-                              operationType: string
+                              operationType: ['DELETE','UPDATE','DISTRIBUTION','ADD','RESTORE']
                               operatorId: integer
                               operatingTime: integer
                     responses:
                       204:
-
-
-
-
