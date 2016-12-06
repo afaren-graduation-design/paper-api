@@ -22,6 +22,10 @@ import static org.mockito.Mockito.when;
 public class UserResourceTest extends TestBase {
 
     User user = mock(User.class);
+    User user01 = mock(User.class);
+
+    UserDetail theDetail = mock(UserDetail.class);
+    UserDetail theDetail01 = mock(UserDetail.class);
 
     String basePath = "/users";
 
@@ -152,8 +156,6 @@ public class UserResourceTest extends TestBase {
     @Test
     public void should_return_user_detail_by_user_ids() throws Exception {
 
-        UserDetail theDetail = mock(UserDetail.class);
-
         when(userMapper.getUserDetailById(1)).thenReturn(theDetail);
         when(userMapper.getUserById(1)).thenReturn(user);
         when(user.getMobilePhone()).thenReturn("123456");
@@ -169,23 +171,24 @@ public class UserResourceTest extends TestBase {
         when(theDetail.getSchoolCity()).thenReturn("西安");
         when(theDetail.getEntranceYear()).thenReturn("2016");
 
-        when(userMapper.getUserDetailById(2)).thenReturn(theDetail);
-        when(userMapper.getUserById(1)).thenReturn(user);
-        when(user.getMobilePhone()).thenReturn("78910");
-        when(user.getEmail()).thenReturn("22@qq.com");
+        when(userMapper.getUserDetailById(2)).thenReturn(theDetail01);
+        when(userMapper.getUserById(2)).thenReturn(user01);
+        when(user01.getMobilePhone()).thenReturn("78910");
+        when(user01.getEmail()).thenReturn("22@qq.com");
 
-        when(theDetail.getUserId()).thenReturn(2);
-        when(theDetail.getSchool()).thenReturn("麻省理工");
-        when(theDetail.getMajor()).thenReturn("计算机科学");
-        when(theDetail.getDegree()).thenReturn("硕士");
-        when(theDetail.getName()).thenReturn("李明");
-        when(theDetail.getGender()).thenReturn("男");
-        when(theDetail.getSchoolProvince()).thenReturn("陕西");
-        when(theDetail.getSchoolCity()).thenReturn("西安");
-        when(theDetail.getEntranceYear()).thenReturn("2016");
+        when(theDetail01.getUserId()).thenReturn(2);
+        when(theDetail01.getSchool()).thenReturn("麻省理工");
+        when(theDetail01.getMajor()).thenReturn("计算机科学");
+        when(theDetail01.getDegree()).thenReturn("硕士");
+        when(theDetail01.getName()).thenReturn("李明");
+        when(theDetail01.getGender()).thenReturn("男");
+        when(theDetail01.getSchoolProvince()).thenReturn("陕西");
+        when(theDetail01.getSchoolCity()).thenReturn("西安");
+        when(theDetail01.getEntranceYear()).thenReturn("2016");
 
         Response response = target(basePath + "/1,2/detail").request().get();
         Map result = response.readEntity(Map.class);
+
         List<Map> userDetailList = (List) result.get("userList");
         Map userDetail01 = userDetailList.get(0);
 
@@ -212,8 +215,8 @@ public class UserResourceTest extends TestBase {
         assertThat(userDetail02.get("degree"), is("硕士"));
         assertThat(userDetail02.get("name"), is("李明"));
         assertThat(userDetail02.get("gender"), is("男"));
-        assertThat(userDetail02.get("mobilePhone"), is("123456"));
-        assertThat(userDetail02.get("email"), is("11@qq.com"));
+        assertThat(userDetail02.get("mobilePhone"), is("78910"));
+        assertThat(userDetail02.get("email"), is("22@qq.com"));
         assertThat(userDetail02.get("schoolProvince"), is("陕西"));
         assertThat(userDetail02.get("schoolCity"), is("西安"));
         assertThat(userDetail02.get("entranceYear"), is("2016"));
