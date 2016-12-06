@@ -108,39 +108,18 @@ baseUri: http://api.bronzesword.com/
         body:
           application/json:
             properties:
-              userId: integer
-              school: string
-              name: string
-              gender: string
-              major: string
-              degree: string
-              birthday: integer
-              email: string
-              mobilePhone: string
-
-    /programs:
-      get:
-          description: 获取指定用户对应的program列表
-                body:
-                  application/json:
-                  programIds: Integer[]
-
-
-      get:
-         description: 获取用户信息
-           body:
-            application/json:
-            userList:
-             properties:[]
-               userId: integer
-               school: string
-               name: string
-               gender: string
-               major: string
-               degree: string
-               birthday: integer
-               email: string
-               mobilePhone: string
+              userList:
+                properties:
+                  []:
+                  userId: integer
+                  school: string
+                  name: string
+                  gender: string
+                  major: string
+                  degree: string
+                  birthday: integer
+                  email: string
+                  mobilePhone: string
 
       put:
         description: 提交用户的详细信息
@@ -161,6 +140,16 @@ baseUri: http://api.bronzesword.com/
                   userInfo:
                     properties:
                       uri: string
+    /programs:
+      get:
+        description: 获取指定用户对应的program列表
+        responses:
+          200:
+            body:
+              application/json:
+                 properties:
+                   programIds:
+                       integer[]
 
     /password:
       put:
@@ -218,25 +207,6 @@ baseUri: http://api.bronzesword.com/
     description: 考试完毕，提交成绩单
     body:
       application/json:
-        example: |
-          {
-            "examerId": 1,
-            "paperId": 2,
-
-            "blankQuizSubmits": [
-              {
-                "blankQuizId": 1,
-                "startTime": 140345676,
-                "endTime": 142345632,
-                "itemPosts": [
-                  {
-                    "answer": "10",
-                    "quizItemId": 3
-                  }
-                ]
-              }
-            ]
-          }
         properties:
           examerId: integer
           paperId: integer
@@ -321,15 +291,25 @@ baseUri: http://api.bronzesword.com/
 
 /papers:
   get:
-    description: 获得所有的考卷定义
+    queryParameters:
+      page: integer
+      pageSize: integer
     responses:
       200:
         body:
           application/json:
             properties:
-              type[]:
-                properties:
-                  uri: string
+              papers:
+                 properties:
+                   []:
+                   uri: string
+                   makeId: integer
+                   paperName: string
+                   description: string
+                   createTime: string
+                   isDistribution: boolean
+              paperCount: integer
+
 
   post:
     description: 提交一份考卷定义，含section定义
@@ -377,115 +357,6 @@ baseUri: http://api.bronzesword.com/
           body:
             # description: quizzes的顺序是有含义的，所以不能乱序
             application/json:
-              example: |
-                {
-                  "id": 1,
-                  "sections": [
-                    {
-                      "id": 1,
-                      "description": "逻辑题",
-                      "type": "blankQuiz",
-                      "quizzes": [
-                        {
-                          "id": 1,
-                          "definition_uri": "blankQuizzes/1",
-                          "items_uri":"blankQuizzes/1/items"
-                        }
-                      ],
-                      "maker_uri": "userInfo/2"
-                    }
-                  ]
-                }
-              properties:
-                id : integer
-                sections:
-                  properties:
-                    []:
-                      properties:
-                        id: integer
-                        description: string
-                          # description: Markdown String to discribe what happen in the future
-                        type: string
-                        quizzes:
-                          properties:
-                            []:
-                              properties:
-                                id: integer
-                                definition_uri: string
-                                [items_uri]: string
-                        maker_uri: string
-    /logicPuzzle:
-        get:
-          responses:
-            200:
-              body:
-                application/json:
-                  properties:
-                    []:
-                      properties:
-                        userId: integer
-                        correctNumber: integer
-                        itemNumber: integer
-                        startTime: integer
-                        endTime: integer
-    /usersDetail:
-      get:
-        responses:
-          200:
-           body:
-             application/json:
-               properties:
-                 []:
-                   properties:
-                     userId: integer
-                     birthday: integer
-                     major: string
-                     gender: string
-                     mobilePhone: string
-                     degree: string
-                     name: string
-                     email: string
-
-  /enrollment:
-    description: 获取固定ID的考卷定义细节
-    get:
-      description: 获取一份考卷定义的细节，含section的细节
-      responses:
-        200:
-          body:
-            # description: quizzes的顺序是有含义的，所以不能乱序
-            application/json:
-              example: |
-                {
-                  "id" :1,
-                  "sections": [
-                    {
-                      "id": 1,
-                      "description": "逻辑题",
-                      "type": "blankQuiz",
-                      "quizzes": [
-                        {
-                          "id": 1,
-                          "definition_uri": "blankQuizzes/1",
-                          "items_uri": "blankQuizzes/1/items"
-                        }
-                      ],
-                      "maker_uri": "userInfo/2"
-                    },
-                    {
-                      "id": 2,
-                      "description": "dojo",
-                      "type": "homeworkQuiz",
-                      "quizzes" : [
-                        {
-                          "id": 1,
-                          "definition_uri": "homeworkQuizzes/2"
-                        }
-                      ],
-                      "maker_uri": "userInfo/3"
-                    }
-                  ]
-                }
               properties:
                 id: integer
                 sections:
@@ -626,15 +497,16 @@ baseUri: http://api.bronzesword.com/
             body:
               application/json:
                 properties:
-                  homeworkQuizzes[]:
+                  homeworkQuizzes:
                     properties:
-                      id: int
-                      description: String
-                      evaluateScript: String
-                      templateRepository: String
-                      makerName: String
-                      createTime: int
-                      homeworkName: String
+                      []:
+                      id: integer
+                      description: string
+                      evaluateScript: string
+                      templateRepository: string
+                      makerName: string
+                      createTime: integer
+                      homeworkName: string
                       uri:  string
   post:
     description: 提交一份homework题目定义
@@ -650,51 +522,20 @@ baseUri: http://api.bronzesword.com/
             properties:
               uri: string
 
-     /{homeworkQuizId}
-           get:
-               # description: 获得指定 id 的homework题目定义
-               queryParameters:
-                     ids: string
-                 responses:
-                     200:
-                       body:
-                         application/json:
-                           properties:
-                                 uri: string
-    /{homeworkQuizIds}
-      get:
-          # description: 获得指定 id 列表的homework题目定义
-          queryParameters:
-                ids: string
-            responses:
-                200:
-                  body:
-                    application/json:
-                      properties:
-                        homeworkQuizzes[]:
+  /{homeworkQuizIds}:
+    get:
+      description: 获得指定 id 列表的homework题目定义
+      queryParameters:
+          ids: string
+      responses:
+          200:
+            body:
+              application/json:
+                  properties:
+                    homeworkQuizzes:
                           properties:
+                            []:
                             uri: string
-
-/papers:
-  get:
-    queryParameters:
-      page: integer
-      pageSize: integer
-    responses:
-      200:
-        body:
-          application/json:
-          properties:
-            papers:
-               type[]:
-                 properties:
-                   uri: string
-                   makeId: integer
-                   paperName: string
-                   description: string
-                   createTime: string
-                   isDistribution: boolean
-            paperCount: integer
 
 /program:
     /{programId}:
@@ -706,30 +547,31 @@ baseUri: http://api.bronzesword.com/
                     200:
                       body:
                         application/json:
-                        properties:
-                          id: integer
-                          programId: integer
-                          properties:
-                            sections[]:
-                                properties:
-                                   description: string
-                                   properties:
-                                        quizzes[]:
-                                            properties:
-                                               definition_uri: string
-                                               items_uri: string
-                                        sectionType: string
-                  post:
+                            properties:
+                                id: integer
+                                programId: integer
+                                sections:
+                                  properties:
+                                    []:
+                                    description: string
+                                    quizzes:
+                                      properties:
+                                        []:
+                                          properties:
+                                            definition_uri: string
+                                            items_uri: string
+                                    sectionType: string
+
+
+
+                post:
                     description: 对指定 program 下的指定 paper 进行操作
                     body:
                           application/json:
                             properties:
-                              operationType: string
+                              operationType:
+                                enum: ['DELETE','UPDATE','DISTRIBUTION','ADD','RESTORE']
                               operatorId: integer
                               operatingTime: integer
                     responses:
                       204:
-
-
-
-
