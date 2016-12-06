@@ -9,7 +9,7 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
-public class BlankQuizSubmitMapperTest extends TestBase{
+public class BlankQuizSubmitMapperTest extends TestBase {
     private BlankQuizSubmitMapper blankQuizSubmitMapper;
 
     @Before
@@ -19,7 +19,7 @@ public class BlankQuizSubmitMapperTest extends TestBase{
     }
 
     @Test
-    public void should_return_id_when_insert_blank_quiz_submit(){
+    public void should_return_id_when_insert_blank_quiz_submit() {
         BlankQuizSubmit blankQuizSubmit = new BlankQuizSubmit();
         blankQuizSubmit.setScoreSheetId(1);
         blankQuizSubmit.setBlankQuizId(2);

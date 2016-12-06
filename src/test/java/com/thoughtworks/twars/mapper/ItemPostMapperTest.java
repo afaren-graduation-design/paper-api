@@ -20,7 +20,7 @@ public class ItemPostMapperTest extends TestBase {
     }
 
     @Test
-    public void should_return_id_when_insert_item_post(){
+    public void should_return_id_when_insert_item_post() {
         ItemPost itemPost = new ItemPost();
         itemPost.setBlankQuizSubmitsId(1);
         itemPost.setAnswer("22");

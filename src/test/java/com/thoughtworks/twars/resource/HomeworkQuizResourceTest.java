@@ -84,22 +84,22 @@ public class HomeworkQuizResourceTest extends TestBase {
         List<Map> homeworkQuizList = (List) result.get("homeworkQuizzes");
         assertThat(homeworkQuizList.size(), is(2));
 
-        Map homeworkItem_01 = homeworkQuizList.get(0);
-        Map homeworkItem_02 = homeworkQuizList.get(1);
+        Map homeworkItem01 = homeworkQuizList.get(0);
 
         assertThat(homeworkQuizList.size(), is(2));
-        assertThat(homeworkItem_01.get("id"), is(1));
-        assertThat(homeworkItem_01.get("description"), is("这是一道比较简单的题目"));
-        assertThat(homeworkItem_01.get("evaluateScript"), is("www.baidu.com"));
-        assertThat(homeworkItem_01.get("templateRepository"), is("templateRepository"));
+        assertThat(homeworkItem01.get("id"), is(1));
+        assertThat(homeworkItem01.get("description"), is("这是一道比较简单的题目"));
+        assertThat(homeworkItem01.get("evaluateScript"), is("www.baidu.com"));
+        assertThat(homeworkItem01.get("templateRepository"), is("templateRepository"));
 
+        Map homeworkItem02 = homeworkQuizList.get(1);
 
-        assertThat(homeworkItem_02.get("id"), is(2));
-        assertThat(homeworkItem_02.get("description"), is("这是一道普通难度的题目"));
+        assertThat(homeworkItem02.get("id"), is(2));
+        assertThat(homeworkItem02.get("description"), is("这是一道普通难度的题目"));
 
-        assertThat(homeworkItem_02.get("evaluateScript"), is("www.talkop.com"));
-        assertThat(homeworkItem_02.get("templateRepository"), is("talkopRepository"));
-   }
+        assertThat(homeworkItem02.get("evaluateScript"), is("www.talkop.com"));
+        assertThat(homeworkItem02.get("templateRepository"), is("talkopRepository"));
+    }
 
     @Test
     public void should_return_homework_quiz_by_id() {
@@ -165,21 +165,21 @@ public class HomeworkQuizResourceTest extends TestBase {
         List<Map> homeworkQuizList = (List) result.get("homeworkQuizzes");
         assertThat(homeworkQuizList.size(), is(2));
 
-        Map homeworkItem_01 = homeworkQuizList.get(0);
-        Map homeworkItem_02 = homeworkQuizList.get(1);
+        Map homeworkItem01 = homeworkQuizList.get(0);
 
         assertThat(homeworkQuizList.size(), is(2));
 
-        assertThat(homeworkItem_01.get("id"), is(1));
-        assertThat(homeworkItem_01.get("description"), is("这是一道比较简单的题目"));
-        assertThat(homeworkItem_01.get("evaluateScript"), is("www.baidu.com"));
-        assertThat(homeworkItem_01.get("templateRepository"), is("templateRepository"));
+        assertThat(homeworkItem01.get("id"), is(1));
+        assertThat(homeworkItem01.get("description"), is("这是一道比较简单的题目"));
+        assertThat(homeworkItem01.get("evaluateScript"), is("www.baidu.com"));
+        assertThat(homeworkItem01.get("templateRepository"), is("templateRepository"));
 
+        Map homeworkItem02 = homeworkQuizList.get(1);
 
-        assertThat(homeworkItem_02.get("id"), is(2));
-        assertThat(homeworkItem_02.get("description"), is("这是一道普通难度的题目"));
-        assertThat(homeworkItem_02.get("evaluateScript"), is("www.talkop.com"));
-        assertThat(homeworkItem_02.get("templateRepository"), is("talkopRepository"));
+        assertThat(homeworkItem02.get("id"), is(2));
+        assertThat(homeworkItem02.get("description"), is("这是一道普通难度的题目"));
+        assertThat(homeworkItem02.get("evaluateScript"), is("www.talkop.com"));
+        assertThat(homeworkItem02.get("templateRepository"), is("talkopRepository"));
 
     }
 

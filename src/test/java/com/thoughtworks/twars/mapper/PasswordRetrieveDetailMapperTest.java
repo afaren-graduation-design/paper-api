@@ -7,7 +7,7 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-public class PasswordRetrieveDetailMapperTest extends TestBase{
+public class PasswordRetrieveDetailMapperTest extends TestBase {
 
     private PasswordRetrieveDetailMapper passwordRetrieveDetailMapper;
 
@@ -18,7 +18,7 @@ public class PasswordRetrieveDetailMapperTest extends TestBase{
     }
 
     @Test
-    public void should_insert_detail(){
+    public void should_insert_detail() {
         PasswordRetrieveDetail passwordRetrieveDetail = new PasswordRetrieveDetail();
         passwordRetrieveDetail.setEmail("123456@qq.com");
 
@@ -27,7 +27,7 @@ public class PasswordRetrieveDetailMapperTest extends TestBase{
     }
 
     @Test
-    public void should_return_detail_by_token(){
+    public void should_return_detail_by_token() {
         PasswordRetrieveDetail passwordRetrieveDetail =
                 passwordRetrieveDetailMapper.getDetailByToken("e652621b9bd77a2ea4a4495ab03e3cc8");
 
@@ -35,7 +35,7 @@ public class PasswordRetrieveDetailMapperTest extends TestBase{
     }
 
     @Test
-    public void should_return_detail_by_email(){
+    public void should_return_detail_by_email() {
         PasswordRetrieveDetail passwordRetrieveDetail =
                 passwordRetrieveDetailMapper.getDetailByEmail("wjj@qq.com");
 
@@ -43,21 +43,21 @@ public class PasswordRetrieveDetailMapperTest extends TestBase{
     }
 
     @Test
-    public void should_update_when_not_exist_detail(){
+    public void should_update_when_not_exist_detail() {
         int id = passwordRetrieveDetailMapper.updateDetailByEmail("123@qq.com");
 
         assertThat(id, is(1));
     }
 
     @Test
-    public void should_update_when_token_is_null(){
+    public void should_update_when_token_is_null() {
         int id = passwordRetrieveDetailMapper.updateDetailByEmail("ydp@qq.com");
 
         assertThat(id , is(1));
     }
 
     @Test
-    public void should_set_token_null_when_password_reset_success(){
+    public void should_set_token_null_when_password_reset_success() {
         int id = passwordRetrieveDetailMapper.setNullToken("test@163.com");
 
         assertThat(id, is(1));

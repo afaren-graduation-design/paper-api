@@ -31,12 +31,43 @@ public class PaperMapperTest extends TestBase {
     public void should_return_paper_with_data() throws Exception {
         Paper paper = paperMapper.getOnePaper(1);
         Gson gson = new GsonBuilder().create();
-        String responseInfoStr = gson.toJson(paper.getResponseInfo());
+        final String responseInfoStr = gson.toJson(paper.getResponseInfo());
 
         assertThat(paper.getId(), is(1));
         assertThat(paper.getMakerId(), is(1));
         assertThat(paper.getSections().size(), is(2));
-        assertThat(responseInfoStr, is("{\"id\":1,\"sections\":[{\"description\":\"这是描述\",\"id\":1,\"quizzes\":[{\"definition_uri\":\"blankQuizzes/1\",\"id\":1,\"items_uri\":\"blankQuizzes/1/items\"},{\"definition_uri\":\"blankQuizzes/2\",\"id\":2,\"items_uri\":\"blankQuizzes/2/items\"}],\"sectionType\":\"blankQuizzes\"},{\"description\":\"这是描述\",\"id\":2,\"quizzes\":[{\"definition_uri\":\"homeworkQuizzes/1\",\"id\":1},{\"definition_uri\":\"homeworkQuizzes/2\",\"id\":2},{\"definition_uri\":\"homeworkQuizzes/3\",\"id\":3},{\"definition_uri\":\"homeworkQuizzes/4\",\"id\":4},{\"definition_uri\":\"homeworkQuizzes/5\",\"id\":5},{\"definition_uri\":\"homeworkQuizzes/6\",\"id\":6},{\"definition_uri\":\"homeworkQuizzes/7\",\"id\":7},{\"definition_uri\":\"homeworkQuizzes/8\",\"id\":8}],\"sectionType\":\"homeworkQuizzes\"}]}"));
+        assertThat(responseInfoStr,
+                is("{\"id\":1,\"sections\":["
+                        +
+                        "{\"description\":\"这是描述\",\"id\":1,\"quizzes\":["
+                        +
+                        "{\"definition_uri\":\"blankQuizzes/1\",\"id\":1,"
+                        +
+                        "\"items_uri\":\"blankQuizzes/1/items\"},"
+                        +
+                        "{\"definition_uri\":\"blankQuizzes/2\",\"id\":2,"
+                        +
+                        "\"items_uri\":\"blankQuizzes/2/items\"}],"
+                        +
+                        "\"sectionType\":\"blankQuizzes\"},{\"description\":\"这是描述\","
+                        +
+                        "\"id\":2,\"quizzes\":[{\"definition_uri\":\"homeworkQuizzes/1\",\"id\":1},"
+                        +
+                        "{\"definition_uri\":\"homeworkQuizzes/2\",\"id\":2},"
+                        +
+                        "{\"definition_uri\":\"homeworkQuizzes/3\",\"id\":3},"
+                        +
+                        "{\"definition_uri\":\"homeworkQuizzes/4\",\"id\":4},"
+                        +
+                        "{\"definition_uri\":\"homeworkQuizzes/5\",\"id\":5},"
+                        +
+                        "{\"definition_uri\":\"homeworkQuizzes/6\",\"id\":6},"
+                        +
+                        "{\"definition_uri\":\"homeworkQuizzes/7\",\"id\":7},"
+                        +
+                        "{\"definition_uri\":\"homeworkQuizzes/8\",\"id\":8}],"
+                        +
+                        "\"sectionType\":\"homeworkQuizzes\"}]}"));
 
     }
 
