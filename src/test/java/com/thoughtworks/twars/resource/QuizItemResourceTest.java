@@ -24,7 +24,8 @@ public class QuizItemResourceTest extends TestBase {
 
     @Test
     public void should_return_all_quizItems() {
-        when(quizItemMapper.getAllQuizItems()).thenReturn(Arrays.asList(firstQuizItem, secondQuizItem));
+        when(quizItemMapper.getAllQuizItems()).thenReturn(
+                Arrays.asList(firstQuizItem, secondQuizItem));
         when(firstQuizItem.getId()).thenReturn(1);
 
         Response response = target(basePath).request().get();
@@ -53,7 +54,8 @@ public class QuizItemResourceTest extends TestBase {
 
         when(quizItemMapper.insertQuizItem(quizItem)).thenReturn(1);
 
-        Response response = target(basePath).request().post(Entity.entity(quizItem, MediaType.APPLICATION_JSON), Response.class);
+        Response response = target(basePath).request().post(
+                Entity.entity(quizItem, MediaType.APPLICATION_JSON), Response.class);
         assertThat(response.getStatus(), is(201));
 
         Map result = response.readEntity(Map.class);

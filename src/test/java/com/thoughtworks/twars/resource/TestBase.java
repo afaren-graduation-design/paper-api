@@ -30,13 +30,19 @@ public class TestBase extends JerseyTest {
     protected HomeworkQuizMapper homeworkQuizMapper = mock(HomeworkQuizMapper.class);
     protected HomeworkSubmitMapper homeworkSubmitMapper = mock(HomeworkSubmitMapper.class);
     protected LoginDetailMapper loginDetailMapper = mock(LoginDetailMapper.class);
-    protected PasswordRetrieveDetailMapper passwordRetrieveDetailMapper = mock(PasswordRetrieveDetailMapper.class);
-    protected HomeworkPostHistoryMapper homeworkPostHistoryMapper = mock(HomeworkPostHistoryMapper.class);
+    protected PasswordRetrieveDetailMapper passwordRetrieveDetailMapper =
+            mock(PasswordRetrieveDetailMapper.class);
+    protected HomeworkPostHistoryMapper homeworkPostHistoryMapper =
+            mock(HomeworkPostHistoryMapper.class);
     protected ThirdPartyMapper thirdPartyMapper = mock(ThirdPartyMapper.class);
-    protected HomeworkQuizDefinitionService homeworkQuizDefinition = mock(HomeworkQuizDefinitionService.class);
-    protected BlankQuizDefinitionService blankQuizDefinition = mock(BlankQuizDefinitionService.class);
-    protected BlankQuizScoreSheetService blankQuizScoreSheet = mock(BlankQuizScoreSheetService.class);
-    protected HomeworkQuizScoreSheetService homeworkQuizScoreSheet = mock(HomeworkQuizScoreSheetService.class);
+    protected HomeworkQuizDefinitionService homeworkQuizDefinition =
+            mock(HomeworkQuizDefinitionService.class);
+    protected BlankQuizDefinitionService blankQuizDefinition =
+            mock(BlankQuizDefinitionService.class);
+    protected BlankQuizScoreSheetService blankQuizScoreSheet =
+            mock(BlankQuizScoreSheetService.class);
+    protected HomeworkQuizScoreSheetService homeworkQuizScoreSheet =
+            mock(HomeworkQuizScoreSheetService.class);
 
     @Override
     protected Application configure() {

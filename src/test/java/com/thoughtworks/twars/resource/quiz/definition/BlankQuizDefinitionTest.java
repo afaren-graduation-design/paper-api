@@ -61,7 +61,6 @@ public class BlankQuizDefinitionTest {
 
     @Test
     public void should_update_blank_quiz() {
-        Map quiz = new HashMap<>();
         Map item = new HashMap<>();
         item.put("easyCount", 8);
         item.put("normalCount", 9);
@@ -69,6 +68,9 @@ public class BlankQuizDefinitionTest {
         item.put("exampleCount", 2);
         List<Map> items = new ArrayList<>();
         items.add(item);
+
+        Map quiz = new HashMap<>();
+
         quiz.put("items", items);
         quiz.put("quizType", "blankQuizzes");
         String description = "这是描述";

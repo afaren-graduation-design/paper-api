@@ -46,7 +46,6 @@ public class PaperResourceTest extends TestBase {
 
     @Test
     public void should_list_all_papers_by_page_and_pageSize() throws Exception {
-        Gson gson = new GsonBuilder().create();
 
         when(paperMapper.getAllPapers(0, 2)).thenReturn(Arrays.asList(firstPaper, secondPaper));
         when(paperMapper.findAll()).thenReturn(list);
@@ -66,17 +65,27 @@ public class PaperResourceTest extends TestBase {
         when(secondPaper.getMakerId()).thenReturn(2);
         when(secondPaper.getIsDistribution()).thenReturn(false);
 
-        Response response = target(basePath).queryParam("page", 1).queryParam("pageSize", 2).request().get();
+        Response response = target(basePath).queryParam("page", 1)
+                .queryParam("pageSize", 2).request().get();
         assertThat(response.getStatus(), is(200));
+
+        Gson gson = new GsonBuilder().create();
 
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
-        assertThat(jsonStr, is("{\"paperInfo\":[{\"createTime\":\"2016-11-11\",\"paperName\":\"简单的试卷\",\"description\":\"easy\",\"isDistribution\":true,\"uri\":\"papers/1\",\"makerId\":3},{\"createTime\":\"2016-11-12\",\"paperName\":\"普通的试卷\",\"description\":\"common\",\"isDistribution\":false,\"uri\":\"papers/5\",\"makerId\":2}],\"paperCount\":2}"));
+        assertThat(jsonStr, is("{\"paperInfo\":[{\"createTime\":\"2016-11-11\",\"paperName\":"
+                +
+                "\"简单的试卷\",\"description\":\"easy\",\"isDistribution\":true,\"uri\":\"papers/1\","
+                +
+                "\"makerId\":3},{\"createTime\":\"2016-11-12\",\"paperName\":\"普通的试卷\","
+                +
+                "\"description\":\"common\",\"isDistribution\":false,\"uri\":\"papers/5\","
+                +
+                "\"makerId\":2}],\"paperCount\":2}"));
     }
 
     @Test
     public void should_list_all_papers_by_page_0_and_pageSize_15() throws Exception {
-        Gson gson = new GsonBuilder().create();
 
         when(paperMapper.getAllPapers(0, 15)).thenReturn(Arrays.asList(firstPaper, secondPaper));
         when(paperMapper.findAll()).thenReturn(list);
@@ -98,9 +107,19 @@ public class PaperResourceTest extends TestBase {
         Response response = target(basePath).request().get();
         assertThat(response.getStatus(), is(200));
 
+        Gson gson = new GsonBuilder().create();
+
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
-        assertThat(jsonStr, is("{\"paperInfo\":[{\"createTime\":\"2016-11-11\",\"paperName\":\"简单的试卷\",\"description\":\"easy\",\"isDistribution\":true,\"uri\":\"papers/1\",\"makerId\":3},{\"createTime\":\"2016-11-12\",\"paperName\":\"普通的试卷\",\"description\":\"common\",\"isDistribution\":false,\"uri\":\"papers/5\",\"makerId\":2}],\"paperCount\":2}"));
+        assertThat(jsonStr, is("{\"paperInfo\":[{\"createTime\":\"2016-11-11\","
+                +
+                "\"paperName\":\"简单的试卷\",\"description\":\"easy\",\"isDistribution\":true,"
+                +
+                "\"uri\":\"papers/1\",\"makerId\":3},{\"createTime\":\"2016-11-12\","
+                +
+                "\"paperName\":\"普通的试卷\",\"description\":\"common\",\"isDistribution\":false,"
+                +
+                "\"uri\":\"papers/5\",\"makerId\":2}],\"paperCount\":2}"));
     }
 
     @Test
@@ -125,7 +144,6 @@ public class PaperResourceTest extends TestBase {
     @Test
     public void should_return_uri_when_request_enrollment() throws Exception {
 
-        Gson gson = new GsonBuilder().create();
         Paper paper = new Paper();
         when(paperMapper.getOnePaper(1)).thenReturn(paper);
 
@@ -149,11 +167,21 @@ public class PaperResourceTest extends TestBase {
 
         Response response = target(basePath + "/enrollment").request().get();
 
+        Gson gson = new GsonBuilder().create();
+
         assertThat(response.getStatus(), is(200));
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
 
-        assertThat(jsonStr, is("{\"id\":1,\"sections\":[{\"description\":\"it is a description!\",\"id\":3,\"quizzes\":[{\"definition_uri\":\"blankQuizzes/1\",\"id\":1,\"items_uri\":\"blankQuizzes/1/items\"},{\"definition_uri\":\"blankQuizzes/2\",\"id\":2,\"items_uri\":\"blankQuizzes/2/items\"}],\"sectionType\":\"blankQuizzes\"}]}"));
+        assertThat(jsonStr, is("{\"id\":1,\"sections\":[{\"description\":\"it is a description!\","
+                +
+                "\"id\":3,\"quizzes\":[{\"definition_uri\":\"blankQuizzes/1\",\"id\":1,"
+                +
+                "\"items_uri\":\"blankQuizzes/1/items\"},{\"definition_uri\":\"blankQuizzes/2\","
+                +
+                "\"id\":2,\"items_uri\":\"blankQuizzes/2/items\"}],"
+                +
+                "\"sectionType\":\"blankQuizzes\"}]}"));
 
     }
 
@@ -212,8 +240,8 @@ public class PaperResourceTest extends TestBase {
         ScoreSheet scoreSheet = new ScoreSheet();
         scoreSheet.setExamerId(1);
         scoreSheet.setId(2);
-        when(scoreSheetMapper.findByPaperId(1)).thenReturn(Arrays.asList
-                (scoreSheet));
+        when(scoreSheetMapper.findByPaperId(1)).thenReturn(Arrays.asList(
+                scoreSheet));
 
         BlankQuizSubmit blankQuizSubmit = new BlankQuizSubmit();
         blankQuizSubmit.setId(4);
@@ -262,8 +290,10 @@ public class PaperResourceTest extends TestBase {
         User user = new User();
         user.setEmail("test@qq.com");
         user.setMobilePhone("13804030030");
-        when(userMapper.findUserDetailsByUserIds(Arrays.asList(examerId))).thenReturn(Arrays.asList(userDetail));
-        when(userMapper.findUsersByUserIds(Arrays.asList(examerId))).thenReturn(Arrays.asList(user));
+        when(userMapper.findUserDetailsByUserIds(Arrays.asList(examerId)))
+                .thenReturn(Arrays.asList(userDetail));
+        when(userMapper.findUsersByUserIds(Arrays.asList(examerId)))
+                .thenReturn(Arrays.asList(user));
 
         Response response = target(basePath + "/1/usersDetail").request().get();
         List<Map> result = response.readEntity(List.class);

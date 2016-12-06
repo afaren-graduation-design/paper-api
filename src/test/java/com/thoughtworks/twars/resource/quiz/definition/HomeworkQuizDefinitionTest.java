@@ -54,12 +54,14 @@ public class HomeworkQuizDefinitionTest {
     }
 
     @Test
-    public void should_return_uri_when_insert_paper_definition(){
-        List<Map> definitions = new ArrayList<>();
+    public void should_return_uri_when_insert_paper_definition() {
         Map definition = new HashMap<>();
         definition.put("description", "找出数组 A 中与对象 B 中相同的数据");
         definition.put("evaluateScript","https://github.com/zhangsan/pos_inspection");
         definition.put("templateRepository", "https://github.com/zhangsan/pos_template");
+
+        List<Map> definitions = new ArrayList<>();
+
         definitions.add(definition);
 
         Map quiz = new HashMap<>();

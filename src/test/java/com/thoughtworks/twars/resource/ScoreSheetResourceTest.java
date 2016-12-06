@@ -38,7 +38,8 @@ public class ScoreSheetResourceTest extends TestBase {
 
     @Test
     public void should_return_all_score_sheets() {
-        when(scoreSheetMapper.findAll()).thenReturn(Arrays.asList(firstScoreSheet, secondScoreSheet));
+        when(scoreSheetMapper.findAll()).thenReturn(
+                Arrays.asList(firstScoreSheet, secondScoreSheet));
         when(firstScoreSheet.getId()).thenReturn(3);
 
         Response response = target(basePath).request().get();
@@ -62,7 +63,8 @@ public class ScoreSheetResourceTest extends TestBase {
 
         when(scoreSheetMapper.findOne(1)).thenReturn(firstScoreSheet);
 
-        when(blankQuizSubmitMapper.findByScoreSheetId(1)).thenReturn(Arrays.asList(blankQuizSubmit));
+        when(blankQuizSubmitMapper.findByScoreSheetId(1))
+                .thenReturn(Arrays.asList(blankQuizSubmit));
         when(itemPostMapper.findByBlankQuizSubmit(2)).thenReturn(Arrays.asList(itemPost));
 
         when(firstScoreSheet.getExamerId()).thenReturn(2);
@@ -76,10 +78,6 @@ public class ScoreSheetResourceTest extends TestBase {
 
         Response response = target(basePath + "/1").request().get();
         assertThat(response.getStatus(), is(200));
-
-//        Map result = response.readEntity(Map.class);
-//        String str = gson.toJson(result);
-//        assertThat(str, is("[{\"blankQuiz\":\"blankQuizzes/3\",\"itemPosts\":[{\"answer\":\"12345\",\"quizItem\":\"quizItems/4\"}]}]"));
     }
 
     @Test

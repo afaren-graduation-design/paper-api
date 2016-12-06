@@ -46,7 +46,9 @@ public class BlankQuizScoreSheetTest {
         when(blankQuizSubmit.getEndTime()).thenReturn(123456);
         List<Map> blankQuizList = blankQuizScoreSheet.getQuizScoreSheet(1);
         String str = gson.toJson(blankQuizList);
-        assertThat(str, is("[{\"blankQuiz\":{\"uri\":\"/blankQuiz/2\"},\"startTime\":123456,\"endTime\":123456,\"itemPosts\":[]}]"));
+        assertThat(str, is("[{\"blankQuiz\":{\"uri\":\"/blankQuiz/2\"},"
+                +
+                "\"startTime\":123456,\"endTime\":123456,\"itemPosts\":[]}]"));
     }
 
     @Test
@@ -59,7 +61,9 @@ public class BlankQuizScoreSheetTest {
         Gson gson = new GsonBuilder().create();
         List<Map> itemPosts = blankQuizScoreSheet.getByBlankQuizSubmitId(1);
         String itemPostStr = gson.toJson(itemPosts);
-        assertThat(itemPostStr, is("[{\"answer\":\"success\",\"quizItem\":{\"uri\":\"quizItem/3\"}}]"));
+        assertThat(itemPostStr, is("[{\"answer\":\"success\",\"quizItem\":{"
+                +
+                "\"uri\":\"quizItem/3\"}}]"));
     }
 
     @Test

@@ -187,35 +187,36 @@ public class UserResourceTest extends TestBase {
         Response response = target(basePath + "/1,2/detail").request().get();
         Map result = response.readEntity(Map.class);
         List<Map> userDetailList = (List) result.get("userList");
-        Map userDetail_01 = userDetailList.get(0);
-        Map userDetail_02 = userDetailList.get(1);
+        Map userDetail01 = userDetailList.get(0);
 
         assertThat(response.getStatus(), is(200));
         assertThat(userDetailList.size(), is(2));
 
-        assertThat(userDetail_01.get("userId"), is(1));
-        assertThat(userDetail_01.get("school"), is("哈佛"));
-        assertThat(userDetail_01.get("major"), is("宗教"));
-        assertThat(userDetail_01.get("degree"), is("博士"));
-        assertThat(userDetail_01.get("name"), is("狗剩"));
-        assertThat(userDetail_01.get("gender"), is("男"));
-        assertThat(userDetail_01.get("mobilePhone"), is("123456"));
-        assertThat(userDetail_01.get("email"), is("11@qq.com"));
-        assertThat(userDetail_01.get("schoolProvince"), is("陕西"));
-        assertThat(userDetail_01.get("schoolCity"), is("西安"));
-        assertThat(userDetail_01.get("entranceYear"), is("2016"));
+        assertThat(userDetail01.get("userId"), is(1));
+        assertThat(userDetail01.get("school"), is("哈佛"));
+        assertThat(userDetail01.get("major"), is("宗教"));
+        assertThat(userDetail01.get("degree"), is("博士"));
+        assertThat(userDetail01.get("name"), is("狗剩"));
+        assertThat(userDetail01.get("gender"), is("男"));
+        assertThat(userDetail01.get("mobilePhone"), is("123456"));
+        assertThat(userDetail01.get("email"), is("11@qq.com"));
+        assertThat(userDetail01.get("schoolProvince"), is("陕西"));
+        assertThat(userDetail01.get("schoolCity"), is("西安"));
+        assertThat(userDetail01.get("entranceYear"), is("2016"));
 
-        assertThat(userDetail_02.get("userId"), is(2));
-        assertThat(userDetail_02.get("school"), is("麻省理工"));
-        assertThat(userDetail_02.get("major"), is("计算机科学"));
-        assertThat(userDetail_02.get("degree"), is("硕士"));
-        assertThat(userDetail_02.get("name"), is("李明"));
-        assertThat(userDetail_02.get("gender"), is("男"));
-        assertThat(userDetail_02.get("mobilePhone"), is("123456"));
-        assertThat(userDetail_02.get("email"), is("11@qq.com"));
-        assertThat(userDetail_02.get("schoolProvince"), is("陕西"));
-        assertThat(userDetail_02.get("schoolCity"), is("西安"));
-        assertThat(userDetail_02.get("entranceYear"), is("2016"));
+        Map userDetail02 = userDetailList.get(1);
+
+        assertThat(userDetail02.get("userId"), is(2));
+        assertThat(userDetail02.get("school"), is("麻省理工"));
+        assertThat(userDetail02.get("major"), is("计算机科学"));
+        assertThat(userDetail02.get("degree"), is("硕士"));
+        assertThat(userDetail02.get("name"), is("李明"));
+        assertThat(userDetail02.get("gender"), is("男"));
+        assertThat(userDetail02.get("mobilePhone"), is("123456"));
+        assertThat(userDetail02.get("email"), is("11@qq.com"));
+        assertThat(userDetail02.get("schoolProvince"), is("陕西"));
+        assertThat(userDetail02.get("schoolCity"), is("西安"));
+        assertThat(userDetail02.get("entranceYear"), is("2016"));
     }
 
     @Test
@@ -226,8 +227,8 @@ public class UserResourceTest extends TestBase {
 
         Entity<UserDetail> entityUserDetail = Entity.entity(updateUserDetail,
                 MediaType.APPLICATION_JSON_TYPE);
-        Response response = target(basePath + "/2/detail").request().put
-                (entityUserDetail);
+        Response response = target(basePath + "/2/detail").request().put(
+                entityUserDetail);
 
         assertThat(response.getStatus(), is(200));
 
@@ -252,8 +253,8 @@ public class UserResourceTest extends TestBase {
 
         Entity<UserDetail> entityUserDetail = Entity.entity(insertUserDetail,
                 MediaType.APPLICATION_JSON_TYPE);
-        Response response = target(basePath + "/18/detail").request().put
-                (entityUserDetail);
+        Response response = target(basePath + "/18/detail").request().put(
+                entityUserDetail);
 
         assertThat(response.getStatus(), is(200));
 
@@ -314,7 +315,8 @@ public class UserResourceTest extends TestBase {
         blankQuizSubmit.setEndTime(123456);
         blankQuizSubmit.setStartTime(123456);
         blankQuizSubmit.setScoreSheetId(2);
-        when(blankQuizSubmitMapper.findByScoreSheetId(2)).thenReturn(Arrays.asList(blankQuizSubmit));
+        when(blankQuizSubmitMapper.findByScoreSheetId(2))
+                .thenReturn(Arrays.asList(blankQuizSubmit));
 
         ItemPost itemPost = new ItemPost();
         itemPost.setId(6);

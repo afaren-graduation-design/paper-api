@@ -26,7 +26,7 @@ import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ProgramResourceTest extends TestBase{
+public class ProgramResourceTest extends TestBase {
     String basePath = "/program";
 
     @Mock
@@ -39,11 +39,13 @@ public class ProgramResourceTest extends TestBase{
 
         when(paper.getProgramId()).thenReturn(1);
 
-        List<Section> sections = new ArrayList();
         Section section1 = new Section();
         section1.setId(1);
         section1.setDescription("just a test");
         section1.setType("blankQuizzes");
+
+        List<Section> sections = new ArrayList();
+
         sections.add(section1);
 
         Section section2 = new Section();
