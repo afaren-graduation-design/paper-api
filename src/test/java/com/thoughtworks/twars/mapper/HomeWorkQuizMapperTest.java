@@ -41,6 +41,9 @@ public class HomeWorkQuizMapperTest extends TestBase {
         homeworkQuiz.setDescription("找出两个数组相同的数据");
         homeworkQuiz.setEvaluateScript("https://github.com/zhangsan/pos_inspection");
         homeworkQuiz.setTemplateRepository("https://github.com/zhangsan/pos_template");
+        homeworkQuiz.setMakerId(1);
+        homeworkQuiz.setCreateTime(1234);
+        homeworkQuiz.setHomeworkName("test");
         homeworkQuizMapper.insertHomeworkQuiz(homeworkQuiz);
 
         assertThat(homeworkQuiz.getId(), is(9));
