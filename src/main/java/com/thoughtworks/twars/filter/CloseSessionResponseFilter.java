@@ -28,13 +28,13 @@ public class CloseSessionResponseFilter implements ContainerResponseFilter {
                     session.rollback(true);
                 }
             }
-        } catch (Exception e) {
-
+        } catch (Exception exception) {
+            exception.printStackTrace();
         } finally {
             try {
                 session.close();
-            } catch (Exception e) {
-
+            } catch (Exception exception) {
+                exception.printStackTrace();
             }
         }
 

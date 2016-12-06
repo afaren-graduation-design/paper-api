@@ -34,12 +34,13 @@ public class LogoutResourceTest extends TestBase {
         Map map = new HashMap<>();
         map.put("userId", 1);
 
-        Response response = target(basePath).request().post(Entity.entity(map, MediaType.APPLICATION_JSON_TYPE));
+        Response response = target(basePath).request().post(
+                Entity.entity(map, MediaType.APPLICATION_JSON_TYPE));
         assertThat(response.getStatus(), is(201));
     }
 
     @Test
-    public void should_return_401_when_not_found_token(){
+    public void should_return_401_when_not_found_token() {
         LoginDetail loginDetail = new LoginDetail();
 
         when(loginDetailMapper.getLoginDetailByUserId(1)).thenReturn(Arrays.asList(loginDetail));
@@ -48,7 +49,8 @@ public class LogoutResourceTest extends TestBase {
         Map map = new HashMap<>();
         map.put("userId", 1);
 
-        Response response = target(basePath).request().post(Entity.entity(map, MediaType.APPLICATION_JSON_TYPE));
+        Response response = target(basePath).request().post(
+                Entity.entity(map, MediaType.APPLICATION_JSON_TYPE));
         assertThat(response.getStatus(), is(401));
     }
 }

@@ -25,7 +25,8 @@ public class ProgramResource extends Resource {
     private PaperOperationMapper paperOperationMapper;
 
     @GET
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "get one paper from program successfully"),
+    @ApiResponses(value = {@ApiResponse(code = 200,
+            message = "get one paper from program successfully"),
             @ApiResponse(code = 404, message = "get one paper from program failed")})
     @Path("/{programId}/paper/{paperId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -54,9 +55,11 @@ public class ProgramResource extends Resource {
             @PathParam("programId") int programId,
             @ApiParam(name = "paperId", value = "paperId", required = true)
             @PathParam("paperId") int paperId,
-            @ApiParam(name = "data", value = "include all info about paper operation when delete paper", required = true)
+            @ApiParam(name = "data",
+                    value = "include all info about paper operation when delete paper",
+                    required = true)
                     Map data) {
-        try{
+        try {
 
             String operationType = (String) data.get("operationType");
             int operatorId = (int) data.get("operatorId");
@@ -69,11 +72,11 @@ public class ProgramResource extends Resource {
             paperOperation.setPaperId(paperId);
 
             int result = paperOperationMapper.insertPaperOperation(paperOperation);
-            if (result == 0){
+            if (result == 0) {
                 return Response.status(Response.Status.NOT_FOUND).build();
             }
-        }catch (Exception e){
-            e.printStackTrace();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
         return Response.status(Response.Status.NO_CONTENT).build();
     }

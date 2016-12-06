@@ -27,7 +27,7 @@ public class BlankQuizMapperTest extends TestBase {
     }
 
     @Test
-    public void should_return_insert_blank_quiz_uri() throws Exception{
+    public void should_return_insert_blank_quiz_uri() throws Exception {
         BlankQuiz blankQuiz = new BlankQuiz();
         blankQuiz.setHardCount(3);
         blankQuiz.setNormalCount(4);

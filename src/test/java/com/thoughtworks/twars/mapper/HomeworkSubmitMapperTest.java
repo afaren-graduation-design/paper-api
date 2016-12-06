@@ -19,7 +19,7 @@ public class HomeworkSubmitMapperTest extends com.thoughtworks.twars.mapper.Test
     }
 
     @Test
-    public void should_return_id_when_insert_homework_submit(){
+    public void should_return_id_when_insert_homework_submit() {
         HomeworkSubmit homeworkSubmit = new HomeworkSubmit();
         homeworkSubmit.setScoreSheetId(1);
         homeworkSubmit.setHomeworkQuizId(3);

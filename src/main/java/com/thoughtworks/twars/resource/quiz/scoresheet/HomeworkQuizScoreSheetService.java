@@ -72,7 +72,7 @@ public class HomeworkQuizScoreSheetService implements IScoreSheetService {
 
             HomeworkSubmit homeworkSubmit =
                     homeworkSubmitMapper.findByScoreSheetIdAndQuizId(scoreSheetId, homeworkQuizId);
-            if(null == homeworkSubmit) {
+            if (null == homeworkSubmit) {
                 homeworkSubmit = new HomeworkSubmit();
                 homeworkSubmit.setScoreSheetId(scoreSheetId);
                 homeworkSubmit.setHomeworkQuizId(homeworkQuizId);

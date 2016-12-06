@@ -38,10 +38,12 @@ public class HomeworkPostHistoryMapperTest extends TestBase {
 
     @Test
     public void should_return_all_homework_post_history() {
-        List<HomeworkPostHistory> homeworkPostHistoryList = homeworkPostHistoryMapper.findByHomeworkSubmitId(1);
+        List<HomeworkPostHistory> homeworkPostHistoryList =
+                homeworkPostHistoryMapper.findByHomeworkSubmitId(1);
 
         assertThat(homeworkPostHistoryList.get(0).getBranch(), is("master"));
-        assertThat(homeworkPostHistoryList.get(0).getVersion(), is("d8160f56ebbb5d40368048f271328eefa87cb97d"));
+        assertThat(homeworkPostHistoryList.get(0).getVersion(),
+                is("d8160f56ebbb5d40368048f271328eefa87cb97d"));
         assertThat(homeworkPostHistoryList.get(0).getUserAnswerRepo(), is("github.com/purple/1"));
         assertThat(homeworkPostHistoryList.get(0).getId(), is(1));
         assertThat(homeworkPostHistoryList.get(0).getStatus(), is(3));

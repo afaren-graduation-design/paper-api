@@ -9,7 +9,7 @@ import java.util.List;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-public class SectionMapperTest extends TestBase{
+public class SectionMapperTest extends TestBase {
 
     private SectionMapper sectionMapper;
 
@@ -27,7 +27,7 @@ public class SectionMapperTest extends TestBase{
     }
 
     @Test
-    public void should_return_id_when_insert_section(){
+    public void should_return_id_when_insert_section() {
         Section section = new Section();
         section.setPaperId(1);
         section.setType("blankQuizze");

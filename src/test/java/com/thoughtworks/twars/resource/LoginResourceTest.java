@@ -29,7 +29,6 @@ public class LoginResourceTest extends TestBase {
     @Test
     public void should_create_user_when_login_with_email() throws Exception {
 
-        User loginUser = new User();
         LoginDetail loginDetail = new LoginDetail();
 
         loginDetail.setId(1);
@@ -37,6 +36,8 @@ public class LoginResourceTest extends TestBase {
 
         List<LoginDetail> loginDetails = new ArrayList<>();
         loginDetails.add(loginDetail);
+
+        User loginUser = new User();
 
         when(userMapper.getUserByEmailAndPassWord(any(User.class))).thenReturn(loginUser);
         when(loginDetailMapper.getLoginDetailByUserId(1)).thenReturn(loginDetails);

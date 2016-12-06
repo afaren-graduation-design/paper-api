@@ -8,9 +8,9 @@ import org.apache.ibatis.session.SqlSessionManager;
 import java.io.IOException;
 import java.io.InputStream;
 
-public final class DBUtil {
+public final class DatabaseUtil {
 
-    private DBUtil() {}
+    private DatabaseUtil() {}
 
     public static SqlSessionManager getSession() {
         String resource = "mybatis/mybatis-config.xml";
@@ -21,8 +21,8 @@ public final class DBUtil {
             SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
             SqlSessionFactory sqlSessionFactory = builder.build(is);
             session = SqlSessionManager.newInstance(sqlSessionFactory);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exception) {
+            exception.printStackTrace();
         }
 
         return session;
@@ -37,8 +37,8 @@ public final class DBUtil {
             SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
             SqlSessionFactory sqlSessionFactory = builder.build(is, environment);
             session = SqlSessionManager.newInstance(sqlSessionFactory);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exception) {
+            exception.printStackTrace();
         }
 
         return session;

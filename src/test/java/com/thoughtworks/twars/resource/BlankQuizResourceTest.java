@@ -57,7 +57,8 @@ public class BlankQuizResourceTest extends TestBase {
         blankQuiz.setNormalCount(4);
         blankQuiz.setEasyCount(3);
 
-        Response response = target(basePath).request().post(Entity.entity(blankQuiz, MediaType.APPLICATION_JSON_TYPE));
+        Response response = target(basePath).request().post(
+                Entity.entity(blankQuiz, MediaType.APPLICATION_JSON_TYPE));
         assertThat(response.getStatus(), is(201));
 
         Map map = response.readEntity(Map.class);
@@ -68,7 +69,8 @@ public class BlankQuizResourceTest extends TestBase {
 
     @Test
     public void should_return_blank_quizzes_by_section_id() {
-        when(blankQuizMapper.findBySectionId(1)).thenReturn(Arrays.asList(firstBlankQuiz, secondBlankQuiz));
+        when(blankQuizMapper.findBySectionId(1)).thenReturn(
+                Arrays.asList(firstBlankQuiz, secondBlankQuiz));
         when(firstBlankQuiz.getId()).thenReturn(2);
         when(firstBlankQuiz.getEasyCount()).thenReturn(3);
         when(firstBlankQuiz.getNormalCount()).thenReturn(4);
@@ -153,7 +155,8 @@ public class BlankQuizResourceTest extends TestBase {
         when(firstExampleItems.getChartPath()).thenReturn("ChartPath 88");
         when(firstExampleItems.getDescriptionZh()).thenReturn("Description 88");
         when(firstExampleItems.getAnswer()).thenReturn("3");
-        when(quizItemMapper.getExampleItems(2)).thenReturn(Arrays.asList(firstExampleItems, secondExampleItems));
+        when(quizItemMapper.getExampleItems(2)).thenReturn(Arrays.asList(
+                firstExampleItems, secondExampleItems));
 
         Response response = target(basePath + "/1/items").request().get();
 

@@ -9,7 +9,7 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
-public class SectionQuizMapperTest extends TestBase{
+public class SectionQuizMapperTest extends TestBase {
 
     private SectionQuizMapper sectionQuizMapper;
 
@@ -20,14 +20,14 @@ public class SectionQuizMapperTest extends TestBase{
     }
 
     @Test
-    public void should_return_one_section_quiz_when_find_by_section_id(){
+    public void should_return_one_section_quiz_when_find_by_section_id() {
         List<SectionQuiz> sectionQuizs = sectionQuizMapper.findBySectionId(1);
 
         assertThat(sectionQuizs.size(), is(2));
     }
 
     @Test
-    public void should_return_id_when_insert_section_quiz(){
+    public void should_return_id_when_insert_section_quiz() {
         SectionQuiz sectionQuiz = new SectionQuiz();
         sectionQuiz.setQuizId(1);
         sectionQuiz.setSectionId(2);

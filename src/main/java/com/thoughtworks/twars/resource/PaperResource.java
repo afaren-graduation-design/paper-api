@@ -43,7 +43,7 @@ public class PaperResource extends Resource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @ApiImplicitParams(value = {
-            @ApiImplicitParam(name = "page",value ="page",required = true),
+            @ApiImplicitParam(name = "page",value = "page",required = true),
             @ApiImplicitParam(name = "pageSize",value = "pageSize",required = true)})
     @ApiResponses(value = {@ApiResponse(code = 200, message = "successful"),
             @ApiResponse(code = 404, message = "get all papers failed")})
@@ -52,7 +52,7 @@ public class PaperResource extends Resource {
             @DefaultValue("1") @QueryParam("page") int page,
             @DefaultValue("15") @QueryParam("pageSize") int pageSize
     ) {
-        int paperCount = paperMapper.findAll().size();
+        final int paperCount = paperMapper.findAll().size();
 
         int startPage = page - 1;
         List<Paper> papers = paperMapper.getAllPapers(startPage,pageSize);
@@ -122,7 +122,7 @@ public class PaperResource extends Resource {
             map.put("uri", insertDefinitionByQuizType(section, paperId));
 
             return Response.status(Response.Status.OK).entity(map).build();
-        } catch (Exception e) {
+        } catch (Exception exception) {
             session.rollback();
         }
         return Response.status(Response.Status.UNSUPPORTED_MEDIA_TYPE).build();
