@@ -539,6 +539,21 @@ baseUri: http://api.bronzesword.com/
 
 /program:
     /{programId}:
+        /papers:
+          get:
+            description: 通过programId获取对应paper列表信息
+            responses:
+                200:
+                  body:
+                    application/json:
+                        properties:
+                          paperList:
+                              properties:
+                                []:
+                                paperName: string
+                                type: string
+
+
         /paper:
             /{paperId}:
                 get:
