@@ -8,6 +8,11 @@
     <resultMap id="paperListMap" type="com.thoughtworks.twars.bean.Paper">
         <id property="id" column="id"></id>
         <result column="makerId" property="makerId"></result>
+        <result column="paperName" property="paperName"></result>
+        <result column="description" property="description"></result>
+        <result column="createTime" property="createTime"></result>
+        <result column="programId" property="programId"></result>
+        <result column="isDistribution" property="isDistribution"></result>
     </resultMap>
 
     <resultMap id="PaperResultMap" type="com.thoughtworks.twars.bean.Paper" >
@@ -43,6 +48,10 @@
 
     <select id="getAllPapers" resultMap="paperListMap" >
         select * from paper LIMIT #{param1},#{param2};
+    </select>
+
+    <select id="findPapersByProgramId" parameterType="java.lang.Integer" resultMap="paperListMap" >
+        select * from paper WHERE programId = #{programId}
     </select>
 
     <insert id="insertPaper" parameterType="com.thoughtworks.twars.bean.Paper" useGeneratedKeys="true" keyProperty="id">
