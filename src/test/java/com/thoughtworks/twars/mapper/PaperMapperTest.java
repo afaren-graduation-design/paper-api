@@ -88,4 +88,10 @@ public class PaperMapperTest extends TestBase {
         assertThat(papers.size(), is(3));
         assertThat(papers.get(1).getMakerId(), is(2));
     }
+
+    @Test
+    public void should_return_papers_by_programId() throws Exception {
+        List<Paper> papers = paperMapper.findPapersByProgramId(6);
+        assertThat(papers.size(), is(8));
+    }
 }
