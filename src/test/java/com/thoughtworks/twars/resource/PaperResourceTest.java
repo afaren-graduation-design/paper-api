@@ -125,7 +125,7 @@ public class PaperResourceTest extends TestBase {
     @Test
     public void should_return_404_when_response_all_papers() throws Exception {
 
-        when(paperMapper.findAll()).thenReturn(null);
+        when(paperMapper.getAllPapers(0,15)).thenReturn(null);
 
         Response response = target(basePath).request().get();
         assertThat(response.getStatus(), is(404));
