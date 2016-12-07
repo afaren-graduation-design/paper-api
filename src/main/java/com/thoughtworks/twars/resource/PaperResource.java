@@ -52,7 +52,6 @@ public class PaperResource extends Resource {
             @DefaultValue("1") @QueryParam("page") int page,
             @DefaultValue("15") @QueryParam("pageSize") int pageSize
     ) {
-        final int paperCount = paperMapper.findAll().size();
 
         int startPage = page - 1;
         List<Paper> papers = paperMapper.getAllPapers(startPage,pageSize);
@@ -76,6 +75,9 @@ public class PaperResource extends Resource {
             paperInfo.add(map);
         }
         result.put("paperInfo", paperInfo);
+
+        int paperCount = paperMapper.findAll().size();
+
         result.put("paperCount", paperCount);
 
         return Response.status(Response.Status.OK).entity(result).build();
