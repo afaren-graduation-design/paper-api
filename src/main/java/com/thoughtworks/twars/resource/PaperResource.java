@@ -86,11 +86,9 @@ public class PaperResource extends Resource {
     @ApiResponses(value = {@ApiResponse(code = 200, message = "insert paper successfully"),
             @ApiResponse(code = 415, message = "insert paper failed")})
     @Produces(MediaType.APPLICATION_JSON)
-
     public Response insertPaper(
             @ApiParam(name = "data", value = "include all info when insert paper", required = true)
             Map data) {
-
         int makerId = (int) data.get("makerId");
         int programId = (int) data.get("programId");
         String paperName = (String) data.get("paperName");
@@ -101,14 +99,11 @@ public class PaperResource extends Resource {
             insertPaper.setMakerId(makerId);
             insertPaper.setPaperName(paperName);
             insertPaper.setProgramId(programId);
-
             paperMapper.insertPaper(insertPaper);
             Map result = new HashMap<>();
             result.put("paperId", insertPaper.getId());
             return Response.status(Response.Status.OK).entity(result).build();
         }
-
-
 
         try {
             Paper paper = new Paper();
