@@ -13,6 +13,9 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Path("/program")
@@ -23,6 +26,44 @@ public class ProgramResource extends Resource {
     private PaperMapper paperMapper;
     @Inject
     private PaperOperationMapper paperOperationMapper;
+
+    @GET
+    @ApiResponses(value = {@ApiResponse(code = 200,
+            message = "get paper list by program id successfully"),
+            @ApiResponse(code = 404, message = "get paper list by program id failed")})
+    @Path("/{programId}/papers")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPapersByProgramId(
+            @ApiParam(name = "programId", value = "programId", required = true)
+            @PathParam("programId") int programId) {
+        List<Paper> papers = paperMapper.findPapersByProgramId(programId);
+
+        if (papers == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
+        List<Map> paperList = new ArrayList<>();
+
+        for (Paper paper : papers) {
+
+            Map paperItem = new HashMap();
+            paperItem.put("id",paper.getId());
+            paperItem.put("makerId",paper.getMakerId());
+            paperItem.put("description",paper.getDescription());
+            paperItem.put("paperName",paper.getPaperName());
+            paperItem.put("createTime",paper.getCreateTime());
+            paperItem.put("isDistribution",paper.getIsDistribution());
+            paperItem.put("programId",paper.getProgramId());
+            paperItem.put("uri","/papers/"+paper.getId());
+
+            paperList.add(paperItem);
+        }
+
+        Map result = new HashMap();
+        result.put("paperList" ,paperList);
+
+        return Response.status(Response.Status.OK).entity(result).build();
+    }
 
     @GET
     @ApiResponses(value = {@ApiResponse(code = 200,
