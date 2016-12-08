@@ -51,6 +51,7 @@ public class Paper {
         Map result = new HashMap<>();
 
         result.put("id", id);
+        result.put("paperName", paperName);
 
         List<Map> sectionsInfo = sections.stream()
                 .map(section -> section.getResponseInfo())
