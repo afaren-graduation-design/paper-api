@@ -83,7 +83,7 @@ public class ProgramResource extends Resource {
         }
 
         return Response.status(Response.Status.OK)
-                .entity(paper.getResponseInfo()).build();
+                .entity(paper).build();
     }
 
     @POST
