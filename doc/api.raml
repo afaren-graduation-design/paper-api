@@ -513,8 +513,12 @@ baseUri: http://api.bronzesword.com/
     body:
       application/json:
         properties:
-          id: integer
-          sectionId: integer
+          description: string
+          evaluateScript: string
+          templateRepository: string
+          makerId: integer
+          createTime: integer
+          homeworkName: string
     responses:
       201:
         body:
@@ -551,7 +555,11 @@ baseUri: http://api.bronzesword.com/
                               properties:
                                 []:
                                 paperName: string
-                                type: string
+                                description: string
+                                createTime: string
+                                isDistribution: integer
+                                programId: integer
+                                uri: string
 
 
         /paper:
