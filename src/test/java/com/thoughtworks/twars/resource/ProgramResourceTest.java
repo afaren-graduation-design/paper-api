@@ -19,7 +19,7 @@ import static org.hamcrest.core.Is.is;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProgramResourceTest extends TestBase {
-    String basePath = "/program";
+    String basePath = "/programs";
 
     @Mock
     Paper paper;
