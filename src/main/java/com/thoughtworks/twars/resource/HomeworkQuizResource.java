@@ -10,10 +10,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
@@ -21,10 +18,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 @Path("/homeworkQuizzes")
 @Api
-public class HomeworkQuizResource {
+public class HomeworkQuizResource extends Resource {
     @Inject
     private HomeworkQuizMapper homeworkQuizMapper;
 
@@ -126,4 +122,42 @@ public class HomeworkQuizResource {
         result.put("homeworkQuizzes", homeworkQuizzes);
         return Response.status(Response.Status.OK).entity(result).build();
     }
+
+    @POST
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "insert one homework quiz successfully"),
+            @ApiResponse(code = 415, message = "insert  one homework quiz failed")})
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response insertPaper(
+            @ApiParam(name = "data", value = "include all info when insert one homework quiz ", required = true)
+                    Map data) {
+        try {
+            HomeworkQuiz homeworkQuiz = new HomeworkQuiz();
+
+            System.out.println(data.toString());
+            String desctiption = (String) data.get("description");
+            String evaluateScript = (String) data.get("evaluateScript");
+            String templateRepository = (String) data.get("templateRepository");
+            int makerId = (int) data.get("makerId");
+            String homeworkName = (String) data.get("homeworkName");
+            int createTime = (int)data.get("createTime");
+
+            homeworkQuiz.setDescription(desctiption);
+            homeworkQuiz.setEvaluateScript(evaluateScript);
+            homeworkQuiz.setTemplateRepository(templateRepository);
+            homeworkQuiz.setMakerId(makerId);
+            homeworkQuiz.setHomeworkName(homeworkName);
+            homeworkQuiz.setCreateTime(createTime);
+
+            Integer id = homeworkQuizMapper.insertHomeworkQuiz(homeworkQuiz);
+
+            Map map = new HashMap();
+            map.put("uri", "homeworkQuizzes/" + id);
+
+            return Response.status(Response.Status.OK).entity(map).build();
+        } catch (Exception exception) {
+            session.rollback();
+        }
+        return Response.status(Response.Status.UNSUPPORTED_MEDIA_TYPE).build();
+    }
+
 }
