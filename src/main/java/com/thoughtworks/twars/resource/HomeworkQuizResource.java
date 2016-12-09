@@ -133,15 +133,14 @@ public class HomeworkQuizResource extends Resource {
         try {
             HomeworkQuiz homeworkQuiz = new HomeworkQuiz();
 
-            System.out.println(data.toString());
-            String desctiption = (String) data.get("description");
+            String description = (String) data.get("description");
             String evaluateScript = (String) data.get("evaluateScript");
             String templateRepository = (String) data.get("templateRepository");
             int makerId = (int) data.get("makerId");
             String homeworkName = (String) data.get("homeworkName");
             int createTime = (int)data.get("createTime");
 
-            homeworkQuiz.setDescription(desctiption);
+            homeworkQuiz.setDescription(description);
             homeworkQuiz.setEvaluateScript(evaluateScript);
             homeworkQuiz.setTemplateRepository(templateRepository);
             homeworkQuiz.setMakerId(makerId);

@@ -2,13 +2,17 @@ package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.bean.HomeworkQuiz;
 import com.thoughtworks.twars.bean.UserDetail;
+import org.hamcrest.MatcherAssert;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +28,7 @@ public class HomeworkQuizResourceTest extends TestBase {
     HomeworkQuiz homeworkQuiz;
     @Mock
     HomeworkQuiz homeworkQuiz01;
+
 
     String basePath = "homeworkQuizzes";
 
@@ -183,4 +188,35 @@ public class HomeworkQuizResourceTest extends TestBase {
 
     }
 
+    @Test
+    public void should_return_homework_quiz_uri() {
+
+        HomeworkQuiz homeworkQuiz = new HomeworkQuiz();
+
+        homeworkQuiz.setDescription("desctiption");
+        homeworkQuiz.setEvaluateScript("evaluateScript.sh");
+        homeworkQuiz.setTemplateRepository("http://github.com/templateRepository");
+        homeworkQuiz.setMakerId(1);
+        homeworkQuiz.setHomeworkName("homeworkName");
+
+        when(homeworkQuizMapper.insertHomeworkQuiz(homeworkQuiz)).thenReturn(1);
+
+        Map map = new HashMap();
+
+        map.put("desctiption","miaoshu");
+        map.put("evaluateScript","ceshi ");
+        map.put("templateRepository","http://github.com/templateRepository");
+        map.put("makerId",1);
+        map.put("homeworkName","homeworkName");
+        map.put("createTime",123456);
+
+        Entity entity = Entity.entity(map, MediaType.APPLICATION_JSON);
+
+        Response response = target(basePath).request().post(entity);
+
+        MatcherAssert.assertThat(response.getStatus(), is(200));
+        Map result = response.readEntity(Map.class);
+
+        MatcherAssert.assertThat(result.size(), is(1));
+    }
 }
