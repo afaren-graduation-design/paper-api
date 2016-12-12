@@ -8,6 +8,15 @@ public class HomeworkQuiz {
     private int makerId;
     private int createTime;
     private String homeworkName;
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public int getMakerId() {
         return makerId;

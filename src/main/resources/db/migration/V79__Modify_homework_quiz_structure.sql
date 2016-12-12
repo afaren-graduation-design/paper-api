@@ -1,0 +1,1 @@
+alter table homeworkQuiz add type varchar(20) NOT NULL;

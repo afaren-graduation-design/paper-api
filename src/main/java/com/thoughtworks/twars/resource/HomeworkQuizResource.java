@@ -39,15 +39,17 @@ public class HomeworkQuizResource extends Resource {
         for (HomeworkQuiz homeworkQuiz : allHomeworkQuizzes) {
             Map homeworkItem = new HashMap<>();
 
-            homeworkItem.put("id", homeworkQuiz.getMakerId());
+            homeworkItem.put("id", homeworkQuiz.getId());
             homeworkItem.put("description", homeworkQuiz.getDescription());
             homeworkItem.put("evaluateScript", homeworkQuiz.getEvaluateScript());
             homeworkItem.put("templateRepository", homeworkQuiz.getTemplateRepository());
             UserDetail userDetail = userMapper.getUserDetailById(homeworkQuiz.getMakerId());
+            homeworkItem.put("makerId", homeworkQuiz.getMakerId());
             homeworkItem.put("makerName", userDetail.getName());
             homeworkItem.put("createTime", homeworkQuiz.getCreateTime());
             homeworkItem.put("homeworkName", homeworkQuiz.getHomeworkName());
-            homeworkItem.put("uri", "/homeworkQuizzes/" + homeworkQuiz.getMakerId());
+            homeworkItem.put("type",homeworkQuiz.getType());
+            homeworkItem.put("uri", "homeworkQuizzes/" + homeworkQuiz.getId());
 
             homeworkQuizzes.add(homeworkItem);
 
@@ -88,7 +90,8 @@ public class HomeworkQuizResource extends Resource {
             homeworkItem.put("makerName", userDetail.getName());
             homeworkItem.put("createTime", homeworkQuiz.getCreateTime());
             homeworkItem.put("homeworkName", homeworkQuiz.getHomeworkName());
-            homeworkItem.put("uri", "/homeworkQuizzes/" + id);
+            homeworkItem.put("type", homeworkQuiz.getType());
+            homeworkItem.put("uri", "homeworkQuizzes/" + id);
 
             Map result = new HashMap<>();
             result.put("homeworkItem", homeworkItem);
@@ -114,7 +117,9 @@ public class HomeworkQuizResource extends Resource {
             homeworkItem.put("makerName", userDetail.getName());
             homeworkItem.put("createTime", homeworkQuiz.getCreateTime());
             homeworkItem.put("homeworkName", homeworkQuiz.getHomeworkName());
-            homeworkItem.put("uri", "/homeworkQuizzes/" + id);
+            homeworkItem.put("uri", "homeworkQuizzes/" + id);
+            homeworkItem.put("type", homeworkQuiz.getType());
+
 
             homeworkQuizzes.add(homeworkItem);
         }
@@ -139,6 +144,8 @@ public class HomeworkQuizResource extends Resource {
             int makerId = (int) data.get("makerId");
             String homeworkName = (String) data.get("homeworkName");
             int createTime = (int) data.get("createTime");
+            String type = (String) data.get("type");
+
 
             homeworkQuiz.setDescription(description);
             homeworkQuiz.setEvaluateScript(evaluateScript);
@@ -146,6 +153,7 @@ public class HomeworkQuizResource extends Resource {
             homeworkQuiz.setMakerId(makerId);
             homeworkQuiz.setHomeworkName(homeworkName);
             homeworkQuiz.setCreateTime(createTime);
+            homeworkQuiz.setType(type);
 
             homeworkQuizMapper.insertHomeworkQuiz(homeworkQuiz);
             Integer id = homeworkQuiz.getId();
