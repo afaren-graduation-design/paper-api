@@ -138,7 +138,7 @@ public class HomeworkQuizResource extends Resource {
             String templateRepository = (String) data.get("templateRepository");
             int makerId = (int) data.get("makerId");
             String homeworkName = (String) data.get("homeworkName");
-            int createTime = (int)data.get("createTime");
+            int createTime = (int) data.get("createTime");
 
             homeworkQuiz.setDescription(description);
             homeworkQuiz.setEvaluateScript(evaluateScript);
@@ -147,7 +147,8 @@ public class HomeworkQuizResource extends Resource {
             homeworkQuiz.setHomeworkName(homeworkName);
             homeworkQuiz.setCreateTime(createTime);
 
-            Integer id = homeworkQuizMapper.insertHomeworkQuiz(homeworkQuiz);
+            homeworkQuizMapper.insertHomeworkQuiz(homeworkQuiz);
+            Integer id = homeworkQuiz.getId();
 
             Map map = new HashMap();
             map.put("uri", "homeworkQuizzes/" + id);
