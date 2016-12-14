@@ -76,7 +76,7 @@ public class ProgramResource extends Resource {
     @Path("/{programId}/papers")
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertPapers(
-            @ApiParam(name = "data", value = "all insert paper", required = true) Map data,
+            @ApiParam(name = "data", value = "insert paper", required = true) Map data,
             @PathParam("programId") int programId) {
 
         Integer makerId = (Integer) data.get("makerId");
@@ -151,8 +151,12 @@ public class ProgramResource extends Resource {
                     sectionQuizMapper.insertSectionQuiz(sectionQuiz);
 
                 }
+
             }
+
+
         }
+
 
         Map result = new HashMap();
         result.put("uri", "programs/" + programId + "/papers/" + paperId);
