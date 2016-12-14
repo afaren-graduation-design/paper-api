@@ -1,9 +1,7 @@
 package com.thoughtworks.twars.resource;
 
-import com.thoughtworks.twars.bean.Paper;
-import com.thoughtworks.twars.bean.PaperOperation;
-import com.thoughtworks.twars.mapper.PaperMapper;
-import com.thoughtworks.twars.mapper.PaperOperationMapper;
+import com.thoughtworks.twars.bean.*;
+import com.thoughtworks.twars.mapper.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
@@ -26,6 +24,12 @@ public class ProgramResource extends Resource {
     private PaperMapper paperMapper;
     @Inject
     private PaperOperationMapper paperOperationMapper;
+    @Inject
+    private SectionMapper sectionMapper;
+    @Inject
+    private BlankQuizMapper blankQuizMapper;
+    @Inject
+    private SectionQuizMapper sectionQuizMapper;
 
     @GET
     @ApiResponses(value = {@ApiResponse(code = 200,
@@ -47,23 +51,115 @@ public class ProgramResource extends Resource {
         for (Paper paper : papers) {
 
             Map paperItem = new HashMap();
-            paperItem.put("id",paper.getId());
-            paperItem.put("makerId",paper.getMakerId());
-            paperItem.put("description",paper.getDescription());
-            paperItem.put("paperName",paper.getPaperName());
-            paperItem.put("createTime",paper.getCreateTime());
-            paperItem.put("isDistribution",paper.getIsDistribution());
-            paperItem.put("programId",paper.getProgramId());
-            paperItem.put("uri","/papers/"+paper.getId());
+            paperItem.put("id", paper.getId());
+            paperItem.put("makerId", paper.getMakerId());
+            paperItem.put("description", paper.getDescription());
+            paperItem.put("paperName", paper.getPaperName());
+            paperItem.put("createTime", paper.getCreateTime());
+            paperItem.put("isDistribution", paper.getIsDistribution());
+            paperItem.put("programId", paper.getProgramId());
+            paperItem.put("uri", "/papers/" + paper.getId());
 
             paperList.add(paperItem);
         }
 
         Map result = new HashMap();
-        result.put("paperList" ,paperList);
+        result.put("paperList", paperList);
 
         return Response.status(Response.Status.OK).entity(result).build();
     }
+
+    @POST
+    @ApiResponses(value = {@ApiResponse(code = 201,
+            message = "create paper list by programId successfully"),
+            @ApiResponse(code = 415, message = "create paper list by program id failed")})
+    @Path("/{programId}/papers")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response insertPapers(
+            @ApiParam(name = "data", value = "include all info when insert paper", required = true) Map data,
+            @PathParam("programId") int programId) {
+
+        Integer makerId = (Integer) data.get("makerId");
+        String paperName = (String) data.get("paperName");
+        String description = (String) data.get("description");
+        Integer createTime = (Integer) data.get("createTime");
+        Boolean isDistribution = true;
+
+        Paper paper = new Paper();
+        paper.setMakerId(makerId);
+        paper.setPaperName(paperName);
+        paper.setDescription(description);
+        paper.setCreateTime(createTime);
+        paper.setIsDistribution(isDistribution);
+
+        paperMapper.insertPaper(paper);
+
+        Integer paperId = paper.getId();
+
+        List sections = (List) data.get("sections");
+        for (Object sectionItem : sections) {
+            Map section = (Map) sectionItem;
+            String sectionDescription = (String) section.get("description");
+            String sectionType = (String) section.get("type");
+
+            Section insertSection = new Section();
+            insertSection.setPaperId(paperId);
+            insertSection.setType(sectionType);
+            insertSection.setDescription(sectionDescription);
+
+            sectionMapper.insertSection(insertSection);
+            Integer sectionId = insertSection.getId();
+
+            if (sectionType.equals("blankQuizzes")) {
+                Map item = (Map) section.get("items");
+
+                Integer easyCount = (Integer) item.get("easyCount");
+                Integer normalCount = (Integer) item.get("normalCount");
+                Integer hardCount = (Integer) item.get("hardCount");
+                Integer exampleCount = (Integer) item.get("exampleCount");
+
+                BlankQuiz insertBlankQuiz = new BlankQuiz();
+                insertBlankQuiz.setEasyCount(easyCount);
+                insertBlankQuiz.setNormalCount(normalCount);
+                insertBlankQuiz.setHardCount(hardCount);
+                insertBlankQuiz.setExampleCount(exampleCount);
+                insertBlankQuiz.setId(sectionId);
+
+                blankQuizMapper.insertBlankQuiz(insertBlankQuiz);
+
+                Integer blankQuizId = insertBlankQuiz.getId();
+
+                SectionQuiz insertSectionQuiz = new SectionQuiz();
+                insertSectionQuiz.setSectionId(sectionId);
+                insertSectionQuiz.setQuizId(blankQuizId);
+
+                sectionQuizMapper.insertSectionQuiz(insertSectionQuiz);
+            }
+            if (sectionType.equals("homeworkQuizzes")) {
+                List item = (List) section.get("items");
+
+                for (Object homeworkItem : item) {
+
+                    Map homeworkQuiz = (Map) homeworkItem;
+
+                    Integer homeworkId = (Integer) homeworkQuiz.get("id");
+
+                    SectionQuiz sectionQuiz = new SectionQuiz();
+                    sectionQuiz.setQuizId(homeworkId);
+                    sectionQuiz.setSectionId(sectionId);
+
+                    sectionQuizMapper.insertSectionQuiz(sectionQuiz);
+
+                }
+            }
+        }
+
+        Map result = new HashMap();
+        result.put("uri", "programs/" + programId + "/papers/" + paperId);
+
+        return Response.status(Response.Status.OK).entity(result).build();
+    }
+
 
     @GET
     @ApiResponses(value = {@ApiResponse(code = 200,
