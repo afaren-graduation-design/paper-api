@@ -74,14 +74,14 @@ public class ProgramResourceTest extends TestBase {
         when(firstPaper.getId()).thenReturn(1);
         when(firstPaper.getPaperName()).thenReturn("简单的试卷");
         when(firstPaper.getDescription()).thenReturn("easy");
-        when(firstPaper.getCreateTime()).thenReturn("2016-11-11");
+        when(firstPaper.getCreateTime()).thenReturn(1111111);
         when(firstPaper.getMakerId()).thenReturn(3);
         when(firstPaper.getIsDistribution()).thenReturn(true);
 
         when(secondPaper.getId()).thenReturn(5);
         when(secondPaper.getPaperName()).thenReturn("普通的试卷");
         when(secondPaper.getDescription()).thenReturn("common");
-        when(secondPaper.getCreateTime()).thenReturn("2016-11-12");
+        when(secondPaper.getCreateTime()).thenReturn(2222222);
         when(secondPaper.getMakerId()).thenReturn(2);
         when(secondPaper.getIsDistribution()).thenReturn(false);
 
