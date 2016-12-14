@@ -157,7 +157,7 @@ public class ProgramResource extends Resource {
         Map result = new HashMap();
         result.put("uri", "programs/" + programId + "/papers/" + paperId);
 
-        return Response.status(Response.Status.OK).entity(result).build();
+        return Response.status(Response.Status.CREATED).entity(result).build();
     }
 
 
