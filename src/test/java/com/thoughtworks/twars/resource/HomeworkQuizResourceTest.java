@@ -173,15 +173,12 @@ public class HomeworkQuizResourceTest extends TestBase {
         Map homeworkItem01 = homeworkQuizList.get(0);
 
         assertThat(homeworkQuizList.size(), is(2));
-
-        assertThat(homeworkItem01.get("id"), is(1));
         assertThat(homeworkItem01.get("description"), is("这是一道比较简单的题目"));
         assertThat(homeworkItem01.get("evaluateScript"), is("www.baidu.com"));
         assertThat(homeworkItem01.get("templateRepository"), is("templateRepository"));
 
         Map homeworkItem02 = homeworkQuizList.get(1);
 
-        assertThat(homeworkItem02.get("id"), is(2));
         assertThat(homeworkItem02.get("description"), is("这是一道普通难度的题目"));
         assertThat(homeworkItem02.get("evaluateScript"), is("www.talkop.com"));
         assertThat(homeworkItem02.get("templateRepository"), is("talkopRepository"));

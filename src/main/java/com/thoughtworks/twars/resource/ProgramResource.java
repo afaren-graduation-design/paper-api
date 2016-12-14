@@ -76,7 +76,7 @@ public class ProgramResource extends Resource {
     @Path("/{programId}/papers")
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertPapers(
-            @ApiParam(name = "data", value = "include all info when insert paper", required = true) Map data,
+            @ApiParam(name = "data", value = "all insert paper", required = true) Map data,
             @PathParam("programId") int programId) {
 
         Integer makerId = (Integer) data.get("makerId");

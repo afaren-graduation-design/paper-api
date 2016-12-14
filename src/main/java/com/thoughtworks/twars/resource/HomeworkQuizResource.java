@@ -129,11 +129,11 @@ public class HomeworkQuizResource extends Resource {
     }
 
     @POST
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "insert one homework quiz successfully"),
-            @ApiResponse(code = 415, message = "insert  one homework quiz failed")})
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "insert successfully"),
+            @ApiResponse(code = 415, message = "insert failed")})
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertPaper(
-            @ApiParam(name = "data", value = "include all info when insert one homework quiz ", required = true)
+            @ApiParam(name = "data", value = "all info one homework quiz ", required = true)
                     Map data) {
         try {
             HomeworkQuiz homeworkQuiz = new HomeworkQuiz();

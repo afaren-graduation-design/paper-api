@@ -73,11 +73,11 @@ public class PaperResourceTest extends TestBase {
 
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
-        assertThat(jsonStr, is("{\"paperInfo\":[{\"createTime\":\"1111111\",\"paperName\":"
+        assertThat(jsonStr, is("{\"paperInfo\":[{\"createTime\":1111111,\"paperName\":"
                 +
                 "\"简单的试卷\",\"description\":\"easy\",\"isDistribution\":true,\"uri\":\"papers/1\","
                 +
-                "\"makerId\":3},{\"createTime\":\"2222222\",\"paperName\":\"普通的试卷\","
+                "\"makerId\":3},{\"createTime\":2222222,\"paperName\":\"普通的试卷\","
                 +
                 "\"description\":\"common\",\"isDistribution\":false,\"uri\":\"papers/5\","
                 +
@@ -111,11 +111,11 @@ public class PaperResourceTest extends TestBase {
 
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
-        assertThat(jsonStr, is("{\"paperInfo\":[{\"createTime\":\"1111111\","
+        assertThat(jsonStr, is("{\"paperInfo\":[{\"createTime\":1111111,"
                 +
                 "\"paperName\":\"简单的试卷\",\"description\":\"easy\",\"isDistribution\":true,"
                 +
-                "\"uri\":\"papers/1\",\"makerId\":3},{\"createTime\":\"2222222\","
+                "\"uri\":\"papers/1\",\"makerId\":3},{\"createTime\":2222222,"
                 +
                 "\"paperName\":\"普通的试卷\",\"description\":\"common\",\"isDistribution\":false,"
                 +
@@ -226,12 +226,14 @@ public class PaperResourceTest extends TestBase {
 
         Map map = new HashMap<>();
         map.put("makerId", 1);
+        map.put("programId",1);
         map.put("paperName", "思沃特训营第n次测验");
         map.put("sections", sections);
 
         Entity entity = Entity.entity(map, MediaType.APPLICATION_JSON_TYPE);
 
         Response response = target(basePath).request().post(entity);
+        System.out.println(response.getStatus());
         assertThat(response.getStatus(), is(200));
     }
 
