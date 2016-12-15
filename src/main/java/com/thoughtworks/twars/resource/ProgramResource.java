@@ -91,6 +91,7 @@ public class ProgramResource extends Resource {
         paper.setDescription(description);
         paper.setCreateTime(createTime);
         paper.setIsDistribution(isDistribution);
+        paper.setProgramId(programId);
 
         paperMapper.insertPaper(paper);
 
@@ -151,19 +152,13 @@ public class ProgramResource extends Resource {
                     sectionQuizMapper.insertSectionQuiz(sectionQuiz);
 
                 }
-
             }
-
-
         }
-
-
         Map result = new HashMap();
         result.put("uri", "programs/" + programId + "/papers/" + paperId);
 
         return Response.status(Response.Status.CREATED).entity(result).build();
     }
-
 
     @GET
     @ApiResponses(value = {@ApiResponse(code = 200,
