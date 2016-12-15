@@ -541,9 +541,53 @@ baseUri: http://api.bronzesword.com/
                             []:
                             uri: string
 
-/program:
+/programs:
     /{programId}:
         /papers:
+          post:
+            description: 通过programId获取对应paper列表信息
+            body:
+              application/json:
+                example:
+                 {
+                  "makerId": 1,
+                  "createTime": 111111,
+                  "programId": 1,
+                  "paperName": "new title",
+                  "description": "描述",
+                  "sections": [
+                    {
+                      "type": "blankQuizzes",
+                      "description": "blank",
+                      "items": {
+                        "easyCount": 1,
+                        "normalCount": 1,
+                        "hardCount": 1,
+                        "exampleCount": 1
+                      }
+                    },
+                    {
+                      "type": "homeworkQuizzes",
+                      "description": "homework",
+                      "items": [
+                        {
+                          "id": 1,
+                          "uri": "homeworkQuizzes/1"
+                        },
+                        {
+                          "id": 2,
+                          "uri": "homeworkQuizzes/2"
+                        }
+                     ]
+                   }
+                 ]
+               }
+            responses:
+              201:
+                body:
+                  application/json:
+                    properties:
+                      uri: string
           get:
             description: 通过programId获取对应paper列表信息
             responses:
