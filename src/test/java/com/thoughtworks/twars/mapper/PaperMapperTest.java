@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.thoughtworks.twars.bean.Paper;
 import org.junit.Before;
 import org.junit.Test;
+
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -36,38 +37,25 @@ public class PaperMapperTest extends TestBase {
         assertThat(paper.getId(), is(1));
         assertThat(paper.getMakerId(), is(1));
         assertThat(paper.getSections().size(), is(2));
+
         assertThat(responseInfoStr,
-                is("{\"id\":1,\"sections\":["
-                        +
-                        "{\"description\":\"这是描述\",\"id\":1,\"quizzes\":["
-                        +
-                        "{\"definition_uri\":\"blankQuizzes/1\",\"id\":1,"
-                        +
-                        "\"items_uri\":\"blankQuizzes/1/items\"},"
-                        +
-                        "{\"definition_uri\":\"blankQuizzes/2\",\"id\":2,"
-                        +
-                        "\"items_uri\":\"blankQuizzes/2/items\"}],"
-                        +
-                        "\"sectionType\":\"blankQuizzes\"},{\"description\":\"这是描述\","
-                        +
-                        "\"id\":2,\"quizzes\":[{\"definition_uri\":\"homeworkQuizzes/1\",\"id\":1},"
-                        +
-                        "{\"definition_uri\":\"homeworkQuizzes/2\",\"id\":2},"
-                        +
-                        "{\"definition_uri\":\"homeworkQuizzes/3\",\"id\":3},"
-                        +
-                        "{\"definition_uri\":\"homeworkQuizzes/4\",\"id\":4},"
-                        +
-                        "{\"definition_uri\":\"homeworkQuizzes/5\",\"id\":5},"
-                        +
-                        "{\"definition_uri\":\"homeworkQuizzes/6\",\"id\":6},"
-                        +
-                        "{\"definition_uri\":\"homeworkQuizzes/7\",\"id\":7},"
-                        +
-                        "{\"definition_uri\":\"homeworkQuizzes/8\",\"id\":8}],"
-                        +
-                        "\"sectionType\":\"homeworkQuizzes\"}]}"));
+                is("{\"paperName\":\"简单的试卷\","
+                        + "\"id\":1,\"sections\":[{\"description\":\"这是描述\","
+                        + "\"id\":1,\"quizzes\":[{\"definition_uri\":\"blankQuizzes/1\""
+                        + ",\"id\":1,\"items_uri\":\"blankQuizzes/1/items\"},"
+                        + "{\"definition_uri\":\"blankQuizzes/2\",\"id\":2,"
+                        + "\"items_uri\":\"blankQuizzes/2/items\"}],"
+                        + "\"sectionType\":\"blankQuizzes\"},{\"description\":\"这是描述\""
+                        + ",\"id\":2,\"quizzes\":"
+                        + "[{\"definition_uri\":\"homeworkQuizzes/1\",\"id\":1}"
+                        + ",{\"definition_uri\":\"homeworkQuizzes/2\",\"id\":2},"
+                        + "{\"definition_uri\":\"homeworkQuizzes/3\",\"id\":3},"
+                        + "{\"definition_uri\":\"homeworkQuizzes/4\",\"id\":4},"
+                        + "{\"definition_uri\":\"homeworkQuizzes/5\",\"id\":5},"
+                        + "{\"definition_uri\":\"homeworkQuizzes/6\",\"id\":6},"
+                        + "{\"definition_uri\":\"homeworkQuizzes/7\",\"id\":7},"
+                        + "{\"definition_uri\":\"homeworkQuizzes/8\",\"id\":8}]"
+                        + ",\"sectionType\":\"homeworkQuizzes\"}]}"));
 
     }
 
@@ -84,7 +72,7 @@ public class PaperMapperTest extends TestBase {
 
     @Test
     public void should_return_papers_by_page_and_pageSize() throws Exception {
-        List<Paper> papers = paperMapper.getAllPapers(1,3);
+        List<Paper> papers = paperMapper.getAllPapers(1, 3);
         assertThat(papers.size(), is(3));
         assertThat(papers.get(1).getMakerId(), is(2));
     }

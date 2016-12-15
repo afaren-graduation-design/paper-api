@@ -44,6 +44,7 @@ public class HomeWorkQuizMapperTest extends TestBase {
         homeworkQuiz.setMakerId(1);
         homeworkQuiz.setCreateTime(1234);
         homeworkQuiz.setHomeworkName("test");
+        homeworkQuiz.setType("homeworkQuizzes");
         homeworkQuizMapper.insertHomeworkQuiz(homeworkQuiz);
 
         assertThat(homeworkQuiz.getId(), is(9));

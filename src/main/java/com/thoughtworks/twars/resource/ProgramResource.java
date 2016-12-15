@@ -76,7 +76,7 @@ public class ProgramResource extends Resource {
     @Path("/{programId}/papers")
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertPapers(
-            @ApiParam(name = "data", value = "include all info when insert paper", required = true) Map data,
+            @ApiParam(name = "data", value = "insert paper", required = true) Map data,
             @PathParam("programId") int programId) {
 
         Integer makerId = (Integer) data.get("makerId");
@@ -151,8 +151,12 @@ public class ProgramResource extends Resource {
                     sectionQuizMapper.insertSectionQuiz(sectionQuiz);
 
                 }
+
             }
+
+
         }
+
 
         Map result = new HashMap();
         result.put("uri", "programs/" + programId + "/papers/" + paperId);
@@ -165,7 +169,7 @@ public class ProgramResource extends Resource {
     @ApiResponses(value = {@ApiResponse(code = 200,
             message = "get one paper from program successfully"),
             @ApiResponse(code = 404, message = "get one paper from program failed")})
-    @Path("/{programId}/paper/{paperId}")
+    @Path("/{programId}/papers/{paperId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOnePaper(
             @ApiParam(name = "programId", value = "programId", required = true)
@@ -185,7 +189,7 @@ public class ProgramResource extends Resource {
     @POST
     @ApiResponses(value = {@ApiResponse(code = 204, message = "delete paper successfully"),
             @ApiResponse(code = 404, message = "delete paper failed")})
-    @Path("/{programId}/paper/{paperId}")
+    @Path("/{programId}/papers/{paperId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertPaperOperation(
             @ApiParam(name = "programId", value = "programId", required = true)
