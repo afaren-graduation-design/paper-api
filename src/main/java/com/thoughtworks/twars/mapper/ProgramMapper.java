@@ -9,5 +9,5 @@ public interface ProgramMapper {
 
     List<User> findUsersByProgramId(int id);
 
-    Program getProgramById (int id);
+    Program getProgramById(int id);
 }

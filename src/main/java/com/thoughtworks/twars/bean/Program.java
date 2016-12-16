@@ -33,11 +33,11 @@ public class Program {
 
     @Override
     public String toString() {
-        return "Program{" +
-                "id=" + id +
-                ", programName='" + programName + '\'' +
-                ", users=" + users +
-                '}';
+        return "Program{"
+                + "id=" + id
+                + ", programName='" + programName + '\''
+                + ", users=" + users
+                + '}';
     }
 }
 
