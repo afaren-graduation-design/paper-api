@@ -90,6 +90,9 @@ public class App extends ResourceConfig {
         blankQuizDefinition.setSectionMapper(sectionMapper);
         blankQuizDefinition.setSectionQuizMapper(sectionQuizMapper);
 
+        final ProgramMapper programMapper = session
+                .getMapper(ProgramMapper.class);
+
 
         register(OpenSessionRequestFilter.class);
         register(CloseSessionResponseFilter.class);
@@ -119,6 +122,7 @@ public class App extends ResourceConfig {
                         bind(passwordRetrieveDetailMapper).to(PasswordRetrieveDetailMapper.class);
                         bind(thirdPartyMapper).to(ThirdPartyMapper.class);
                         bind(paperOperationMapper).to(PaperOperationMapper.class);
+                        bind(programMapper).to(ProgramMapper.class);
                         bind(session).to(SqlSessionManager.class);
                     }
                 });

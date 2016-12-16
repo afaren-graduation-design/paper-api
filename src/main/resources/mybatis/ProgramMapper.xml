@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thoughtworks.twars.mapper.ProgramMapper">
+
+    <resultMap id="programMap" type="com.thoughtworks.twars.bean.Program">
+        <id property="id" column="id"></id>
+        <result column="name" property="programName"></result>
+        <!--  one to many   -->
+        <collection property="users" column="id" javaType="ArrayList" ofType="usersMap"
+                    select="findeUsersByProgramId"/>
+    </resultMap>
+
+    <resultMap id="usersMap" type="com.thoughtworks.twars.bean.User">
+        <id property="id" column="id"></id>
+        <result column="email" property="email"></result>
+        <result column="mobilePhone" property="mobilePhone"></result>
+        <result column="role" property="role"></result>
+    </resultMap>
+
+    <select id="findUsersByProgramId" parameterType="java.lang.Integer" resultMap="usersMap">
+       select users.* from users,userProgram where userProgram.programId = #{id} and users.id = userProgram.userId;
+    </select>
+
+    <select id="getProgramById" parameterType="java.lang.Integer"
+            resultMap="programMap">
+        select * from programs where id =#{id}
+    </select>
+
+</mapper>

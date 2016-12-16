@@ -47,6 +47,7 @@
         <mapper resource="mybatis/PasswordRetrieveDetailMapper.xml"></mapper>
         <mapper resource="mybatis/ThirdPartyMapper.xml"></mapper>
         <mapper resource="mybatis/PaperOperationMapper.xml"></mapper>
+        <mapper resource="mybatis/ProgramMapper.xml"></mapper>
 
     </mappers>
 </configuration>

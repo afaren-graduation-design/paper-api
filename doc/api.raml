@@ -543,6 +543,16 @@ baseUri: http://api.bronzesword.com/
 
 /programs:
     /{programId}:
+        /users:
+          get:
+            description: 通过programId获取对应users列表信息
+            body:
+              application/json:
+                properties:
+                  uris:
+                    properties:
+                     []:
+                     uri: string
         /papers:
           post:
             description: 通过programId获取对应paper列表信息
