@@ -30,6 +30,8 @@ public class ProgramResource extends Resource {
     private BlankQuizMapper blankQuizMapper;
     @Inject
     private SectionQuizMapper sectionQuizMapper;
+    @Inject
+    private ProgramMapper programMapper;
 
     @GET
     @ApiResponses(value = {@ApiResponse(code = 200,
@@ -181,6 +183,35 @@ public class ProgramResource extends Resource {
                 .entity(paper.getResponseInfo()).build();
     }
 
+    @GET
+    @ApiResponses(value = {@ApiResponse(code = 200,
+            message = "get usersId by programId successfully"),
+            @ApiResponse(code = 404, message = "get usersId by programId failure")})
+    @Path("/{programId}/users")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findUsersIdByProgramId(
+            @ApiParam(name = "programId", value = "programId", required = true)
+            @PathParam("programId") int programId) {
+        List<Integer> users = programMapper.findUsersIdByProgramId(programId);
+        if (users.size() != 0) {
+
+            List<String> usersUri = new ArrayList<String>();
+
+            for (Integer item : users) {
+                String uri = "users/" + item;
+                usersUri.add(uri);
+            }
+
+            Map<String, Object> result = new HashMap();
+            result.put("usersUri", usersUri);
+
+            return Response.status(Response.Status.OK).entity(result).build();
+        }
+        return Response.status(Response.Status.NOT_FOUND).build();
+
+    }
+
+
     @POST
     @ApiResponses(value = {@ApiResponse(code = 204, message = "delete paper successfully"),
             @ApiResponse(code = 404, message = "delete paper failed")})
@@ -216,4 +247,5 @@ public class ProgramResource extends Resource {
         }
         return Response.status(Response.Status.NO_CONTENT).build();
     }
+
 }

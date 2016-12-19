@@ -3,8 +3,12 @@ package com.thoughtworks.twars.mapper;
 import com.thoughtworks.twars.bean.User;
 import org.junit.Before;
 import org.junit.Test;
+import scala.Int;
 
 import java.util.List;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 
 public class ProgramMapperTest extends TestBase {
 
@@ -17,10 +21,9 @@ public class ProgramMapperTest extends TestBase {
     }
 
     @Test
-    public void should_return_users_by_program_id() throws Exception {
-
-        List<User> users = programMapper.findUsersByProgramId(1);
-
-        System.out.println(programMapper.findUsersByProgramId(1));
+    public void should_return_users_uri_by_program_id() {
+        List<Integer> usersId = programMapper.findUsersIdByProgramId(1);
+        assertThat(usersId.size(), is(3));
     }
+
 }

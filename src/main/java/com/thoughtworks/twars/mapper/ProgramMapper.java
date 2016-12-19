@@ -1,13 +1,9 @@
 package com.thoughtworks.twars.mapper;
 
-import com.thoughtworks.twars.bean.Program;
-import com.thoughtworks.twars.bean.User;
-
 import java.util.List;
 
 public interface ProgramMapper {
 
-    List<User> findUsersByProgramId(int id);
+    List<Integer> findUsersIdByProgramId(int id);
 
-    Program getProgramById(int id);
 }

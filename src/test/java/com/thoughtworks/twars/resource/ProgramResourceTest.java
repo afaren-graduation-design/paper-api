@@ -27,9 +27,6 @@ public class ProgramResourceTest extends TestBase {
     Paper paper;
 
     @Mock
-    List<Paper> papers;
-
-    @Mock
     Paper firstPaper;
 
     @Mock
@@ -72,7 +69,6 @@ public class ProgramResourceTest extends TestBase {
 
         when(paperMapper.findPapersByProgramId(6))
                 .thenReturn(Arrays.asList(firstPaper, secondPaper));
-        when(papers.size()).thenReturn(2);
 
         when(firstPaper.getId()).thenReturn(1);
         when(firstPaper.getPaperName()).thenReturn("简单的试卷");
@@ -87,6 +83,7 @@ public class ProgramResourceTest extends TestBase {
         when(secondPaper.getCreateTime()).thenReturn(2222222);
         when(secondPaper.getMakerId()).thenReturn(2);
         when(secondPaper.getIsDistribution()).thenReturn(false);
+
         Response response = target(basePath + "/6/papers").request().get();
         Assert.assertThat(response.getStatus(), is(200));
 
@@ -115,36 +112,36 @@ public class ProgramResourceTest extends TestBase {
         data.put("description", "paper desc");
 
         List sections = new ArrayList();
-        data.put("sections",sections);
+        data.put("sections", sections);
 
         Map sectionOne = new HashMap();
         Map sectionTwo = new HashMap();
         sections.add(sectionOne);
         sections.add(sectionTwo);
 
-        sectionOne.put("type","blankQuizzes");
-        sectionOne.put("description","blankQuizzes description");
+        sectionOne.put("type", "blankQuizzes");
+        sectionOne.put("description", "blankQuizzes description");
 
         Map itemsOne = new HashMap();
-        sectionOne.put("items",itemsOne);
+        sectionOne.put("items", itemsOne);
         itemsOne.put("easyCount", 1);
         itemsOne.put("normalCount", 1);
         itemsOne.put("hardCount", 1);
         itemsOne.put("exampleCount", 1);
 
-        sectionTwo.put("type","homeworkQuizzes");
-        sectionTwo.put("description","blankQuizzes description");
+        sectionTwo.put("type", "homeworkQuizzes");
+        sectionTwo.put("description", "blankQuizzes description");
 
         List itemsTwo = new ArrayList();
-        sectionTwo.put("items",itemsTwo);
+        sectionTwo.put("items", itemsTwo);
 
         Map homeworkOne = new HashMap();
-        homeworkOne.put("id",1);
-        homeworkOne.put("uri","homeworkQuizzes/1");
+        homeworkOne.put("id", 1);
+        homeworkOne.put("uri", "homeworkQuizzes/1");
 
         Map homeworkTwo = new HashMap();
-        homeworkTwo.put("id",2);
-        homeworkTwo.put("uri","homeworkQuizzes/2");
+        homeworkTwo.put("id", 2);
+        homeworkTwo.put("uri", "homeworkQuizzes/2");
 
         itemsTwo.add(homeworkOne);
         itemsTwo.add(homeworkTwo);
@@ -156,4 +153,19 @@ public class ProgramResourceTest extends TestBase {
 
     }
 
+    @Test
+    public void should_return_users_uri_by_program_id() throws Exception {
+
+        when(programMapper.findUsersIdByProgramId(1))
+                .thenReturn(Arrays.asList(1, 2, 3));
+        Response response = target(basePath + "/1/users").request().get();
+
+        assertThat(response.getStatus(), is(200));
+        Gson gson = new GsonBuilder().create();
+
+        Map result = response.readEntity(Map.class);
+        String jsonStr = gson.toJson(result);
+        Assert.assertThat(jsonStr, is("{"
+                + "\"usersUri\":[\"users/1\",\"users/2\",\"users/3\"]}"));
+    }
 }
