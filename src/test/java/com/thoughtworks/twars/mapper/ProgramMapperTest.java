@@ -19,7 +19,7 @@ public class ProgramMapperTest extends TestBase {
     @Test
     public void should_return_users_by_program_id() throws Exception {
 
-        List<User> lst = programMapper.findUsersByProgramId(1);
+        List<User> users = programMapper.findUsersByProgramId(1);
 
         System.out.println(programMapper.findUsersByProgramId(1));
     }
