@@ -214,4 +214,12 @@ public class UserMapperTest extends TestBase {
         List<Integer> mentorsId = userMapper.findMentorsIdByEmail(email);
         assertThat(mentorsId.size(), is(2));
     }
+
+    @Test
+    public void should_return_relationship_create_success() {
+        Integer mentorId = 7;
+        Integer userId = 2;
+        Integer result = userMapper.insertUserMentor(mentorId, userId);
+        assertThat(result, is(1));
+    }
 }

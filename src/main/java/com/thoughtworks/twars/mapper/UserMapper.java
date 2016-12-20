@@ -38,4 +38,6 @@ public interface UserMapper {
     List<Integer> findProgramsById(Integer id);
 
     List<Integer> findMentorsIdByEmail(String email);
+
+    Integer insertUserMentor(Integer mentorId, Integer userId);
 }
