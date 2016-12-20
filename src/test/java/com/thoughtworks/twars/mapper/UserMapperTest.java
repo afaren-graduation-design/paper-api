@@ -207,4 +207,11 @@ public class UserMapperTest extends TestBase {
 
         assertThat(programs.size(), is(2));
     }
+
+    @Test
+    public void should_return_mentors_id_by_email() {
+        String email = "test";
+        List<Integer> mentorsId = userMapper.findMentorsIdByEmail(email);
+        assertThat(mentorsId.size(), is(2));
+    }
 }

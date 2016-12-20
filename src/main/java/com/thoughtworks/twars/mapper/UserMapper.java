@@ -36,4 +36,6 @@ public interface UserMapper {
     List<User> findUsersByUserIds(List<Integer> userIds);
 
     List<Integer> findProgramsById(Integer id);
+
+    List<Integer> findMentorsIdByEmail(String email);
 }

@@ -18,14 +18,15 @@
     </select>
 
     <select id="findBySectionId" resultMap="blankQuizListMap">
-        select a.* from blankQuiz a , sectionQuiz b where a.id = b.quizId AND b.sectionId  = #{sectionId};
+        select a.* from blankQuiz a , sectionQuiz b where a.id = b.quizId AND b.sectionId = #{sectionId};
     </select>
 
     <select id="findOne" resultType="com.thoughtworks.twars.bean.BlankQuiz">
         select * from blankQuiz where id = #{id};
     </select>
 
-    <insert id="insertBlankQuiz" parameterType="com.thoughtworks.twars.bean.BlankQuiz" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertBlankQuiz" parameterType="com.thoughtworks.twars.bean.BlankQuiz" useGeneratedKeys="true"
+            keyProperty="id">
         INSERT INTO blankQuiz(hardCount,normalCount,easyCount,exampleCount)
         VALUES (#{hardCount},#{normalCount},#{easyCount},#{exampleCount});
     </insert>

@@ -83,4 +83,8 @@
     <select id="findProgramsById" resultType="java.lang.Integer">
         SELECT programId FROM userProgram WHERE userId = #{id}
     </select>
+
+    <select id="findMentorsIdByEmail" resultType="java.lang.Integer">
+        SELECT id from users where email like concat('%',#{email},'%')
+    </select>
 </mapper>
