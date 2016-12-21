@@ -9,6 +9,7 @@ import javax.ws.rs.container.ContainerResponseFilter;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 
+
 public class CloseSessionResponseFilter implements ContainerResponseFilter {
 
     @Inject
@@ -18,13 +19,13 @@ public class CloseSessionResponseFilter implements ContainerResponseFilter {
     public void filter(ContainerRequestContext requestContext,
                        ContainerResponseContext responseContext) throws IOException {
         try {
-            if (responseContext.getStatus() < Response.Status.BAD_REQUEST.getStatusCode()) {
+            if (responseContext.getStatus() < Response.Status.BAD_REQUEST.getStatusCode() && session.isManagedSessionStarted()) {
                 session.commit(true);
             } else {
                 Boolean skipRollback = (Boolean) requestContext.getProperty("skipRollback");
                 if (skipRollback != null && skipRollback) {
                     session.commit(true);
-                } else {
+                } else if(session.isManagedSessionStarted()) {
                     session.rollback(true);
                 }
             }
@@ -37,7 +38,5 @@ public class CloseSessionResponseFilter implements ContainerResponseFilter {
                 exception.printStackTrace();
             }
         }
-
-
     }
 }
