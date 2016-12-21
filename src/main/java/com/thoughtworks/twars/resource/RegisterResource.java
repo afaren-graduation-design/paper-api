@@ -30,9 +30,10 @@ public class RegisterResource extends Resource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createUser(
-            @ApiParam(name = "user", value = "User example",required = true)
-            User user) {
+            @ApiParam(name = "user", value = "User example", required = true)
+                    User user) {
         userMapper.insertUser(user);
+        userMapper.insertUserProgram(user.getId(), 1);
 
         Map<String, Object> map = new HashMap<>();
         Map<String, String> userInfo = new HashMap<>();
