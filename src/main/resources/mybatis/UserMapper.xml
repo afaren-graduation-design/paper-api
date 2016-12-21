@@ -86,9 +86,9 @@
         SELECT programId FROM userProgram WHERE userId = #{id}
     </select>
 
-    <select id="findMentorsIdByEmail" resultType="java.lang.Integer">
-        SELECT id from users where email like concat('%',#{email},'%')
-    </select>
+    <!--<select id="findMentorsIdByEmail" resultType="java.lang.Integer">-->
+        <!--SELECT id from users where email like concat('%',#{email},'%')-->
+    <!--</select>-->
 
     <insert id="insertUserMentor" parameterType="java.lang.Integer">
         INSERT INTO userMentor VALUES(#{param1},#{param2});

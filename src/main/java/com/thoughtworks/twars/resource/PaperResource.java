@@ -43,8 +43,8 @@ public class PaperResource extends Resource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @ApiImplicitParams(value = {
-            @ApiImplicitParam(name = "page",value = "page",required = true),
-            @ApiImplicitParam(name = "pageSize",value = "pageSize",required = true)})
+            @ApiImplicitParam(name = "page", value = "page", required = true),
+            @ApiImplicitParam(name = "pageSize", value = "pageSize", required = true)})
     @ApiResponses(value = {@ApiResponse(code = 200, message = "successful"),
             @ApiResponse(code = 404, message = "get all papers failed")})
 
@@ -54,7 +54,7 @@ public class PaperResource extends Resource {
     ) {
 
         int startPage = page - 1;
-        List<Paper> papers = paperMapper.getAllPapers(startPage,pageSize);
+        List<Paper> papers = paperMapper.getAllPapers(startPage, pageSize);
         List<Map> paperInfo = new ArrayList<>();
         Map result = new HashMap<>();
 
@@ -66,7 +66,7 @@ public class PaperResource extends Resource {
             Paper item = papers.get(i);
             Map map = new HashMap<>();
             map.put("uri", "papers/" + item.getId());
-            map.put("makerId",item.getMakerId());
+            map.put("makerId", item.getMakerId());
             map.put("paperName", item.getPaperName());
             map.put("description", item.getDescription());
             map.put("createTime", item.getCreateTime());
@@ -90,7 +90,7 @@ public class PaperResource extends Resource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertPaper(
             @ApiParam(name = "data", value = "include all info when insert paper", required = true)
-            Map data) {
+                    Map data) {
         int makerId = (int) data.get("makerId");
         int programId = (int) data.get("programId");
         String paperName = (String) data.get("paperName");
@@ -131,10 +131,10 @@ public class PaperResource extends Resource {
         Map homeworkQuizzes = (Map) section.get("homeworkQuizzes");
 
         if ("blankQuizzes".equals(blankQuizzes.get("quizType"))) {
-            blankQuizDefinition.insertQuizDefinition(blankQuizzes,paperId);
+            blankQuizDefinition.insertQuizDefinition(blankQuizzes, paperId);
         }
         if ("homeworkQuizzes".equals(homeworkQuizzes.get("quizType"))) {
-            homeworkQuizDefinition.insertQuizDefinition(homeworkQuizzes,paperId);
+            homeworkQuizDefinition.insertQuizDefinition(homeworkQuizzes, paperId);
         }
 
         return "papers/" + paperId;

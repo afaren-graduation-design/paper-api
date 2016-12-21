@@ -209,15 +209,8 @@ public class UserMapperTest extends TestBase {
     }
 
     @Test
-    public void should_return_mentors_id_by_email() {
-        String email = "test";
-        List<Integer> mentorsId = userMapper.findMentorsIdByEmail(email);
-        assertThat(mentorsId.size(), is(2));
-    }
-
-    @Test
     public void should_return_relationship_create_success() {
-        Integer mentorId = 8;
+        Integer mentorId = 7;
         Integer userId = 2;
         Integer result = userMapper.insertUserMentor(mentorId, userId);
         assertThat(result, is(1));
@@ -226,7 +219,7 @@ public class UserMapperTest extends TestBase {
     @Test
     public void should_create_relationship_with_program() {
         Integer programId = 1;
-        Integer userId = 8;
+        Integer userId = 4;
         Integer result = userMapper.insertUserProgram(userId, programId);
         assertThat(result, is(1));
     }
