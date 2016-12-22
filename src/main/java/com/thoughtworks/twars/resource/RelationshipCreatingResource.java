@@ -1,9 +1,7 @@
 package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.mapper.UserMapper;
-import com.thoughtworks.twars.resource.Resource;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
@@ -30,10 +28,13 @@ public class RelationshipCreatingResource extends Resource {
     public Response insertMentorUser(
             @PathParam("mentorId") int mentorId,
             @PathParam("studentId") int studentId) {
-
-        Integer isCreating = userMapper.insertStudentMentor(mentorId, studentId);
-        if (isCreating == 1) {
-            return Response.status(Response.Status.CREATED).build();
+        try {
+            Integer isCreating = userMapper.insertStudentMentor(mentorId, studentId);
+            if (isCreating == 1) {
+                return Response.status(Response.Status.CREATED).build();
+            }
+        } catch (Exception exception) {
+            session.rollback();
         }
         return Response.status(Response.Status.FORBIDDEN).build();
     }

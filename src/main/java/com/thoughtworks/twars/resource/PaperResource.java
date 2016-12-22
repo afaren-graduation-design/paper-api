@@ -91,23 +91,23 @@ public class PaperResource extends Resource {
     public Response insertPaper(
             @ApiParam(name = "data", value = "include all info when insert paper", required = true)
                     Map data) {
-        int makerId = (int) data.get("makerId");
-        int programId = (int) data.get("programId");
-        String paperName = (String) data.get("paperName");
-        Map section = (Map) data.get("sections");
-
-        if (section == null) {
-            Paper insertPaper = new Paper();
-            insertPaper.setMakerId(makerId);
-            insertPaper.setPaperName(paperName);
-            insertPaper.setProgramId(programId);
-            paperMapper.insertPaper(insertPaper);
-            Map result = new HashMap<>();
-            result.put("paperId", insertPaper.getId());
-            return Response.status(Response.Status.OK).entity(result).build();
-        }
-
         try {
+            int makerId = (int) data.get("makerId");
+            int programId = (int) data.get("programId");
+            String paperName = (String) data.get("paperName");
+            Map section = (Map) data.get("sections");
+
+            if (section == null) {
+                Paper insertPaper = new Paper();
+                insertPaper.setMakerId(makerId);
+                insertPaper.setPaperName(paperName);
+                insertPaper.setProgramId(programId);
+                paperMapper.insertPaper(insertPaper);
+                Map result = new HashMap<>();
+                result.put("paperId", insertPaper.getId());
+                return Response.status(Response.Status.OK).entity(result).build();
+            }
+
             Paper paper = new Paper();
             paper.setMakerId(makerId);
             paper.setPaperName(paperName);
