@@ -86,9 +86,9 @@
         SELECT programId FROM userProgram WHERE userId = #{id}
     </select>
 
-    <!--<select id="findMentorsIdByEmail" resultType="java.lang.Integer">-->
-    <!--SELECT id from users where email like concat('%',#{email},'%')-->
-    <!--</select>-->
+    <select id="findUserByEmailAndPrivilege" resultType="java.lang.Integer">
+        select id from users u,userPrivilege p where u.id = p.userId and p.privilege = #{param1} and u.email like  concat('%',#{param2},'%')
+    </select>
 
     <insert id="insertStudentMentor" parameterType="java.lang.Integer">
         INSERT INTO studentMentor VALUES(#{param1},#{param2});
@@ -98,3 +98,4 @@
         INSERT INTO userProgram VALUES(#{param1},#{param2});
     </insert>
 </mapper>
+

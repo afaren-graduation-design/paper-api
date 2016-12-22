@@ -354,5 +354,18 @@ public class UserResourceTest extends TestBase {
         assertThat(result.size(), is(2));
     }
 
+    @Test
+    public void should_return_user_detail_uris() throws Exception {
+
+        String email = "test";
+        String privilege = "mentor";
+        when(userMapper.findUserByEmailAndPrivilege(privilege,email))
+                .thenReturn(Arrays.asList(1,2));
+
+        Response response = target(basePath + "/search")
+                .queryParam("privilege","mentor")
+                .queryParam("email","test").request().get();
+        assertThat(response.getStatus(), is(200));
+    }
 
 }

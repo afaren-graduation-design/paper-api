@@ -223,4 +223,12 @@ public class UserMapperTest extends TestBase {
         Integer result = userMapper.insertUserProgram(userId, programId);
         assertThat(result, is(1));
     }
+
+    @Test
+    public void should_return_users_id_list() {
+        String email = "test";
+        String privilege = "mentor";
+        List<Integer> ids = userMapper.findUserByEmailAndPrivilege(privilege, email);
+        assertThat(ids.size(), is(2));
+    }
 }

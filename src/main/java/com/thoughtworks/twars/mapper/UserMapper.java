@@ -40,4 +40,7 @@ public interface UserMapper {
     Integer insertStudentMentor(Integer mentorId, Integer studentId);
 
     Integer insertUserProgram(Integer userId, Integer programId);
+
+    List<Integer> findUserByEmailAndPrivilege(String privilege, String email);
+
 }
