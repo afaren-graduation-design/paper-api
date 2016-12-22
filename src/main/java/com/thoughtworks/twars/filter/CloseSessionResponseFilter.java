@@ -19,13 +19,14 @@ public class CloseSessionResponseFilter implements ContainerResponseFilter {
     public void filter(ContainerRequestContext requestContext,
                        ContainerResponseContext responseContext) throws IOException {
         try {
-            if (responseContext.getStatus() < Response.Status.BAD_REQUEST.getStatusCode() && session.isManagedSessionStarted()) {
+            if (responseContext.getStatus() < Response.Status.BAD_REQUEST.getStatusCode()
+                    && session.isManagedSessionStarted()) {
                 session.commit(true);
             } else {
                 Boolean skipRollback = (Boolean) requestContext.getProperty("skipRollback");
                 if (skipRollback != null && skipRollback) {
                     session.commit(true);
-                } else if(session.isManagedSessionStarted()) {
+                } else if (session.isManagedSessionStarted()) {
                     session.rollback(true);
                 }
             }
