@@ -376,7 +376,6 @@ public class UserResource extends Resource {
 
         Map map = new HashMap<>();
         map.put("usersUri", usersUri);
-        System.out.println(usersUri.toString());
 
         return Response.status(Response.Status.OK).entity(map).build();
     }
