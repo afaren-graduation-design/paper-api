@@ -25,14 +25,14 @@ public class RelationshipCreatingResource extends Resource {
     @ApiResponses(value = {@ApiResponse(code = 201,
             message = "create mentor by userId successfully"),
             @ApiResponse(code = 403, message = "create mentor by userId failure")})
-    @Path("/{mentorId}/users/{userId}")
+    @Path("/{mentorId}/users/{studentId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertMentorUser(
             @PathParam("mentorId") int mentorId,
-            @PathParam("userId") int userId) {
+            @PathParam("studentId") int studentId) {
 
-        Integer id = userMapper.insertUserMentor(mentorId, userId);
-        if (id == 1) {
+        Integer isCreating = userMapper.insertStudentMentor(mentorId, studentId);
+        if (isCreating == 1) {
             return Response.status(Response.Status.CREATED).build();
         }
         return Response.status(Response.Status.FORBIDDEN).build();

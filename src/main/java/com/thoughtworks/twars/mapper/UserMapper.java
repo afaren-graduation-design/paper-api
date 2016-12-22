@@ -37,7 +37,7 @@ public interface UserMapper {
 
     List<Integer> findProgramsById(Integer id);
 
-    Integer insertUserMentor(Integer mentorId, Integer userId);
+    Integer insertStudentMentor(Integer mentorId, Integer studentId);
 
     Integer insertUserProgram(Integer userId, Integer programId);
 }

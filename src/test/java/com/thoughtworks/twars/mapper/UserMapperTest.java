@@ -211,8 +211,8 @@ public class UserMapperTest extends TestBase {
     @Test
     public void should_return_relationship_create_success() {
         Integer mentorId = 7;
-        Integer userId = 2;
-        Integer result = userMapper.insertUserMentor(mentorId, userId);
+        Integer studentId = 2;
+        Integer result = userMapper.insertStudentMentor(mentorId, studentId);
         assertThat(result, is(1));
     }
 

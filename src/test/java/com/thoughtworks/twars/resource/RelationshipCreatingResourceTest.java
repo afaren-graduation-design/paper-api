@@ -26,7 +26,7 @@ public class RelationshipCreatingResourceTest extends TestBase {
     @Test
     public void should_return_201_when_create_relationship_with_mentor() throws Exception {
 
-        when(userMapper.insertUserMentor(3, 6)).thenReturn(1);
+        when(userMapper.insertStudentMentor(3, 6)).thenReturn(1);
         Entity entity = Entity.entity("", MediaType.APPLICATION_JSON);
         Response response = target(basePath + "/3/users/6").request().post(entity);
         assertThat(response.getStatus(), is(201));

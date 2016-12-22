@@ -87,10 +87,10 @@
     </select>
 
     <!--<select id="findMentorsIdByEmail" resultType="java.lang.Integer">-->
-        <!--SELECT id from users where email like concat('%',#{email},'%')-->
+    <!--SELECT id from users where email like concat('%',#{email},'%')-->
     <!--</select>-->
 
-    <insert id="insertUserMentor" parameterType="java.lang.Integer">
+    <insert id="insertStudentMentor" parameterType="java.lang.Integer">
         INSERT INTO userMentor VALUES(#{param1},#{param2});
     </insert>
 

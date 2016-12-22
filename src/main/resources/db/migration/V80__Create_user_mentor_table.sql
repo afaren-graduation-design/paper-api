@@ -1,7 +1,7 @@
-create table userMentor (
+create table studentMentor (
     mentorId int(11)NOT NULL,
-    userId int(11) NOT NULL ,
-    foreign key(userId) references users(id) ,
+    studentId int(11) NOT NULL ,
+    foreign key(studentId) references users(id) ,
     foreign key(mentorId) references users(id),
-    primary key(userId,mentorId)
+    primary key(studentId,mentorId)
 );
