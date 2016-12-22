@@ -91,7 +91,7 @@
     <!--</select>-->
 
     <insert id="insertStudentMentor" parameterType="java.lang.Integer">
-        INSERT INTO userMentor VALUES(#{param1},#{param2});
+        INSERT INTO studentMentor VALUES(#{param1},#{param2});
     </insert>
 
     <insert id="insertUserProgram" parameterType="java.lang.Integer">
