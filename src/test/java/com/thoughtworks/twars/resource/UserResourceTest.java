@@ -359,12 +359,12 @@ public class UserResourceTest extends TestBase {
 
         String email = "test";
         String privilege = "mentor";
-        when(userMapper.findUserByEmailAndPrivilege(privilege,email))
-                .thenReturn(Arrays.asList(1,2));
+        when(userMapper.findUserByEmailAndPrivilege(privilege, email))
+                .thenReturn(Arrays.asList(1, 2));
 
         Response response = target(basePath + "/search")
-                .queryParam("privilege","mentor")
-                .queryParam("email","test").request().get();
+                .queryParam("privilege", "mentor")
+                .queryParam("email", "test").request().get();
         assertThat(response.getStatus(), is(200));
     }
 
