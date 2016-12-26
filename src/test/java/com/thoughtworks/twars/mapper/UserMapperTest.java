@@ -225,10 +225,13 @@ public class UserMapperTest extends TestBase {
     }
 
     @Test
-    public void should_return_users_id_list() {
+    public void should_return_users_detail() {
         String email = "test";
         String privilege = "mentor";
-        List<Integer> ids = userMapper.findUserByEmailAndPrivilege(privilege, email);
-        assertThat(ids.size(), is(2));
+        Integer page = 1;
+        Integer pageSize = 15;
+        List<UserDetail> userDetail = userMapper.findUsersByInformation(email,privilege,page,
+                pageSize);
+        assertThat(userDetail.size(), is(1));
     }
 }

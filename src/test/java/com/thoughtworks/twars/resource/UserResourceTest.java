@@ -355,16 +355,30 @@ public class UserResourceTest extends TestBase {
     }
 
     @Test
-    public void should_return_user_detail_uris() throws Exception {
+    public void should_return_users_detail() throws Exception {
+
+        UserDetail userDetail = mock(UserDetail.class);
+        userDetail.setDegree("本科");
+        userDetail.setEntranceYear("2016");
+        userDetail.setGender("F");
+        userDetail.setMajor("计算机");
+        userDetail.setName("张一");
+        userDetail.setSchool("西安邮电大学");
+        userDetail.setSchoolCity("西安");
+        userDetail.setUserId(3);
 
         String email = "test";
         String privilege = "mentor";
-        when(userMapper.findUserByEmailAndPrivilege(privilege,email))
-                .thenReturn(Arrays.asList(1,2));
+        Integer page = 1;
+        Integer pageSize = 15;
 
+        when(userMapper.findUsersByInformation(email, privilege, page, pageSize))
+                .thenReturn(Arrays.asList(userDetail));
         Response response = target(basePath + "/search")
-                .queryParam("privilege","mentor")
-                .queryParam("email","test").request().get();
+                .queryParam("privilege", "mentor")
+                .queryParam("page", 1)
+                .queryParam("pageSize", 15)
+                .queryParam("email", "test").request().get();
         assertThat(response.getStatus(), is(200));
     }
 

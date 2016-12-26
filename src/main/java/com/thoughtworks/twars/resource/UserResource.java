@@ -356,26 +356,29 @@ public class UserResource extends Resource {
     }
 
     @GET
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "get users uri successful"),
-            @ApiResponse(code = 404, message = "get users uri failed")})
     @Path("/search")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response searchUsersUri(
-            @QueryParam("privilege") String privilege,
-            @QueryParam("email") String email) {
+    @ApiImplicitParams(value = {
+            @ApiImplicitParam(name = "page", value = "page", required = true),
+            @ApiImplicitParam(name = "pageSize", value = "pageSize", required = true)})
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "get users detail successful"),
+            @ApiResponse(code = 404, message = "get users　detail failed")})
 
-        List<Integer> ids = userMapper.findUserByEmailAndPrivilege(privilege, email);
-        if (ids == null) {
+    public Response searchUsersDetail(
+            @DefaultValue("1") @QueryParam("page") Integer page,
+            @DefaultValue("15") @QueryParam("pageSize") Integer pageSize,
+            @QueryParam("email") String email,
+            @QueryParam("privilege") String privilege
+    ) {
+
+        List<UserDetail> usersDetail = userMapper.findUsersByInformation(email, privilege, page,
+                pageSize);
+        if (usersDetail == null) {
             return Response.status(Response.Status.OK).build();
         }
 
-        List usersUri = new ArrayList();
-        for (Integer id : ids) {
-            usersUri.add("users/" + id + "/detail");
-        }
-
         Map map = new HashMap<>();
-        map.put("usersUri", usersUri);
+        map.put("usersDetail", usersDetail);
 
         return Response.status(Response.Status.OK).entity(map).build();
     }

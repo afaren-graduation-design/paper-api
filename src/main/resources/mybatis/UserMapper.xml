@@ -86,8 +86,15 @@
         SELECT programId FROM userProgram WHERE userId = #{id}
     </select>
 
-    <select id="findUserByEmailAndPrivilege" resultType="java.lang.Integer">
-        select id from users u,userPrivilege p where u.id = p.userId and p.privilege = #{param1} and u.email like  concat('%',#{param2},'%')
+    <select id="findUsersByInformation" resultMap="userDetailMap">
+        select userDetail.*
+        from users inner join userDetail join userPrivilege
+        on
+          users.id = userDetail.userId
+        and
+          users.id = userPrivilege.userId
+        where users.email like concat("%",#{param1},"%")
+        and userPrivilege.privilege = #{param2} limit #{param3},#{param4};
     </select>
 
     <insert id="insertStudentMentor" parameterType="java.lang.Integer">

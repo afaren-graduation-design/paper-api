@@ -41,6 +41,7 @@ public interface UserMapper {
 
     Integer insertUserProgram(Integer userId, Integer programId);
 
-    List<Integer> findUserByEmailAndPrivilege(String privilege, String email);
+    List<UserDetail> findUsersByInformation(
+            String email, String privilege, Integer page, Integer pageSize);
 
 }
