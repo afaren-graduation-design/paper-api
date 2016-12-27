@@ -365,7 +365,7 @@ public class UserResource extends Resource {
             @ApiResponse(code = 404, message = "get users　detail failed")})
 
     public Response searchUsersDetail(
-            @DefaultValue("1") @QueryParam("page") Integer page,
+            @DefaultValue("0") @QueryParam("page") Integer page,
             @DefaultValue("15") @QueryParam("pageSize") Integer pageSize,
             @QueryParam("email") String email,
             @QueryParam("privilege") String privilege
