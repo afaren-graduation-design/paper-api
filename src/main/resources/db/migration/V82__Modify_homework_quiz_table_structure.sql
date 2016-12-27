@@ -1,0 +1,1 @@
+alter table homeworkQuiz add answerPath varchar(255) NOT NULL;

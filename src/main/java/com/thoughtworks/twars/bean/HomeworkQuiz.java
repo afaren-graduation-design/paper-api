@@ -9,6 +9,7 @@ public class HomeworkQuiz {
     private int createTime;
     private String homeworkName;
     private String type;
+    private String answerPath;
 
     public String getType() {
         return type;
@@ -16,6 +17,14 @@ public class HomeworkQuiz {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getAnswerPath() {
+        return answerPath;
+    }
+
+    public void setAnswerPath(String answerPath) {
+        this.answerPath = answerPath;
     }
 
     public int getMakerId() {
