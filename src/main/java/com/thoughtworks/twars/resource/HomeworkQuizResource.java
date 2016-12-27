@@ -4,10 +4,7 @@ import com.thoughtworks.twars.bean.HomeworkQuiz;
 import com.thoughtworks.twars.bean.UserDetail;
 import com.thoughtworks.twars.mapper.HomeworkQuizMapper;
 import com.thoughtworks.twars.mapper.UserMapper;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -29,11 +26,21 @@ public class HomeworkQuizResource extends Resource {
 
 
     @GET
+    @ApiImplicitParams(value = {
+            @ApiImplicitParam(name = "page", value = "page", required = true),
+            @ApiImplicitParam(name = "pageSize", value = "pageSize", required = true)})
     @ApiResponses(value = {@ApiResponse(code = 200, message = "successful"),
             @ApiResponse(code = 404, message = "not found")})
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllHomeworkQuiz() {
-        List<HomeworkQuiz> allHomeworkQuizzes = homeworkQuizMapper.findAllHomeworkQuizzes();
+    public Response getAllHomeworkQuiz(
+            @DefaultValue("1") @QueryParam("page") int page,
+            @DefaultValue("15") @QueryParam("pageSize") int pageSize,
+            @QueryParam("homeworkName") String homeworkName,
+            @QueryParam("type") String type
+    ) {
+        int startPage = page - 1;
+        List<HomeworkQuiz> allHomeworkQuizzes = homeworkQuizMapper
+                .findHomeworkQuizzes(homeworkName, type, startPage, pageSize);
         List homeworkQuizzes = new ArrayList();
 
         for (HomeworkQuiz homeworkQuiz : allHomeworkQuizzes) {
@@ -48,12 +55,13 @@ public class HomeworkQuizResource extends Resource {
             homeworkItem.put("makerName", userDetail.getName());
             homeworkItem.put("createTime", homeworkQuiz.getCreateTime());
             homeworkItem.put("homeworkName", homeworkQuiz.getHomeworkName());
-            homeworkItem.put("type",homeworkQuiz.getType());
+            homeworkItem.put("type", homeworkQuiz.getType());
             homeworkItem.put("uri", "homeworkQuizzes/" + homeworkQuiz.getId());
 
             homeworkQuizzes.add(homeworkItem);
 
         }
+
 
         Map result = new HashMap<>();
         result.put("homeworkQuizzes", homeworkQuizzes);

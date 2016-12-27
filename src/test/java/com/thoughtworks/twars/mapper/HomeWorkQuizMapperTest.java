@@ -50,4 +50,36 @@ public class HomeWorkQuizMapperTest extends TestBase {
         assertThat(homeworkQuiz.getId(), is(9));
     }
 
+    @Test
+    public void should_return_one_homework_quizzes_by_search_name_and_type() {
+        List<HomeworkQuiz> homeworkQuizs = homeworkQuizMapper
+                .findHomeworkQuizzes("hom","java",0,15);
+        assertThat(homeworkQuizs.size(),is(1));
+    }
+
+    @Test
+    public void should_return_homework_quizzes_by_search_homework_name() {
+        List<HomeworkQuiz> homeworkQuizs = homeworkQuizMapper.findHomeworkQuizzes("hom",null,0,15);
+        assertThat(homeworkQuizs.size(),is(8));
+    }
+
+    @Test
+    public void should_return_homework_quizzes_by_search_homework_type() {
+        List<HomeworkQuiz> homeworkQuizs = homeworkQuizMapper.findHomeworkQuizzes(null,"java",0,15);
+        assertThat(homeworkQuizs.size(),is(1));
+    }
+
+    @Test
+    public void should_return_homework_quizzes_by_search() {
+        List<HomeworkQuiz> homeworkQuizs = homeworkQuizMapper.findHomeworkQuizzes(null,null,0,15);
+        assertThat(homeworkQuizs.size(),is(8));
+    }
+
+    @Test
+    public void should_return_none_when_search_homework_quizzes() {
+        List<HomeworkQuiz> homeworkQuizs = homeworkQuizMapper
+                .findHomeworkQuizzes("test","php",0,15);
+        assertThat(homeworkQuizs.size(),is(0));
+    }
+
 }

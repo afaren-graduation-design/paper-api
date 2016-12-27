@@ -12,6 +12,7 @@ public interface HomeworkQuizMapper {
 
     int insertHomeworkQuiz(HomeworkQuiz homeworkQuiz);
 
-    List<HomeworkQuiz> findAllHomeworkQuizzes();
+    List<HomeworkQuiz> findHomeworkQuizzes(
+            String homeworkName, String type, int page, int pageSize);
 
 }

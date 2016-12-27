@@ -25,12 +25,21 @@
         SELECT * FROM homeworkQuiz WHERE id = #{id};
     </select>
 
-    <select id="findAllHomeworkQuizzes" resultMap="homeworkQuizListMap">
-        SELECT * FROM homeworkQuiz;
-    </select>
-
     <insert id="insertHomeworkQuiz" parameterType="com.thoughtworks.twars.bean.HomeworkQuiz" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO homeworkQuiz(description, evaluateScript, templateRepository,makerId,createTime,homeworkName,type) VALUES(#{description}, #{evaluateScript}, #{templateRepository},#{makerId},#{createTime},#{homeworkName},#{type});
     </insert>
+
+    <select id="findHomeworkQuizzes" resultMap="homeworkQuizListMap">
+        select * from homeworkQuiz
+        <where>
+            <if test="param1 != null">
+                homeworkName like concat("%",#{param1},"%")
+            </if>
+            <if test="param2 != null">
+                AND type like #{param2}
+            </if>
+        </where>
+        limit #{param3},#{param4};
+    </select>
 
 </mapper>

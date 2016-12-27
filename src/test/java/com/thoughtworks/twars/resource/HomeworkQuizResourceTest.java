@@ -1,5 +1,7 @@
 package com.thoughtworks.twars.resource;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.thoughtworks.twars.bean.HomeworkQuiz;
 import com.thoughtworks.twars.bean.UserDetail;
 import org.hamcrest.MatcherAssert;
@@ -12,10 +14,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -134,17 +133,6 @@ public class HomeworkQuizResourceTest extends TestBase {
 
     @Test
     public void should_return_all_homework_quiz_List() {
-
-
-        List<HomeworkQuiz> homeworkQuizzes = mock(List.class);
-        when(homeworkQuizMapper.findAllHomeworkQuizzes()).thenReturn(homeworkQuizzes);
-
-        Iterator iterator = mock(Iterator.class);
-        when(iterator.hasNext()).thenReturn(true, true, false);
-        when(iterator.next()).thenReturn(homeworkQuiz, homeworkQuiz01);
-
-        when(homeworkQuizzes.iterator()).thenReturn(iterator);
-
         when(homeworkQuiz.getMakerId()).thenReturn(1);
         when(homeworkQuiz.getDescription()).thenReturn("这是一道比较简单的题目");
         when(homeworkQuiz.getEvaluateScript()).thenReturn("www.baidu.com");
@@ -155,34 +143,44 @@ public class HomeworkQuizResourceTest extends TestBase {
         when(homeworkQuiz01.getEvaluateScript()).thenReturn("www.talkop.com");
         when(homeworkQuiz01.getTemplateRepository()).thenReturn("talkopRepository");
 
-
         UserDetail userDetail = mock(UserDetail.class);
         when(userDetail.getName()).thenReturn("Rose");
         when(userMapper.getUserDetailById(1)).thenReturn(userDetail);
         when(userMapper.getUserDetailById(2)).thenReturn(userDetail);
 
+        when(homeworkQuizMapper.findHomeworkQuizzes(null,null,0,15))
+                .thenReturn(Arrays.asList(homeworkQuiz01,homeworkQuiz));
+
         Response response = target(basePath).request().get();
-        Assert.assertEquals(response.getStatus(), 200);
+
         assertThat(response.getStatus(), is(200));
 
+        Gson gson = new GsonBuilder().create();
+
         Map result = response.readEntity(Map.class);
-
-        List<Map> homeworkQuizList = (List) result.get("homeworkQuizzes");
-        assertThat(homeworkQuizList.size(), is(2));
-
-        Map homeworkItem01 = homeworkQuizList.get(0);
-
-        assertThat(homeworkQuizList.size(), is(2));
-        assertThat(homeworkItem01.get("description"), is("这是一道比较简单的题目"));
-        assertThat(homeworkItem01.get("evaluateScript"), is("www.baidu.com"));
-        assertThat(homeworkItem01.get("templateRepository"), is("templateRepository"));
-
-        Map homeworkItem02 = homeworkQuizList.get(1);
-
-        assertThat(homeworkItem02.get("description"), is("这是一道普通难度的题目"));
-        assertThat(homeworkItem02.get("evaluateScript"), is("www.talkop.com"));
-        assertThat(homeworkItem02.get("templateRepository"), is("talkopRepository"));
-
+        String jsonStr = gson.toJson(result);
+        assertThat(jsonStr,is(
+                "{\"homeworkQuizzes\":"
+                        + "["
+                        +   "{\"evaluateScript\":\"www.talkop.com\","
+                        +       "\"templateRepository\":\"talkopRepository\","
+                        +       "\"createTime\":0,"
+                        +       "\"description\":\"这是一道普通难度的题目\","
+                        +       "\"id\":0,\"makerName\":\"Rose\","
+                        +       "\"uri\":\"homeworkQuizzes/0\","
+                        +       "\"makerId\":2"
+                        +   "},{"
+                        +       "\"evaluateScript\":\"www.baidu.com\","
+                        +       "\"templateRepository\":\"templateRepository\","
+                        +       "\"createTime\":0,"
+                        +       "\"description\":\"这是一道比较简单的题目\","
+                        +       "\"id\":0,"
+                        +       "\"makerName\":\"Rose\","
+                        +       "\"uri\":\"homeworkQuizzes/0\","
+                        +       "\"makerId\":1"
+                        +   "}]"
+                        + "}"
+        ));
     }
 
     @Test
@@ -217,3 +215,6 @@ public class HomeworkQuizResourceTest extends TestBase {
         MatcherAssert.assertThat(result.size(), is(1));
     }
 }
+
+
+
