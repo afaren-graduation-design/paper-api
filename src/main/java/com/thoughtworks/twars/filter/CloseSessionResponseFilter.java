@@ -33,7 +33,9 @@ public class CloseSessionResponseFilter implements ContainerResponseFilter {
         } catch (Exception exception) {
             exception.printStackTrace();
         } finally {
-            session.close();
+            if (session.isManagedSessionStarted()) {
+                session.close();
+            }
         }
     }
 }
