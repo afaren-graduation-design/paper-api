@@ -49,6 +49,7 @@ public class HomeworkQuizResource extends Resource {
             homeworkItem.put("createTime", homeworkQuiz.getCreateTime());
             homeworkItem.put("homeworkName", homeworkQuiz.getHomeworkName());
             homeworkItem.put("type",homeworkQuiz.getType());
+            homeworkItem.put("answerPath",homeworkQuiz.getAnswerPath());
             homeworkItem.put("uri", "homeworkQuizzes/" + homeworkQuiz.getId());
 
             homeworkQuizzes.add(homeworkItem);
@@ -91,6 +92,7 @@ public class HomeworkQuizResource extends Resource {
             homeworkItem.put("createTime", homeworkQuiz.getCreateTime());
             homeworkItem.put("homeworkName", homeworkQuiz.getHomeworkName());
             homeworkItem.put("type", homeworkQuiz.getType());
+            homeworkItem.put("answerPath",homeworkQuiz.getAnswerPath());
             homeworkItem.put("uri", "homeworkQuizzes/" + id);
 
             Map result = new HashMap<>();
@@ -118,6 +120,7 @@ public class HomeworkQuizResource extends Resource {
             homeworkItem.put("createTime", homeworkQuiz.getCreateTime());
             homeworkItem.put("homeworkName", homeworkQuiz.getHomeworkName());
             homeworkItem.put("uri", "homeworkQuizzes/" + id);
+            homeworkItem.put("answerPath",homeworkQuiz.getAnswerPath());
             homeworkItem.put("type", homeworkQuiz.getType());
 
 
@@ -145,6 +148,7 @@ public class HomeworkQuizResource extends Resource {
             String homeworkName = (String) data.get("homeworkName");
             int createTime = (int) data.get("createTime");
             String type = (String) data.get("type");
+            String answerPath = (String) data.get("answerPath");
 
 
             homeworkQuiz.setDescription(description);
@@ -154,6 +158,8 @@ public class HomeworkQuizResource extends Resource {
             homeworkQuiz.setHomeworkName(homeworkName);
             homeworkQuiz.setCreateTime(createTime);
             homeworkQuiz.setType(type);
+            homeworkQuiz.setAnswerPath(answerPath);
+
 
             homeworkQuizMapper.insertHomeworkQuiz(homeworkQuiz);
             Integer id = homeworkQuiz.getId();

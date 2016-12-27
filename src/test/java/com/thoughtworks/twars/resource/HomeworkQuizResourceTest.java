@@ -40,6 +40,7 @@ public class HomeworkQuizResourceTest extends TestBase {
         when(homeworkQuiz.getDescription()).thenReturn("这是一道比较简单的题目");
         when(homeworkQuiz.getEvaluateScript()).thenReturn("www.baidu.com");
         when(homeworkQuiz.getTemplateRepository()).thenReturn("templateRepository");
+        when(homeworkQuiz.getAnswerPath()).thenReturn("/homework-answer/check-readme");
 
         UserDetail userDetail = mock(UserDetail.class);
         when(userDetail.getName()).thenReturn("Rose");
@@ -55,6 +56,7 @@ public class HomeworkQuizResourceTest extends TestBase {
         assertThat(item.get("description"), is("这是一道比较简单的题目"));
         assertThat(item.get("evaluateScript"), is("www.baidu.com"));
         assertThat(item.get("templateRepository"), is("templateRepository"));
+        assertThat(item.get("answerPath"), is("/homework-answer/check-readme"));
     }
 
     @Test
@@ -65,6 +67,7 @@ public class HomeworkQuizResourceTest extends TestBase {
         when(homeworkQuiz.getDescription()).thenReturn("这是一道比较简单的题目");
         when(homeworkQuiz.getEvaluateScript()).thenReturn("www.baidu.com");
         when(homeworkQuiz.getTemplateRepository()).thenReturn("templateRepository");
+        when(homeworkQuiz.getAnswerPath()).thenReturn("/homework-answer/check-readme");
 
 
         when(homeworkQuizMapper.findById(2)).thenReturn(homeworkQuiz01);
@@ -73,6 +76,7 @@ public class HomeworkQuizResourceTest extends TestBase {
         when(homeworkQuiz01.getDescription()).thenReturn("这是一道普通难度的题目");
         when(homeworkQuiz01.getEvaluateScript()).thenReturn("www.talkop.com");
         when(homeworkQuiz01.getTemplateRepository()).thenReturn("talkopRepository");
+        when(homeworkQuiz01.getAnswerPath()).thenReturn("/homework-answer/calculate_median");
 
 
         UserDetail userDetail = mock(UserDetail.class);
@@ -96,14 +100,15 @@ public class HomeworkQuizResourceTest extends TestBase {
         assertThat(homeworkItem01.get("description"), is("这是一道比较简单的题目"));
         assertThat(homeworkItem01.get("evaluateScript"), is("www.baidu.com"));
         assertThat(homeworkItem01.get("templateRepository"), is("templateRepository"));
+        assertThat(homeworkItem01.get("answerPath"), is("/homework-answer/check-readme"));
 
         Map homeworkItem02 = homeworkQuizList.get(1);
 
         assertThat(homeworkItem02.get("id"), is(2));
         assertThat(homeworkItem02.get("description"), is("这是一道普通难度的题目"));
-
         assertThat(homeworkItem02.get("evaluateScript"), is("www.talkop.com"));
         assertThat(homeworkItem02.get("templateRepository"), is("talkopRepository"));
+        assertThat(homeworkItem02.get("answerPath"), is("/homework-answer/calculate_median"));
     }
 
     @Test
@@ -112,6 +117,7 @@ public class HomeworkQuizResourceTest extends TestBase {
         when(homeworkQuiz.getDescription()).thenReturn("这是一道比较简单的题目");
         when(homeworkQuiz.getEvaluateScript()).thenReturn("www.baidu.com");
         when(homeworkQuiz.getTemplateRepository()).thenReturn("templateRepository");
+        when(homeworkQuiz.getAnswerPath()).thenReturn("/homework-answer/check-readme");
 
         UserDetail userDetail = mock(UserDetail.class);
         when(userDetail.getName()).thenReturn("Rose");
@@ -124,12 +130,13 @@ public class HomeworkQuizResourceTest extends TestBase {
 
         Map result = response.readEntity(Map.class);
 
-        Map homeworkItem = (Map)result.get("homeworkItem");
+        Map homeworkItem = (Map) result.get("homeworkItem");
 
         assertThat(homeworkItem.get("id"), is(1));
         assertThat(homeworkItem.get("description"), is("这是一道比较简单的题目"));
         assertThat(homeworkItem.get("evaluateScript"), is("www.baidu.com"));
         assertThat(homeworkItem.get("templateRepository"), is("templateRepository"));
+        assertThat(homeworkItem.get("answerPath"), is("/homework-answer/check-readme"));
     }
 
     @Test
@@ -149,11 +156,13 @@ public class HomeworkQuizResourceTest extends TestBase {
         when(homeworkQuiz.getDescription()).thenReturn("这是一道比较简单的题目");
         when(homeworkQuiz.getEvaluateScript()).thenReturn("www.baidu.com");
         when(homeworkQuiz.getTemplateRepository()).thenReturn("templateRepository");
+        when(homeworkQuiz.getAnswerPath()).thenReturn("/homework-answer/check-readme");
 
         when(homeworkQuiz01.getMakerId()).thenReturn(2);
         when(homeworkQuiz01.getDescription()).thenReturn("这是一道普通难度的题目");
         when(homeworkQuiz01.getEvaluateScript()).thenReturn("www.talkop.com");
         when(homeworkQuiz01.getTemplateRepository()).thenReturn("talkopRepository");
+        when(homeworkQuiz01.getAnswerPath()).thenReturn("/homework-answer/calculate_median");
 
 
         UserDetail userDetail = mock(UserDetail.class);
@@ -176,12 +185,14 @@ public class HomeworkQuizResourceTest extends TestBase {
         assertThat(homeworkItem01.get("description"), is("这是一道比较简单的题目"));
         assertThat(homeworkItem01.get("evaluateScript"), is("www.baidu.com"));
         assertThat(homeworkItem01.get("templateRepository"), is("templateRepository"));
+        assertThat(homeworkItem01.get("answerPath"), is("/homework-answer/check-readme"));
 
         Map homeworkItem02 = homeworkQuizList.get(1);
 
         assertThat(homeworkItem02.get("description"), is("这是一道普通难度的题目"));
         assertThat(homeworkItem02.get("evaluateScript"), is("www.talkop.com"));
         assertThat(homeworkItem02.get("templateRepository"), is("talkopRepository"));
+        assertThat(homeworkItem02.get("answerPath"), is("/homework-answer/calculate_median"));
 
     }
 
@@ -195,17 +206,19 @@ public class HomeworkQuizResourceTest extends TestBase {
         homeworkQuiz.setTemplateRepository("http://github.com/templateRepository");
         homeworkQuiz.setMakerId(1);
         homeworkQuiz.setHomeworkName("homeworkName");
+        homeworkQuiz.setAnswerPath("/homework-answer/calculate_median");
 
         when(homeworkQuizMapper.insertHomeworkQuiz(homeworkQuiz)).thenReturn(1);
 
         Map map = new HashMap();
 
-        map.put("desctiption","miaoshu");
-        map.put("evaluateScript","ceshi ");
-        map.put("templateRepository","http://github.com/templateRepository");
-        map.put("makerId",1);
-        map.put("homeworkName","homeworkName");
-        map.put("createTime",123456);
+        map.put("desctiption", "miaoshu");
+        map.put("evaluateScript", "ceshi ");
+        map.put("templateRepository", "http://github.com/templateRepository");
+        map.put("makerId", 1);
+        map.put("homeworkName", "homeworkName");
+        map.put("createTime", 123456);
+        map.put("answerPath", "/homework-answer/calculate_median");
 
         Entity entity = Entity.entity(map, MediaType.APPLICATION_JSON);
 

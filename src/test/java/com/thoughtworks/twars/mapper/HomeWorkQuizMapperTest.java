@@ -22,7 +22,7 @@ public class HomeWorkQuizMapperTest extends TestBase {
     @Test
     public void should_return_homework_list_when_by_section_id() {
         List<HomeworkQuiz> homeworkQuizList = homeworkQuizMapper.findBySectionId(2);
-        
+
         assertThat(homeworkQuizList.size(), is(8));
     }
 
@@ -45,6 +45,7 @@ public class HomeWorkQuizMapperTest extends TestBase {
         homeworkQuiz.setCreateTime(1234);
         homeworkQuiz.setHomeworkName("test");
         homeworkQuiz.setType("homeworkQuizzes");
+        homeworkQuiz.setAnswerPath("/homework-answer/collection");
         homeworkQuizMapper.insertHomeworkQuiz(homeworkQuiz);
 
         assertThat(homeworkQuiz.getId(), is(9));

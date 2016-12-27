@@ -508,6 +508,8 @@ baseUri: http://api.bronzesword.com/
                       makerName: string
                       createTime: integer
                       homeworkName: string
+                      type: string
+                      answerPath: string
                       uri:  string
   post:
     description: 提交一份homework题目定义
@@ -520,6 +522,8 @@ baseUri: http://api.bronzesword.com/
           makerId: integer
           createTime: integer
           homeworkName: string
+          type: string
+          answerPath： string
     responses:
       201:
         body:
