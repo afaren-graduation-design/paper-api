@@ -492,8 +492,13 @@ baseUri: http://api.bronzesword.com/
 
 /homeworkQuizzes:
   get:
-    # description: 获得所有的homework题目定义
-      responses:
+    description: 获取查询条件
+    queryParameters:
+      homeworkName: string
+      type: string
+      page: integer
+      pageSize: integer
+    responses:
           200:
             body:
               application/json:
@@ -523,7 +528,7 @@ baseUri: http://api.bronzesword.com/
           createTime: integer
           homeworkName: string
           type: string
-          answerPath： string
+          answerPath: string
     responses:
       201:
         body:
