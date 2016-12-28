@@ -90,11 +90,18 @@
         select userDetail.*
         from users inner join userDetail join userPrivilege
         on
-          users.id = userDetail.userId
+        users.id = userDetail.userId
         and
-          users.id = userPrivilege.userId
-        where users.email like concat("%",#{param1},"%")
-        and userPrivilege.privilege = #{param2} limit #{param3},#{param4};
+        users.id = userPrivilege.userId
+        <where>
+            <if test="param1 != null">
+                users.email like concat("%",#{param1},"%")
+            </if>
+            <if test="param2 != null">
+                and userPrivilege.privilege = #{param2}
+            </if>
+        </where>
+        limit #{param3},#{param4};
     </select>
 
     <insert id="insertStudentMentor" parameterType="java.lang.Integer">
@@ -105,4 +112,6 @@
         INSERT INTO userProgram VALUES(#{param1},#{param2});
     </insert>
 </mapper>
+
+
 

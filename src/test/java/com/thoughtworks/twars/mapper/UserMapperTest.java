@@ -1,5 +1,7 @@
 package com.thoughtworks.twars.mapper;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.thoughtworks.twars.bean.User;
 import com.thoughtworks.twars.bean.UserDetail;
 import org.junit.Before;
@@ -225,13 +227,41 @@ public class UserMapperTest extends TestBase {
     }
 
     @Test
-    public void should_return_users_detail() {
-        String email = "test";
-        String privilege = "mentor";
-        Integer page = 1;
-        Integer pageSize = 15;
-        List<UserDetail> userDetail = userMapper.findUsersByInformation(email,privilege,page,
-                pageSize);
+    public void should_return_users_detail_by_email_and_privilege() {
+        List<UserDetail> userDetail = userMapper
+                .findUsersByInformation("test", "mentor", 1, 15);
+        Gson gson = new GsonBuilder().create();
+
+        String jsonStr = gson.toJson(userDetail);
+        System.out.println(jsonStr);
         assertThat(userDetail.size(), is(1));
+    }
+
+    @Test
+    public void should_return_users_detail_by_email() {
+        List<UserDetail> usersDetail = userMapper
+                .findUsersByInformation("@", null, 0, 15);
+        assertThat(usersDetail.size(), is(2));
+    }
+
+    @Test
+    public void should_return_users_detail_by_privilege() {
+        List<UserDetail> userDetail = userMapper
+                .findUsersByInformation(null, "mentor", 0, 15);
+        assertThat(userDetail.size(), is(2));
+    }
+
+    @Test
+    public void should_return_users_detail_by_page() {
+        List<UserDetail> userDetail = userMapper
+                .findUsersByInformation(null, null, 0, 15);
+        assertThat(userDetail.size(), is(2));
+    }
+
+    @Test
+    public void should_return_users_detail_by_none() {
+        List<UserDetail> userDetail = userMapper
+                .findUsersByInformation(null, null, 0, 15);
+        assertThat(userDetail.size(), is(2));
     }
 }

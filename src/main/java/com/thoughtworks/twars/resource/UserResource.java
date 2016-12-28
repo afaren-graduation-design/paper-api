@@ -365,14 +365,14 @@ public class UserResource extends Resource {
             @ApiResponse(code = 404, message = "get users　detail failed")})
 
     public Response searchUsersDetail(
-            @DefaultValue("0") @QueryParam("page") Integer page,
+            @DefaultValue("1") @QueryParam("page") Integer page,
             @DefaultValue("15") @QueryParam("pageSize") Integer pageSize,
             @QueryParam("email") String email,
             @QueryParam("privilege") String privilege
     ) {
-
-        List<UserDetail> usersDetail = userMapper.findUsersByInformation(email, privilege, page,
-                pageSize);
+        Integer pageStart = page - 1;
+        List<UserDetail> usersDetail = userMapper
+                .findUsersByInformation(email, privilege, pageStart, pageSize);
         if (usersDetail == null) {
             return Response.status(Response.Status.OK).build();
         }
