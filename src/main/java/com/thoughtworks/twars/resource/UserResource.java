@@ -374,7 +374,7 @@ public class UserResource extends Resource {
         List<UserDetail> usersDetail = userMapper
                 .findUsersByInformation(email, privilege, pageStart, pageSize);
         if (usersDetail == null) {
-            return Response.status(Response.Status.OK).build();
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
 
         Map map = new HashMap<>();

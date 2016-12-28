@@ -230,10 +230,6 @@ public class UserMapperTest extends TestBase {
     public void should_return_users_detail_by_email_and_privilege() {
         List<UserDetail> userDetail = userMapper
                 .findUsersByInformation("test", "mentor", 1, 15);
-        Gson gson = new GsonBuilder().create();
-
-        String jsonStr = gson.toJson(userDetail);
-        System.out.println(jsonStr);
         assertThat(userDetail.size(), is(1));
     }
 

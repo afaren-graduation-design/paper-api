@@ -52,36 +52,37 @@ public class HomeWorkQuizMapperTest extends TestBase {
     }
 
     @Test
-    public void should_return_one_homework_quizzes_by_search_name_and_type() {
-        List<HomeworkQuiz> homeworkQuizs = homeworkQuizMapper
+    public void should_return_homework_quizzes_by_search_name_and_type() {
+        List<HomeworkQuiz> homeworkQuizzes = homeworkQuizMapper
                 .findHomeworkQuizzes("hom","Java",0,15);
-        assertThat(homeworkQuizs.size(),is(2));
+        assertThat(homeworkQuizzes.size(),is(2));
     }
 
     @Test
     public void should_return_homework_quizzes_by_search_homework_name() {
-        List<HomeworkQuiz> homeworkQuizs = homeworkQuizMapper.findHomeworkQuizzes("hom",null,0,15);
-        assertThat(homeworkQuizs.size(),is(8));
+        List<HomeworkQuiz> homeworkQuizzes = homeworkQuizMapper
+                .findHomeworkQuizzes("hom",null,0,15);
+        assertThat(homeworkQuizzes.size(),is(8));
     }
 
     @Test
     public void should_return_homework_quizzes_by_search_homework_type() {
-        List<HomeworkQuiz> homeworkQuizs = homeworkQuizMapper
+        List<HomeworkQuiz> homeworkQuizzes = homeworkQuizMapper
                 .findHomeworkQuizzes(null,"Java",0,15);
-        assertThat(homeworkQuizs.size(),is(2));
+        assertThat(homeworkQuizzes.size(),is(2));
     }
 
     @Test
     public void should_return_homework_quizzes_by_search() {
-        List<HomeworkQuiz> homeworkQuizs = homeworkQuizMapper.findHomeworkQuizzes(null,null,0,15);
-        assertThat(homeworkQuizs.size(),is(8));
+        List<HomeworkQuiz> homeworkQuizzes = homeworkQuizMapper.findHomeworkQuizzes(null,null,0,15);
+        assertThat(homeworkQuizzes.size(),is(8));
     }
 
     @Test
     public void should_return_none_when_search_homework_quizzes() {
-        List<HomeworkQuiz> homeworkQuizs = homeworkQuizMapper
+        List<HomeworkQuiz> homeworkQuizzes = homeworkQuizMapper
                 .findHomeworkQuizzes("test","php",0,15);
-        assertThat(homeworkQuizs.size(),is(0));
+        assertThat(homeworkQuizzes.size(),is(0));
     }
 
 }
