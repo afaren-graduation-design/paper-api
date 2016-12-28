@@ -367,12 +367,7 @@ public class UserResourceTest extends TestBase {
         userDetail.setSchoolCity("西安");
         userDetail.setUserId(3);
 
-        String email = "test";
-        String privilege = "mentor";
-        Integer page = 1;
-        Integer pageSize = 15;
-
-        when(userMapper.findUsersByInformation(email, privilege, page, pageSize))
+        when(userMapper.findUsersByInformation("test", "mentor", 1, 15))
                 .thenReturn(Arrays.asList(userDetail));
         Response response = target(basePath + "/search")
                 .queryParam("privilege", "mentor")
