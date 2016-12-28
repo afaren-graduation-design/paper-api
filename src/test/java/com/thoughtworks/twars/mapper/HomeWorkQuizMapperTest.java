@@ -54,8 +54,8 @@ public class HomeWorkQuizMapperTest extends TestBase {
     @Test
     public void should_return_one_homework_quizzes_by_search_name_and_type() {
         List<HomeworkQuiz> homeworkQuizs = homeworkQuizMapper
-                .findHomeworkQuizzes("hom","java",0,15);
-        assertThat(homeworkQuizs.size(),is(1));
+                .findHomeworkQuizzes("hom","Java",0,15);
+        assertThat(homeworkQuizs.size(),is(2));
     }
 
     @Test
@@ -66,8 +66,9 @@ public class HomeWorkQuizMapperTest extends TestBase {
 
     @Test
     public void should_return_homework_quizzes_by_search_homework_type() {
-        List<HomeworkQuiz> homeworkQuizs = homeworkQuizMapper.findHomeworkQuizzes(null,"java",0,15);
-        assertThat(homeworkQuizs.size(),is(1));
+        List<HomeworkQuiz> homeworkQuizs = homeworkQuizMapper
+                .findHomeworkQuizzes(null,"Java",0,15);
+        assertThat(homeworkQuizs.size(),is(2));
     }
 
     @Test
