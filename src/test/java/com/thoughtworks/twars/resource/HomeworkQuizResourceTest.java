@@ -90,9 +90,9 @@ public class HomeworkQuizResourceTest extends TestBase {
         Gson gson = new GsonBuilder().create();
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
-        assertThat(jsonStr,is(
+        assertThat(jsonStr, is(
                 "{\"homeworkQuizzes\":["
-                    + "{\"evaluateScript\":\"www.baidu.com\","
+                        + "{\"evaluateScript\":\"www.baidu.com\","
                         + "\"templateRepository\":\"templateRepository\","
                         + "\"createTime\":0,"
                         + "\"description\":\"这是一道比较简单的题目\","
@@ -108,7 +108,7 @@ public class HomeworkQuizResourceTest extends TestBase {
                         + "\"makerName\":\"Rose\","
                         + "\"uri\":\"homeworkQuizzes/2\""
                         + "}"
-                + "]}"
+                        + "]}"
         ));
 
     }
@@ -132,7 +132,7 @@ public class HomeworkQuizResourceTest extends TestBase {
 
         Map result = response.readEntity(Map.class);
 
-        Map homeworkItem = (Map)result.get("homeworkItem");
+        Map homeworkItem = (Map) result.get("homeworkItem");
 
         assertThat(homeworkItem.get("id"), is(1));
         assertThat(homeworkItem.get("description"), is("这是一道比较简单的题目"));
@@ -159,8 +159,8 @@ public class HomeworkQuizResourceTest extends TestBase {
         when(userMapper.getUserDetailById(1)).thenReturn(userDetail);
         when(userMapper.getUserDetailById(2)).thenReturn(userDetail);
 
-        when(homeworkQuizMapper.findHomeworkQuizzes(null,null,0,15))
-                .thenReturn(Arrays.asList(homeworkQuiz01,homeworkQuiz));
+        when(homeworkQuizMapper.findHomeworkQuizzes(null, null, 0, 15))
+                .thenReturn(Arrays.asList(homeworkQuiz01, homeworkQuiz));
 
         Response response = target(basePath).request().get();
 
@@ -170,26 +170,26 @@ public class HomeworkQuizResourceTest extends TestBase {
 
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
-        assertThat(jsonStr,is(
+        assertThat(jsonStr, is(
                 "{\"homeworkQuizzes\":"
                         + "["
-                        +   "{\"evaluateScript\":\"www.talkop.com\","
-                        +       "\"templateRepository\":\"talkopRepository\","
-                        +       "\"createTime\":0,"
-                        +       "\"description\":\"这是一道普通难度的题目\","
-                        +       "\"id\":0,\"makerName\":\"Rose\","
-                        +       "\"uri\":\"homeworkQuizzes/0\","
-                        +       "\"makerId\":2"
-                        +   "},{"
-                        +       "\"evaluateScript\":\"www.baidu.com\","
-                        +       "\"templateRepository\":\"templateRepository\","
-                        +       "\"createTime\":0,"
-                        +       "\"description\":\"这是一道比较简单的题目\","
-                        +       "\"id\":0,"
-                        +       "\"makerName\":\"Rose\","
-                        +       "\"uri\":\"homeworkQuizzes/0\","
-                        +       "\"makerId\":1"
-                        +   "}]"
+                        + "{\"evaluateScript\":\"www.talkop.com\","
+                        + "\"templateRepository\":\"talkopRepository\","
+                        + "\"createTime\":0,"
+                        + "\"description\":\"这是一道普通难度的题目\","
+                        + "\"id\":0,\"makerName\":\"Rose\","
+                        + "\"uri\":\"homeworkQuizzes/0\","
+                        + "\"makerId\":2"
+                        + "},{"
+                        + "\"evaluateScript\":\"www.baidu.com\","
+                        + "\"templateRepository\":\"templateRepository\","
+                        + "\"createTime\":0,"
+                        + "\"description\":\"这是一道比较简单的题目\","
+                        + "\"id\":0,"
+                        + "\"makerName\":\"Rose\","
+                        + "\"uri\":\"homeworkQuizzes/0\","
+                        + "\"makerId\":1"
+                        + "}]"
                         + "}"
         ));
     }
@@ -199,7 +199,7 @@ public class HomeworkQuizResourceTest extends TestBase {
 
         HomeworkQuiz homeworkQuiz = new HomeworkQuiz();
 
-        homeworkQuiz.setDescription("desctiption");
+        homeworkQuiz.setDescription("description");
         homeworkQuiz.setEvaluateScript("evaluateScript.sh");
         homeworkQuiz.setTemplateRepository("http://github.com/templateRepository");
         homeworkQuiz.setMakerId(1);
@@ -210,7 +210,7 @@ public class HomeworkQuizResourceTest extends TestBase {
 
         Map map = new HashMap();
 
-        map.put("desctiption", "miaoshu");
+        map.put("description", "miaoshu");
         map.put("evaluateScript", "ceshi ");
         map.put("templateRepository", "http://github.com/templateRepository");
         map.put("makerId", 1);
