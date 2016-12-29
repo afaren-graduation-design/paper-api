@@ -38,7 +38,7 @@ public class HomeworkQuizResource extends Resource {
             @QueryParam("homeworkName") String homeworkName,
             @QueryParam("type") String type
     ) {
-        int startPage = page - 1;
+        int startPage = Math.max(page - 1, 0);
         List<HomeworkQuiz> allHomeworkQuizzes = homeworkQuizMapper
                 .findHomeworkQuizzes(homeworkName, type, startPage, pageSize);
         List homeworkQuizzes = new ArrayList();
