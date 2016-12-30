@@ -43,8 +43,8 @@ public class PaperResource extends Resource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @ApiImplicitParams(value = {
-            @ApiImplicitParam(name = "page", value = "page", required = true),
-            @ApiImplicitParam(name = "pageSize", value = "pageSize", required = true)})
+            @ApiImplicitParam(name = "page", value = "page"),
+            @ApiImplicitParam(name = "pageSize", value = "pageSize")})
     @ApiResponses(value = {@ApiResponse(code = 200, message = "successful"),
             @ApiResponse(code = 404, message = "get all papers failed")})
 
@@ -53,7 +53,7 @@ public class PaperResource extends Resource {
             @DefaultValue("15") @QueryParam("pageSize") int pageSize
     ) {
 
-        int startPage = page - 1;
+        int startPage = Math.max(page - 1, 0);
         List<Paper> papers = paperMapper.getAllPapers(startPage, pageSize);
         List<Map> paperInfo = new ArrayList<>();
         Map result = new HashMap<>();
@@ -90,7 +90,7 @@ public class PaperResource extends Resource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertPaper(
             @ApiParam(name = "data", value = "include all info when insert paper", required = true)
-                    Map data) {
+                      Map data) {
         try {
             int makerId = (int) data.get("makerId");
             int programId = (int) data.get("programId");

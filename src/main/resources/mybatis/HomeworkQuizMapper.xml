@@ -41,7 +41,7 @@
                 homeworkName like concat("%",#{param1},"%")
             </if>
             <if test="param2 != null">
-                AND type like #{param2}
+                AND type = #{param2}
             </if>
         </where>
         limit #{param3},#{param4};

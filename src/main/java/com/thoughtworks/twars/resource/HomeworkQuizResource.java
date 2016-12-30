@@ -27,8 +27,8 @@ public class HomeworkQuizResource extends Resource {
 
     @GET
     @ApiImplicitParams(value = {
-            @ApiImplicitParam(name = "page", value = "page", required = true),
-            @ApiImplicitParam(name = "pageSize", value = "pageSize", required = true)})
+            @ApiImplicitParam(name = "page", value = "page"),
+            @ApiImplicitParam(name = "pageSize", value = "pageSize")})
     @ApiResponses(value = {@ApiResponse(code = 200, message = "successful"),
             @ApiResponse(code = 404, message = "not found")})
     @Produces(MediaType.APPLICATION_JSON)
@@ -38,7 +38,7 @@ public class HomeworkQuizResource extends Resource {
             @QueryParam("homeworkName") String homeworkName,
             @QueryParam("type") String type
     ) {
-        int startPage = page - 1;
+        int startPage = Math.max(page - 1, 0);
         List<HomeworkQuiz> allHomeworkQuizzes = homeworkQuizMapper
                 .findHomeworkQuizzes(homeworkName, type, startPage, pageSize);
         List homeworkQuizzes = new ArrayList();
@@ -55,8 +55,8 @@ public class HomeworkQuizResource extends Resource {
             homeworkItem.put("makerName", userDetail.getName());
             homeworkItem.put("createTime", homeworkQuiz.getCreateTime());
             homeworkItem.put("homeworkName", homeworkQuiz.getHomeworkName());
-            homeworkItem.put("type",homeworkQuiz.getType());
-            homeworkItem.put("answerPath",homeworkQuiz.getAnswerPath());
+            homeworkItem.put("type", homeworkQuiz.getType());
+            homeworkItem.put("answerPath", homeworkQuiz.getAnswerPath());
             homeworkItem.put("uri", "homeworkQuizzes/" + homeworkQuiz.getId());
 
             homeworkQuizzes.add(homeworkItem);
@@ -99,7 +99,7 @@ public class HomeworkQuizResource extends Resource {
             homeworkItem.put("createTime", homeworkQuiz.getCreateTime());
             homeworkItem.put("homeworkName", homeworkQuiz.getHomeworkName());
             homeworkItem.put("type", homeworkQuiz.getType());
-            homeworkItem.put("answerPath",homeworkQuiz.getAnswerPath());
+            homeworkItem.put("answerPath", homeworkQuiz.getAnswerPath());
             homeworkItem.put("uri", "homeworkQuizzes/" + id);
 
             Map result = new HashMap<>();
@@ -166,7 +166,7 @@ public class HomeworkQuizResource extends Resource {
             homeworkQuiz.setCreateTime(createTime);
             homeworkQuiz.setType(type);
             homeworkQuiz.setAnswerPath(answerPath);
-            
+
             homeworkQuizMapper.insertHomeworkQuiz(homeworkQuiz);
             Integer id = homeworkQuiz.getId();
 

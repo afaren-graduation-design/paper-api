@@ -370,11 +370,11 @@ public class UserResource extends Resource {
             @QueryParam("email") String email,
             @QueryParam("privilege") String privilege
     ) {
-        Integer pageStart = page - 1;
+        Integer pageStart = Math.max(page - 1, 0);
         List<UserDetail> usersDetail = userMapper
                 .findUsersByInformation(email, privilege, pageStart, pageSize);
         if (usersDetail == null) {
-            return Response.status(Response.Status.OK).build();
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
 
         Map map = new HashMap<>();
