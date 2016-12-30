@@ -1,5 +1,7 @@
 package com.thoughtworks.twars.resource;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.thoughtworks.twars.bean.*;
 import com.thoughtworks.twars.mapper.*;
 import io.swagger.annotations.Api;
@@ -8,6 +10,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 import javax.inject.Inject;
+import javax.sound.midi.Soundbank;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -15,6 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Path("/programs")
 @Api
@@ -248,4 +252,22 @@ public class ProgramResource extends Resource {
         return Response.status(Response.Status.NO_CONTENT).build();
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllPrograms(
+            @DefaultValue("1") @QueryParam("page") int page,
+            @DefaultValue("15") @QueryParam("pageSize") int pageSize
+    ) {
+
+        int startPage = Math.max(page - 1, 0);
+        List<Program> programs = programMapper.getAllPrograms(startPage, pageSize);
+        Map result = new HashMap();
+
+        List<Map> programsInfo = programs.stream()
+                .map(program -> program.getResponseInfo())
+                .collect(Collectors.toList());
+
+        result.put("programs", programsInfo);
+        return Response.status(Response.Status.OK).entity(result).build();
+    }
 }

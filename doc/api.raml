@@ -552,6 +552,15 @@ baseUri: http://api.bronzesword.com/
                             uri: string
 
 /programs:
+  get:
+    description: 获取所有programs信息
+    body:
+      application/json:
+        properties:
+          programs:
+            properties:
+              id: integer
+              name: string
     /{programId}:
         /users:
           get:

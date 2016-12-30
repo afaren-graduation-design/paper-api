@@ -14,10 +14,12 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.*;
 
-import static org.mockito.Mockito.when;
+import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProgramResourceTest extends TestBase {
@@ -31,6 +33,13 @@ public class ProgramResourceTest extends TestBase {
 
     @Mock
     Paper secondPaper;
+
+
+    @Mock
+    Program firstProgram;
+
+    @Mock
+    Program secondProgram;
 
 
     @Test
@@ -168,4 +177,39 @@ public class ProgramResourceTest extends TestBase {
         Assert.assertThat(jsonStr, is("{"
                 + "\"usersUri\":[\"users/1\",\"users/2\",\"users/3\"]}"));
     }
+
+    @Test
+    public void should_list_all_programs() throws Exception {
+
+        when(firstProgram.getId()).thenReturn(1);
+        when(firstProgram.getName()).thenReturn("111");
+        when(secondProgram.getId()).thenReturn(2);
+        when(secondProgram.getName()).thenReturn("222");
+
+        Map m1 = new HashMap();
+        m1.put("id", 1);
+        m1.put("name", "111");
+
+        Map m2 = new HashMap();
+        m2.put("id", 2);
+        m2.put("name", "222");
+        when(firstProgram.getResponseInfo()).thenReturn(m1);
+        when(secondProgram.getResponseInfo()).thenReturn(m2);
+
+        when(programMapper.getAllPrograms(0, 15))
+                .thenReturn(Arrays.asList(firstProgram, secondProgram));
+
+        Response response = target("/programs").request().get();
+        assertThat(response.getStatus(), is(200));
+
+        Gson gson = new GsonBuilder().create();
+
+        Map result = response.readEntity(Map.class);
+        String jsonStr = gson.toJson(result);
+
+        Assert.assertThat(jsonStr, is("{\"programs\":"
+                + "[{\"name\":\"111\",\"id\":1},"
+                + "{\"name\":\"222\",\"id\":2}]}"));
+    }
 }
+

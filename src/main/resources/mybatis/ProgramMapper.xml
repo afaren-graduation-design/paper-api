@@ -3,9 +3,17 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.thoughtworks.twars.mapper.ProgramMapper">
+    <resultMap id="programsMap" type="com.thoughtworks.twars.bean.Program">
+        <id column="id" property="id" ></id>
+        <result column="name" property="name"></result>
+    </resultMap>
 
     <select id="findUsersIdByProgramId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
         select userId from userProgram where userProgram.programId = #{id}
     </select>
 
+    <select id="getAllPrograms" resultMap="programsMap">
+        select * from programs
+        limit #{param1},#{param2}
+    </select>
 </mapper>
