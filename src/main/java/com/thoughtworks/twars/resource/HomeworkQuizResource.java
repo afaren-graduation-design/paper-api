@@ -126,6 +126,7 @@ public class HomeworkQuizResource extends Resource {
             homeworkItem.put("makerName", userDetail.getName());
             homeworkItem.put("createTime", homeworkQuiz.getCreateTime());
             homeworkItem.put("homeworkName", homeworkQuiz.getHomeworkName());
+            homeworkItem.put("answerPath",homeworkQuiz.getAnswerPath());
             homeworkItem.put("uri", "homeworkQuizzes/" + id);
             homeworkItem.put("type", homeworkQuiz.getType());
 
