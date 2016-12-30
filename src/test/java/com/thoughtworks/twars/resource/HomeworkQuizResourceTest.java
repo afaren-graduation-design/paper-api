@@ -91,24 +91,16 @@ public class HomeworkQuizResourceTest extends TestBase {
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
         assertThat(jsonStr, is(
-                "{\"homeworkQuizzes\":["
-                        + "{\"evaluateScript\":\"www.baidu.com\","
-                        + "\"templateRepository\":\"templateRepository\","
-                        + "\"createTime\":0,"
-                        + "\"description\":\"这是一道比较简单的题目\","
-                        + "\"id\":1,\"makerName\":\"Rose\","
-                        + "\"uri\":\"homeworkQuizzes/1\""
-                        + "},"
-
+                "{\"homeworkQuizzes\":[{\"evaluateScript\":\"www.baidu.com\","
+                        + "\"templateRepository\":\"templateRepository\",\"createTime\":0,"
+                        + "\"description\":\"这是一道比较简单的题目\",\"id\":1,\"makerName\":\"Rose\","
+                        + "\"answerPath\":\"/homework-answer/check-readme\","
+                        + "\"uri\":\"homeworkQuizzes/1\"},"
                         + "{\"evaluateScript\":\"www.talkop.com\","
-                        + "\"templateRepository\":\"talkopRepository\","
-                        + "\"createTime\":0,"
-                        + "\"description\":\"这是一道普通难度的题目\","
-                        + "\"id\":2,"
-                        + "\"makerName\":\"Rose\","
-                        + "\"uri\":\"homeworkQuizzes/2\""
-                        + "}"
-                        + "]}"
+                        + "\"templateRepository\":\"talkopRepository\",\"createTime\":0,"
+                        + "\"description\":\"这是一道普通难度的题目\",\"id\":2,\"makerName\":\"Rose\","
+                        + "\"answerPath\":\"/homework-answer/calculate_median\","
+                        + "\"uri\":\"homeworkQuizzes/2\"}]}"
         ));
 
     }
@@ -147,11 +139,13 @@ public class HomeworkQuizResourceTest extends TestBase {
         when(homeworkQuiz.getDescription()).thenReturn("这是一道比较简单的题目");
         when(homeworkQuiz.getEvaluateScript()).thenReturn("www.baidu.com");
         when(homeworkQuiz.getTemplateRepository()).thenReturn("templateRepository");
+        when(homeworkQuiz.getAnswerPath()).thenReturn("/homework-answer/check-readme");
 
         when(homeworkQuiz01.getMakerId()).thenReturn(2);
         when(homeworkQuiz01.getDescription()).thenReturn("这是一道普通难度的题目");
         when(homeworkQuiz01.getEvaluateScript()).thenReturn("www.talkop.com");
         when(homeworkQuiz01.getTemplateRepository()).thenReturn("talkopRepository");
+        when(homeworkQuiz01.getAnswerPath()).thenReturn("/homework-answer/check-readme");
 
 
         UserDetail userDetail = mock(UserDetail.class);
@@ -170,28 +164,25 @@ public class HomeworkQuizResourceTest extends TestBase {
 
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
-        assertThat(jsonStr, is(
-                "{\"homeworkQuizzes\":"
-                        + "["
-                        + "{\"evaluateScript\":\"www.talkop.com\","
-                        + "\"templateRepository\":\"talkopRepository\","
-                        + "\"createTime\":0,"
-                        + "\"description\":\"这是一道普通难度的题目\","
-                        + "\"id\":0,\"makerName\":\"Rose\","
-                        + "\"uri\":\"homeworkQuizzes/0\","
-                        + "\"makerId\":2"
-                        + "},{"
-                        + "\"evaluateScript\":\"www.baidu.com\","
-                        + "\"templateRepository\":\"templateRepository\","
-                        + "\"createTime\":0,"
-                        + "\"description\":\"这是一道比较简单的题目\","
-                        + "\"id\":0,"
-                        + "\"makerName\":\"Rose\","
-                        + "\"uri\":\"homeworkQuizzes/0\","
-                        + "\"makerId\":1"
-                        + "}]"
-                        + "}"
-        ));
+        assertThat(jsonStr, is("{\"homeworkQuizzes\":[{"
+                + "\"evaluateScript\":\"www.talkop.com\","
+                + "\"templateRepository\":\"talkopRepository\","
+                + "\"createTime\":0,"
+                + "\"description\":\"这是一道普通难度的题目\","
+                + "\"id\":0,"
+                + "\"makerName\":\"Rose\","
+                + "\"answerPath\":\"/homework-answer/check-readme\","
+                + "\"uri\":\"homeworkQuizzes/0\","
+                + "\"makerId\":2},"
+                + "{\"evaluateScript\":\"www.baidu.com\","
+                + "\"templateRepository\":\"templateRepository\","
+                + "\"createTime\":0,"
+                + "\"description\":\"这是一道比较简单的题目\","
+                + "\"id\":0,"
+                + "\"makerName\":\"Rose\","
+                + "\"answerPath\":\"/homework-answer/check-readme\","
+                + "\"uri\":\"homeworkQuizzes/0\","
+                + "\"makerId\":1}]}"));
     }
 
     @Test
