@@ -10,6 +10,7 @@ public class HomeworkQuiz {
     private String homeworkName;
     private String type;
     private String answerPath;
+    private int stackId;
 
     public String getType() {
         return type;
@@ -81,5 +82,13 @@ public class HomeworkQuiz {
 
     public void setTemplateRepository(String templateRepository) {
         this.templateRepository = templateRepository;
+    }
+
+    public int getStackId() {
+        return stackId;
+    }
+
+    public void setStackId(int stack) {
+        this.stackId = stack;
     }
 }

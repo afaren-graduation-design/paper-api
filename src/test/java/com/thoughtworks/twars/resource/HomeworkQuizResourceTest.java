@@ -67,7 +67,7 @@ public class HomeworkQuizResourceTest extends TestBase {
         when(homeworkQuiz.getEvaluateScript()).thenReturn("www.baidu.com");
         when(homeworkQuiz.getTemplateRepository()).thenReturn("templateRepository");
         when(homeworkQuiz.getAnswerPath()).thenReturn("/homework-answer/check-readme");
-
+        when(homeworkQuiz.getStackId()).thenReturn(1);
 
         when(homeworkQuizMapper.findById(2)).thenReturn(homeworkQuiz01);
 
@@ -76,6 +76,7 @@ public class HomeworkQuizResourceTest extends TestBase {
         when(homeworkQuiz01.getEvaluateScript()).thenReturn("www.talkop.com");
         when(homeworkQuiz01.getTemplateRepository()).thenReturn("talkopRepository");
         when(homeworkQuiz01.getAnswerPath()).thenReturn("/homework-answer/calculate_median");
+        when(homeworkQuiz01.getStackId()).thenReturn(2);
 
 
         UserDetail userDetail = mock(UserDetail.class);
@@ -90,15 +91,24 @@ public class HomeworkQuizResourceTest extends TestBase {
         Gson gson = new GsonBuilder().create();
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
+        System.out.println(jsonStr);
         assertThat(jsonStr, is(
                 "{\"homeworkQuizzes\":[{\"evaluateScript\":\"www.baidu.com\","
-                        + "\"templateRepository\":\"templateRepository\",\"createTime\":0,"
-                        + "\"description\":\"这是一道比较简单的题目\",\"id\":1,\"makerName\":\"Rose\","
+                        + "\"templateRepository\":\"templateRepository\","
+                        + "\"createTime\":0,"
+                        + "\"stackId\":1,"
+                        + "\"description\":\"这是一道比较简单的题目\","
+                        + "\"id\":1,"
+                        + "\"makerName\":\"Rose\","
                         + "\"answerPath\":\"/homework-answer/check-readme\","
                         + "\"uri\":\"homeworkQuizzes/1\"},"
                         + "{\"evaluateScript\":\"www.talkop.com\","
-                        + "\"templateRepository\":\"talkopRepository\",\"createTime\":0,"
-                        + "\"description\":\"这是一道普通难度的题目\",\"id\":2,\"makerName\":\"Rose\","
+                        + "\"templateRepository\":\"talkopRepository\","
+                        + "\"createTime\":0,"
+                        + "\"stackId\":2,"
+                        + "\"description\":\"这是一道普通难度的题目\","
+                        + "\"id\":2,"
+                        + "\"makerName\":\"Rose\","
                         + "\"answerPath\":\"/homework-answer/calculate_median\","
                         + "\"uri\":\"homeworkQuizzes/2\"}]}"
         ));
@@ -112,6 +122,8 @@ public class HomeworkQuizResourceTest extends TestBase {
         when(homeworkQuiz.getEvaluateScript()).thenReturn("www.baidu.com");
         when(homeworkQuiz.getTemplateRepository()).thenReturn("templateRepository");
         when(homeworkQuiz.getAnswerPath()).thenReturn("/homework-answer/check-readme");
+        when(homeworkQuiz.getStackId()).thenReturn(1);
+
 
         UserDetail userDetail = mock(UserDetail.class);
         when(userDetail.getName()).thenReturn("Rose");
@@ -131,6 +143,8 @@ public class HomeworkQuizResourceTest extends TestBase {
         assertThat(homeworkItem.get("evaluateScript"), is("www.baidu.com"));
         assertThat(homeworkItem.get("templateRepository"), is("templateRepository"));
         assertThat(homeworkItem.get("answerPath"), is("/homework-answer/check-readme"));
+        assertThat(homeworkItem.get("stackId"), is(1));
+
     }
 
     @Test
@@ -140,12 +154,14 @@ public class HomeworkQuizResourceTest extends TestBase {
         when(homeworkQuiz.getEvaluateScript()).thenReturn("www.baidu.com");
         when(homeworkQuiz.getTemplateRepository()).thenReturn("templateRepository");
         when(homeworkQuiz.getAnswerPath()).thenReturn("/homework-answer/check-readme");
+        when(homeworkQuiz01.getStackId()).thenReturn(1);
 
         when(homeworkQuiz01.getMakerId()).thenReturn(2);
         when(homeworkQuiz01.getDescription()).thenReturn("这是一道普通难度的题目");
         when(homeworkQuiz01.getEvaluateScript()).thenReturn("www.talkop.com");
         when(homeworkQuiz01.getTemplateRepository()).thenReturn("talkopRepository");
         when(homeworkQuiz01.getAnswerPath()).thenReturn("/homework-answer/check-readme");
+        when(homeworkQuiz01.getStackId()).thenReturn(2);
 
 
         UserDetail userDetail = mock(UserDetail.class);
@@ -164,10 +180,9 @@ public class HomeworkQuizResourceTest extends TestBase {
 
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
-        assertThat(jsonStr, is("{\"homeworkQuizzes\":[{"
-                + "\"evaluateScript\":\"www.talkop.com\","
-                + "\"templateRepository\":\"talkopRepository\","
-                + "\"createTime\":0,"
+        assertThat(jsonStr, is("{\"homeworkQuizzes\":[{\"evaluateScript\":\"www.talkop.com\","
+                + "\"templateRepository\":\"talkopRepository\",\"createTime\":0,"
+                + "\"stackId\":2,"
                 + "\"description\":\"这是一道普通难度的题目\","
                 + "\"id\":0,"
                 + "\"makerName\":\"Rose\","
@@ -177,6 +192,7 @@ public class HomeworkQuizResourceTest extends TestBase {
                 + "{\"evaluateScript\":\"www.baidu.com\","
                 + "\"templateRepository\":\"templateRepository\","
                 + "\"createTime\":0,"
+                + "\"stackId\":0,"
                 + "\"description\":\"这是一道比较简单的题目\","
                 + "\"id\":0,"
                 + "\"makerName\":\"Rose\","
@@ -219,6 +235,3 @@ public class HomeworkQuizResourceTest extends TestBase {
         MatcherAssert.assertThat(result.size(), is(1));
     }
 }
-
-
-

@@ -57,6 +57,7 @@ public class HomeworkQuizResource extends Resource {
             homeworkItem.put("homeworkName", homeworkQuiz.getHomeworkName());
             homeworkItem.put("type", homeworkQuiz.getType());
             homeworkItem.put("answerPath", homeworkQuiz.getAnswerPath());
+            homeworkItem.put("stackId", homeworkQuiz.getStackId());
             homeworkItem.put("uri", "homeworkQuizzes/" + homeworkQuiz.getId());
 
             homeworkQuizzes.add(homeworkItem);
@@ -100,6 +101,7 @@ public class HomeworkQuizResource extends Resource {
             homeworkItem.put("homeworkName", homeworkQuiz.getHomeworkName());
             homeworkItem.put("type", homeworkQuiz.getType());
             homeworkItem.put("answerPath", homeworkQuiz.getAnswerPath());
+            homeworkItem.put("stackId", homeworkQuiz.getStackId());
             homeworkItem.put("uri", "homeworkQuizzes/" + id);
 
             Map result = new HashMap<>();
@@ -126,7 +128,8 @@ public class HomeworkQuizResource extends Resource {
             homeworkItem.put("makerName", userDetail.getName());
             homeworkItem.put("createTime", homeworkQuiz.getCreateTime());
             homeworkItem.put("homeworkName", homeworkQuiz.getHomeworkName());
-            homeworkItem.put("answerPath",homeworkQuiz.getAnswerPath());
+            homeworkItem.put("answerPath", homeworkQuiz.getAnswerPath());
+            homeworkItem.put("stackId", homeworkQuiz.getStackId());
             homeworkItem.put("uri", "homeworkQuizzes/" + id);
             homeworkItem.put("type", homeworkQuiz.getType());
 
@@ -147,25 +150,28 @@ public class HomeworkQuizResource extends Resource {
                     Map data) {
         try {
             HomeworkQuiz homeworkQuiz = new HomeworkQuiz();
-
             String description = (String) data.get("description");
-            String evaluateScript = (String) data.get("evaluateScript");
-            String templateRepository = (String) data.get("templateRepository");
-            int makerId = (int) data.get("makerId");
-            String homeworkName = (String) data.get("homeworkName");
-            int createTime = (int) data.get("createTime");
-            String type = (String) data.get("type");
-            String answerPath = (String) data.get("answerPath");
-
-
             homeworkQuiz.setDescription(description);
+            String evaluateScript = (String) data.get("evaluateScript");
             homeworkQuiz.setEvaluateScript(evaluateScript);
+            String templateRepository = (String) data.get("templateRepository");
             homeworkQuiz.setTemplateRepository(templateRepository);
+            int makerId = (int) data.get("makerId");
             homeworkQuiz.setMakerId(makerId);
+            String homeworkName = (String) data.get("homeworkName");
             homeworkQuiz.setHomeworkName(homeworkName);
+            int createTime = (int) data.get("createTime");
             homeworkQuiz.setCreateTime(createTime);
+            String type = (String) data.get("type");
             homeworkQuiz.setType(type);
+            String answerPath = (String) data.get("answerPath");
             homeworkQuiz.setAnswerPath(answerPath);
+
+            int stackId = 1;
+            if (data.get("stackId") != null) {
+                stackId = (int) data.get("stackId");
+            }
+            homeworkQuiz.setStackId(stackId);
 
             homeworkQuizMapper.insertHomeworkQuiz(homeworkQuiz);
             Integer id = homeworkQuiz.getId();

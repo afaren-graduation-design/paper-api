@@ -16,6 +16,7 @@
         <result column="homeworkName" property="homeworkName"></result>
         <result column="type" property="type"></result>
         <result column="answerPath" property="answerPath"></result>
+        <result column="stackId" property="stackId"></result>
 
     </resultMap>
 
@@ -30,8 +31,8 @@
     <insert id="insertHomeworkQuiz" parameterType="com.thoughtworks.twars.bean.HomeworkQuiz" useGeneratedKeys="true"
             keyProperty="id">
         INSERT INTO homeworkQuiz(description, evaluateScript,
-        templateRepository,makerId,createTime,homeworkName,type,answerPath) VALUES(#{description}, #{evaluateScript},
-        #{templateRepository},#{makerId},#{createTime},#{homeworkName},#{type},#{answerPath});
+        templateRepository,makerId,createTime,homeworkName,type,answerPath,stackId) VALUES(#{description}, #{evaluateScript},
+        #{templateRepository},#{makerId},#{createTime},#{homeworkName},#{type},#{answerPath},#{stackId});
     </insert>
 
     <select id="findHomeworkQuizzes" resultMap="homeworkQuizListMap">
