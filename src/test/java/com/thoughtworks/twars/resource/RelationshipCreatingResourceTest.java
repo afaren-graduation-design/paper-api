@@ -28,7 +28,7 @@ public class RelationshipCreatingResourceTest extends TestBase {
 
         when(userMapper.insertStudentMentor(3, 6)).thenReturn(1);
         Entity entity = Entity.entity("", MediaType.APPLICATION_JSON);
-        Response response = target(basePath + "/3/users/6").request().post(entity);
+        Response response = target(basePath + "/3/students/6").request().post(entity);
         assertThat(response.getStatus(), is(201));
     }
 }
