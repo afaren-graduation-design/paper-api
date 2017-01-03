@@ -23,7 +23,7 @@ public class RelationshipCreatingResource extends Resource {
     @ApiResponses(value = {@ApiResponse(code = 201,
             message = "create mentor by userId successfully"),
             @ApiResponse(code = 403, message = "create mentor by userId failure")})
-    @Path("/{mentorId}/users/{studentId}")
+    @Path("/{mentorId}/students/{studentId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertMentorUser(
             @PathParam("mentorId") int mentorId,
