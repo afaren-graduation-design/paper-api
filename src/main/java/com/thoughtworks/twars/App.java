@@ -92,6 +92,8 @@ public class App extends ResourceConfig {
 
         final ProgramMapper programMapper = session
                 .getMapper(ProgramMapper.class);
+        final StackMapper stackMapper = session
+                .getMapper(StackMapper.class);
 
 
         register(OpenSessionRequestFilter.class);
@@ -123,6 +125,7 @@ public class App extends ResourceConfig {
                         bind(thirdPartyMapper).to(ThirdPartyMapper.class);
                         bind(paperOperationMapper).to(PaperOperationMapper.class);
                         bind(programMapper).to(ProgramMapper.class);
+                        bind(stackMapper).to(StackMapper.class);
                         bind(session).to(SqlSessionManager.class);
                     }
                 });

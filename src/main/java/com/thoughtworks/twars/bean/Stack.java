@@ -1,22 +1,15 @@
 package com.thoughtworks.twars.bean;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Stack {
     private int stackId;
     private String title;
     private String description;
     private String definitionFile;
-    private List<HomeworkQuiz> homeworkQuizList;
-
-    public List<HomeworkQuiz> getHomeworkQuizList() {
-        return homeworkQuizList;
-    }
-
-    public void setHomeworkQuizList(List<HomeworkQuiz> homeworkQuizList) {
-        this.homeworkQuizList = homeworkQuizList;
-    }
 
     public int getStackId() {
         return stackId;
@@ -48,5 +41,13 @@ public class Stack {
 
     public void setDefinitionFile(String definitionFile) {
         this.definitionFile = definitionFile;
+    }
+
+    public Map getResponseInfo() {
+        Map result = new HashMap<>();
+        result.put("stackId", stackId);
+        result.put("title", title);
+        return result;
+
     }
 }
