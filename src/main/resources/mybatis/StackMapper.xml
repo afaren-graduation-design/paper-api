@@ -6,10 +6,12 @@
     <resultMap id="stackListMap" type="com.thoughtworks.twars.bean.Stack">
         <id property="stackId" column="stackId"></id>
         <result column="title" property="title"></result>
+        <result column="description" property="description"></result>
+        <result column="definitionFile" property="definitionFile"></result>
     </resultMap>
 
     <select id="getAllStack" resultMap="stackListMap">
-        select stackId,title from stack;
+        select * from stack order by stackId;
     </select>
 
 

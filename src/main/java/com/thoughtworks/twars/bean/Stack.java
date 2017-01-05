@@ -47,7 +47,8 @@ public class Stack {
         Map result = new HashMap<>();
         result.put("stackId", stackId);
         result.put("title", title);
+        result.put("description", description);
+        result.put("definitionFile", definitionFile);
         return result;
-
     }
 }

@@ -33,16 +33,24 @@ public class StackResourceTest extends TestBase {
     public void should_return_all_stack() throws Exception {
         when(stackOne.getStackId()).thenReturn(1);
         when(stackOne.getTitle()).thenReturn("C#");
+        when(stackOne.getDescription()).thenReturn("这是C#");
+        when(stackOne.getDefinitionFile()).thenReturn("./aa/bb/cc");
         when(stackTwo.getStackId()).thenReturn(2);
         when(stackTwo.getTitle()).thenReturn("java");
+        when(stackTwo.getDescription()).thenReturn("./xx/yy/zz");
 
         Map m1 = new HashMap();
         m1.put("stackId", 1);
         m1.put("title", "C#");
+        m1.put("description", "这是C#");
+        m1.put("definitionFile", "./aa/bb/cc");
 
         Map m2 = new HashMap();
         m2.put("stackId", 2);
         m2.put("title", "java");
+        m2.put("description", "这是Java");
+        m2.put("definitionFile", "./xx/yy/zz");
+
         when(stackOne.getResponseInfo()).thenReturn(m1);
         when(stackTwo.getResponseInfo()).thenReturn(m2);
 
@@ -56,14 +64,17 @@ public class StackResourceTest extends TestBase {
 
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
+        System.out.println(jsonStr);
 
-        Assert.assertThat(jsonStr, is("{\"items\":[{\"stackId\":1,"
+        Assert.assertThat(jsonStr, is("{\"items\":[{\"definitionFile\":\"./aa/bb/cc\","
+                + "\"stackId\":1,"
+                + "\"description\":\"这是C#\","
                 + "\"title\":\"C#\"},"
-                + "{\"stackId\":2,"
+                + "{\"definitionFile\":\"./xx/yy/zz\","
+                + "\"stackId\":2,"
+                + "\"description\":\"这是Java\","
                 + "\"title\":\"java\"}]}"
         ));
-
     }
-
 }
 
