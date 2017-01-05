@@ -175,7 +175,7 @@ public class UserResource extends Resource {
             message = "get one user's programIds successful"),
             @ApiResponse(code = 404, message = "get one user's programIds failed")})
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getProgramdById(
+    public Response getProgramById(
             @ApiParam(name = "userId", value = "int", required = true)
             @PathParam("param") int userId) {
 

@@ -91,11 +91,10 @@ public class HomeworkQuizResourceTest extends TestBase {
         Gson gson = new GsonBuilder().create();
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
-        System.out.println(jsonStr);
         assertThat(jsonStr, is(
                 "{\"homeworkQuizzes\":[{\"evaluateScript\":\"www.baidu.com\","
                         + "\"templateRepository\":\"templateRepository\","
-                        + "\"createTime\":0,"
+                        + "\"createTime\":0.0,"
                         + "\"stackId\":1,"
                         + "\"description\":\"这是一道比较简单的题目\","
                         + "\"id\":1,"
@@ -104,7 +103,7 @@ public class HomeworkQuizResourceTest extends TestBase {
                         + "\"uri\":\"homeworkQuizzes/1\"},"
                         + "{\"evaluateScript\":\"www.talkop.com\","
                         + "\"templateRepository\":\"talkopRepository\","
-                        + "\"createTime\":0,"
+                        + "\"createTime\":0.0,"
                         + "\"stackId\":2,"
                         + "\"description\":\"这是一道普通难度的题目\","
                         + "\"id\":2,"
@@ -181,7 +180,7 @@ public class HomeworkQuizResourceTest extends TestBase {
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
         assertThat(jsonStr, is("{\"homeworkQuizzes\":[{\"evaluateScript\":\"www.talkop.com\","
-                + "\"templateRepository\":\"talkopRepository\",\"createTime\":0,"
+                + "\"templateRepository\":\"talkopRepository\",\"createTime\":0.0,"
                 + "\"stackId\":2,"
                 + "\"description\":\"这是一道普通难度的题目\","
                 + "\"id\":0,"
@@ -191,7 +190,7 @@ public class HomeworkQuizResourceTest extends TestBase {
                 + "\"makerId\":2},"
                 + "{\"evaluateScript\":\"www.baidu.com\","
                 + "\"templateRepository\":\"templateRepository\","
-                + "\"createTime\":0,"
+                + "\"createTime\":0.0,"
                 + "\"stackId\":0,"
                 + "\"description\":\"这是一道比较简单的题目\","
                 + "\"id\":0,"
@@ -222,7 +221,7 @@ public class HomeworkQuizResourceTest extends TestBase {
         map.put("templateRepository", "http://github.com/templateRepository");
         map.put("makerId", 1);
         map.put("homeworkName", "homeworkName");
-        map.put("createTime", 123456);
+        map.put("createTime", 123456.0);
         map.put("answerPath", "/homework-answer/calculate_median");
 
         Entity entity = Entity.entity(map, MediaType.APPLICATION_JSON);

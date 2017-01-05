@@ -82,14 +82,14 @@ public class ProgramResourceTest extends TestBase {
         when(firstPaper.getId()).thenReturn(1);
         when(firstPaper.getPaperName()).thenReturn("简单的试卷");
         when(firstPaper.getDescription()).thenReturn("easy");
-        when(firstPaper.getCreateTime()).thenReturn(1111111);
+        when(firstPaper.getCreateTime()).thenReturn((double) 1111111);
         when(firstPaper.getMakerId()).thenReturn(3);
         when(firstPaper.getIsDistribution()).thenReturn(true);
 
         when(secondPaper.getId()).thenReturn(5);
         when(secondPaper.getPaperName()).thenReturn("普通的试卷");
         when(secondPaper.getDescription()).thenReturn("common");
-        when(secondPaper.getCreateTime()).thenReturn(2222222);
+        when(secondPaper.getCreateTime()).thenReturn((double) 2222222);
         when(secondPaper.getMakerId()).thenReturn(2);
         when(secondPaper.getIsDistribution()).thenReturn(false);
 
@@ -100,12 +100,11 @@ public class ProgramResourceTest extends TestBase {
 
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
-
         Assert.assertThat(jsonStr, is("{\"paperList\":[{"
-                + "\"createTime\":1111111,\"paperName\":\"简单的试卷\","
+                + "\"createTime\":1111111.0,\"paperName\":\"简单的试卷\","
                 + "\"description\":\"easy\",\"isDistribution\":true,\"id\":1,"
                 + "\"uri\":\"/papers/1\",\"programId\":0,\"makerId\":3},"
-                + "{\"createTime\":2222222,\"paperName\":\"普通的试卷\","
+                + "{\"createTime\":2222222.0,\"paperName\":\"普通的试卷\","
                 + "\"description\":\"common\",\"isDistribution\":false,\"id\":5,"
                 + "\"uri\":\"/papers/5\",\"programId\":0,\"makerId\":2}]}"));
     }
@@ -115,7 +114,7 @@ public class ProgramResourceTest extends TestBase {
 
         Map data = new HashMap();
         data.put("makerId", 1);
-        data.put("createTime", 111111);
+        data.put("createTime", 111111.0);
         data.put("programId", 1);
         data.put("paperName", "paperName");
         data.put("description", "paper desc");

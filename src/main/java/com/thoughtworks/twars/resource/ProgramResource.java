@@ -88,7 +88,7 @@ public class ProgramResource extends Resource {
         Integer makerId = (Integer) data.get("makerId");
         String paperName = (String) data.get("paperName");
         String description = (String) data.get("description");
-        Integer createTime = (Integer) data.get("createTime");
+        double createTime = (double) data.get("createTime");
         Boolean isDistribution = true;
 
         Paper paper = new Paper();
