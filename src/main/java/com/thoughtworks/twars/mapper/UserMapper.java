@@ -46,4 +46,7 @@ public interface UserMapper {
 
     List<Integer> findMentorIdsByStudentId(Integer id);
 
+    List<Integer> findStudentIdsByMentorId(Integer id);
+
+
 }

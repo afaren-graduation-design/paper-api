@@ -262,8 +262,14 @@ public class UserMapperTest extends TestBase {
     }
 
     @Test
-    public void should_return_MentorIds_by_studentId() {
+    public void should_return_mentorIds_by_studentId() {
         List<Integer> mentorIds = userMapper.findMentorIdsByStudentId(1);
+        assertThat(mentorIds.size(), is(2));
+    }
+
+    @Test
+    public void should_return_studentIds_by_mentorId() {
+        List<Integer> mentorIds = userMapper.findStudentIdsByMentorId(1);
         assertThat(mentorIds.size(), is(2));
     }
 
