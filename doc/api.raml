@@ -562,7 +562,7 @@ baseUri: http://api.bronzesword.com/
             properties:
               id: integer
               name: string
-    /{programId}:
+  /{programId}:
         /users:
           get:
             description: 通过programId获取对应users列表信息
@@ -670,3 +670,18 @@ baseUri: http://api.bronzesword.com/
                               operatingTime: integer
                     responses:
                       204:
+/stacks:
+  get:
+    description: 获取所有的技术栈
+    responses:
+      200:
+        body:
+          application/json:
+            properties:
+              items:
+                properties:
+                  []:
+                  stackId: string
+                  title: string
+                  description: string
+                  definitionFile: string
