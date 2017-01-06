@@ -377,4 +377,16 @@ public class UserResourceTest extends TestBase {
         assertThat(response.getStatus(), is(200));
     }
 
+    @Test
+    public void should_return_mentorIds_by_studentId() {
+        when(userMapper.findMentorIdsByStudentId(1)).thenReturn(Arrays.asList(1,2));
+
+        Response response = target(basePath + "/1/mentors").request().get();
+        assertThat(response.getStatus(), is(200));
+
+        Map map = response.readEntity(Map.class);
+        List result = (List) map.get("mentorIds");
+
+        assertThat(result.size(), is(2));
+    }
 }

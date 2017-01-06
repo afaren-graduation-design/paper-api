@@ -191,6 +191,24 @@ public class UserResource extends Resource {
         return Response.status(Response.Status.OK).entity(map).build();
     }
 
+    @GET
+    @Path("/{param}/mentors")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "get mentorIds successful"),
+            @ApiResponse(code = 404, message = "get mentorIds by studentId failure")})
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getProgramById(
+            @PathParam("param") Integer id) {
+        List<Integer> mentorIds = userMapper.findMentorIdsByStudentId(id);
+        if (mentorIds == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
+        Map map = new HashMap<>();
+        map.put("mentorIds", mentorIds);
+
+        return Response.status(Response.Status.OK).entity(map).build();
+    }
+
 
     @PUT
     @Path("/{param}/detail")
@@ -382,4 +400,5 @@ public class UserResource extends Resource {
 
         return Response.status(Response.Status.OK).entity(map).build();
     }
+
 }

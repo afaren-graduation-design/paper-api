@@ -44,4 +44,6 @@ public interface UserMapper {
     List<UserDetail> findUsersByInformation(
             String email, String privilege, Integer page, Integer pageSize);
 
+    List<Integer> findMentorIdsByStudentId(Integer id);
+
 }

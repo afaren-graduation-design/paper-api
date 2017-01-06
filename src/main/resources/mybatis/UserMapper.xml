@@ -111,6 +111,10 @@
     <insert id="insertUserProgram" parameterType="java.lang.Integer">
         INSERT INTO userProgram VALUES(#{param1},#{param2});
     </insert>
+
+    <select id="findMentorIdsByStudentId" resultType="java.lang.Integer">
+        select mentorId from studentMentor where studentId = #{id};
+    </select>
 </mapper>
 
 
