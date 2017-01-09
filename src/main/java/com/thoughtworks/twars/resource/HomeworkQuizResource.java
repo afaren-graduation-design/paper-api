@@ -50,9 +50,8 @@ public class HomeworkQuizResource extends Resource {
             homeworkItem.put("description", homeworkQuiz.getDescription());
             homeworkItem.put("evaluateScript", homeworkQuiz.getEvaluateScript());
             homeworkItem.put("templateRepository", homeworkQuiz.getTemplateRepository());
-            UserDetail userDetail = userMapper.getUserDetailById(homeworkQuiz.getMakerId());
             homeworkItem.put("makerId", homeworkQuiz.getMakerId());
-            homeworkItem.put("makerName", userDetail.getName());
+            homeworkItem.put("makerDetailUri","users/"+homeworkQuiz.getMakerId()+"/detail");
             homeworkItem.put("createTime", homeworkQuiz.getCreateTime());
             homeworkItem.put("homeworkName", homeworkQuiz.getHomeworkName());
             homeworkItem.put("type", homeworkQuiz.getType());
