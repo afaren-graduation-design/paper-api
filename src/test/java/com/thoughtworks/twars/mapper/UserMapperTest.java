@@ -183,7 +183,7 @@ public class UserMapperTest extends TestBase {
 
         List<UserDetail> userDetails = userMapper.findUserDetailsByUserIds(userIds);
 
-        assertThat(userDetails.size(), is(2));
+        assertThat(userDetails.size(), is(3));
         assertThat(userDetails.get(0).getUserId(), is(1));
         assertThat(userDetails.get(0).getSchool(), is("思沃学院"));
         assertThat(userDetails.get(0).getSchoolCity(), is("西安"));
@@ -237,28 +237,28 @@ public class UserMapperTest extends TestBase {
     public void should_return_users_detail_by_email() {
         List<UserDetail> usersDetail = userMapper
                 .findUsersByInformation("@", null, 0, 15);
-        assertThat(usersDetail.size(), is(2));
+        assertThat(usersDetail.size(), is(3));
     }
 
     @Test
     public void should_return_users_detail_by_privilege() {
         List<UserDetail> userDetail = userMapper
                 .findUsersByInformation(null, "mentor", 0, 15);
-        assertThat(userDetail.size(), is(2));
+        assertThat(userDetail.size(), is(3));
     }
 
     @Test
     public void should_return_users_detail_by_page() {
         List<UserDetail> userDetail = userMapper
                 .findUsersByInformation(null, null, 0, 15);
-        assertThat(userDetail.size(), is(2));
+        assertThat(userDetail.size(), is(3));
     }
 
     @Test
     public void should_return_users_detail_by_none() {
         List<UserDetail> userDetail = userMapper
                 .findUsersByInformation(null, null, 0, 15);
-        assertThat(userDetail.size(), is(2));
+        assertThat(userDetail.size(), is(3));
     }
 
     @Test
