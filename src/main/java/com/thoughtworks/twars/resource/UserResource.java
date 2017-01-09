@@ -351,6 +351,26 @@ public class UserResource extends Resource {
 
 
     @POST
+    @ApiResponses(value = {@ApiResponse(code = 201, message = "create user and program's "
+            + "relationship successfully"),
+            @ApiResponse(code = 403, message = "create user and program's relationship failure")})
+    @Path("/{userId}/programs/{programId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response resetPassword(
+            @PathParam("userId") Integer userId,
+            @PathParam("programId") Integer programId) {
+
+        Integer id = userMapper.insertUserProgram(userId, programId);
+
+        if (id == 0) {
+            return Response.status(Response.Status.FORBIDDEN).build();
+        }
+
+        return Response.status(Response.Status.CREATED).build();
+    }
+
+
+    @POST
     @ApiResponses(value = {@ApiResponse(code = 200, message = "reset password successful")})
     @Path("/password/reset")
     @Produces(MediaType.APPLICATION_JSON)

@@ -379,7 +379,7 @@ public class UserResourceTest extends TestBase {
 
     @Test
     public void should_return_mentorIds_by_studentId() {
-        when(userMapper.findMentorIdsByStudentId(1)).thenReturn(Arrays.asList(1,2));
+        when(userMapper.findMentorIdsByStudentId(1)).thenReturn(Arrays.asList(1, 2));
 
         Response response = target(basePath + "/1/mentors").request().get();
         assertThat(response.getStatus(), is(200));
@@ -392,7 +392,7 @@ public class UserResourceTest extends TestBase {
 
     @Test
     public void should_return_studentIds_by_mentorId() {
-        when(userMapper.findStudentIdsByMentorId(1)).thenReturn(Arrays.asList(1,2));
+        when(userMapper.findStudentIdsByMentorId(1)).thenReturn(Arrays.asList(1, 2));
 
         Response response = target(basePath + "/1/mentees").request().get();
         assertThat(response.getStatus(), is(200));
@@ -401,5 +401,17 @@ public class UserResourceTest extends TestBase {
         List result = (List) map.get("studentIds");
 
         assertThat(result.size(), is(2));
+    }
+
+    @Test
+    public void should_return_create_user_and_programs_relationship() {
+
+        when(userMapper.insertUserProgram(1, 7)).thenReturn(1);
+
+        Entity entity = Entity.entity(null, MediaType.APPLICATION_JSON_TYPE);
+        Response response = target(basePath + "/1/programs/7").request().post(entity);
+        System.out.println(response.getStatus());
+
+        assertThat(response.getStatus(), is(201));
     }
 }
