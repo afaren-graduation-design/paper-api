@@ -25,11 +25,6 @@ public class HomeworkQuizResource extends Resource {
 
 
     @GET
-    @ApiImplicitParams(value = {
-            @ApiImplicitParam(name = "page", value = "page"),
-            @ApiImplicitParam(name = "pageSize", value = "pageSize")})
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "successful"),
-            @ApiResponse(code = 404, message = "not found")})
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllHomeworkQuiz(
             @DefaultValue("1") @QueryParam("page") int page,
@@ -68,12 +63,9 @@ public class HomeworkQuizResource extends Resource {
     }
 
     @GET
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "successful"),
-            @ApiResponse(code = 404, message = "not found")})
     @Path("/{param}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOneHomeworkQuiz(
-            @ApiParam(value = "homeworkQuizIds", allowableValues = "string", required = true)
             @PathParam("param") String ids) {
         List homeworkQuizzes = new ArrayList();
         String[] idList = ids.split(",");
@@ -113,12 +105,8 @@ public class HomeworkQuizResource extends Resource {
     }
 
     @POST
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "insert successfully"),
-            @ApiResponse(code = 415, message = "insert failed")})
     @Produces(MediaType.APPLICATION_JSON)
-    public Response insertPaper(
-            @ApiParam(name = "data", value = "all info one homework quiz ", required = true)
-                    Map data) {
+    public Response insertPaper(Map data) {
         try {
             HomeworkQuiz homeworkQuiz = new HomeworkQuiz();
             String description = (String) data.get("description");

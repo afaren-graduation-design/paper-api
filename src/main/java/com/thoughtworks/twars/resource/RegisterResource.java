@@ -26,12 +26,8 @@ public class RegisterResource extends Resource {
     private UserMapper userMapper;
 
     @POST
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "register successfully")})
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createUser(
-            @ApiParam(name = "user", value = "User example", required = true)
-                    User user) {
+    public Response createUser(User user) {
         userMapper.insertUser(user);
         userMapper.insertUserProgram(user.getId(), 1);
 

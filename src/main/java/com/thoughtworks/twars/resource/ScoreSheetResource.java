@@ -30,8 +30,6 @@ public class ScoreSheetResource extends Resource {
     private HomeworkQuizScoreSheetService homeworkQuizScoreSheet;
 
     @GET
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "get all scoresheets successful"),
-            @ApiResponse(code = 404, message = "get all scoresheets failed")})
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAll() {
         List<ScoreSheet> scoreSheets = scoreSheetMapper.findAll();
@@ -55,12 +53,7 @@ public class ScoreSheetResource extends Resource {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    @ApiResponses(value = {@ApiResponse(code = 201, message = "insert scoresheet successful")})
-    public Response insertScoreSheet(
-            @ApiParam(name = "data", value = "include all info when you insert scoreSheet",
-                    required = true)
-            Map data) {
+    public Response insertScoreSheet(Map data) {
         int examerId = (int) data.get("examerId");
         int paperId = (int) data.get("paperId");
         int scoreSheetId;
@@ -113,11 +106,8 @@ public class ScoreSheetResource extends Resource {
 
     @GET
     @Path("/{id}")
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "get one scoreSheet successfully"),
-            @ApiResponse(code = 404, message = "get one scoreSheet failed")})
     @Produces(MediaType.APPLICATION_JSON)
     public Response findOne(
-            @ApiParam(name = "scoreSheetId", value = "int",required = true)
             @PathParam("id") int id
     ) {
         ScoreSheet scoreSheet = scoreSheetMapper.findOne(id);

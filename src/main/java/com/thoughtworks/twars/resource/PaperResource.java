@@ -42,12 +42,6 @@ public class PaperResource extends Resource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @ApiImplicitParams(value = {
-            @ApiImplicitParam(name = "page", value = "page"),
-            @ApiImplicitParam(name = "pageSize", value = "pageSize")})
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "successful"),
-            @ApiResponse(code = 404, message = "get all papers failed")})
-
     public Response getAllPapers(
             @DefaultValue("1") @QueryParam("page") int page,
             @DefaultValue("15") @QueryParam("pageSize") int pageSize
@@ -85,12 +79,8 @@ public class PaperResource extends Resource {
 
 
     @POST
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "insert paper successfully"),
-            @ApiResponse(code = 415, message = "insert paper failed")})
     @Produces(MediaType.APPLICATION_JSON)
-    public Response insertPaper(
-            @ApiParam(name = "data", value = "include all info when insert paper", required = true)
-                      Map data) {
+    public Response insertPaper(Map data) {
         try {
             int makerId = (int) data.get("makerId");
             int programId = (int) data.get("programId");
@@ -142,12 +132,9 @@ public class PaperResource extends Resource {
 
 
     @GET
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "get one paper successfully"),
-            @ApiResponse(code = 404, message = "get one paper failed")})
     @Path("/{param}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOnePaper(
-            @ApiParam(name = "id", value = "paperId", required = true)
             @PathParam("param") int id) {
         Paper paper = paperMapper.getOnePaper(id);
         if (paper == null) {
@@ -186,8 +173,6 @@ public class PaperResource extends Resource {
     }
 
     @GET
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "get enrollment paper successfully"),
-            @ApiResponse(code = 404, message = "get enrollment paper failed")})
     @Path("/enrollment")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEnrollmentPaper() {
@@ -196,12 +181,9 @@ public class PaperResource extends Resource {
 
 
     @GET
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "get logicPuzzle successfully"),
-            @ApiResponse(code = 404, message = "get logicPuzzle failed")})
     @Path("/{param}/logicPuzzle")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getLogicPuzzleByPaperId(
-            @ApiParam(name = "id", value = "paperId", required = true)
             @PathParam("param") int id
     ) {
 

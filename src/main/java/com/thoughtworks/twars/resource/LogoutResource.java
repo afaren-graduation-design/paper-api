@@ -19,8 +19,6 @@ public class LogoutResource extends Resource {
     private LoginDetailMapper loginDetailMapper;
 
     @POST
-    @ApiResponses(value = {@ApiResponse(code = 201, message = "logout successfully"),
-            @ApiResponse(code = 401, message = "logout failed")})
     public Response logoutUser(Map data) {
 
         List<LoginDetail> loginDetailList =

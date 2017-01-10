@@ -30,8 +30,6 @@ public class BlankQuizResource {
     private QuizItemMapper quizItemMapper;
 
     @GET
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "get all blankQuizzes successful"),
-            @ApiResponse(code = 404, message = "get all blankQuizzes failed")})
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllBlankQuizzes() {
 
@@ -55,12 +53,9 @@ public class BlankQuizResource {
         return Response.status(Response.Status.OK).entity(result).build();
     }
 
-
     @POST
-    @ApiResponses(value = {@ApiResponse(code = 201, message = "insert blankQuiz successful")})
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertBlankQuiz(
-            @ApiParam(name = "blankQuiz", value = "BlankQuiz example",required = true)
             BlankQuiz blankQuiz) {
 
         blankQuizMapper.insertBlankQuiz(blankQuiz);
@@ -74,12 +69,9 @@ public class BlankQuizResource {
 
 
     @GET
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "successful"),
-            @ApiResponse(code = 404, message = "blankQuiz not found")})
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{param}")
     public Response getBlankQuizzesBySectionId(
-            @ApiParam(value = "sectionId",allowableValues = "int",required = true)
             @PathParam("param") int sectionId
     ) {
 
@@ -109,11 +101,8 @@ public class BlankQuizResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "successful"),
-            @ApiResponse(code = 404, message = "blankQuizItems not found")})
     @Path("/{param}/items")
     public Response getItems(
-            @ApiParam(value = "blankQuizId",allowableValues = "int",required = true)
             @PathParam("param") int blankQuizId) {
 
         BlankQuiz blankQuiz = blankQuizMapper.findOne(blankQuizId);

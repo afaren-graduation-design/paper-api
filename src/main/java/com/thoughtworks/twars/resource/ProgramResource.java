@@ -38,13 +38,9 @@ public class ProgramResource extends Resource {
     private ProgramMapper programMapper;
 
     @GET
-    @ApiResponses(value = {@ApiResponse(code = 200,
-            message = "get paper list by program id successfully"),
-            @ApiResponse(code = 404, message = "get paper list by program id failed")})
     @Path("/{programId}/papers")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPapersByProgramId(
-            @ApiParam(name = "programId", value = "programId", required = true)
             @PathParam("programId") int programId) {
         List<Paper> papers = paperMapper.findPapersByProgramId(programId);
 
@@ -76,9 +72,6 @@ public class ProgramResource extends Resource {
     }
 
     @POST
-    @ApiResponses(value = {@ApiResponse(code = 201,
-            message = "create paper list by programId successfully"),
-            @ApiResponse(code = 415, message = "create paper list by program id failed")})
     @Path("/{programId}/papers")
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertPapers(
@@ -167,15 +160,10 @@ public class ProgramResource extends Resource {
     }
 
     @GET
-    @ApiResponses(value = {@ApiResponse(code = 200,
-            message = "get one paper from program successfully"),
-            @ApiResponse(code = 404, message = "get one paper from program failed")})
     @Path("/{programId}/papers/{paperId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOnePaper(
-            @ApiParam(name = "programId", value = "programId", required = true)
             @PathParam("programId") int programId,
-            @ApiParam(name = "paperId", value = "paperId", required = true)
             @PathParam("paperId") int paperId) {
 
         Paper paper = paperMapper.getOnePaper(paperId);
@@ -188,13 +176,9 @@ public class ProgramResource extends Resource {
     }
 
     @GET
-    @ApiResponses(value = {@ApiResponse(code = 200,
-            message = "get usersId by programId successfully"),
-            @ApiResponse(code = 404, message = "get usersId by programId failure")})
     @Path("/{programId}/users")
     @Produces(MediaType.APPLICATION_JSON)
     public Response findUsersIdByProgramId(
-            @ApiParam(name = "programId", value = "programId", required = true)
             @PathParam("programId") int programId) {
         List<Integer> users = programMapper.findUsersIdByProgramId(programId);
         if (users.size() != 0) {
@@ -217,19 +201,11 @@ public class ProgramResource extends Resource {
 
 
     @POST
-    @ApiResponses(value = {@ApiResponse(code = 204, message = "delete paper successfully"),
-            @ApiResponse(code = 404, message = "delete paper failed")})
     @Path("/{programId}/papers/{paperId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertPaperOperation(
-            @ApiParam(name = "programId", value = "programId", required = true)
             @PathParam("programId") int programId,
-            @ApiParam(name = "paperId", value = "paperId", required = true)
-            @PathParam("paperId") int paperId,
-            @ApiParam(name = "data",
-                    value = "include all info about paper operation when delete paper",
-                    required = true)
-                    Map data) {
+            @PathParam("paperId") int paperId, Map data) {
         try {
 
             String operationType = (String) data.get("operationType");

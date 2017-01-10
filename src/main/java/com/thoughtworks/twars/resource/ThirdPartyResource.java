@@ -17,7 +17,6 @@ public class ThirdPartyResource extends Resource {
     private ThirdPartyMapper thirdPartyMapper;
 
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/github")
     public Response createUser(ThirdParty thirdParty) {

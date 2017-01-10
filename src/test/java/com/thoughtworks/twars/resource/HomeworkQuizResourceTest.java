@@ -235,3 +235,4 @@ public class HomeworkQuizResourceTest extends TestBase {
         MatcherAssert.assertThat(result.size(), is(1));
     }
 }
+

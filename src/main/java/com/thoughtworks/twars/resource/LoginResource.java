@@ -30,15 +30,8 @@ public class LoginResource extends Resource {
     private LoginDetailMapper loginDetailMapper;
 
     @POST
-    @ApiResponses(value = {@ApiResponse(code = 201, message = "successful",
-            responseHeaders = @ResponseHeader(name = "token", description = "login token",
-                    response = String.class)),
-            @ApiResponse(code = 401, message = "login failed")})
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createUser(
-            @ApiParam(name = "user",value = "User example", required = true)
-            User user) {
+    public Response createUser(User user) {
 
         Pattern mobilePhoneMatches = Pattern
                 .compile("^1([3|4|5|8])[0-9]\\d{8}$");

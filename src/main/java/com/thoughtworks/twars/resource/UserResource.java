@@ -35,11 +35,8 @@ public class UserResource extends Resource {
 
     @GET
     @Path("/{param}")
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "get one user successful"),
-            @ApiResponse(code = 404, message = "get one user failed")})
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUser(
-            @ApiParam(name = "userId", value = "int", required = true)
             @PathParam("param") int userId) {
 
         User user = userMapper.getUserById(userId);
@@ -59,11 +56,8 @@ public class UserResource extends Resource {
 
     @GET
     @Path("/{param}/logicPuzzle")
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "get one user successful"),
-            @ApiResponse(code = 404, message = "get one user failed")})
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserLogicPuzzle(
-            @ApiParam(name = "id", value = "userId", required = true)
             @PathParam("param") int userId) {
         ScoreSheet scoreSheet = scoreSheetMapper.findOneByUserId(userId);
 
@@ -98,12 +92,9 @@ public class UserResource extends Resource {
     }
 
     @GET
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "get one userDetail successful"),
-            @ApiResponse(code = 404, message = "get one userDetail user failed")})
     @Path("/{param}/detail")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserDetail(
-            @ApiParam(name = "userId", value = "String", required = true)
             @PathParam("param") String userIds) {
 
         String[] ids = userIds.split(",");
@@ -171,14 +162,9 @@ public class UserResource extends Resource {
 
     @GET
     @Path("/{param}/programs")
-    @ApiResponses(value = {@ApiResponse(code = 200,
-            message = "get one user's programIds successful"),
-            @ApiResponse(code = 404, message = "get one user's programIds failed")})
     @Produces(MediaType.APPLICATION_JSON)
     public Response getProgramById(
-            @ApiParam(name = "userId", value = "int", required = true)
             @PathParam("param") int userId) {
-
         List<Integer> programIds = userMapper.findProgramsById(userId);
 
         if (programIds == null) {
@@ -193,8 +179,6 @@ public class UserResource extends Resource {
 
     @GET
     @Path("/{param}/mentors")
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "get mentorIds successful"),
-            @ApiResponse(code = 404, message = "get mentorIds by studentId failure")})
     @Produces(MediaType.APPLICATION_JSON)
     public Response findMentorIdsByStudentId(
             @PathParam("param") Integer id) {
@@ -211,8 +195,6 @@ public class UserResource extends Resource {
 
     @GET
     @Path("/{param}/mentees")
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "get menteeIds successful"),
-            @ApiResponse(code = 404, message = "get menteeIds by mentorId failure")})
     @Produces(MediaType.APPLICATION_JSON)
     public Response findStudentIdsByMentorId(
             @PathParam("param") Integer id) {
@@ -230,11 +212,8 @@ public class UserResource extends Resource {
 
     @PUT
     @Path("/{param}/detail")
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "update one userDetail successful")})
     @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
     public Response updateUserDetail(
-            @ApiParam(name = "userId", value = "int", required = true)
             @PathParam("param") int userId,
             UserDetail userDetail
     ) {
@@ -248,10 +227,6 @@ public class UserResource extends Resource {
 
 
     @GET
-    @ApiImplicitParams(value = {
-            @ApiImplicitParam(name = "field", value = "field name", required = true),
-            @ApiImplicitParam(name = "value", value = "field value", required = true)})
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "get one user successful")})
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserByField(
             @QueryParam("field") String field,
@@ -281,13 +256,7 @@ public class UserResource extends Resource {
 
     @PUT
     @Path("/{param}/password")
-    @ApiImplicitParams(value = {@ApiImplicitParam(name = "userId", value = "int", required = true),
-            @ApiImplicitParam(name = "userPasswordMap",
-                    value = "include all info when update user password", required = true)})
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "update user password successful"),
-            @ApiResponse(code = 400, message = "update user password failed")})
     @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
     public Response updateUserPassword(
             @PathParam("param") int userId,
             Map userPasswordMap
@@ -310,10 +279,6 @@ public class UserResource extends Resource {
 
     @GET
     @Path("/password/retrieve")
-    @ApiImplicitParams(value = {
-            @ApiImplicitParam(name = "field", value = "field name", required = true),
-            @ApiImplicitParam(name = "value", value = "field value", required = true)})
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "get one user successful")})
     @Produces(MediaType.APPLICATION_JSON)
     public Response findUserByField(
             @QueryParam("field") String field,
@@ -351,9 +316,6 @@ public class UserResource extends Resource {
 
 
     @POST
-    @ApiResponses(value = {@ApiResponse(code = 201, message = "create user and program's "
-            + "relationship successfully"),
-            @ApiResponse(code = 403, message = "create user and program's relationship failure")})
     @Path("/{userId}/programs/{programId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response resetPassword(
@@ -371,13 +333,9 @@ public class UserResource extends Resource {
 
 
     @POST
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "reset password successful")})
     @Path("/password/reset")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response resetPassword(
-            @ApiParam(name = "data", value = "include all info when reset password",
-                    required = true)
-                    Map data) {
+    public Response resetPassword(Map data) {
         String newPasword = (String) data.get("newPassword");
         String token = (String) data.get("token");
         int timeLimit = 86400;
@@ -414,12 +372,6 @@ public class UserResource extends Resource {
     @GET
     @Path("/search")
     @Produces(MediaType.APPLICATION_JSON)
-    @ApiImplicitParams(value = {
-            @ApiImplicitParam(name = "page", value = "page", required = true),
-            @ApiImplicitParam(name = "pageSize", value = "pageSize", required = true)})
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "get users detail successful"),
-            @ApiResponse(code = 404, message = "get users　detail failed")})
-
     public Response searchUsersDetail(
             @DefaultValue("1") @QueryParam("page") Integer page,
             @DefaultValue("15") @QueryParam("pageSize") Integer pageSize,

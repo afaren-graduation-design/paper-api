@@ -64,7 +64,6 @@ public class StackResourceTest extends TestBase {
 
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
-        System.out.println(jsonStr);
 
         Assert.assertThat(jsonStr, is("{\"items\":[{\"definitionFile\":\"./aa/bb/cc\","
                 + "\"stackId\":1,"

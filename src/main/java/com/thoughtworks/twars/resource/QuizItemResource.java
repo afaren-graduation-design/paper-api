@@ -24,8 +24,6 @@ public class QuizItemResource extends Resource {
     private QuizItemMapper quizItemMapper;
 
     @GET
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "get all quizItems successful"),
-            @ApiResponse(code = 404, message = "all quizItems not found")})
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllQuizItems() {
         List<QuizItem> quizItems = quizItemMapper.getAllQuizItems();
@@ -49,11 +47,8 @@ public class QuizItemResource extends Resource {
 
 
     @POST
-    @ApiResponses(value = {@ApiResponse(code = 201, message = "insert quizItems successful")})
     @Produces(MediaType.APPLICATION_JSON)
-    public Response insertQuizItem(
-            @ApiParam(name = "quizItem", value = "QuizItem example", required = true)
-                    QuizItem quizItem) {
+    public Response insertQuizItem(QuizItem quizItem) {
 
         quizItemMapper.insertQuizItem(quizItem);
 
@@ -66,8 +61,6 @@ public class QuizItemResource extends Resource {
 
     @GET
     @Path("/{param}")
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "successful"),
-            @ApiResponse(code = 404, message = "all blankQuizzes not found")})
     @Produces(MediaType.APPLICATION_JSON)
     public Response getQuizItem(
             @PathParam("param") int id) {

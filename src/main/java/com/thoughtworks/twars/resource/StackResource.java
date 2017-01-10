@@ -25,8 +25,6 @@ public class StackResource extends Resource {
     private StackMapper stackMapper;
 
     @GET
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "get all stack successful"),
-            @ApiResponse(code = 404, message = "get all stack failed")})
     @Produces(MediaType.APPLICATION_JSON)
 
     public Response getAllStack() {
