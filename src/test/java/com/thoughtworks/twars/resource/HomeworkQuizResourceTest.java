@@ -41,17 +41,12 @@ public class HomeworkQuizResourceTest extends TestBase {
         when(homeworkQuiz.getTemplateRepository()).thenReturn("templateRepository");
         when(homeworkQuiz.getAnswerPath()).thenReturn("/homework-answer/check-readme");
 
-        UserDetail userDetail = mock(UserDetail.class);
-        when(userDetail.getName()).thenReturn("Rose");
-        when(userMapper.getUserDetailById(homeworkQuiz.getMakerId())).thenReturn(userDetail);
-
         Response response = target(basePath + "/1").request().get();
         assertThat(response.getStatus(), is(200));
 
-        Map homeworkItem = response.readEntity(Map.class);
-        Map item = (Map) homeworkItem.get("homeworkItem");
+        Map item = response.readEntity(Map.class);
         assertThat(item.get("makerId"), is(1));
-        assertThat(item.get("makerName"), is("Rose"));
+        assertThat(item.get("makerDetailUri"), is("users/1/detail"));
         assertThat(item.get("description"), is("这是一道比较简单的题目"));
         assertThat(item.get("evaluateScript"), is("www.baidu.com"));
         assertThat(item.get("templateRepository"), is("templateRepository"));
@@ -79,11 +74,6 @@ public class HomeworkQuizResourceTest extends TestBase {
         when(homeworkQuiz01.getStackId()).thenReturn(2);
 
 
-        UserDetail userDetail = mock(UserDetail.class);
-        when(userDetail.getName()).thenReturn("Rose");
-        when(userMapper.getUserDetailById(1)).thenReturn(userDetail);
-        when(userMapper.getUserDetailById(2)).thenReturn(userDetail);
-
         Response response = target(basePath + "/1,2").request().get();
         Assert.assertEquals(response.getStatus(), 200);
         assertThat(response.getStatus(), is(200));
@@ -91,26 +81,30 @@ public class HomeworkQuizResourceTest extends TestBase {
         Gson gson = new GsonBuilder().create();
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
-        assertThat(jsonStr, is(
-                "{\"homeworkQuizzes\":[{\"evaluateScript\":\"www.baidu.com\","
-                        + "\"templateRepository\":\"templateRepository\","
-                        + "\"createTime\":0.0,"
-                        + "\"stackId\":1,"
-                        + "\"description\":\"这是一道比较简单的题目\","
-                        + "\"id\":1,"
-                        + "\"makerName\":\"Rose\","
-                        + "\"answerPath\":\"/homework-answer/check-readme\","
-                        + "\"uri\":\"homeworkQuizzes/1\"},"
-                        + "{\"evaluateScript\":\"www.talkop.com\","
-                        + "\"templateRepository\":\"talkopRepository\","
-                        + "\"createTime\":0.0,"
-                        + "\"stackId\":2,"
-                        + "\"description\":\"这是一道普通难度的题目\","
-                        + "\"id\":2,"
-                        + "\"makerName\":\"Rose\","
-                        + "\"answerPath\":\"/homework-answer/calculate_median\","
-                        + "\"uri\":\"homeworkQuizzes/2\"}]}"
-        ));
+        assertThat(jsonStr, is("{\"homeworkQuizzes\":["
+                + "{"
+                    + "\"evaluateScript\":\"www.baidu.com\","
+                    + "\"templateRepository\":\"templateRepository\","
+                    + "\"createTime\":0.0,"
+                    + "\"stackId\":1,"
+                    + "\"description\":\"这是一道比较简单的题目\","
+                    + "\"id\":1,"
+                    + "\"makerDetailUri\":\"users/1/detail\","
+                    + "\"answerPath\":\"/homework-answer/check-readme\","
+                    + "\"uri\":\"homeworkQuizzes/1\","
+                    + "\"makerId\":1"
+                + "},{"
+                    + "\"evaluateScript\":\"www.talkop.com\","
+                    + "\"templateRepository\":\"talkopRepository\","
+                    + "\"createTime\":0.0,"
+                    + "\"stackId\":2,"
+                    + "\"description\":\"这是一道普通难度的题目\","
+                    + "\"id\":2,"
+                    + "\"makerDetailUri\":\"users/2/detail\","
+                    + "\"answerPath\":\"/homework-answer/calculate_median\","
+                    + "\"uri\":\"homeworkQuizzes/2\","
+                    + "\"makerId\":2"
+                + "}]}"));
 
     }
 
@@ -122,27 +116,24 @@ public class HomeworkQuizResourceTest extends TestBase {
         when(homeworkQuiz.getTemplateRepository()).thenReturn("templateRepository");
         when(homeworkQuiz.getAnswerPath()).thenReturn("/homework-answer/check-readme");
         when(homeworkQuiz.getStackId()).thenReturn(1);
-
-
-        UserDetail userDetail = mock(UserDetail.class);
-        when(userDetail.getName()).thenReturn("Rose");
-        when(userMapper.getUserDetailById(homeworkQuiz.getMakerId())).thenReturn(userDetail);
+        when(homeworkQuiz.getMakerId()).thenReturn(1);
 
 
         Response response = target("homeworkQuizzes/1").request().get();
 
         assertThat(response.getStatus(), is(200));
 
-        Map result = response.readEntity(Map.class);
+        Map item = response.readEntity(Map.class);
 
-        Map homeworkItem = (Map) result.get("homeworkItem");
+        assertThat(item.get("id"), is(1));
+        assertThat(item.get("makerDetailUri"), is("users/1/detail"));
+        assertThat(item.get("description"), is("这是一道比较简单的题目"));
+        assertThat(item.get("evaluateScript"), is("www.baidu.com"));
+        assertThat(item.get("templateRepository"), is("templateRepository"));
+        assertThat(item.get("answerPath"), is("/homework-answer/check-readme"));
+        assertThat(item.get("stackId"), is(1));
+        assertThat(item.get("makerId"), is(1));
 
-        assertThat(homeworkItem.get("id"), is(1));
-        assertThat(homeworkItem.get("description"), is("这是一道比较简单的题目"));
-        assertThat(homeworkItem.get("evaluateScript"), is("www.baidu.com"));
-        assertThat(homeworkItem.get("templateRepository"), is("templateRepository"));
-        assertThat(homeworkItem.get("answerPath"), is("/homework-answer/check-readme"));
-        assertThat(homeworkItem.get("stackId"), is(1));
 
     }
 

@@ -96,11 +96,12 @@ public class HomeworkQuizResource extends Resource {
             homeworkQuizzes.add(homeworkItem);
         }
         Map result = new HashMap<>();
-        if(homeworkQuizzes.size() == 1) {
+        if (homeworkQuizzes.size() == 1) {
             result = (Map) homeworkQuizzes.get(0);
-        }else{
-            result.put("homeworkQuizzes", homeworkQuizzes);
+            return Response.status(Response.Status.OK).entity(result).build();
         }
+        result.put("homeworkQuizzes", homeworkQuizzes);
+
         return Response.status(Response.Status.OK).entity(result).build();
     }
 
