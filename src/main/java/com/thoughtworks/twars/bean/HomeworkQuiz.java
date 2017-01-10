@@ -109,6 +109,7 @@ public class HomeworkQuiz {
         result.put("type", getType());
         result.put("answerPath", getAnswerPath());
         result.put("stackId", getStackId());
+        result.put("uri", "homeworkQuizzes/" + getId());
 
         return result;
     }
