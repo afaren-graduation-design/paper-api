@@ -1,7 +1,5 @@
 package com.thoughtworks.twars.mapper;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.thoughtworks.twars.bean.User;
 import com.thoughtworks.twars.bean.UserDetail;
 import org.junit.Before;

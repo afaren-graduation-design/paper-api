@@ -180,11 +180,12 @@ public class HomeworkQuizResourceTest extends TestBase {
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
         assertThat(jsonStr, is("{\"homeworkQuizzes\":[{\"evaluateScript\":\"www.talkop.com\","
-                + "\"templateRepository\":\"talkopRepository\",\"createTime\":0.0,"
+                + "\"templateRepository\":\"talkopRepository\","
+                + "\"createTime\":0.0,"
                 + "\"stackId\":2,"
                 + "\"description\":\"这是一道普通难度的题目\","
                 + "\"id\":0,"
-                + "\"makerName\":\"Rose\","
+                + "\"makerDetailUri\":\"users/2/detail\","
                 + "\"answerPath\":\"/homework-answer/check-readme\","
                 + "\"uri\":\"homeworkQuizzes/0\","
                 + "\"makerId\":2},"
@@ -194,7 +195,7 @@ public class HomeworkQuizResourceTest extends TestBase {
                 + "\"stackId\":0,"
                 + "\"description\":\"这是一道比较简单的题目\","
                 + "\"id\":0,"
-                + "\"makerName\":\"Rose\","
+                + "\"makerDetailUri\":\"users/1/detail\","
                 + "\"answerPath\":\"/homework-answer/check-readme\","
                 + "\"uri\":\"homeworkQuizzes/0\","
                 + "\"makerId\":1}]}"));
