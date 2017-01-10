@@ -1,7 +1,6 @@
 package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.bean.HomeworkQuiz;
-import com.thoughtworks.twars.bean.UserDetail;
 import com.thoughtworks.twars.mapper.HomeworkQuizMapper;
 import com.thoughtworks.twars.mapper.UserMapper;
 import io.swagger.annotations.*;
@@ -79,36 +78,6 @@ public class HomeworkQuizResource extends Resource {
         List homeworkQuizzes = new ArrayList();
         String[] idList = ids.split(",");
 
-        if (idList.length == 1) {
-            Integer id = Integer.parseInt(idList[0]);
-            HomeworkQuiz homeworkQuiz = homeworkQuizMapper.findById(id);
-
-            if (homeworkQuiz == null) {
-                return Response.status(Response.Status.NOT_FOUND).build();
-            }
-
-            Map homeworkItem = new HashMap<>();
-
-            homeworkItem.put("id", id);
-            homeworkItem.put("description", homeworkQuiz.getDescription());
-            homeworkItem.put("evaluateScript", homeworkQuiz.getEvaluateScript());
-            homeworkItem.put("templateRepository", homeworkQuiz.getTemplateRepository());
-            homeworkItem.put("makerId", homeworkQuiz.getMakerId());
-            UserDetail userDetail = userMapper.getUserDetailById(homeworkQuiz.getMakerId());
-            homeworkItem.put("makerName", userDetail.getName());
-            homeworkItem.put("createTime", homeworkQuiz.getCreateTime());
-            homeworkItem.put("homeworkName", homeworkQuiz.getHomeworkName());
-            homeworkItem.put("type", homeworkQuiz.getType());
-            homeworkItem.put("answerPath", homeworkQuiz.getAnswerPath());
-            homeworkItem.put("stackId", homeworkQuiz.getStackId());
-            homeworkItem.put("uri", "homeworkQuizzes/" + id);
-
-            Map result = new HashMap<>();
-            result.put("homeworkItem", homeworkItem);
-            return Response.status(Response.Status.OK).entity(result).build();
-
-        }
-
         for (String i : idList) {
             Integer id = Integer.parseInt(i);
             HomeworkQuiz homeworkQuiz = homeworkQuizMapper.findById(id);
@@ -123,8 +92,7 @@ public class HomeworkQuizResource extends Resource {
             homeworkItem.put("description", homeworkQuiz.getDescription());
             homeworkItem.put("evaluateScript", homeworkQuiz.getEvaluateScript());
             homeworkItem.put("templateRepository", homeworkQuiz.getTemplateRepository());
-            UserDetail userDetail = userMapper.getUserDetailById(homeworkQuiz.getMakerId());
-            homeworkItem.put("makerName", userDetail.getName());
+            homeworkItem.put("makerDetailUri", "users/" + homeworkQuiz.getMakerId() + "/detail");
             homeworkItem.put("createTime", homeworkQuiz.getCreateTime());
             homeworkItem.put("homeworkName", homeworkQuiz.getHomeworkName());
             homeworkItem.put("answerPath", homeworkQuiz.getAnswerPath());
@@ -132,11 +100,14 @@ public class HomeworkQuizResource extends Resource {
             homeworkItem.put("uri", "homeworkQuizzes/" + id);
             homeworkItem.put("type", homeworkQuiz.getType());
 
-
             homeworkQuizzes.add(homeworkItem);
         }
         Map result = new HashMap<>();
-        result.put("homeworkQuizzes", homeworkQuizzes);
+        if(homeworkQuizzes.size() == 1) {
+            result = (Map) homeworkQuizzes.get(0);
+        }else{
+            result.put("homeworkQuizzes", homeworkQuizzes);
+        }
         return Response.status(Response.Status.OK).entity(result).build();
     }
 
