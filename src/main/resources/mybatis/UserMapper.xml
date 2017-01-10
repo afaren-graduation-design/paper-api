@@ -22,6 +22,21 @@
         <result column="mobilePhone" property="mobilePhone"></result>
     </resultMap>
 
+    <resultMap id="userInformationMap" type="java.util.Map">
+        <id property="userId" column="userId"></id>
+        <result column="school" property="school"></result>
+        <result column="name" property="name"></result>
+        <result column="major" property="major"></result>
+        <result column="degree" property="degree"></result>
+        <result column="gender" property="gender"></result>
+        <result column="schoolProvince" property="schoolProvince"></result>
+        <result column="schoolCity" property="schoolCity"></result>
+        <result column="entranceYear" property="entranceYear"></result>
+        <result column="email" property="email"></result>
+        <result column="mobilePhone" property="mobilePhone"></result>
+
+    </resultMap>
+
     <select id="getUserById" resultType="com.thoughtworks.twars.bean.User">
         select * from users where id = #{id}
     </select>
@@ -86,8 +101,8 @@
         SELECT programId FROM userProgram WHERE userId = #{id}
     </select>
 
-    <select id="findUsersByInformation" resultMap="userDetailMap">
-        select userDetail.*
+    <select id="findUsersByInformation" resultMap="userInformationMap">
+        select userDetail.* ,users.email,users.mobilePhone
         from users inner join userDetail join userPrivilege
         on
         users.id = userDetail.userId

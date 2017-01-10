@@ -357,15 +357,17 @@ public class UserResourceTest extends TestBase {
     @Test
     public void should_return_users_detail() throws Exception {
 
-        UserDetail userDetail = mock(UserDetail.class);
-        userDetail.setDegree("本科");
-        userDetail.setEntranceYear("2016");
-        userDetail.setGender("F");
-        userDetail.setMajor("计算机");
-        userDetail.setName("张一");
-        userDetail.setSchool("西安邮电大学");
-        userDetail.setSchoolCity("西安");
-        userDetail.setUserId(3);
+        Map userDetail = new HashMap();
+
+        userDetail.put("degree", "本科");
+        userDetail.put("entranceYear", "2016");
+        userDetail.put("gentder", "F");
+        userDetail.put("major", "计算机");
+        userDetail.put("name", "张一");
+        userDetail.put("school", "西安邮电大学");
+        userDetail.put("schoolCity", "西安");
+        userDetail.put("useId", 3);
+
 
         when(userMapper.findUsersByInformation("test", "mentor", 1, 15))
                 .thenReturn(Arrays.asList(userDetail));

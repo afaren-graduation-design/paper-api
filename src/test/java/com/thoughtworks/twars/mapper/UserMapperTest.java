@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -226,35 +227,35 @@ public class UserMapperTest extends TestBase {
 
     @Test
     public void should_return_users_detail_by_email_and_privilege() {
-        List<UserDetail> userDetail = userMapper
+        List<Map> userDetail = userMapper
                 .findUsersByInformation("test", "mentor", 1, 15);
         assertThat(userDetail.size(), is(1));
     }
 
     @Test
     public void should_return_users_detail_by_email() {
-        List<UserDetail> usersDetail = userMapper
+        List<Map> usersDetail = userMapper
                 .findUsersByInformation("@", null, 0, 15);
         assertThat(usersDetail.size(), is(3));
     }
 
     @Test
     public void should_return_users_detail_by_privilege() {
-        List<UserDetail> userDetail = userMapper
+        List<Map> userDetail = userMapper
                 .findUsersByInformation(null, "mentor", 0, 15);
         assertThat(userDetail.size(), is(3));
     }
 
     @Test
     public void should_return_users_detail_by_page() {
-        List<UserDetail> userDetail = userMapper
+        List<Map> userDetail = userMapper
                 .findUsersByInformation(null, null, 0, 15);
         assertThat(userDetail.size(), is(3));
     }
 
     @Test
     public void should_return_users_detail_by_none() {
-        List<UserDetail> userDetail = userMapper
+        List<Map> userDetail = userMapper
                 .findUsersByInformation(null, null, 0, 15);
         assertThat(userDetail.size(), is(3));
     }

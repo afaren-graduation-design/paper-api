@@ -5,6 +5,7 @@ import com.thoughtworks.twars.bean.UserDetail;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserMapper {
 
@@ -41,7 +42,7 @@ public interface UserMapper {
 
     Integer insertUserProgram(Integer userId, Integer programId);
 
-    List<UserDetail> findUsersByInformation(
+    List<Map> findUsersByInformation(
             String email, String privilege, Integer page, Integer pageSize);
 
     List<Integer> findMentorIdsByStudentId(Integer id);
