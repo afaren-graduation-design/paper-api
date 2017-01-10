@@ -1,5 +1,8 @@
 package com.thoughtworks.twars.bean;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class HomeworkQuiz {
     private int id;
     private String description;
@@ -90,5 +93,23 @@ public class HomeworkQuiz {
 
     public void setStackId(int stack) {
         this.stackId = stack;
+    }
+
+    public Map<String, Object> getResponseInfo() {
+        Map<String, Object> result = new HashMap<>();
+
+        result.put("id", getId());
+        result.put("description", getDescription());
+        result.put("evaluateScript", getEvaluateScript());
+        result.put("templateRepository", getTemplateRepository());
+        result.put("makerId", getMakerId());
+        result.put("makerDetailUri", "users/" + getMakerId() + "/detail");
+        result.put("createTime", getCreateTime());
+        result.put("homeworkName", getHomeworkName());
+        result.put("type", getType());
+        result.put("answerPath", getAnswerPath());
+        result.put("stackId", getStackId());
+
+        return result;
     }
 }

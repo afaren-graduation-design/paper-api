@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Path("/homeworkQuizzes")
 @Api
@@ -35,30 +36,12 @@ public class HomeworkQuizResource extends Resource {
         int startPage = Math.max(page - 1, 0);
         List<HomeworkQuiz> allHomeworkQuizzes = homeworkQuizMapper
                 .findHomeworkQuizzes(homeworkName, type, startPage, pageSize);
-        List homeworkQuizzes = new ArrayList();
-
-        for (HomeworkQuiz homeworkQuiz : allHomeworkQuizzes) {
-            Map homeworkItem = new HashMap<>();
-
-            homeworkItem.put("id", homeworkQuiz.getId());
-            homeworkItem.put("description", homeworkQuiz.getDescription());
-            homeworkItem.put("evaluateScript", homeworkQuiz.getEvaluateScript());
-            homeworkItem.put("templateRepository", homeworkQuiz.getTemplateRepository());
-            homeworkItem.put("makerId", homeworkQuiz.getMakerId());
-            homeworkItem.put("makerDetailUri", "users/" + homeworkQuiz.getMakerId() + "/detail");
-            homeworkItem.put("createTime", homeworkQuiz.getCreateTime());
-            homeworkItem.put("homeworkName", homeworkQuiz.getHomeworkName());
-            homeworkItem.put("type", homeworkQuiz.getType());
-            homeworkItem.put("answerPath", homeworkQuiz.getAnswerPath());
-            homeworkItem.put("stackId", homeworkQuiz.getStackId());
-            homeworkItem.put("uri", "homeworkQuizzes/" + homeworkQuiz.getId());
-
-            homeworkQuizzes.add(homeworkItem);
-
-        }
-
+        List<Map> items = allHomeworkQuizzes
+                .stream()
+                .map(item -> item.getResponseInfo())
+                .collect(Collectors.toList());
         Map result = new HashMap<>();
-        result.put("homeworkQuizzes", homeworkQuizzes);
+        result.put("homeworkQuizzes", items);
         return Response.status(Response.Status.OK).entity(result).build();
     }
 
@@ -74,27 +57,11 @@ public class HomeworkQuizResource extends Resource {
             Integer id = Integer.parseInt(i);
             HomeworkQuiz homeworkQuiz = homeworkQuizMapper.findById(id);
 
-            if (homeworkQuiz == null) {
-                return Response.status(Response.Status.NOT_FOUND).build();
-            }
-
-            Map homeworkItem = new HashMap<>();
-
-            homeworkItem.put("id", id);
-            homeworkItem.put("description", homeworkQuiz.getDescription());
-            homeworkItem.put("evaluateScript", homeworkQuiz.getEvaluateScript());
-            homeworkItem.put("templateRepository", homeworkQuiz.getTemplateRepository());
-            homeworkItem.put("makerDetailUri", "users/" + homeworkQuiz.getMakerId() + "/detail");
-            homeworkItem.put("makerId", homeworkQuiz.getMakerId());
-            homeworkItem.put("createTime", homeworkQuiz.getCreateTime());
-            homeworkItem.put("homeworkName", homeworkQuiz.getHomeworkName());
-            homeworkItem.put("answerPath", homeworkQuiz.getAnswerPath());
-            homeworkItem.put("stackId", homeworkQuiz.getStackId());
-            homeworkItem.put("uri", "homeworkQuizzes/" + id);
-            homeworkItem.put("type", homeworkQuiz.getType());
+            Map homeworkItem = homeworkQuiz.getResponseInfo();
 
             homeworkQuizzes.add(homeworkItem);
         }
+
         Map result = new HashMap<>();
         if (homeworkQuizzes.size() == 1) {
             result = (Map) homeworkQuizzes.get(0);

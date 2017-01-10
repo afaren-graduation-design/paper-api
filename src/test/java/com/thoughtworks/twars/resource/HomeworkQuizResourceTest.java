@@ -41,16 +41,29 @@ public class HomeworkQuizResourceTest extends TestBase {
         when(homeworkQuiz.getTemplateRepository()).thenReturn("templateRepository");
         when(homeworkQuiz.getAnswerPath()).thenReturn("/homework-answer/check-readme");
 
+        Map h1 = new HashMap();
+        h1.put("id", 1);
+        h1.put("makerId", 1);
+        h1.put("description", "这是一道比较简单的题目");
+        h1.put("evaluateScript", "www.baidu.com");
+        h1.put("templateRepository", "templateRepository");
+        h1.put("answerPath", "homework-answer/check-readme");
+        h1.put("makerDetailUri", "users/1/detail");
+
+
+        when(homeworkQuiz.getResponseInfo()).thenReturn(h1);
+
         Response response = target(basePath + "/1").request().get();
         assertThat(response.getStatus(), is(200));
 
         Map item = response.readEntity(Map.class);
+        assertThat(item.get("id"), is(1));
         assertThat(item.get("makerId"), is(1));
         assertThat(item.get("makerDetailUri"), is("users/1/detail"));
         assertThat(item.get("description"), is("这是一道比较简单的题目"));
         assertThat(item.get("evaluateScript"), is("www.baidu.com"));
         assertThat(item.get("templateRepository"), is("templateRepository"));
-        assertThat(item.get("answerPath"), is("/homework-answer/check-readme"));
+        assertThat(item.get("answerPath"), is("homework-answer/check-readme"));
     }
 
     @Test
@@ -61,8 +74,19 @@ public class HomeworkQuizResourceTest extends TestBase {
         when(homeworkQuiz.getDescription()).thenReturn("这是一道比较简单的题目");
         when(homeworkQuiz.getEvaluateScript()).thenReturn("www.baidu.com");
         when(homeworkQuiz.getTemplateRepository()).thenReturn("templateRepository");
-        when(homeworkQuiz.getAnswerPath()).thenReturn("/homework-answer/check-readme");
+        when(homeworkQuiz.getAnswerPath()).thenReturn("homework-answer/check-readme");
         when(homeworkQuiz.getStackId()).thenReturn(1);
+
+        Map h1 = new HashMap();
+        h1.put("id", 1);
+        h1.put("makerId", 1);
+        h1.put("description", "这是一道比较简单的题目");
+        h1.put("evaluateScript", "www.baidu.com");
+        h1.put("templateRepository", "templateRepository");
+        h1.put("answerPath", "homework-answer/check-readme");
+        h1.put("makerDetailUri", "users/1/detail");
+
+        when(homeworkQuiz.getResponseInfo()).thenReturn(h1);
 
         when(homeworkQuizMapper.findById(2)).thenReturn(homeworkQuiz01);
 
@@ -70,42 +94,40 @@ public class HomeworkQuizResourceTest extends TestBase {
         when(homeworkQuiz01.getDescription()).thenReturn("这是一道普通难度的题目");
         when(homeworkQuiz01.getEvaluateScript()).thenReturn("www.talkop.com");
         when(homeworkQuiz01.getTemplateRepository()).thenReturn("talkopRepository");
-        when(homeworkQuiz01.getAnswerPath()).thenReturn("/homework-answer/calculate_median");
+        when(homeworkQuiz01.getAnswerPath()).thenReturn("homework-answer/calculate_median");
         when(homeworkQuiz01.getStackId()).thenReturn(2);
 
+        Map h2 = new HashMap();
+        h2.put("id", 2);
+        h2.put("makerId", 2);
+        h2.put("description", "这是一道普通难度的题目");
+        h2.put("evaluateScript", "www.talkop.com");
+        h2.put("templateRepository", "talkopRepository");
+        h2.put("answerPath", "homework-answer/calculate_median");
+        h2.put("makerDetailUri", "users/2/detail");
+
+        when(homeworkQuiz01.getResponseInfo()).thenReturn(h2);
 
         Response response = target(basePath + "/1,2").request().get();
-        Assert.assertEquals(response.getStatus(), 200);
         assertThat(response.getStatus(), is(200));
 
         Gson gson = new GsonBuilder().create();
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
-        assertThat(jsonStr, is("{\"homeworkQuizzes\":["
-                + "{"
-                    + "\"evaluateScript\":\"www.baidu.com\","
-                    + "\"templateRepository\":\"templateRepository\","
-                    + "\"createTime\":0.0,"
-                    + "\"stackId\":1,"
-                    + "\"description\":\"这是一道比较简单的题目\","
-                    + "\"id\":1,"
-                    + "\"makerDetailUri\":\"users/1/detail\","
-                    + "\"answerPath\":\"/homework-answer/check-readme\","
-                    + "\"uri\":\"homeworkQuizzes/1\","
-                    + "\"makerId\":1"
-                + "},{"
-                    + "\"evaluateScript\":\"www.talkop.com\","
-                    + "\"templateRepository\":\"talkopRepository\","
-                    + "\"createTime\":0.0,"
-                    + "\"stackId\":2,"
-                    + "\"description\":\"这是一道普通难度的题目\","
-                    + "\"id\":2,"
-                    + "\"makerDetailUri\":\"users/2/detail\","
-                    + "\"answerPath\":\"/homework-answer/calculate_median\","
-                    + "\"uri\":\"homeworkQuizzes/2\","
-                    + "\"makerId\":2"
-                + "}]}"));
-
+        assertThat(jsonStr, is("{\"homeworkQuizzes\":[{\"evaluateScript\":\"www.baidu.com\","
+                + "\"templateRepository\":\"templateRepository\","
+                + "\"description\":\"这是一道比较简单的题目\","
+                + "\"id\":1,"
+                + "\"answerPath\":\"homework-answer/check-readme\","
+                + "\"makerDetailUri\":\"users/1/detail\","
+                + "\"makerId\":1},"
+                + "{\"evaluateScript\":\"www.talkop.com\","
+                + "\"templateRepository\":\"talkopRepository\","
+                + "\"description\":\"这是一道普通难度的题目\","
+                + "\"id\":2,"
+                + "\"answerPath\":\"homework-answer/calculate_median\","
+                + "\"makerDetailUri\":\"users/2/detail\","
+                + "\"makerId\":2}]}"));
     }
 
     @Test
@@ -114,11 +136,21 @@ public class HomeworkQuizResourceTest extends TestBase {
         when(homeworkQuiz.getDescription()).thenReturn("这是一道比较简单的题目");
         when(homeworkQuiz.getEvaluateScript()).thenReturn("www.baidu.com");
         when(homeworkQuiz.getTemplateRepository()).thenReturn("templateRepository");
-        when(homeworkQuiz.getAnswerPath()).thenReturn("/homework-answer/check-readme");
+        when(homeworkQuiz.getAnswerPath()).thenReturn("homework-answer/check-readme");
         when(homeworkQuiz.getStackId()).thenReturn(1);
         when(homeworkQuiz.getMakerId()).thenReturn(1);
 
+        Map h1 = new HashMap();
+        h1.put("id", 1);
+        h1.put("makerId", 1);
+        h1.put("stackId", 1);
+        h1.put("description", "这是一道比较简单的题目");
+        h1.put("evaluateScript", "www.baidu.com");
+        h1.put("templateRepository", "templateRepository");
+        h1.put("answerPath", "homework-answer/check-readme");
+        h1.put("makerDetailUri", "users/1/detail");
 
+        when(homeworkQuiz.getResponseInfo()).thenReturn(h1);
         Response response = target("homeworkQuizzes/1").request().get();
 
         assertThat(response.getStatus(), is(200));
@@ -130,11 +162,9 @@ public class HomeworkQuizResourceTest extends TestBase {
         assertThat(item.get("description"), is("这是一道比较简单的题目"));
         assertThat(item.get("evaluateScript"), is("www.baidu.com"));
         assertThat(item.get("templateRepository"), is("templateRepository"));
-        assertThat(item.get("answerPath"), is("/homework-answer/check-readme"));
+        assertThat(item.get("answerPath"), is("homework-answer/check-readme"));
         assertThat(item.get("stackId"), is(1));
         assertThat(item.get("makerId"), is(1));
-
-
     }
 
     @Test
@@ -144,7 +174,18 @@ public class HomeworkQuizResourceTest extends TestBase {
         when(homeworkQuiz.getEvaluateScript()).thenReturn("www.baidu.com");
         when(homeworkQuiz.getTemplateRepository()).thenReturn("templateRepository");
         when(homeworkQuiz.getAnswerPath()).thenReturn("/homework-answer/check-readme");
-        when(homeworkQuiz01.getStackId()).thenReturn(1);
+        when(homeworkQuiz.getStackId()).thenReturn(2);
+
+        Map h1 = new HashMap();
+        h1.put("makerId", 1);
+        h1.put("description", "这是一道比较简单的题目");
+        h1.put("evaluateScript", "www.baidu.com");
+        h1.put("templateRepository", "templateRepository");
+        h1.put("answerPath", "/homework-answer/check-readme");
+        h1.put("stackId", 2);
+        h1.put("makerDetailUri", "users/1/detail");
+
+        when(homeworkQuiz.getResponseInfo()).thenReturn(h1);
 
         when(homeworkQuiz01.getMakerId()).thenReturn(2);
         when(homeworkQuiz01.getDescription()).thenReturn("这是一道普通难度的题目");
@@ -153,14 +194,19 @@ public class HomeworkQuizResourceTest extends TestBase {
         when(homeworkQuiz01.getAnswerPath()).thenReturn("/homework-answer/check-readme");
         when(homeworkQuiz01.getStackId()).thenReturn(2);
 
+        Map h2 = new HashMap();
+        h2.put("makerId", 2);
+        h2.put("description", "这是一道普通难度的题目");
+        h2.put("evaluateScript", "www.talkop.com");
+        h2.put("templateRepository", "talkopRepository");
+        h2.put("answerPath", "/homework-answer/check-readme");
+        h2.put("stackId", 2);
+        h2.put("makerDetailUri", "users/2/detail");
+        when(homeworkQuiz01.getResponseInfo()).thenReturn(h2);
 
-        UserDetail userDetail = mock(UserDetail.class);
-        when(userDetail.getName()).thenReturn("Rose");
-        when(userMapper.getUserDetailById(1)).thenReturn(userDetail);
-        when(userMapper.getUserDetailById(2)).thenReturn(userDetail);
 
         when(homeworkQuizMapper.findHomeworkQuizzes(null, null, 0, 15))
-                .thenReturn(Arrays.asList(homeworkQuiz01, homeworkQuiz));
+                .thenReturn(Arrays.asList(homeworkQuiz, homeworkQuiz01));
 
         Response response = target(basePath).request().get();
 
@@ -170,26 +216,22 @@ public class HomeworkQuizResourceTest extends TestBase {
 
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
-        assertThat(jsonStr, is("{\"homeworkQuizzes\":[{\"evaluateScript\":\"www.talkop.com\","
+        System.out.println(jsonStr);
+        assertThat(jsonStr, is("{\"homeworkQuizzes\":[{\"evaluateScript\":\"www.baidu.com\","
+                + "\"templateRepository\":\"templateRepository\","
+                + "\"stackId\":2,"
+                + "\"description\":\"这是一道比较简单的题目\","
+                + "\"answerPath\":\"/homework-answer/check-readme\","
+                + "\"makerDetailUri\":\"users/1/detail\","
+                + "\"makerId\":1},"
+                + "{\"evaluateScript\":\"www.talkop.com\","
                 + "\"templateRepository\":\"talkopRepository\","
-                + "\"createTime\":0.0,"
                 + "\"stackId\":2,"
                 + "\"description\":\"这是一道普通难度的题目\","
-                + "\"id\":0,"
+                + "\"answerPath\":\"/homework-answer/check-readme\","
                 + "\"makerDetailUri\":\"users/2/detail\","
-                + "\"answerPath\":\"/homework-answer/check-readme\","
-                + "\"uri\":\"homeworkQuizzes/0\","
-                + "\"makerId\":2},"
-                + "{\"evaluateScript\":\"www.baidu.com\","
-                + "\"templateRepository\":\"templateRepository\","
-                + "\"createTime\":0.0,"
-                + "\"stackId\":0,"
-                + "\"description\":\"这是一道比较简单的题目\","
-                + "\"id\":0,"
-                + "\"makerDetailUri\":\"users/1/detail\","
-                + "\"answerPath\":\"/homework-answer/check-readme\","
-                + "\"uri\":\"homeworkQuizzes/0\","
-                + "\"makerId\":1}]}"));
+                + "\"makerId\":2}]}"
+        ));
     }
 
     @Test
@@ -226,4 +268,5 @@ public class HomeworkQuizResourceTest extends TestBase {
         MatcherAssert.assertThat(result.size(), is(1));
     }
 }
+
 
