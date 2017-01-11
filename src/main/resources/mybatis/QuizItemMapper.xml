@@ -42,4 +42,9 @@
             select * from quizItem where count  <  15 limit #{exampleCount};
         ]]>
     </select>
+
+    <select id="getExamples" resultMap="quizItemListMap" flushCache="true" useCache="false">
+        select id,count from quizItem order by count limit 2;
+    </select>
+
 </mapper>

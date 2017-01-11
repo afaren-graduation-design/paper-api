@@ -19,4 +19,6 @@ public interface QuizItemMapper {
     List<QuizItem> getHardItems(int hardItems);
 
     List<QuizItem> getExampleItems(int exampleCount);
+
+    List<QuizItem> getExamples();
 }

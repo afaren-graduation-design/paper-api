@@ -3,9 +3,6 @@ package com.thoughtworks.twars.resource;
 import com.thoughtworks.twars.bean.QuizItem;
 import com.thoughtworks.twars.mapper.QuizItemMapper;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -81,5 +78,21 @@ public class QuizItemResource extends Resource {
 
         return Response.status(Response.Status.OK).entity(map).build();
     }
+
+    @GET
+    @Path("/examples")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getExamples() {
+
+        List<QuizItem> exampleItems = quizItemMapper.getExamples();
+        List<Map> exaples = exampleItems
+                .stream()
+                .map(item -> item.getResponseInfo())
+                .collect(Collectors.toList());
+        Map reslut = new HashMap();
+        reslut.put("examples",exaples);
+        return Response.status(Response.Status.OK).entity(reslut).build();
+    }
+
 
 }

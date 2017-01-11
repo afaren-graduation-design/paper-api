@@ -1,5 +1,8 @@
 package com.thoughtworks.twars.bean;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class QuizItem {
     private int id;
     private String initializedBox;
@@ -119,4 +122,25 @@ public class QuizItem {
     public void setInfoPath(String infoPath) {
         this.infoPath = infoPath;
     }
+
+    public Map getResponseInfo() {
+        Map quizItem = new HashMap();
+
+        quizItem.put("id", getId());
+        quizItem.put("initializedBox", getInitializedBox());
+        quizItem.put("stepsString", getStepsString());
+        quizItem.put("count", getCount());
+        quizItem.put("question", getQuestion());
+        quizItem.put("questionZh", getQuestionZh());
+        quizItem.put("stepsLength", getStepsLength());
+        quizItem.put("maxUpdateTimes", getMaxUpdateTimes());
+        quizItem.put("answer", getAnswer());
+        quizItem.put("description", getDescription());
+        quizItem.put("descriptionZh", getDescriptionZh());
+        quizItem.put("chartPath", getChartPath());
+        quizItem.put("infoPath", getInfoPath());
+
+        return quizItem;
+    }
+
 }

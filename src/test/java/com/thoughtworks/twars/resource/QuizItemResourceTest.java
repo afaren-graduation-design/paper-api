@@ -1,12 +1,16 @@
 package com.thoughtworks.twars.resource;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.thoughtworks.twars.bean.QuizItem;
+import org.junit.Assert;
 import org.junit.Test;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -88,5 +92,86 @@ public class QuizItemResourceTest extends TestBase {
 
         Response response = target(basePath + "/10").request().get();
         assertThat(response.getStatus(), is(404));
+    }
+
+    @Test
+    public void should_return_example_quiz_items() {
+        Map firstItem = new HashMap();
+
+        firstItem.put("id", 1);
+        firstItem.put("initializedBox", " [0,2,7,2,1,5,7,1,4,8]");
+        firstItem.put("stepsString", "step instructions");
+        firstItem.put("count", 13);
+        firstItem.put("question", "question english instructions");
+        firstItem.put("questionZh", "question Chinese instructions");
+        firstItem.put("stepsLength", 11);
+        firstItem.put("maxUpdateTimes", 4);
+        firstItem.put("answer", 5);
+        firstItem.put("description", "english description");
+        firstItem.put("descriptionZh", "chinese description");
+        firstItem.put("chartPath", "logic-puzzle/17.png");
+        firstItem.put("infoPath", "logic-puzzle/17.json");
+
+        Map secondItem = new HashMap();
+
+        secondItem.put("id", 2);
+        secondItem.put("initializedBox", "[0,2,7,2,1,5,7,1,4,8]");
+        secondItem.put("stepsString", "step instructions");
+        secondItem.put("count", 14);
+        secondItem.put("question", "question english instructions");
+        secondItem.put("questionZh", "question Chinese instructions");
+        secondItem.put("stepsLength", 11);
+        secondItem.put("maxUpdateTimes", 4);
+        secondItem.put("answer", 1);
+        secondItem.put("description", "english description");
+        secondItem.put("descriptionZh", "chinese description");
+        secondItem.put("chartPath", "logic-puzzle/33.png");
+        secondItem.put("infoPath", "logic-puzzle/33.json");
+
+        when(quizItemMapper.getExamples()).thenReturn(Arrays.asList(firstQuizItem, secondQuizItem));
+        when(firstQuizItem.getResponseInfo()).thenReturn(firstItem);
+        when(secondQuizItem.getResponseInfo()).thenReturn(secondItem);
+
+        Response response = target(basePath + "/examples").request().get();
+        assertThat(response.getStatus(), is(200));
+
+        Gson gson = new GsonBuilder().create();
+
+        Map result = response.readEntity(Map.class);
+        String jsonStr = gson.toJson(result);
+
+        Assert.assertThat(jsonStr, is("{\"examples\":["
+                + "{\"question\":\"question english instructions\","
+                    + "\"count\":13,"
+                    + "\"description\":\"english description\","
+                    + "\"infoPath\":\"logic-puzzle/17.json\","
+                    + "\"stepsLength\":11,"
+                    + "\"maxUpdateTimes\":4,"
+                    + "\"descriptionZh\":\"chinese description\","
+                    + "\"answer\":5,"
+                    + "\"stepsString\":\"step instructions\","
+                    + "\"questionZh\":\"question Chinese instructions\","
+                    + "\"id\":1,"
+                    + "\"chartPath\":\"logic-puzzle/17.png\","
+                    + "\"initializedBox\":\" [0,2,7,2,1,5,7,1,4,8]\""
+                + "},{"
+                    + "\"question\":\"question english instructions\","
+                    + "\"count\":14,"
+                    + "\"description\":\"english description\","
+                    + "\"infoPath\":\"logic-puzzle/33.json\","
+                    + "\"stepsLength\":11,"
+                    + "\"maxUpdateTimes\":4,"
+                    + "\"descriptionZh\":\"chinese description\","
+                    + "\"answer\":1,"
+                    + "\"stepsString\":\"step instructions\","
+                    + "\"questionZh\":\"question Chinese instructions\","
+                    + "\"id\":2,"
+                    + "\"chartPath\":\"logic-puzzle/33.png\","
+                    + "\"initializedBox\":\"[0,2,7,2,1,5,7,1,4,8]\""
+                + "}"
+            + "]}"));
+
+
+
     }
 }
