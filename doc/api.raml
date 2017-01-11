@@ -498,7 +498,28 @@ baseUri: http://api.bronzesword.com/
                 question: string
                 description: string
                 chartPath: string
-
+  /examples:
+    get:
+      description: 获得一count最小的前两道例题
+      responses:
+        200:
+          body:
+            application/json:
+              properties:
+                id: integer
+                initializedBox: string
+                stepsString: string
+                count: integer
+                question: string
+                questionZh: string
+                stepsLength: integer
+                maxUpdateTimes: integer
+                answer: string
+                description: string
+                descriptionZh:: string
+                chartPath: string
+                infoPath: string
+              
 /homeworkQuizzes:
   get:
     description: 获取查询条件
