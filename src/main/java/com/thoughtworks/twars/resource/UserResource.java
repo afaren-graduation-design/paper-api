@@ -96,35 +96,7 @@ public class UserResource extends Resource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserDetail(
             @PathParam("param") String userIds) {
-
         String[] ids = userIds.split(",");
-
-        if (ids.length == 1) {
-            Integer userId = Integer.parseInt(ids[0]);
-            UserDetail detail = userMapper.getUserDetailById(userId);
-            User user = userMapper.getUserById(userId);
-
-            if (null == user || null == detail) {
-                return Response.status(Response.Status.NOT_FOUND).build();
-            }
-
-            Map<String, Object> map = new HashMap<>();
-            map.put("userId", detail.getUserId());
-            map.put("school", detail.getSchool());
-            map.put("major", detail.getMajor());
-            map.put("degree", detail.getDegree());
-            map.put("name", detail.getName());
-            map.put("gender", detail.getGender());
-            map.put("email", user.getEmail());
-            map.put("mobilePhone", user.getMobilePhone());
-            map.put("schoolProvince", detail.getSchoolProvince());
-            map.put("schoolCity", detail.getSchoolCity());
-            map.put("entranceYear", detail.getEntranceYear());
-
-            return Response.status(Response.Status.OK).entity(map).build();
-        }
-
-
         List userList = new ArrayList();
         for (String i : ids) {
 
@@ -154,9 +126,13 @@ public class UserResource extends Resource {
         }
 
         Map result = new HashMap<>();
+        if (userList.size() == 1) {
+            result = (Map) userList.get(0);
+            return Response.status(Response.Status.OK).entity(result).build();
+        }
+
         result.put("userList", userList);
         return Response.status(Response.Status.OK).entity(result).build();
-
 
     }
 
