@@ -75,6 +75,9 @@ public class PaperResource extends Resource {
             int makerId = (int) data.get("makerId");
             int programId = (int) data.get("programId");
             String paperName = (String) data.get("paperName");
+            String description = (String) data.get("description");
+            Integer createTime = (Integer) data.get("createTime");
+
             Map section = (Map) data.get("sections");
 
             if (section == null) {
@@ -82,9 +85,15 @@ public class PaperResource extends Resource {
                 insertPaper.setMakerId(makerId);
                 insertPaper.setPaperName(paperName);
                 insertPaper.setProgramId(programId);
+                insertPaper.setDescription(description);
+                insertPaper.setCreateTime(createTime);
+                insertPaper.setIsDistribution(true);
+
                 paperMapper.insertPaper(insertPaper);
+
                 Map result = new HashMap<>();
                 result.put("paperId", insertPaper.getId());
+
                 return Response.status(Response.Status.OK).entity(result).build();
             }
 
@@ -92,6 +101,9 @@ public class PaperResource extends Resource {
             paper.setMakerId(makerId);
             paper.setPaperName(paperName);
             paper.setProgramId(programId);
+            paper.setDescription(description);
+            paper.setCreateTime(createTime);
+            paper.setIsDistribution(true);
 
             paperMapper.insertPaper(paper);
             int paperId = paper.getId();
@@ -100,6 +112,7 @@ public class PaperResource extends Resource {
 
             return Response.status(Response.Status.OK).entity(map).build();
         } catch (Exception exception) {
+            exception.printStackTrace();
             session.rollback();
         }
         return Response.status(Response.Status.UNSUPPORTED_MEDIA_TYPE).build();

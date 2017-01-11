@@ -1,16 +1,11 @@
 package com.thoughtworks.twars.resource;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.thoughtworks.twars.bean.*;
 import com.thoughtworks.twars.mapper.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 
 import javax.inject.Inject;
-import javax.sound.midi.Soundbank;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -66,7 +61,7 @@ public class ProgramResource extends Resource {
         Integer makerId = (Integer) data.get("makerId");
         String paperName = (String) data.get("paperName");
         String description = (String) data.get("description");
-        double createTime = (double) data.get("createTime");
+        Integer createTime = (Integer) data.get("createTime");
         Boolean isDistribution = true;
 
         Paper paper = new Paper();

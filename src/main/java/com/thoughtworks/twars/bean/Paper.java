@@ -1,9 +1,5 @@
 package com.thoughtworks.twars.bean;
 
-import java.lang.String;
-
-import io.swagger.models.auth.In;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +11,7 @@ public class Paper {
     private List<Section> sections;
     private String paperName;
     private String description;
-    private double createTime;
+    private Integer createTime;
     private Integer programId;
     private boolean isDistribution;
 
@@ -79,11 +75,11 @@ public class Paper {
         this.description = description;
     }
 
-    public double getCreateTime() {
+    public Integer getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(double createTime) {
+    public void setCreateTime(Integer createTime) {
         this.createTime = createTime;
     }
 
