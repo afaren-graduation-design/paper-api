@@ -2,7 +2,9 @@ package com.thoughtworks.twars.resource;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.thoughtworks.twars.bean.*;
+import com.thoughtworks.twars.bean.Paper;
+import com.thoughtworks.twars.bean.Program;
+import com.thoughtworks.twars.bean.Section;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,11 +16,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.*;
 
-import java.util.Map;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -82,17 +81,17 @@ public class ProgramResourceTest extends TestBase {
         when(firstPaper.getId()).thenReturn(1);
         when(firstPaper.getPaperName()).thenReturn("简单的试卷");
         when(firstPaper.getDescription()).thenReturn("easy");
-        when(firstPaper.getCreateTime()).thenReturn((double) 1111111);
+        when(firstPaper.getCreateTime()).thenReturn(1111111);
         when(firstPaper.getMakerId()).thenReturn(3);
         when(firstPaper.getIsDistribution()).thenReturn(true);
 
         Map m1 = new HashMap();
-        m1.put("id",1);
-        m1.put("paperName","简单的试卷");
-        m1.put("description","easy");
-        m1.put("createTime",1111111);
-        m1.put("makerId",3);
-        m1.put("distribution",true);
+        m1.put("id", 1);
+        m1.put("paperName", "简单的试卷");
+        m1.put("description", "easy");
+        m1.put("createTime", 1111111);
+        m1.put("makerId", 3);
+        m1.put("distribution", true);
         m1.put("uri", "/papers/1");
 
         when(firstPaper.getPapersInfo()).thenReturn(m1);
@@ -100,18 +99,18 @@ public class ProgramResourceTest extends TestBase {
         when(secondPaper.getId()).thenReturn(5);
         when(secondPaper.getPaperName()).thenReturn("普通的试卷");
         when(secondPaper.getDescription()).thenReturn("common");
-        when(secondPaper.getCreateTime()).thenReturn((double) 2222222);
+        when(secondPaper.getCreateTime()).thenReturn(2222222);
         when(secondPaper.getMakerId()).thenReturn(2);
         when(secondPaper.getIsDistribution()).thenReturn(false);
 
 
         Map m2 = new HashMap();
-        m2.put("id",1);
-        m2.put("paperName","简单的试卷");
-        m2.put("description","easy");
-        m2.put("createTime",1111111);
-        m2.put("makerId",3);
-        m2.put("distribution",true);
+        m2.put("id", 1);
+        m2.put("paperName", "简单的试卷");
+        m2.put("description", "easy");
+        m2.put("createTime", 1111111);
+        m2.put("makerId", 3);
+        m2.put("distribution", true);
         m2.put("uri", "/papers/1");
 
         when(secondPaper.getPapersInfo()).thenReturn(m2);
@@ -144,7 +143,7 @@ public class ProgramResourceTest extends TestBase {
 
         Map data = new HashMap();
         data.put("makerId", 1);
-        data.put("createTime", 111111.0);
+        data.put("createTime", 111111);
         data.put("programId", 1);
         data.put("paperName", "paperName");
         data.put("description", "paper desc");

@@ -54,7 +54,7 @@ public class PaperResourceTest extends TestBase {
         when(firstPaper.getId()).thenReturn(1);
         when(firstPaper.getPaperName()).thenReturn("简单的试卷");
         when(firstPaper.getDescription()).thenReturn("easy");
-        when(firstPaper.getCreateTime()).thenReturn((double) 1111111);
+        when(firstPaper.getCreateTime()).thenReturn(1111111);
         when(firstPaper.getMakerId()).thenReturn(3);
         when(firstPaper.getIsDistribution()).thenReturn(true);
 
@@ -71,7 +71,7 @@ public class PaperResourceTest extends TestBase {
         when(secondPaper.getId()).thenReturn(5);
         when(secondPaper.getPaperName()).thenReturn("普通的试卷");
         when(secondPaper.getDescription()).thenReturn("common");
-        when(secondPaper.getCreateTime()).thenReturn((double) 2222222);
+        when(secondPaper.getCreateTime()).thenReturn(2222222);
         when(secondPaper.getMakerId()).thenReturn(2);
         when(secondPaper.getIsDistribution()).thenReturn(false);
 
@@ -118,7 +118,7 @@ public class PaperResourceTest extends TestBase {
         when(firstPaper.getId()).thenReturn(1);
         when(firstPaper.getPaperName()).thenReturn("简单的试卷");
         when(firstPaper.getDescription()).thenReturn("easy");
-        when(firstPaper.getCreateTime()).thenReturn((double) 1111111);
+        when(firstPaper.getCreateTime()).thenReturn(1111111);
         when(firstPaper.getMakerId()).thenReturn(3);
         when(firstPaper.getIsDistribution()).thenReturn(true);
 
@@ -135,7 +135,7 @@ public class PaperResourceTest extends TestBase {
         when(secondPaper.getId()).thenReturn(5);
         when(secondPaper.getPaperName()).thenReturn("普通的试卷");
         when(secondPaper.getDescription()).thenReturn("common");
-        when(secondPaper.getCreateTime()).thenReturn((double) 2222222);
+        when(secondPaper.getCreateTime()).thenReturn(2222222);
         when(secondPaper.getMakerId()).thenReturn(2);
         when(secondPaper.getIsDistribution()).thenReturn(false);
 
