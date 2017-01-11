@@ -1,5 +1,6 @@
 package com.thoughtworks.twars.mapper;
 
+
 import com.thoughtworks.twars.bean.HomeworkQuiz;
 
 import java.util.List;
@@ -13,6 +14,5 @@ public interface HomeworkQuizMapper {
     int insertHomeworkQuiz(HomeworkQuiz homeworkQuiz);
 
     List<HomeworkQuiz> findHomeworkQuizzes(
-            String homeworkName, String type, int page, int pageSize);
-
+            String homeworkName, Integer stackId, int page, int pageSize);
 }
