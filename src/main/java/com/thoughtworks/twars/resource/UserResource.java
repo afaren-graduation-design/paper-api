@@ -356,7 +356,7 @@ public class UserResource extends Resource {
     ) {
         Integer pageStart = Math.max(page - 1, 0);
         List<Map> usersDetail = userMapper
-                .findUsersByInformation(email, privilege, pageStart, pageSize);
+                .findUsersByInformation(email, privilege, pageStart * pageSize, pageSize);
         if (usersDetail == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }

@@ -216,7 +216,7 @@ public class ProgramResource extends Resource {
     ) {
 
         int startPage = Math.max(page - 1, 0);
-        List<Program> programs = programMapper.getAllPrograms(startPage, pageSize);
+        List<Program> programs = programMapper.getAllPrograms(startPage * pageSize, pageSize);
         Map result = new HashMap();
 
         List<Map> programsInfo = programs.stream()

@@ -35,7 +35,7 @@ public class HomeworkQuizResource extends Resource {
     ) {
         int startPage = Math.max(page - 1, 0);
         List<HomeworkQuiz> allHomeworkQuizzes = homeworkQuizMapper
-                .findHomeworkQuizzes(homeworkName, type, startPage, pageSize);
+                .findHomeworkQuizzes(homeworkName, type, startPage * pageSize, pageSize);
         List<Map> items = allHomeworkQuizzes
                 .stream()
                 .map(item -> item.getResponseInfo())

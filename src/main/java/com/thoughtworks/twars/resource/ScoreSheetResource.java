@@ -5,9 +5,6 @@ import com.thoughtworks.twars.mapper.ScoreSheetMapper;
 import com.thoughtworks.twars.resource.quiz.scoresheet.BlankQuizScoreSheetService;
 import com.thoughtworks.twars.resource.quiz.scoresheet.HomeworkQuizScoreSheetService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -54,6 +51,7 @@ public class ScoreSheetResource extends Resource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertScoreSheet(Map data) {
+
         int examerId = (int) data.get("examerId");
         int paperId = (int) data.get("paperId");
         int scoreSheetId;
