@@ -44,7 +44,7 @@
     </select>
 
     <select id="getExamples" resultMap="quizItemListMap" flushCache="true" useCache="false">
-        select id,count from quizItem order by count limit 2;
+        select * from quizItem order by count limit 2;
     </select>
 
 </mapper>
