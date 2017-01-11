@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @Path("/papers")
@@ -49,26 +50,15 @@ public class PaperResource extends Resource {
 
         int startPage = Math.max(page - 1, 0);
         List<Paper> papers = paperMapper.getAllPapers(startPage, pageSize);
-        List<Map> paperInfo = new ArrayList<>();
         Map result = new HashMap<>();
 
-        if (papers == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
+        List<Map> items = papers
+                .stream()
+                .map(item -> item.getPapersInfo())
+                .collect(Collectors.toList());
 
-        for (int i = 0; i < papers.size(); i++) {
-            Paper item = papers.get(i);
-            Map map = new HashMap<>();
-            map.put("uri", "papers/" + item.getId());
-            map.put("makerId", item.getMakerId());
-            map.put("paperName", item.getPaperName());
-            map.put("description", item.getDescription());
-            map.put("createTime", item.getCreateTime());
-            map.put("isDistribution", item.getIsDistribution());
 
-            paperInfo.add(map);
-        }
-        result.put("paperInfo", paperInfo);
+        result.put("paperInfo", items);
 
         int paperCount = paperMapper.findAll().size();
 

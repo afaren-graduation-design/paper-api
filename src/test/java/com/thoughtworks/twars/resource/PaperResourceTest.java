@@ -58,12 +58,33 @@ public class PaperResourceTest extends TestBase {
         when(firstPaper.getMakerId()).thenReturn(3);
         when(firstPaper.getIsDistribution()).thenReturn(true);
 
+        Map m1 = new HashMap();
+        m1.put("uri", "papers/1");
+        m1.put("paperName", "简单的试卷");
+        m1.put("description", "easy");
+        m1.put("createTime", "1111111");
+        m1.put("makerId", 3);
+        m1.put("isDistribution", true);
+
+        when(firstPaper.getPapersInfo()).thenReturn(m1);
+
         when(secondPaper.getId()).thenReturn(5);
         when(secondPaper.getPaperName()).thenReturn("普通的试卷");
         when(secondPaper.getDescription()).thenReturn("common");
         when(secondPaper.getCreateTime()).thenReturn((double) 2222222);
         when(secondPaper.getMakerId()).thenReturn(2);
         when(secondPaper.getIsDistribution()).thenReturn(false);
+
+
+        Map m2 = new HashMap();
+        m2.put("uri", "papers/5");
+        m2.put("paperName", "普通的试卷");
+        m2.put("description", "common");
+        m2.put("createTime", "2222222");
+        m2.put("makerId", 2);
+        m2.put("isDistribution", false);
+
+        when(secondPaper.getPapersInfo()).thenReturn(m2);
 
         Response response = target(basePath).queryParam("page", 1)
                 .queryParam("pageSize", 2).request().get();
@@ -73,15 +94,19 @@ public class PaperResourceTest extends TestBase {
 
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
-        assertThat(jsonStr, is("{\"paperInfo\":[{\"createTime\":1111111.0,\"paperName\":"
-                +
-                "\"简单的试卷\",\"description\":\"easy\",\"isDistribution\":true,\"uri\":\"papers/1\","
-                +
-                "\"makerId\":3},{\"createTime\":2222222.0,\"paperName\":\"普通的试卷\","
-                +
-                "\"description\":\"common\",\"isDistribution\":false,\"uri\":\"papers/5\","
-                +
-                "\"makerId\":2}],\"paperCount\":2}"));
+        assertThat(jsonStr, is("{\"paperInfo\":[{\"createTime\":\"1111111\""
+                + ",\"paperName\":\"简单的试卷\""
+                + ",\"description\":\"easy\""
+                + ",\"isDistribution\":true"
+                + ",\"uri\":\"papers/1\""
+                + ",\"makerId\":3}"
+                + ",{\"createTime\":\"2222222\""
+                + ",\"paperName\":\"普通的试卷\""
+                + ",\"description\":\"common\""
+                + ",\"isDistribution\":false"
+                + ",\"uri\":\"papers/5\""
+                + ",\"makerId\":2}]"
+                + ",\"paperCount\":2}"));
     }
 
     @Test
@@ -97,12 +122,32 @@ public class PaperResourceTest extends TestBase {
         when(firstPaper.getMakerId()).thenReturn(3);
         when(firstPaper.getIsDistribution()).thenReturn(true);
 
+        Map m1 = new HashMap();
+        m1.put("uri", "papers/1");
+        m1.put("paperName", "简单的试卷");
+        m1.put("description", "easy");
+        m1.put("createTime", "1111111");
+        m1.put("makerId", 3);
+        m1.put("isDistribution", true);
+
+        when(firstPaper.getPapersInfo()).thenReturn(m1);
+
         when(secondPaper.getId()).thenReturn(5);
         when(secondPaper.getPaperName()).thenReturn("普通的试卷");
         when(secondPaper.getDescription()).thenReturn("common");
         when(secondPaper.getCreateTime()).thenReturn((double) 2222222);
         when(secondPaper.getMakerId()).thenReturn(2);
         when(secondPaper.getIsDistribution()).thenReturn(false);
+
+
+        Map m2 = new HashMap();
+        m2.put("uri", "papers/1");
+        m2.put("paperName", "简单的试卷");
+        m2.put("description", "easy");
+        m2.put("createTime", "1111111");
+        m2.put("makerId", 3);
+        m2.put("isDistribution", true);
+        when(secondPaper.getPapersInfo()).thenReturn(m2);
 
         Response response = target(basePath).request().get();
         assertThat(response.getStatus(), is(200));
@@ -111,24 +156,19 @@ public class PaperResourceTest extends TestBase {
 
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
-        assertThat(jsonStr, is("{\"paperInfo\":[{\"createTime\":1111111.0,"
-                +
-                "\"paperName\":\"简单的试卷\",\"description\":\"easy\",\"isDistribution\":true,"
-                +
-                "\"uri\":\"papers/1\",\"makerId\":3},{\"createTime\":2222222.0,"
-                +
-                "\"paperName\":\"普通的试卷\",\"description\":\"common\",\"isDistribution\":false,"
-                +
-                "\"uri\":\"papers/5\",\"makerId\":2}],\"paperCount\":2}"));
-    }
-
-    @Test
-    public void should_return_404_when_response_all_papers() throws Exception {
-
-        when(paperMapper.getAllPapers(0,15)).thenReturn(null);
-
-        Response response = target(basePath).request().get();
-        assertThat(response.getStatus(), is(404));
+        assertThat(jsonStr, is("{\"paperInfo\":[{\"createTime\":\"1111111\""
+                + ",\"paperName\":\"简单的试卷\""
+                + ",\"description\":\"easy\""
+                + ",\"isDistribution\":true"
+                + ",\"uri\":\"papers/1\""
+                + ",\"makerId\":3}"
+                + ",{\"createTime\":\"1111111\""
+                + ",\"paperName\":\"简单的试卷\""
+                + ",\"description\":\"easy\""
+                + ",\"isDistribution\":true"
+                + ",\"uri\":\"papers/1\""
+                + ",\"makerId\":3}]"
+                + ",\"paperCount\":2}"));
     }
 
     @Test
@@ -226,7 +266,7 @@ public class PaperResourceTest extends TestBase {
 
         Map map = new HashMap<>();
         map.put("makerId", 1);
-        map.put("programId",1);
+        map.put("programId", 1);
         map.put("paperName", "思沃特训营第n次测验");
         map.put("sections", sections);
 

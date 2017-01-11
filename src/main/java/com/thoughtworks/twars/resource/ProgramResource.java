@@ -44,29 +44,14 @@ public class ProgramResource extends Resource {
             @PathParam("programId") int programId) {
         List<Paper> papers = paperMapper.findPapersByProgramId(programId);
 
-        if (papers == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
-
-        List<Map> paperList = new ArrayList<>();
-
-        for (Paper paper : papers) {
-
-            Map paperItem = new HashMap();
-            paperItem.put("id", paper.getId());
-            paperItem.put("makerId", paper.getMakerId());
-            paperItem.put("description", paper.getDescription());
-            paperItem.put("paperName", paper.getPaperName());
-            paperItem.put("createTime", paper.getCreateTime());
-            paperItem.put("isDistribution", paper.getIsDistribution());
-            paperItem.put("programId", paper.getProgramId());
-            paperItem.put("uri", "/papers/" + paper.getId());
-
-            paperList.add(paperItem);
-        }
+        List<Map> items = papers
+                .stream()
+                .map(item -> item.getPapersInfo())
+                .collect(Collectors.toList());
 
         Map result = new HashMap();
-        result.put("paperList", paperList);
+
+        result.put("paperList", items);
 
         return Response.status(Response.Status.OK).entity(result).build();
     }

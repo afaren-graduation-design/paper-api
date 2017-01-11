@@ -86,12 +86,35 @@ public class ProgramResourceTest extends TestBase {
         when(firstPaper.getMakerId()).thenReturn(3);
         when(firstPaper.getIsDistribution()).thenReturn(true);
 
+        Map m1 = new HashMap();
+        m1.put("id",1);
+        m1.put("paperName","简单的试卷");
+        m1.put("description","easy");
+        m1.put("createTime",1111111);
+        m1.put("makerId",3);
+        m1.put("distribution",true);
+        m1.put("uri", "/papers/1");
+
+        when(firstPaper.getPapersInfo()).thenReturn(m1);
+
         when(secondPaper.getId()).thenReturn(5);
         when(secondPaper.getPaperName()).thenReturn("普通的试卷");
         when(secondPaper.getDescription()).thenReturn("common");
         when(secondPaper.getCreateTime()).thenReturn((double) 2222222);
         when(secondPaper.getMakerId()).thenReturn(2);
         when(secondPaper.getIsDistribution()).thenReturn(false);
+
+
+        Map m2 = new HashMap();
+        m2.put("id",1);
+        m2.put("paperName","简单的试卷");
+        m2.put("description","easy");
+        m2.put("createTime",1111111);
+        m2.put("makerId",3);
+        m2.put("distribution",true);
+        m2.put("uri", "/papers/1");
+
+        when(secondPaper.getPapersInfo()).thenReturn(m2);
 
         Response response = target(basePath + "/6/papers").request().get();
         Assert.assertThat(response.getStatus(), is(200));
@@ -100,13 +123,20 @@ public class ProgramResourceTest extends TestBase {
 
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
-        Assert.assertThat(jsonStr, is("{\"paperList\":[{"
-                + "\"createTime\":1111111.0,\"paperName\":\"简单的试卷\","
-                + "\"description\":\"easy\",\"isDistribution\":true,\"id\":1,"
-                + "\"uri\":\"/papers/1\",\"programId\":0,\"makerId\":3},"
-                + "{\"createTime\":2222222.0,\"paperName\":\"普通的试卷\","
-                + "\"description\":\"common\",\"isDistribution\":false,\"id\":5,"
-                + "\"uri\":\"/papers/5\",\"programId\":0,\"makerId\":2}]}"));
+        Assert.assertThat(jsonStr, is("{\"paperList\":[{\"createTime\":1111111,"
+                + "\"paperName\":\"简单的试卷\","
+                + "\"description\":\"easy\","
+                + "\"id\":1,"
+                + "\"distribution\":true,"
+                + "\"uri\":\"/papers/1\","
+                + "\"makerId\":3},"
+                + "{\"createTime\":1111111,"
+                + "\"paperName\":\"简单的试卷\","
+                + "\"description\":\"easy\","
+                + "\"id\":1,"
+                + "\"distribution\":true,"
+                + "\"uri\":\"/papers/1\","
+                + "\"makerId\":3}]}"));
     }
 
     @Test

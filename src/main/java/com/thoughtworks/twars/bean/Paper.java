@@ -53,9 +53,8 @@ public class Paper {
 
     public Map getResponseInfo() {
         Map result = new HashMap<>();
-
-        result.put("id", id);
-        result.put("paperName", paperName);
+        result.put("paperName", getPaperName());
+        result.put("id", getId());
 
         List<Map> sectionsInfo = sections.stream()
                 .map(section -> section.getResponseInfo())
@@ -99,6 +98,24 @@ public class Paper {
     public void setPaperName(String paperName) {
         this.paperName = paperName;
     }
+
+
+    public Map getPapersInfo() {
+        Map result = new HashMap<>();
+
+        result.put("uri", "papers/" + getId());
+        result.put("makerId", getMakerId());
+        result.put("paperName", getPaperName());
+        result.put("description", getDescription());
+        result.put("createTime", getCreateTime());
+        result.put("isDistribution", getIsDistribution());
+        result.put("id", getId());
+        result.put("programId", getProgramId());
+
+        return result;
+    }
+
+
 }
 
 
