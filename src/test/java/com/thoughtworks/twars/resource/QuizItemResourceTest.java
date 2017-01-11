@@ -140,7 +140,7 @@ public class QuizItemResourceTest extends TestBase {
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
 
-        Assert.assertThat(jsonStr, is("{\"examples\":["
+        Assert.assertThat(jsonStr, is("{\"items\":["
                 + "{\"question\":\"question english instructions\","
                     + "\"count\":13,"
                     + "\"description\":\"english description\","
