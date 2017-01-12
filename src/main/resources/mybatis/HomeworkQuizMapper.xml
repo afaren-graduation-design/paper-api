@@ -14,7 +14,6 @@
         <result column="makerId" property="makerId"></result>
         <result column="createTime" property="createTime"></result>
         <result column="homeworkName" property="homeworkName"></result>
-        <result column="type" property="type"></result>
         <result column="answerPath" property="answerPath"></result>
         <result column="stackId" property="stackId"></result>
 
@@ -31,8 +30,8 @@
     <insert id="insertHomeworkQuiz" parameterType="com.thoughtworks.twars.bean.HomeworkQuiz" useGeneratedKeys="true"
             keyProperty="id">
         INSERT INTO homeworkQuiz(description, evaluateScript,
-        templateRepository,makerId,createTime,homeworkName,type,answerPath,stackId) VALUES(#{description}, #{evaluateScript},
-        #{templateRepository},#{makerId},#{createTime},#{homeworkName},#{type},#{answerPath},#{stackId});
+        templateRepository,makerId,createTime,homeworkName,answerPath,stackId) VALUES(#{description}, #{evaluateScript},
+        #{templateRepository},#{makerId},#{createTime},#{homeworkName},#{answerPath},#{stackId});
     </insert>
 
     <select id="findHomeworkQuizzes" resultMap="homeworkQuizListMap">
@@ -42,7 +41,7 @@
                 homeworkName like concat("%",#{param1},"%")
             </if>
             <if test="param2 != null">
-                AND type = #{param2}
+                AND stackId = #{param2}
             </if>
         </where>
         limit #{param3},#{param4};

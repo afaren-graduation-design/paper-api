@@ -31,11 +31,11 @@ public class HomeworkQuizResource extends Resource {
             @DefaultValue("1") @QueryParam("page") int page,
             @DefaultValue("15") @QueryParam("pageSize") int pageSize,
             @QueryParam("homeworkName") String homeworkName,
-            @QueryParam("type") String type
+            @QueryParam("stackId") Integer stackId
     ) {
         int startPage = Math.max(page - 1, 0);
         List<HomeworkQuiz> allHomeworkQuizzes = homeworkQuizMapper
-                .findHomeworkQuizzes(homeworkName, type, startPage * pageSize, pageSize);
+                .findHomeworkQuizzes(homeworkName, stackId, startPage * pageSize, pageSize);
         List<Map> items = allHomeworkQuizzes
                 .stream()
                 .map(item -> item.getResponseInfo())
@@ -89,8 +89,7 @@ public class HomeworkQuizResource extends Resource {
             homeworkQuiz.setHomeworkName(homeworkName);
             double createTime = (double) data.get("createTime");
             homeworkQuiz.setCreateTime(createTime);
-            String type = (String) data.get("type");
-            homeworkQuiz.setType(type);
+
             String answerPath = (String) data.get("answerPath");
             homeworkQuiz.setAnswerPath(answerPath);
 

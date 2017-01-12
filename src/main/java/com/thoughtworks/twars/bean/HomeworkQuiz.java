@@ -11,17 +11,8 @@ public class HomeworkQuiz {
     private int makerId;
     private double createTime;
     private String homeworkName;
-    private String type;
     private String answerPath;
     private int stackId;
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public String getAnswerPath() {
         return answerPath;
@@ -106,7 +97,6 @@ public class HomeworkQuiz {
         result.put("makerDetailUri", "users/" + getMakerId() + "/detail");
         result.put("createTime", getCreateTime());
         result.put("homeworkName", getHomeworkName());
-        result.put("type", getType());
         result.put("answerPath", getAnswerPath());
         result.put("stackId", getStackId());
         result.put("uri", "homeworkQuizzes/" + getId());
