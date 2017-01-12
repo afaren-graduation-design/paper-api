@@ -87,7 +87,7 @@ public class HomeworkQuizResource extends Resource {
             homeworkQuiz.setMakerId(makerId);
             String homeworkName = (String) data.get("homeworkName");
             homeworkQuiz.setHomeworkName(homeworkName);
-            double createTime = (double) data.get("createTime");
+            int createTime = (int) data.get("createTime");
             homeworkQuiz.setCreateTime(createTime);
 
             String answerPath = (String) data.get("answerPath");

@@ -255,7 +255,7 @@ public class HomeworkQuizResourceTest extends TestBase {
         map.put("templateRepository", "http://github.com/templateRepository");
         map.put("makerId", 1);
         map.put("homeworkName", "homeworkName");
-        map.put("createTime", 123456.0);
+        map.put("createTime", 123456);
         map.put("answerPath", "/homework-answer/calculate_median");
 
         Entity entity = Entity.entity(map, MediaType.APPLICATION_JSON);

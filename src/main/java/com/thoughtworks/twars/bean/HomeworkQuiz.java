@@ -9,7 +9,7 @@ public class HomeworkQuiz {
     private String evaluateScript;
     private String templateRepository;
     private int makerId;
-    private double createTime;
+    private int createTime;
     private String homeworkName;
     private String answerPath;
     private int stackId;
@@ -30,11 +30,11 @@ public class HomeworkQuiz {
         this.makerId = makerId;
     }
 
-    public double getCreateTime() {
+    public int getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(double createTime) {
+    public void setCreateTime(int createTime) {
         this.createTime = createTime;
     }
 
