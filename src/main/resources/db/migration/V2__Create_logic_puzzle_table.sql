@@ -11,4 +11,4 @@ CREATE TABLE logicPuzzle (
   description VARCHAR(2048) NOT NULL ,
   descriptionZh VARCHAR(2048) NOT NULL ,
   chartPath VARCHAR(128) NOT NULL
-);
+) DEFAULT CHARSET=utf8;

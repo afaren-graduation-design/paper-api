@@ -3,4 +3,4 @@ create table stack(
    title VARCHAR(128) NOT NULL  UNIQUE,
    description VARCHAR(128) NOT NULL,
    definitionFile VARCHAR(128) NOT NULL
-);
+) DEFAULT CHARSET=utf8;

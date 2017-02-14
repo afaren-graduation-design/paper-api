@@ -5,4 +5,4 @@ CREATE TABLE userInfo (
     major VARCHAR(128) NOT NULL,
     degree VARCHAR (128) NOT NULL,
     birhday INT NOT NULL
-)
+) DEFAULT CHARSET=utf8

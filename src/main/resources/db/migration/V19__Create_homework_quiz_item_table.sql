@@ -4,4 +4,4 @@ CREATE TABLE homeworkQuizItem (
     evaluateScript VARCHAR (2048) NOT NULL ,
     evaluateRepository VARCHAR (2048) NOT NULL ,
     templateRepository VARCHAR (512) NOT NULL
-)
+) DEFAULT CHARSET=utf8
