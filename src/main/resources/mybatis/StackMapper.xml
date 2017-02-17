@@ -14,5 +14,11 @@
         select * from stack order by stackId;
     </select>
 
+    <insert id="insertStack" parameterType="com.thoughtworks.twars.bean.Stack" useGeneratedKeys="true"
+            keyProperty="stackId">
+        INSERT INTO stack(title,description,definition)
+        VALUES (#{title}, #{description}, #{definition});
+    </insert>
+
 
 </mapper>

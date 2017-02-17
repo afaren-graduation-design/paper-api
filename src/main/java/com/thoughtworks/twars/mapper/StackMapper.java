@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface StackMapper {
     List<Stack> getAllStack();
+
+    int insertStack(Stack stack);
 }

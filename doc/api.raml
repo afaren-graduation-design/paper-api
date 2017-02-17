@@ -519,7 +519,7 @@ baseUri: http://api.bronzesword.com/
                 descriptionZh:: string
                 chartPath: string
                 infoPath: string
-              
+
 /homeworkQuizzes:
   get:
     description: 获取查询条件
@@ -714,4 +714,32 @@ baseUri: http://api.bronzesword.com/
                   stackId: string
                   title: string
                   description: string
-                  definitionFile: string
+                  definition: string
+
+  post:
+    description: 添加一个技术栈
+    body:
+      application/json:
+        properties:
+          title: string
+          description: string
+          definition: string
+    responses:
+      201:
+        body:
+          application/json:
+            properties:
+              uri: string
+
+  /{stackId}:
+    get:
+      description: 获取一个技术栈
+      responses:
+        200:
+          body:
+            application/json:
+              properties:
+                stackId: string
+                title: string
+                description: string
+                definition: string

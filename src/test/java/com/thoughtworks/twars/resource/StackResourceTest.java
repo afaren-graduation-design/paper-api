@@ -9,6 +9,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -74,6 +76,25 @@ public class StackResourceTest extends TestBase {
                 + "\"description\":\"这是Java\","
                 + "\"title\":\"java\"}]}"
         ));
+    }
+
+    @Test
+    public void should_add_stack() {
+        Stack stack = new Stack();
+
+        stack.setStackId(4);
+        stack.setTitle("Scala");
+        stack.setDescription("这是Scala技术栈");
+        stack.setDefinition("scala:2.12");
+
+        Entity<Stack> entityStack = Entity.entity(stack, MediaType.APPLICATION_JSON_TYPE);
+        Response response = target(basePath).request().post(entityStack);
+
+        assertThat(response.getStatus(), is(201));
+
+        Map result = response.readEntity(Map.class);
+        assertThat(result.get("stackId"), is(4));
+        assertThat(result.get("uri"), is("stack/4"));
     }
 }
 

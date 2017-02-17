@@ -24,4 +24,18 @@ public class StackMapperTest extends TestBase {
         List<Stack> stackList = stackMapper.getAllStack();
         assertThat(stackList.size(), is(3));
     }
+
+    @Test
+    public void should_add_stack() {
+        Stack stack = new Stack();
+
+        stack.setTitle("JavaScript");
+        stack.setDescription("这是JavaScript");
+        stack.setDefinition("node:5.8");
+
+        stackMapper.insertStack(stack);
+
+        System.out.println(stack.getStackId());
+        assertThat(stack.getStackId(), is(4));
+    }
 }
