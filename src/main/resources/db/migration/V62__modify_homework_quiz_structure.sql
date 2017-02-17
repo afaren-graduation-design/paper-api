@@ -1,1 +1,0 @@
-ALTER TABLE `homeworkPostHistory` MODIFY COLUMN `version` VARCHAR(512) NULL;

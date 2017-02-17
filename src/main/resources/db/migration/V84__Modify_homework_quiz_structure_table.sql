@@ -1,1 +1,0 @@
-alter table homeworkQuiz add stackId int(11) NOT NULL DEFAULT 1 ;

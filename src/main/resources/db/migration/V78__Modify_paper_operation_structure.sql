@@ -1,1 +1,0 @@
-alter table paperOperation change operationType operationType enum('DELETE','UPDATE','DISTRIBUTION','ADD','RESTORE');

@@ -1,1 +1,0 @@
-ALTER TABLE userDetail ADD COLUMN `entranceYear` VARCHAR(128);

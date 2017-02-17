@@ -1,5 +1,0 @@
-
-ALTER TABLE `paper` ADD COLUMN description VARCHAR(255);
-ALTER TABLE `paper` ADD COLUMN createTime INT(11);
-ALTER TABLE `paper` ADD COLUMN isDistribution TINYINT(1);
-ALTER TABLE `paper` ADD COLUMN programId INTEGER;

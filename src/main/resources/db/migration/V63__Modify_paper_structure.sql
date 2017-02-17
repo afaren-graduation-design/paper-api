@@ -1,1 +1,0 @@
-ALTER TABLE `paper` ADD COLUMN paperName VARCHAR(128);
