@@ -26,6 +26,9 @@ public class StackResourceTest extends TestBase {
     String basePath = "/stacks";
 
     @Mock
+    Stack stack;
+
+    @Mock
     Stack stackOne;
 
     @Mock
@@ -95,6 +98,34 @@ public class StackResourceTest extends TestBase {
         Map result = response.readEntity(Map.class);
         assertThat(result.get("stackId"), is(4));
         assertThat(result.get("uri"), is("stack/4"));
+    }
+
+    @Test
+    public void should_return_a_stack() {
+        when(stackMapper.getStackById(2)).thenReturn(stack);
+
+        when(stack.getStackId()).thenReturn(2);
+        when(stack.getTitle()).thenReturn("Java");
+        when(stack.getDescription()).thenReturn("这是Java技术栈");
+        when(stack.getDefinition()).thenReturn("jetty:9.3");
+
+        Response response = target(basePath + "/2").request().get();
+        assertThat(response.getStatus(), is(200));
+
+        Map result = response.readEntity(Map.class);
+
+        assertThat((Integer) result.get("stackId"), is(2));
+        assertThat((String) result.get("title"), is("Java"));
+        assertThat((String) result.get("description"), is("这是Java技术栈"));
+        assertThat((String) result.get("definition"), is("jetty:9.3"));
+    }
+
+    @Test
+    public void should_return_404_when_get_stack() {
+        when(stackMapper.getStackById(90)).thenReturn(null);
+
+        Response response = target(basePath + "/90").request().get();
+        assertThat(response.getStatus(), is(404));
     }
 }
 

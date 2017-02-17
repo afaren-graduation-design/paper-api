@@ -14,6 +14,10 @@
         select * from stack order by stackId;
     </select>
 
+    <select id="getStackById" resultType="com.thoughtworks.twars.bean.Stack">
+        select * from stack where stackId = #{stackId}
+    </select>
+
     <insert id="insertStack" parameterType="com.thoughtworks.twars.bean.Stack" useGeneratedKeys="true"
             keyProperty="stackId">
         INSERT INTO stack(title,description,definition)

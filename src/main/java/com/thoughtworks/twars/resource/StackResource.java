@@ -7,10 +7,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.HashMap;
@@ -36,6 +33,27 @@ public class StackResource extends Resource {
                 .map(stack -> stack.getResponseInfo())
                 .collect(Collectors.toList());
         map.put("items", stackListInfo);
+
+        return Response.status(Response.Status.OK).entity(map).build();
+    }
+
+    @GET
+    @Path("/{stackId}")
+    @Produces(MediaType.APPLICATION_JSON)
+
+    public Response getStackById(
+            @PathParam("stackId") int stackId) {
+        Stack stack = stackMapper.getStackById(stackId);
+
+        if (stack == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("stackId", stack.getStackId());
+        map.put("title", stack.getTitle());
+        map.put("description", stack.getDescription());
+        map.put("definition", stack.getDefinition());
 
         return Response.status(Response.Status.OK).entity(map).build();
     }

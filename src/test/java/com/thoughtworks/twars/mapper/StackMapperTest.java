@@ -38,4 +38,10 @@ public class StackMapperTest extends TestBase {
         System.out.println(stack.getStackId());
         assertThat(stack.getStackId(), is(4));
     }
+
+    @Test
+    public void should_return_stack_by_stackId() {
+        Stack stack = stackMapper.getStackById(1);
+        assertThat(stack.getTitle(), is("Java"));
+    }
 }
