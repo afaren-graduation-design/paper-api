@@ -7,7 +7,7 @@
         <id property="stackId" column="stackId"></id>
         <result column="title" property="title"></result>
         <result column="description" property="description"></result>
-        <result column="definitionFile" property="definitionFile"></result>
+        <result column="definition" property="definition"></result>
     </resultMap>
 
     <select id="getAllStack" resultMap="stackListMap">

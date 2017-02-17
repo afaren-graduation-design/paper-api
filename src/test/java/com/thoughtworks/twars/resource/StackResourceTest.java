@@ -34,7 +34,7 @@ public class StackResourceTest extends TestBase {
         when(stackOne.getStackId()).thenReturn(1);
         when(stackOne.getTitle()).thenReturn("C#");
         when(stackOne.getDescription()).thenReturn("这是C#");
-        when(stackOne.getDefinitionFile()).thenReturn("./aa/bb/cc");
+        when(stackOne.getDefinition()).thenReturn("./aa/bb/cc");
         when(stackTwo.getStackId()).thenReturn(2);
         when(stackTwo.getTitle()).thenReturn("java");
         when(stackTwo.getDescription()).thenReturn("./xx/yy/zz");

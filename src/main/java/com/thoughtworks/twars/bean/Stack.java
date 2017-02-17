@@ -9,7 +9,7 @@ public class Stack {
     private int stackId;
     private String title;
     private String description;
-    private String definitionFile;
+    private String definition;
 
     public int getStackId() {
         return stackId;
@@ -35,12 +35,12 @@ public class Stack {
         this.description = description;
     }
 
-    public String getDefinitionFile() {
-        return definitionFile;
+    public String getDefinition() {
+        return definition;
     }
 
-    public void setDefinitionFile(String definitionFile) {
-        this.definitionFile = definitionFile;
+    public void setDefinition(String definition) {
+        this.definition = definition;
     }
 
     public Map getResponseInfo() {
@@ -48,7 +48,7 @@ public class Stack {
         result.put("stackId", stackId);
         result.put("title", title);
         result.put("description", description);
-        result.put("definitionFile", definitionFile);
+        result.put("definition", definition);
         return result;
     }
 }
