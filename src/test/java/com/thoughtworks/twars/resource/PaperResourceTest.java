@@ -57,6 +57,7 @@ public class PaperResourceTest extends TestBase {
         when(firstPaper.getCreateTime()).thenReturn(1111111);
         when(firstPaper.getMakerId()).thenReturn(3);
         when(firstPaper.getIsDistribution()).thenReturn(true);
+        when(firstPaper.getPaperType()).thenReturn("test");
 
         Map m1 = new HashMap();
         m1.put("uri", "papers/1");
@@ -65,6 +66,7 @@ public class PaperResourceTest extends TestBase {
         m1.put("createTime", "1111111");
         m1.put("makerId", 3);
         m1.put("isDistribution", true);
+        m1.put("paperType", "test");
 
         when(firstPaper.getPapersInfo()).thenReturn(m1);
 
@@ -74,6 +76,7 @@ public class PaperResourceTest extends TestBase {
         when(secondPaper.getCreateTime()).thenReturn(2222222);
         when(secondPaper.getMakerId()).thenReturn(2);
         when(secondPaper.getIsDistribution()).thenReturn(false);
+        when(secondPaper.getPaperType()).thenReturn("exam");
 
 
         Map m2 = new HashMap();
@@ -83,6 +86,7 @@ public class PaperResourceTest extends TestBase {
         m2.put("createTime", "2222222");
         m2.put("makerId", 2);
         m2.put("isDistribution", false);
+        m2.put("paperType", "exam");
 
         when(secondPaper.getPapersInfo()).thenReturn(m2);
 
@@ -94,13 +98,16 @@ public class PaperResourceTest extends TestBase {
 
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
-        assertThat(jsonStr, is("{\"paperInfo\":[{\"createTime\":\"1111111\""
+        System.out.println(jsonStr);
+        assertThat(jsonStr, is("{\"paperInfo\":[{\"paperType\":\"test\""
+                +",\"createTime\":\"1111111\""
                 + ",\"paperName\":\"简单的试卷\""
                 + ",\"description\":\"easy\""
                 + ",\"isDistribution\":true"
                 + ",\"uri\":\"papers/1\""
                 + ",\"makerId\":3}"
-                + ",{\"createTime\":\"2222222\""
+                +",{\"paperType\":\"exam\""
+                + ",\"createTime\":\"2222222\""
                 + ",\"paperName\":\"普通的试卷\""
                 + ",\"description\":\"common\""
                 + ",\"isDistribution\":false"
@@ -121,6 +128,7 @@ public class PaperResourceTest extends TestBase {
         when(firstPaper.getCreateTime()).thenReturn(1111111);
         when(firstPaper.getMakerId()).thenReturn(3);
         when(firstPaper.getIsDistribution()).thenReturn(true);
+        when(firstPaper.getPaperType()).thenReturn("exam");
 
         Map m1 = new HashMap();
         m1.put("uri", "papers/1");
@@ -129,6 +137,7 @@ public class PaperResourceTest extends TestBase {
         m1.put("createTime", "1111111");
         m1.put("makerId", 3);
         m1.put("isDistribution", true);
+        m1.put("paperType", "exam");
 
         when(firstPaper.getPapersInfo()).thenReturn(m1);
 
@@ -138,6 +147,7 @@ public class PaperResourceTest extends TestBase {
         when(secondPaper.getCreateTime()).thenReturn(2222222);
         when(secondPaper.getMakerId()).thenReturn(2);
         when(secondPaper.getIsDistribution()).thenReturn(false);
+        when(secondPaper.getPaperType()).thenReturn("test");
 
 
         Map m2 = new HashMap();
@@ -147,6 +157,7 @@ public class PaperResourceTest extends TestBase {
         m2.put("createTime", "1111111");
         m2.put("makerId", 3);
         m2.put("isDistribution", true);
+        m2.put("paperType", "test");
         when(secondPaper.getPapersInfo()).thenReturn(m2);
 
         Response response = target(basePath).request().get();
@@ -156,13 +167,16 @@ public class PaperResourceTest extends TestBase {
 
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
-        assertThat(jsonStr, is("{\"paperInfo\":[{\"createTime\":\"1111111\""
+        System.out.println(jsonStr);
+        assertThat(jsonStr, is("{\"paperInfo\":[{\"paperType\":\"exam\""
+                + ",\"createTime\":\"1111111\""
                 + ",\"paperName\":\"简单的试卷\""
                 + ",\"description\":\"easy\""
                 + ",\"isDistribution\":true"
                 + ",\"uri\":\"papers/1\""
                 + ",\"makerId\":3}"
-                + ",{\"createTime\":\"1111111\""
+                + ",{\"paperType\":\"test\""
+                + ",\"createTime\":\"1111111\""
                 + ",\"paperName\":\"简单的试卷\""
                 + ",\"description\":\"easy\""
                 + ",\"isDistribution\":true"

@@ -55,7 +55,7 @@
     </select>
 
     <insert id="insertPaper" parameterType="com.thoughtworks.twars.bean.Paper" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO paper(makerId, paperName,programId,description,createTime,isDistribution)
-        VALUES (#{makerId}, #{paperName},#{programId},#{description},#{createTime},#{isDistribution});
+        INSERT INTO paper(makerId, paperName,programId,description,createTime,isDistribution,paperType)
+        VALUES (#{makerId}, #{paperName},#{programId},#{description},#{createTime},#{isDistribution},#{paperType});
     </insert>
 </mapper>

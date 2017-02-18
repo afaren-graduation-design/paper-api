@@ -77,6 +77,7 @@ public class PaperResource extends Resource {
             String paperName = (String) data.get("paperName");
             String description = (String) data.get("description");
             Integer createTime = (Integer) data.get("createTime");
+            String paperType = (String) data.get("paperType");
 
             Map section = (Map) data.get("sections");
 
@@ -87,6 +88,7 @@ public class PaperResource extends Resource {
                 insertPaper.setProgramId(programId);
                 insertPaper.setDescription(description);
                 insertPaper.setCreateTime(createTime);
+                insertPaper.setPaperType(paperType);
                 insertPaper.setIsDistribution(true);
 
                 paperMapper.insertPaper(insertPaper);
@@ -103,6 +105,7 @@ public class PaperResource extends Resource {
             paper.setProgramId(programId);
             paper.setDescription(description);
             paper.setCreateTime(createTime);
+            paper.setPaperType(paperType);
             paper.setIsDistribution(true);
 
             paperMapper.insertPaper(paper);

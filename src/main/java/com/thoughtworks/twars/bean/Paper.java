@@ -14,6 +14,7 @@ public class Paper {
     private Integer createTime;
     private Integer programId;
     private boolean isDistribution;
+    private String paperType;
 
     public Integer getProgramId() {
         return programId;
@@ -95,6 +96,14 @@ public class Paper {
         this.paperName = paperName;
     }
 
+    public String getPaperType() {
+        return paperType;
+    }
+
+    public void setPaperType(String paperType) {
+        this.paperType = paperType;
+    }
+
 
     public Map getPapersInfo() {
         Map result = new HashMap<>();
@@ -107,6 +116,7 @@ public class Paper {
         result.put("isDistribution", getIsDistribution());
         result.put("id", getId());
         result.put("programId", getProgramId());
+        result.put("paperType", getPaperType());
 
         return result;
     }
