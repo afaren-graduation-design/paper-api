@@ -100,13 +100,13 @@ public class PaperResourceTest extends TestBase {
         String jsonStr = gson.toJson(result);
         System.out.println(jsonStr);
         assertThat(jsonStr, is("{\"paperInfo\":[{\"paperType\":\"test\""
-                +",\"createTime\":\"1111111\""
+                + ",\"createTime\":\"1111111\""
                 + ",\"paperName\":\"简单的试卷\""
                 + ",\"description\":\"easy\""
                 + ",\"isDistribution\":true"
                 + ",\"uri\":\"papers/1\""
                 + ",\"makerId\":3}"
-                +",{\"paperType\":\"exam\""
+                + ",{\"paperType\":\"exam\""
                 + ",\"createTime\":\"2222222\""
                 + ",\"paperName\":\"普通的试卷\""
                 + ",\"description\":\"common\""

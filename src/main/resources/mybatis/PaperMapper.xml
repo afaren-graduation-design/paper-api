@@ -15,16 +15,16 @@
         <result column="isDistribution" property="isDistribution"></result>
     </resultMap>
 
-    <resultMap id="PaperResultMap" type="com.thoughtworks.twars.bean.Paper" >
-        <id column="id" property="id" jdbcType="INTEGER" />
-        <result column="makerId" property="makerId" jdbcType="INTEGER" />
+    <resultMap id="PaperResultMap" type="com.thoughtworks.twars.bean.Paper">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="makerId" property="makerId" jdbcType="INTEGER"/>
         <!--        one to many     -->
         <collection property="sections" column="id" javaType="ArrayList" ofType="com.thoughtworks.twars.bean.Section"
-                     select="selectPaperFromSection"/>
+                    select="selectPaperFromSection"/>
     </resultMap>
 
-    <resultMap id="SectionResultMap" type="com.thoughtworks.twars.bean.Section" >
-        <id column="id" property="id" jdbcType="INTEGER" />
+    <resultMap id="SectionResultMap" type="com.thoughtworks.twars.bean.Section">
+        <id column="id" property="id" jdbcType="INTEGER"/>
         <!--        one to many     -->
         <collection property="quizzes" column="id" javaType="ArrayList" ofType="com.thoughtworks.twars.bean.SectionQuiz"
                     select="selectQuizFromSectionQuiz"/>
@@ -43,14 +43,14 @@
     </select>
 
     <select id="selectQuizFromSectionQuiz" parameterType="java.lang.Integer" resultType="java.lang.Integer">
-        SELECT quizId  FROM sectionQuiz WHERE sectionId=#{sectionId}
+        SELECT quizId FROM sectionQuiz WHERE sectionId=#{sectionId}
     </select>
 
-    <select id="getAllPapers" resultMap="paperListMap" >
+    <select id="getAllPapers" resultMap="paperListMap">
         select * from paper LIMIT #{param1},#{param2};
     </select>
 
-    <select id="findPapersByProgramId" parameterType="java.lang.Integer" resultMap="paperListMap" >
+    <select id="findPapersByProgramId" parameterType="java.lang.Integer" resultMap="paperListMap">
         select * from paper WHERE programId = #{programId}
     </select>
 

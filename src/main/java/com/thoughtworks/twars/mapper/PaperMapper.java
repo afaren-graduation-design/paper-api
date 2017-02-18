@@ -11,7 +11,7 @@ public interface PaperMapper {
 
     Paper getPaperById(int id);
 
-    List<Paper> getAllPapers(int page , int pageSize);
+    List<Paper> getAllPapers(int page, int pageSize);
 
     Paper getOnePaper(int id);
 
