@@ -1,2 +1,2 @@
 ALTER TABLE paper
-ADD COLUMN paperType enum("test","exam");
+ADD COLUMN paperType enum("practice","exam");

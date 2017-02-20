@@ -57,7 +57,7 @@ public class PaperResourceTest extends TestBase {
         when(firstPaper.getCreateTime()).thenReturn(1111111);
         when(firstPaper.getMakerId()).thenReturn(3);
         when(firstPaper.getIsDistribution()).thenReturn(true);
-        when(firstPaper.getPaperType()).thenReturn("test");
+        when(firstPaper.getPaperType()).thenReturn("practice");
 
         Map m1 = new HashMap();
         m1.put("uri", "papers/1");
@@ -66,7 +66,7 @@ public class PaperResourceTest extends TestBase {
         m1.put("createTime", "1111111");
         m1.put("makerId", 3);
         m1.put("isDistribution", true);
-        m1.put("paperType", "test");
+        m1.put("paperType", "practice");
 
         when(firstPaper.getPapersInfo()).thenReturn(m1);
 
@@ -99,7 +99,7 @@ public class PaperResourceTest extends TestBase {
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
         System.out.println(jsonStr);
-        assertThat(jsonStr, is("{\"paperInfo\":[{\"paperType\":\"test\""
+        assertThat(jsonStr, is("{\"paperInfo\":[{\"paperType\":\"practice\""
                 + ",\"createTime\":\"1111111\""
                 + ",\"paperName\":\"简单的试卷\""
                 + ",\"description\":\"easy\""
@@ -147,7 +147,7 @@ public class PaperResourceTest extends TestBase {
         when(secondPaper.getCreateTime()).thenReturn(2222222);
         when(secondPaper.getMakerId()).thenReturn(2);
         when(secondPaper.getIsDistribution()).thenReturn(false);
-        when(secondPaper.getPaperType()).thenReturn("test");
+        when(secondPaper.getPaperType()).thenReturn("practice");
 
 
         Map m2 = new HashMap();
@@ -157,7 +157,7 @@ public class PaperResourceTest extends TestBase {
         m2.put("createTime", "1111111");
         m2.put("makerId", 3);
         m2.put("isDistribution", true);
-        m2.put("paperType", "test");
+        m2.put("paperType", "practice");
         when(secondPaper.getPapersInfo()).thenReturn(m2);
 
         Response response = target(basePath).request().get();
@@ -175,7 +175,7 @@ public class PaperResourceTest extends TestBase {
                 + ",\"isDistribution\":true"
                 + ",\"uri\":\"papers/1\""
                 + ",\"makerId\":3}"
-                + ",{\"paperType\":\"test\""
+                + ",{\"paperType\":\"practice\""
                 + ",\"createTime\":\"1111111\""
                 + ",\"paperName\":\"简单的试卷\""
                 + ",\"description\":\"easy\""
