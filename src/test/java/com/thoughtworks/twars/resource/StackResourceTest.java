@@ -56,8 +56,8 @@ public class StackResourceTest extends TestBase {
         m2.put("description", "这是Java");
         m2.put("definitionFile", "./xx/yy/zz");
 
-        when(stackOne.getResponseInfo()).thenReturn(m1);
-        when(stackTwo.getResponseInfo()).thenReturn(m2);
+        when(stackOne.toMap()).thenReturn(m1);
+        when(stackTwo.toMap()).thenReturn(m2);
 
         when(stackMapper.getAllStack())
                 .thenReturn(Arrays.asList(stackOne, stackTwo));
@@ -109,15 +109,26 @@ public class StackResourceTest extends TestBase {
         when(stack.getDescription()).thenReturn("这是Java技术栈");
         when(stack.getDefinition()).thenReturn("jetty:9.3");
 
+        Map m1 = new HashMap();
+        m1.put("stackId", 2);
+        m1.put("title", "Java");
+        m1.put("description", "这是Java技术栈");
+        m1.put("definitionFile", "jetty:9.3");
+
+        when(stack.toMap()).thenReturn(m1);
+
         Response response = target(basePath + "/2").request().get();
+
         assertThat(response.getStatus(), is(200));
+        Gson gson = new GsonBuilder().create();
 
         Map result = response.readEntity(Map.class);
+        String jsonStr = gson.toJson(result);
 
-        assertThat((Integer) result.get("stackId"), is(2));
-        assertThat((String) result.get("title"), is("Java"));
-        assertThat((String) result.get("description"), is("这是Java技术栈"));
-        assertThat((String) result.get("definition"), is("jetty:9.3"));
+        Assert.assertThat(jsonStr,is("{\"definitionFile\":\"jetty:9.3\""
+                + ",\"stackId\":2"
+                + ",\"description\":\"这是Java技术栈\""
+                + ",\"title\":\"Java\"}"));
     }
 
     @Test

@@ -43,8 +43,8 @@ public class Stack {
         this.definition = definition;
     }
 
-    public Map getResponseInfo() {
-        Map result = new HashMap<>();
+    public Map<String, Object> toMap() {
+        Map<String, Object> result = new HashMap<>();
         result.put("stackId", stackId);
         result.put("title", title);
         result.put("description", description);

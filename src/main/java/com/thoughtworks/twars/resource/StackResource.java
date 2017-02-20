@@ -6,6 +6,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -30,7 +31,7 @@ public class StackResource extends Resource {
 
         Map map = new HashMap<>();
         List<Map> stackListInfo = stackList.stream()
-                .map(stack -> stack.getResponseInfo())
+                .map(stack -> stack.toMap())
                 .collect(Collectors.toList());
         map.put("items", stackListInfo);
 
@@ -49,13 +50,7 @@ public class StackResource extends Resource {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        Map<String, Object> map = new HashMap<>();
-        map.put("stackId", stack.getStackId());
-        map.put("title", stack.getTitle());
-        map.put("description", stack.getDescription());
-        map.put("definition", stack.getDefinition());
-
-        return Response.status(Response.Status.OK).entity(map).build();
+        return Response.status(Response.Status.OK).entity(stack.toMap()).build();
     }
 
     @POST

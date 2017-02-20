@@ -14,7 +14,7 @@
         select * from stack order by stackId;
     </select>
 
-    <select id="getStackById" resultType="com.thoughtworks.twars.bean.Stack">
+    <select id="getStackById" resultMap="stackListMap">
         select * from stack where stackId = #{stackId}
     </select>
 
