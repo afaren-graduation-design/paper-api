@@ -12,7 +12,7 @@
         <result column="description" property="description"></result>
         <result column="createTime" property="createTime"></result>
         <result column="programId" property="programId"></result>
-        <result column="isDistribution" property="isDistribution"></result>
+        <result column="isDistributed" property="isDistributed"></result>
     </resultMap>
 
     <resultMap id="PaperResultMap" type="com.thoughtworks.twars.bean.Paper">
@@ -51,7 +51,7 @@
     </select>
 
     <select id="findPapersByProgramId" parameterType="java.lang.Integer" resultMap="paperListMap">
-        select * from paper WHERE programId = #{programId}
+        select * from paper WHERE programId = #{programId} AND isDistributed = true;
     </select>
 
     <insert id="insertPaper" parameterType="com.thoughtworks.twars.bean.Paper" useGeneratedKeys="true" keyProperty="id">
