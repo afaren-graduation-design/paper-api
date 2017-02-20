@@ -82,6 +82,7 @@ public class ProgramResourceTest extends TestBase {
         when(firstPaper.getPaperName()).thenReturn("简单的试卷");
         when(firstPaper.getDescription()).thenReturn("easy");
         when(firstPaper.getCreateTime()).thenReturn(1111111);
+        when(firstPaper.getPaperType()).thenReturn("practice");
         when(firstPaper.getMakerId()).thenReturn(3);
         when(firstPaper.getIsDistribution()).thenReturn(true);
 
@@ -90,6 +91,7 @@ public class ProgramResourceTest extends TestBase {
         m1.put("paperName", "简单的试卷");
         m1.put("description", "easy");
         m1.put("createTime", 1111111);
+        m1.put("paperType", "practice");
         m1.put("makerId", 3);
         m1.put("distribution", true);
         m1.put("uri", "/papers/1");
@@ -100,6 +102,7 @@ public class ProgramResourceTest extends TestBase {
         when(secondPaper.getPaperName()).thenReturn("普通的试卷");
         when(secondPaper.getDescription()).thenReturn("common");
         when(secondPaper.getCreateTime()).thenReturn(2222222);
+        when(secondPaper.getPaperType()).thenReturn("exam");
         when(secondPaper.getMakerId()).thenReturn(2);
         when(secondPaper.getIsDistribution()).thenReturn(false);
 
@@ -109,6 +112,7 @@ public class ProgramResourceTest extends TestBase {
         m2.put("paperName", "简单的试卷");
         m2.put("description", "easy");
         m2.put("createTime", 1111111);
+        m2.put("paperType", "exam");
         m2.put("makerId", 3);
         m2.put("distribution", true);
         m2.put("uri", "/papers/1");
@@ -122,14 +126,17 @@ public class ProgramResourceTest extends TestBase {
 
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
-        Assert.assertThat(jsonStr, is("{\"paperList\":[{\"createTime\":1111111,"
+        System.out.println(jsonStr);
+        Assert.assertThat(jsonStr, is("{\"paperList\":[{\"paperType\":\"practice\","
+                + "\"createTime\":1111111,"
                 + "\"paperName\":\"简单的试卷\","
                 + "\"description\":\"easy\","
                 + "\"id\":1,"
                 + "\"distribution\":true,"
                 + "\"uri\":\"/papers/1\","
                 + "\"makerId\":3},"
-                + "{\"createTime\":1111111,"
+                + "{\"paperType\":\"exam\","
+                + "\"createTime\":1111111,"
                 + "\"paperName\":\"简单的试卷\","
                 + "\"description\":\"easy\","
                 + "\"id\":1,"
@@ -145,6 +152,7 @@ public class ProgramResourceTest extends TestBase {
         data.put("makerId", 1);
         data.put("createTime", 111111);
         data.put("programId", 1);
+        data.put("paperType", "exam");
         data.put("paperName", "paperName");
         data.put("description", "paper desc");
 
