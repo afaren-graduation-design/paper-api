@@ -56,7 +56,7 @@ public class PaperResourceTest extends TestBase {
         when(firstPaper.getDescription()).thenReturn("easy");
         when(firstPaper.getCreateTime()).thenReturn(1111111);
         when(firstPaper.getMakerId()).thenReturn(3);
-        when(firstPaper.getIsDistribution()).thenReturn(true);
+        when(firstPaper.getIsDistributed()).thenReturn(true);
         when(firstPaper.getPaperType()).thenReturn("practice");
 
         Map m1 = new HashMap();
@@ -75,7 +75,7 @@ public class PaperResourceTest extends TestBase {
         when(secondPaper.getDescription()).thenReturn("common");
         when(secondPaper.getCreateTime()).thenReturn(2222222);
         when(secondPaper.getMakerId()).thenReturn(2);
-        when(secondPaper.getIsDistribution()).thenReturn(false);
+        when(secondPaper.getIsDistributed()).thenReturn(false);
         when(secondPaper.getPaperType()).thenReturn("exam");
 
 
@@ -127,7 +127,7 @@ public class PaperResourceTest extends TestBase {
         when(firstPaper.getDescription()).thenReturn("easy");
         when(firstPaper.getCreateTime()).thenReturn(1111111);
         when(firstPaper.getMakerId()).thenReturn(3);
-        when(firstPaper.getIsDistribution()).thenReturn(true);
+        when(firstPaper.getIsDistributed()).thenReturn(true);
         when(firstPaper.getPaperType()).thenReturn("exam");
 
         Map m1 = new HashMap();
@@ -146,7 +146,7 @@ public class PaperResourceTest extends TestBase {
         when(secondPaper.getDescription()).thenReturn("common");
         when(secondPaper.getCreateTime()).thenReturn(2222222);
         when(secondPaper.getMakerId()).thenReturn(2);
-        when(secondPaper.getIsDistribution()).thenReturn(false);
+        when(secondPaper.getIsDistributed()).thenReturn(false);
         when(secondPaper.getPaperType()).thenReturn("practice");
 
 

@@ -1,0 +1,1 @@
+ALTER TABLE paper CHANGE isDistribution isDistributed tinyint(1) NOT NULL

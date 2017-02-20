@@ -71,7 +71,7 @@ public class ProgramResource extends Resource {
         paper.setDescription(description);
         paper.setCreateTime(createTime);
         paper.setPaperType(paperType);
-        paper.setIsDistribution(isDistribution);
+        paper.setIsDistributed(isDistribution);
         paper.setProgramId(programId);
 
         paperMapper.insertPaper(paper);

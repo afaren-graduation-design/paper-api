@@ -63,6 +63,7 @@ public class PaperMapperTest extends TestBase {
     public void should_insert_paper() {
         Paper paper = new Paper();
         paper.setMakerId(3);
+        paper.setIsDistributed(true);
         paper.setPaperName("思沃特训营第一次测验");
 
         paperMapper.insertPaper(paper);

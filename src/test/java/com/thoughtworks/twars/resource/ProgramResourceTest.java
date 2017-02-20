@@ -84,7 +84,7 @@ public class ProgramResourceTest extends TestBase {
         when(firstPaper.getCreateTime()).thenReturn(1111111);
         when(firstPaper.getPaperType()).thenReturn("practice");
         when(firstPaper.getMakerId()).thenReturn(3);
-        when(firstPaper.getIsDistribution()).thenReturn(true);
+        when(firstPaper.getIsDistributed()).thenReturn(true);
 
         Map m1 = new HashMap();
         m1.put("id", 1);
@@ -104,7 +104,7 @@ public class ProgramResourceTest extends TestBase {
         when(secondPaper.getCreateTime()).thenReturn(2222222);
         when(secondPaper.getPaperType()).thenReturn("exam");
         when(secondPaper.getMakerId()).thenReturn(2);
-        when(secondPaper.getIsDistribution()).thenReturn(false);
+        when(secondPaper.getIsDistributed()).thenReturn(false);
 
 
         Map m2 = new HashMap();

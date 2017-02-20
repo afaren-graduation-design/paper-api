@@ -13,7 +13,7 @@ public class Paper {
     private String description;
     private Integer createTime;
     private Integer programId;
-    private boolean isDistribution;
+    private boolean isDistributed;
     private String paperType;
 
     public Integer getProgramId() {
@@ -84,12 +84,12 @@ public class Paper {
         this.createTime = createTime;
     }
 
-    public boolean getIsDistribution() {
-        return isDistribution;
+    public boolean getIsDistributed() {
+        return isDistributed;
     }
 
-    public void setIsDistribution(boolean isDistribution) {
-        this.isDistribution = isDistribution;
+    public void setIsDistributed(boolean isDistributed) {
+        this.isDistributed = isDistributed;
     }
 
     public void setPaperName(String paperName) {
@@ -113,7 +113,7 @@ public class Paper {
         result.put("paperName", getPaperName());
         result.put("description", getDescription());
         result.put("createTime", getCreateTime());
-        result.put("isDistribution", getIsDistribution());
+        result.put("isDistributed", getIsDistributed());
         result.put("id", getId());
         result.put("programId", getProgramId());
         result.put("paperType", getPaperType());
