@@ -10,4 +10,6 @@ public interface ProgramMapper {
 
     List<Program> getAllPrograms(int page,int pageSize);
 
+    Integer insertPrograms(Program program);
+
 }
