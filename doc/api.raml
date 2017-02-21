@@ -659,7 +659,6 @@ baseUri: http://api.bronzesword.com/
                                 paperName: string
                                 description: string
                                 createTime: string
-                                isDistribution: integer
                                 programId: integer
                                 uri: string
 
@@ -695,8 +694,8 @@ baseUri: http://api.bronzesword.com/
                           application/json:
                             properties:
                               operationType:
-                                enum: ['DELETE','UPDATE','DISTRIBUTION','ADD','RESTORE']
-                              operatorId: integer
+                                enum: ['DELETE','DISTRIBUTION','UNDISTRIBUTION']
+                              paperId: integer
                               operatingTime: integer
                     responses:
                       204:
@@ -729,6 +728,7 @@ baseUri: http://api.bronzesword.com/
         body:
           application/json:
             properties:
+              stackId: integer
               uri: string
 
   /{stackId}:
