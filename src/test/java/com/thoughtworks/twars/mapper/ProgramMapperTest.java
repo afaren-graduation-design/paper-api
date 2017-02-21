@@ -46,4 +46,16 @@ public class ProgramMapperTest extends TestBase {
         assertThat(program.getId(), is(5));
     }
 
+    @Test
+    public void should_update_programs() {
+        Program program = new Program();
+        program.setId(1);
+        program.setName("五年级");
+        program.setUriEnable(true);
+
+        int reslut = programMapper.updatePrograms(program);
+
+        assertThat(reslut, is(1));
+    }
+
 }
