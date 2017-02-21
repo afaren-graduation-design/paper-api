@@ -242,7 +242,7 @@ public class ProgramResourceTest extends TestBase {
     }
 
     @Test
-    public void should_instert_programs() throws Exception {
+    public void should_insert_programs() {
 
         Map data = new HashMap();
         data.put("name", "五年级");
@@ -254,6 +254,21 @@ public class ProgramResourceTest extends TestBase {
                 entityProgram);
 
         Assert.assertThat(response.getStatus(), is(201));
+    }
+
+    @Test
+    public void should_update_programs_by_id() throws Exception {
+
+        Map data = new HashMap();
+        data.put("name", "五年级");
+        data.put("uriEnable", false);
+
+        Entity entityProgram = Entity.entity(data,
+                MediaType.APPLICATION_JSON_TYPE);
+        Response response = target(basePath + "/1").request().put(
+                entityProgram);
+        
+        Assert.assertThat(response.getStatus(), is(204));
     }
 }
 
