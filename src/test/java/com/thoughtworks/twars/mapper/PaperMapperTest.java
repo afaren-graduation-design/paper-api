@@ -63,7 +63,6 @@ public class PaperMapperTest extends TestBase {
     public void should_insert_paper() {
         Paper paper = new Paper();
         paper.setMakerId(3);
-        paper.setIsDistributed(true);
         paper.setPaperName("思沃特训营第一次测验");
 
         paperMapper.insertPaper(paper);
@@ -81,6 +80,6 @@ public class PaperMapperTest extends TestBase {
     @Test
     public void should_return_papers_by_programId() throws Exception {
         List<Paper> papers = paperMapper.findPapersByProgramId(6);
-        assertThat(papers.size(), is(3));
+        assertThat(papers.size(), is(8));
     }
 }

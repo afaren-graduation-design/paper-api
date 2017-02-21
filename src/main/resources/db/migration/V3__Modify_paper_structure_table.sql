@@ -1,1 +1,1 @@
-ALTER TABLE paper CHANGE isDistribution isDistributed tinyint(1) NOT NULL
+ALTER TABLE paper DROP COLUMN isDistribution;

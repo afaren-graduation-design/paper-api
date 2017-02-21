@@ -12,7 +12,6 @@
         <result column="description" property="description"></result>
         <result column="createTime" property="createTime"></result>
         <result column="programId" property="programId"></result>
-        <result column="isDistributed" property="isDistributed"></result>
     </resultMap>
 
     <resultMap id="PaperResultMap" type="com.thoughtworks.twars.bean.Paper">
@@ -51,11 +50,11 @@
     </select>
 
     <select id="findPapersByProgramId" parameterType="java.lang.Integer" resultMap="paperListMap">
-        select * from paper WHERE programId = #{programId} AND isDistributed = true;
+        select * from paper WHERE programId = #{programId};
     </select>
 
     <insert id="insertPaper" parameterType="com.thoughtworks.twars.bean.Paper" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO paper(makerId, paperName,programId,description,createTime,isDistributed,paperType)
-        VALUES (#{makerId}, #{paperName},#{programId},#{description},#{createTime},#{isDistributed},#{paperType});
+        INSERT INTO paper(makerId, paperName,programId,description,createTime,paperType)
+        VALUES (#{makerId}, #{paperName},#{programId},#{description},#{createTime},#{paperType});
     </insert>
 </mapper>

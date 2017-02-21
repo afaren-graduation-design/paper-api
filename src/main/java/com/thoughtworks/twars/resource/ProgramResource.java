@@ -63,7 +63,6 @@ public class ProgramResource extends Resource {
         String description = (String) data.get("description");
         String paperType = (String) data.get("paperType");
         Integer createTime = (Integer) data.get("createTime");
-        Boolean isDistribution = true;
 
         Paper paper = new Paper();
         paper.setMakerId(makerId);
@@ -71,7 +70,6 @@ public class ProgramResource extends Resource {
         paper.setDescription(description);
         paper.setCreateTime(createTime);
         paper.setPaperType(paperType);
-        paper.setIsDistributed(isDistribution);
         paper.setProgramId(programId);
 
         paperMapper.insertPaper(paper);

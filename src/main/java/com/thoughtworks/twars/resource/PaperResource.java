@@ -89,7 +89,6 @@ public class PaperResource extends Resource {
                 insertPaper.setDescription(description);
                 insertPaper.setCreateTime(createTime);
                 insertPaper.setPaperType(paperType);
-                insertPaper.setIsDistributed(true);
 
                 paperMapper.insertPaper(insertPaper);
 
@@ -106,7 +105,6 @@ public class PaperResource extends Resource {
             paper.setDescription(description);
             paper.setCreateTime(createTime);
             paper.setPaperType(paperType);
-            paper.setIsDistributed(true);
 
             paperMapper.insertPaper(paper);
             int paperId = paper.getId();

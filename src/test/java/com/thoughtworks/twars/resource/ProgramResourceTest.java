@@ -84,7 +84,6 @@ public class ProgramResourceTest extends TestBase {
         when(firstPaper.getCreateTime()).thenReturn(1111111);
         when(firstPaper.getPaperType()).thenReturn("practice");
         when(firstPaper.getMakerId()).thenReturn(3);
-        when(firstPaper.getIsDistributed()).thenReturn(true);
 
         Map m1 = new HashMap();
         m1.put("id", 1);
@@ -93,7 +92,6 @@ public class ProgramResourceTest extends TestBase {
         m1.put("createTime", 1111111);
         m1.put("paperType", "practice");
         m1.put("makerId", 3);
-        m1.put("distribution", true);
         m1.put("uri", "/papers/1");
 
         when(firstPaper.getPapersInfo()).thenReturn(m1);
@@ -104,7 +102,6 @@ public class ProgramResourceTest extends TestBase {
         when(secondPaper.getCreateTime()).thenReturn(2222222);
         when(secondPaper.getPaperType()).thenReturn("exam");
         when(secondPaper.getMakerId()).thenReturn(2);
-        when(secondPaper.getIsDistributed()).thenReturn(false);
 
 
         Map m2 = new HashMap();
@@ -114,7 +111,6 @@ public class ProgramResourceTest extends TestBase {
         m2.put("createTime", 1111111);
         m2.put("paperType", "exam");
         m2.put("makerId", 3);
-        m2.put("distribution", true);
         m2.put("uri", "/papers/1");
 
         when(secondPaper.getPapersInfo()).thenReturn(m2);
@@ -126,13 +122,11 @@ public class ProgramResourceTest extends TestBase {
 
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
-        System.out.println(jsonStr);
         Assert.assertThat(jsonStr, is("{\"paperList\":[{\"paperType\":\"practice\","
                 + "\"createTime\":1111111,"
                 + "\"paperName\":\"简单的试卷\","
                 + "\"description\":\"easy\","
                 + "\"id\":1,"
-                + "\"distribution\":true,"
                 + "\"uri\":\"/papers/1\","
                 + "\"makerId\":3},"
                 + "{\"paperType\":\"exam\","
@@ -140,7 +134,6 @@ public class ProgramResourceTest extends TestBase {
                 + "\"paperName\":\"简单的试卷\","
                 + "\"description\":\"easy\","
                 + "\"id\":1,"
-                + "\"distribution\":true,"
                 + "\"uri\":\"/papers/1\","
                 + "\"makerId\":3}]}"));
     }
