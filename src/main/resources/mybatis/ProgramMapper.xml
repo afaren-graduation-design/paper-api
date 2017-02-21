@@ -20,4 +20,8 @@
     <insert id="insertPrograms" parameterType="com.thoughtworks.twars.bean.Program" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO programs (name, uriEnable) VALUES (#{name},#{uriEnable});
     </insert>
+
+    <update id="updatePrograms" parameterType="com.thoughtworks.twars.bean.Program" useGeneratedKeys="true" keyProperty="id">
+        update programs set name = #{name},uriEnable = #{uriEnable} where id = #{id} ;
+    </update>
 </mapper>
