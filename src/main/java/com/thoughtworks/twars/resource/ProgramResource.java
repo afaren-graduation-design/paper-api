@@ -76,6 +76,14 @@ public class ProgramResource extends Resource {
 
         Integer paperId = paper.getId();
 
+        PaperOperation paperOperation = new PaperOperation();
+        paperOperation.setPaperId(paperId);
+        paperOperation.setOperatingTime(createTime);
+        paperOperation.setOperationType("DISTRIBUTION");
+        paperOperation.setOperatorId(makerId);
+
+        paperOperationMapper.insertPaperOperation(paperOperation);
+
         List sections = (List) data.get("sections");
         for (Object sectionItem : sections) {
             Map section = (Map) sectionItem;
