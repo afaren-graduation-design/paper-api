@@ -1,13 +1,20 @@
 package com.thoughtworks.twars.bean;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class Program {
     private Integer id;
     private String name;
+    private Boolean uriEnable;
+
+    public Boolean getUriEnable() {
+        return uriEnable;
+    }
+
+    public void setUriEnable(Boolean uriEnable) {
+        this.uriEnable = uriEnable;
+    }
 
     public Integer getId() {
         return id;
@@ -37,6 +44,7 @@ public class Program {
         return "Program{"
                 + "id=" + id
                 + ", name='" + name + '\''
+                + ", uriEnable='" + uriEnable + '\''
                 + '}';
     }
 }
