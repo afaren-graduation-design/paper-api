@@ -1,10 +1,8 @@
 package com.thoughtworks.twars.mapper;
 
 import com.thoughtworks.twars.bean.Program;
-import com.thoughtworks.twars.bean.User;
 import org.junit.Before;
 import org.junit.Test;
-import scala.Int;
 
 import java.util.List;
 
@@ -35,6 +33,17 @@ public class ProgramMapperTest extends TestBase {
         assertThat(programs.size(), is(3));
 
         assertEquals(programMapper.getAllPrograms(0, 0).size(), 0);
+    }
+
+    @Test
+    public void should_insert_programs() {
+        Program program = new Program();
+        program.setName("五年级");
+        program.setUriEnable(true);
+
+        programMapper.insertPrograms(program);
+
+        assertThat(program.getId(), is(5));
     }
 
 }
