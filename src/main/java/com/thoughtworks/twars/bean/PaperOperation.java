@@ -1,5 +1,8 @@
 package com.thoughtworks.twars.bean;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class PaperOperation {
     private int id;
     private String operationType;
@@ -45,6 +48,18 @@ public class PaperOperation {
 
     public void setPaperId(int paperId) {
         this.paperId = paperId;
+    }
+
+    public Map toMap(){
+        Map result = new HashMap<>();
+
+        result.put("id", getId());
+        result.put("operatorId", getOperatorId());
+        result.put("operatingTime", getOperatingTime());
+        result.put("paperId", getPaperId());
+        result.put("operationType", getOperationType());
+
+        return result;
     }
 
     @Override

@@ -50,7 +50,13 @@
     </select>
 
     <select id="findPapersByProgramId" parameterType="java.lang.Integer" resultMap="paperListMap">
-        select * from paper WHERE programId = #{programId};
+        select * from paper WHERE programId = #{programId} AND id in (SELECT paperId FROM paperOperation P
+        WHERE id=(
+        SELECT
+        MAX(id)
+        FROM paperOperation
+        WHERE paperId=P.paperId
+        ));
     </select>
 
     <insert id="insertPaper" parameterType="com.thoughtworks.twars.bean.Paper" useGeneratedKeys="true" keyProperty="id">

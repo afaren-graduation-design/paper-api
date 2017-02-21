@@ -80,6 +80,6 @@ public class PaperMapperTest extends TestBase {
     @Test
     public void should_return_papers_by_programId() throws Exception {
         List<Paper> papers = paperMapper.findPapersByProgramId(6);
-        assertThat(papers.size(), is(8));
+        assertThat(papers.size(), is(2));
     }
 }

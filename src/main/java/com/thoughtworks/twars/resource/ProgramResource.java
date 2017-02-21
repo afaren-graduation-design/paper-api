@@ -207,7 +207,6 @@ public class ProgramResource extends Resource {
             paperOperation.setPaperId(paperId);
 
             int result = paperOperationMapper.insertPaperOperation(paperOperation);
-            System.out.println(result);
             if (result == 0) {
                 return Response.status(Response.Status.NOT_FOUND).build();
             }

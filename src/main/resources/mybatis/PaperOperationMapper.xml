@@ -5,6 +5,14 @@
 
 <mapper namespace="com.thoughtworks.twars.mapper.PaperOperationMapper">
 
+    <resultMap id="paperOperationMap" type="com.thoughtworks.twars.bean.PaperOperation">
+        <id property="id" column="id"></id>
+        <result column="operatorId" property="operatorId"></result>
+        <result column="operatingTime" property="operatingTime"></result>
+        <result column="paperId" property="paperId"></result>
+        <result column="operationType" property="operationType"></result>
+    </resultMap>
+
     <insert id="insertPaperOperation" parameterType="com.thoughtworks.twars.bean.PaperOperation" useGeneratedKeys="true"
             keyProperty="id">
         INSERT INTO paperOperation(operationType, operatorId,operatingTime,paperId)
