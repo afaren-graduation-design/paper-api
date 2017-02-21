@@ -85,16 +85,16 @@ public class ProgramResourceTest extends TestBase {
         when(firstPaper.getPaperType()).thenReturn("practice");
         when(firstPaper.getMakerId()).thenReturn(3);
 
-        Map m1 = new HashMap();
-        m1.put("id", 1);
-        m1.put("paperName", "简单的试卷");
-        m1.put("description", "easy");
-        m1.put("createTime", 1111111);
-        m1.put("paperType", "practice");
-        m1.put("makerId", 3);
-        m1.put("uri", "/papers/1");
+        Map data = new HashMap();
+        data.put("id", 1);
+        data.put("paperName", "简单的试卷");
+        data.put("description", "easy");
+        data.put("createTime", 1111111);
+        data.put("paperType", "practice");
+        data.put("makerId", 3);
+        data.put("uri", "/papers/1");
 
-        when(firstPaper.getPapersInfo()).thenReturn(m1);
+        when(firstPaper.getPapersInfo()).thenReturn(data);
 
         when(secondPaper.getId()).thenReturn(5);
         when(secondPaper.getPaperName()).thenReturn("普通的试卷");
@@ -239,6 +239,21 @@ public class ProgramResourceTest extends TestBase {
         Assert.assertThat(jsonStr, is("{\"programs\":"
                 + "[{\"name\":\"111\",\"id\":1},"
                 + "{\"name\":\"222\",\"id\":2}]}"));
+    }
+
+    @Test
+    public void should_instert_programs() throws Exception {
+
+        Map data = new HashMap();
+        data.put("name", "五年级");
+        data.put("uriEnable", false);
+
+        Entity entityProgram = Entity.entity(data,
+                MediaType.APPLICATION_JSON_TYPE);
+        Response response = target(basePath).request().post(
+                entityProgram);
+
+        Assert.assertThat(response.getStatus(), is(201));
     }
 }
 
