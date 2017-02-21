@@ -592,6 +592,19 @@ baseUri: http://api.bronzesword.com/
             properties:
               id: integer
               name: string
+  post:
+    description: 管理员权限下创建一个program
+    body:
+      application/json:
+        properties:
+          name: string
+          uriEnable: boolean
+    responses:
+      201:
+        body:
+          application/json:
+            properties:
+              id: integer
   /{programId}:
         /users:
           get:
