@@ -235,4 +235,23 @@ public class ProgramResource extends Resource {
         result.put("programs", programsInfo);
         return Response.status(Response.Status.OK).entity(result).build();
     }
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response insertPrograms(Map data) {
+        String name = (String) data.get("name");
+        Boolean uriEnable = (Boolean) data.get("uriEnable");
+
+        Program program = new Program();
+        program.setName(name);
+        program.setUriEnable(uriEnable);
+
+        programMapper.insertPrograms(program);
+
+        Map result = new HashMap();
+        result.put("id", program.getId());
+
+        return Response.status(Response.Status.CREATED).entity(result).build();
+    }
+
 }
