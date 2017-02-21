@@ -16,4 +16,8 @@
         select * from programs
         limit #{param1},#{param2}
     </select>
+
+    <insert id="insertPrograms" parameterType="com.thoughtworks.twars.bean.Program" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO programs VALUES (#{name},#{uriEnable});
+    </insert>
 </mapper>
