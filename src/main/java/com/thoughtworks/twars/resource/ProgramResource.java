@@ -196,9 +196,9 @@ public class ProgramResource extends Resource {
             @PathParam("paperId") int paperId, Map data) {
         try {
 
-            String operationType = (String) data.get("operationType");
-            int operatorId = (int) data.get("operatorId");
-            int operatingTime = (int) data.get("operatingTime");
+            String operationType = (String) data.get("operation");
+            int operatorId = (int) data.get("makerId");
+            int operatingTime = (int) data.get("createTime");
 
             PaperOperation paperOperation = new PaperOperation();
             paperOperation.setOperationType(operationType);
@@ -207,6 +207,7 @@ public class ProgramResource extends Resource {
             paperOperation.setPaperId(paperId);
 
             int result = paperOperationMapper.insertPaperOperation(paperOperation);
+            System.out.println(result);
             if (result == 0) {
                 return Response.status(Response.Status.NOT_FOUND).build();
             }
