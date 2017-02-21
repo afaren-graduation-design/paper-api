@@ -267,7 +267,7 @@ public class ProgramResourceTest extends TestBase {
                 MediaType.APPLICATION_JSON_TYPE);
         Response response = target(basePath + "/1").request().put(
                 entityProgram);
-        
+
         Assert.assertThat(response.getStatus(), is(204));
     }
 }
