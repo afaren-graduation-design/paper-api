@@ -12,4 +12,6 @@ public interface ProgramMapper {
 
     Integer insertPrograms(Program program);
 
+    Integer updatePrograms(Program program);
+
 }
