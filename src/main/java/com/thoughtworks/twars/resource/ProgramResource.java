@@ -254,4 +254,20 @@ public class ProgramResource extends Resource {
         return Response.status(Response.Status.CREATED).entity(result).build();
     }
 
+    @PUT
+    @Path("/{programId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updatePrograms(
+            @PathParam("programId") int programId, Map data) {
+
+        Program program = new Program();
+        program.setId(programId);
+        program.setName((String) data.get("name"));
+        program.setUriEnable((Boolean) data.get("uriEnable"));
+
+        programMapper.updatePrograms(program);
+
+        return Response.status(Response.Status.NO_CONTENT).build();
+    }
+
 }
