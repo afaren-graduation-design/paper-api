@@ -18,6 +18,6 @@
     </select>
 
     <insert id="insertPrograms" parameterType="com.thoughtworks.twars.bean.Program" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO programs VALUES (#{name},#{uriEnable});
+        INSERT INTO programs (name, uriEnable) VALUES (#{name},#{uriEnable});
     </insert>
 </mapper>
