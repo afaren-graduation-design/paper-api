@@ -605,6 +605,15 @@ baseUri: http://api.bronzesword.com/
           application/json:
             properties:
               id: integer
+  put:
+    description: 管理员权限下修改一个program
+    body:
+      application/json:
+        properties:
+          name: string
+          uriEnable: boolean
+    responses:
+      204:
   /{programId}:
         /users:
           get:
