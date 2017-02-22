@@ -18,6 +18,10 @@
         select * from stack where stackId = #{stackId}
     </select>
 
+    <select id="getStackByTitle" resultMap="stackListMap">
+        select * from stack where title = #{title}
+    </select>
+
     <insert id="insertStack" parameterType="com.thoughtworks.twars.bean.Stack" useGeneratedKeys="true"
             keyProperty="stackId">
         INSERT INTO stack(title,description,definition)

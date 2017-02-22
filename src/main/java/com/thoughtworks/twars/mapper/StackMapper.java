@@ -9,5 +9,7 @@ public interface StackMapper {
 
     Stack getStackById(int stackId);
 
+    Stack getStackByTitle(String title);
+
     int insertStack(Stack stack);
 }

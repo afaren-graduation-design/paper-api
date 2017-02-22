@@ -57,6 +57,10 @@ public class StackResource extends Resource {
     @Produces(MediaType.APPLICATION_JSON)
 
     public Response createStack(Stack stack) {
+        Stack stack1 = stackMapper.getStackByTitle(stack.getTitle());
+        if(stack1!=null){
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
         stackMapper.insertStack(stack);
 
         Map<String, Object> map = new HashMap<>();
