@@ -9,7 +9,7 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
-public class PaperAndOperationMapperTest extends TestBase{
+public class PaperAndOperationMapperTest extends TestBase {
     private PaperAndOperationMapper paperAndOperationMapper;
 
     @Before
@@ -20,7 +20,7 @@ public class PaperAndOperationMapperTest extends TestBase{
 
     @Test
     public void should_return_papers_by_programId() throws Exception {
-        List<PaperAndOperation> papers = paperAndOperationMapper.findPapersByProgramId(6);
-        assertThat(papers.size(), is(2));
+        List<PaperAndOperation> papers = paperAndOperationMapper.findPapersByProgramId(1);
+        assertThat(papers.size(), is(6));
     }
 }
