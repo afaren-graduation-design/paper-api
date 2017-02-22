@@ -3,6 +3,7 @@ package com.thoughtworks.twars.resource;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.thoughtworks.twars.bean.Paper;
+import com.thoughtworks.twars.bean.PaperAndOperation;
 import com.thoughtworks.twars.bean.Program;
 import com.thoughtworks.twars.bean.Section;
 import org.junit.Assert;
@@ -28,10 +29,10 @@ public class ProgramResourceTest extends TestBase {
     Paper paper;
 
     @Mock
-    Paper firstPaper;
+    PaperAndOperation firstPaper;
 
     @Mock
-    Paper secondPaper;
+    PaperAndOperation secondPaper;
 
 
     @Mock
@@ -75,15 +76,18 @@ public class ProgramResourceTest extends TestBase {
     @Test
     public void should_list_all_papers_by_programId() throws Exception {
 
-        when(paperMapper.findPapersByProgramId(6))
+        when(paperAndOperationMapper.findPapersByProgramId(6))
                 .thenReturn(Arrays.asList(firstPaper, secondPaper));
 
-        when(firstPaper.getId()).thenReturn(1);
+        when(firstPaper.getPaperId()).thenReturn(1);
         when(firstPaper.getPaperName()).thenReturn("简单的试卷");
         when(firstPaper.getDescription()).thenReturn("easy");
         when(firstPaper.getCreateTime()).thenReturn(1111111);
         when(firstPaper.getPaperType()).thenReturn("practice");
         when(firstPaper.getMakerId()).thenReturn(3);
+        when(firstPaper.getOperatorId()).thenReturn(3);
+        when(firstPaper.getOperationId()).thenReturn(2);
+        when(firstPaper.getOperationType()).thenReturn("DISTRIBUTION");
 
         Map data = new HashMap();
         data.put("id", 1);
@@ -93,15 +97,21 @@ public class ProgramResourceTest extends TestBase {
         data.put("paperType", "practice");
         data.put("makerId", 3);
         data.put("uri", "/papers/1");
+        data.put("operatorId", 3);
+        data.put("operationId", 2);
+        data.put("operationType", "DISTRIBUTION");
 
         when(firstPaper.getPapersInfo()).thenReturn(data);
 
-        when(secondPaper.getId()).thenReturn(5);
+        when(secondPaper.getPaperId()).thenReturn(5);
         when(secondPaper.getPaperName()).thenReturn("普通的试卷");
         when(secondPaper.getDescription()).thenReturn("common");
         when(secondPaper.getCreateTime()).thenReturn(2222222);
         when(secondPaper.getPaperType()).thenReturn("exam");
         when(secondPaper.getMakerId()).thenReturn(2);
+        when(secondPaper.getOperationId()).thenReturn(1);
+        when(secondPaper.getOperatorId()).thenReturn(2);
+        when(secondPaper.getOperationType()).thenReturn("UNDISTRIBUTION");
 
 
         Map m2 = new HashMap();
@@ -112,6 +122,9 @@ public class ProgramResourceTest extends TestBase {
         m2.put("paperType", "exam");
         m2.put("makerId", 3);
         m2.put("uri", "/papers/1");
+        m2.put("operatorId", 2);
+        m2.put("operationId", 1);
+        m2.put("operationType", "UNDISTRIBUTION");
 
         when(secondPaper.getPapersInfo()).thenReturn(m2);
 
@@ -126,15 +139,21 @@ public class ProgramResourceTest extends TestBase {
                 + "\"createTime\":1111111,"
                 + "\"paperName\":\"简单的试卷\","
                 + "\"description\":\"easy\","
+                + "\"operationId\":2,"
+                + "\"operationType\":\"DISTRIBUTION\","
                 + "\"id\":1,"
                 + "\"uri\":\"/papers/1\","
+                + "\"operatorId\":3,"
                 + "\"makerId\":3},"
                 + "{\"paperType\":\"exam\","
                 + "\"createTime\":1111111,"
                 + "\"paperName\":\"简单的试卷\","
                 + "\"description\":\"easy\","
+                + "\"operationId\":1,"
+                + "\"operationType\":\"UNDISTRIBUTION\","
                 + "\"id\":1,"
                 + "\"uri\":\"/papers/1\","
+                + "\"operatorId\":2,"
                 + "\"makerId\":3}]}"));
     }
 
@@ -267,6 +286,7 @@ public class ProgramResourceTest extends TestBase {
                 MediaType.APPLICATION_JSON_TYPE);
         Response response = target(basePath + "/1").request().put(
                 entityProgram);
+        System.out.println(response);
 
         Assert.assertThat(response.getStatus(), is(204));
     }

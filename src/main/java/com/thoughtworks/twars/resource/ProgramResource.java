@@ -31,13 +31,15 @@ public class ProgramResource extends Resource {
     private SectionQuizMapper sectionQuizMapper;
     @Inject
     private ProgramMapper programMapper;
+    @Inject
+    private PaperAndOperationMapper paperAndOperationMapper;
 
     @GET
     @Path("/{programId}/papers")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPapersByProgramId(
             @PathParam("programId") int programId) {
-        List<Paper> papers = paperMapper.findPapersByProgramId(programId);
+        List<PaperAndOperation> papers = paperAndOperationMapper.findPapersByProgramId(programId);
 
         List<Map> items = papers
                 .stream()

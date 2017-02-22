@@ -60,5 +60,6 @@
         <mapper resource="mybatis/PaperOperationMapper.xml"></mapper>
         <mapper resource="mybatis/ProgramMapper.xml"></mapper>
         <mapper resource="mybatis/StackMapper.xml"></mapper>
+        <mapper resource="mybatis/PaperAndOperationMapper.xml"></mapper>
     </mappers>
 </configuration>

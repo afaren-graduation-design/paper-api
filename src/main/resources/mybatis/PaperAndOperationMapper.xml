@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.thoughtworks.twars.mapper.PaperAndOperationMapper">
+
+    <resultMap id="paperAndOperationMap" type="com.thoughtworks.twars.bean.PaperAndOperation">
+        <result column="paperId" property="paperId"></result>
+        <result column="makerId" property="makerId"></result>
+        <result column="paperName" property="paperName"></result>
+        <result column="paperType" property="paperType"></result>
+        <result column="description" property="description"></result>
+        <result column="createTime" property="createTime"></result>
+        <result column="programId" property="programId"></result>
+        <result column="operationId" property="operationId"></result>
+        <result column="operatorId" property="operatorId"></result>
+        <result column="operationType" property="operationType"></result>
+    </resultMap>
+
+    <select id="findPapersByProgramId" parameterType="java.lang.Integer" resultMap="paperAndOperationMap">
+        SELECT P.id paperId,makerId,paperName,paperType,description, createTime,programId,O.id operationId,
+        operatorId,operationType
+        FROM paper P LEFT JOIN paperOperation O ON P.id = O.paperId
+        WHERE O.id =
+        (SELECT
+        MAX(id)
+        FROM paperOperation
+        WHERE paperId=O.paperId
+        ) AND P.programId = #{programId}
+    </select>
+</mapper>

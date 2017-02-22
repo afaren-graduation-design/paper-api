@@ -3,6 +3,7 @@ package com.thoughtworks.twars.mapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.thoughtworks.twars.bean.Paper;
+import com.thoughtworks.twars.bean.PaperAndOperation;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,6 +15,7 @@ import static org.hamcrest.core.Is.is;
 public class PaperMapperTest extends TestBase {
 
     private PaperMapper paperMapper;
+    private PaperAndOperationMapper paperAndOperationMapper;
 
     @Before
     public void setUp() throws Exception {
@@ -75,11 +77,5 @@ public class PaperMapperTest extends TestBase {
         List<Paper> papers = paperMapper.getAllPapers(1, 3);
         assertThat(papers.size(), is(3));
         assertThat(papers.get(1).getMakerId(), is(2));
-    }
-
-    @Test
-    public void should_return_papers_by_programId() throws Exception {
-        List<Paper> papers = paperMapper.findPapersByProgramId(6);
-        assertThat(papers.size(), is(2));
     }
 }

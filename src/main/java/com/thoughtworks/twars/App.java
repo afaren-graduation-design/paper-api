@@ -70,6 +70,9 @@ public class App extends ResourceConfig {
         final PaperOperationMapper paperOperationMapper = session
                 .getMapper(PaperOperationMapper.class);
 
+        final PaperAndOperationMapper paperAndOperationMapper = session
+                .getMapper(PaperAndOperationMapper.class);
+
         final BlankQuizScoreSheetService blankQuizScoreSheet = new BlankQuizScoreSheetService();
         blankQuizScoreSheet.setBlankQuizSubmitMapper(blankQuizSubmitMapper);
         blankQuizScoreSheet.setItemPostMapper(itemPostMapper);
@@ -124,6 +127,7 @@ public class App extends ResourceConfig {
                         bind(passwordRetrieveDetailMapper).to(PasswordRetrieveDetailMapper.class);
                         bind(thirdPartyMapper).to(ThirdPartyMapper.class);
                         bind(paperOperationMapper).to(PaperOperationMapper.class);
+                        bind(paperAndOperationMapper).to(PaperAndOperationMapper.class);
                         bind(programMapper).to(ProgramMapper.class);
                         bind(stackMapper).to(StackMapper.class);
                         bind(session).to(SqlSessionManager.class);

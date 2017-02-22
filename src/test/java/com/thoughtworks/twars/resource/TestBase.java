@@ -1,5 +1,6 @@
 package com.thoughtworks.twars.resource;
 
+import com.thoughtworks.twars.bean.PaperAndOperation;
 import com.thoughtworks.twars.bean.PaperOperation;
 import com.thoughtworks.twars.mapper.*;
 import com.thoughtworks.twars.resource.quiz.definition.BlankQuizDefinitionService;
@@ -21,6 +22,7 @@ public class TestBase extends JerseyTest {
     protected SqlSessionManager sqlSessionManager = mock(SqlSessionManager.class);
     protected PaperMapper paperMapper = mock(PaperMapper.class);
     protected PaperOperationMapper paperOperationMapper = mock(PaperOperationMapper.class);
+    protected PaperAndOperationMapper paperAndOperationMapper = mock(PaperAndOperationMapper.class);
     protected UserMapper userMapper = mock(UserMapper.class);
     protected QuizItemMapper quizItemMapper = mock(QuizItemMapper.class);
     protected SectionMapper sectionMapper = mock(SectionMapper.class);
@@ -59,6 +61,7 @@ public class TestBase extends JerseyTest {
             protected void configure() {
                 bind(paperMapper).to(PaperMapper.class);
                 bind(paperOperationMapper).to(PaperOperationMapper.class);
+                bind(paperAndOperationMapper).to(PaperAndOperationMapper.class);
                 bind(userMapper).to(UserMapper.class);
                 bind(quizItemMapper).to(QuizItemMapper.class);
                 bind(sectionMapper).to(SectionMapper.class);
