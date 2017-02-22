@@ -20,7 +20,7 @@ public class PaperAndOperationMapperTest extends TestBase {
 
     @Test
     public void should_return_papers_by_programId() throws Exception {
-        List<PaperAndOperation> papers = paperAndOperationMapper.findPapersByProgramId(1);
-        assertThat(papers.size(), is(6));
+        List<PaperAndOperation> papers = paperAndOperationMapper.findPapersByProgramId(6);
+        assertThat(papers.size(), is(2));
     }
 }

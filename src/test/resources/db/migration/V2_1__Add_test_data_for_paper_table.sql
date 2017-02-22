@@ -9,11 +9,3 @@ UPDATE paper SET paperType="exam" WHERE id=8;
 UPDATE paper SET paperType="practice" WHERE id=9;
 UPDATE paper SET paperType="exam" WHERE id=10;
 UPDATE paper SET paperType="exam" WHERE id=11;
-
-UPDATE paper SET programId=1 WHERE id=4;
-UPDATE paper SET programId=1 WHERE id=5;
-UPDATE paper SET programId=1 WHERE id=6;
-UPDATE paper SET programId=1 WHERE id=7;
-UPDATE paper SET programId=1 WHERE id=8;
-UPDATE paper SET programId=1 WHERE id=9;
-UPDATE paper SET programId=1 WHERE id=10;
