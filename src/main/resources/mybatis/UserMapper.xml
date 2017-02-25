@@ -136,6 +136,9 @@
         select studentId from studentMentor where mentorId = #{id};
     </select>
 
+    <delete id="deleteUserByEmail" parameterType="java.lang.String">
+        delete from users where email = #{email};
+    </delete>
 
 </mapper>
 
