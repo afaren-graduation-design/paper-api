@@ -93,6 +93,20 @@ baseUri: http://api.bronzesword.com/
             userName: string
       responses:
         201:
+    put:
+      queryParameters:
+        email: string
+      description: 在管理员权限下，更新用户权限
+      body:
+        application/json:
+          properties:
+            email: string
+            mobilePhone: string
+            password: string
+            role: array
+            userName: string
+      responses:
+        204:
   /{id}:
     get:
       responses:
