@@ -416,4 +416,40 @@ public class UserResourceTest extends TestBase {
 
         assertThat(response.getStatus(), is(201));
     }
+
+    @Test
+    public void should_return_201_when_admin_create_user() {
+
+        Map data = new HashMap();
+        data.put("email","test.com");
+        data.put("mobliePhone","13999999999");
+        data.put("password","123456");
+        data.put("userName","zh");
+        ArrayList<Integer> role = new ArrayList();
+        role.add(1);
+        role.add(2);
+        data.put("role",role);
+
+        Entity entity = Entity.entity(data, MediaType.APPLICATION_JSON_TYPE);
+        Response response = target(basePath + "/user-authority").request().post(entity);
+
+        assertThat(response.getStatus(), is(201));
+    }
+
+    @Test
+    public void should_return_201_when_admin_create_user_and_role_is_null() {
+
+        Map data = new HashMap();
+        data.put("email","test.com");
+        data.put("mobliePhone","13999999999");
+        data.put("password","123456");
+        data.put("userName","zh");
+        ArrayList<Integer> role = new ArrayList();
+        data.put("role",role);
+
+        Entity entity = Entity.entity(data, MediaType.APPLICATION_JSON_TYPE);
+        Response response = target(basePath + "/user-authority").request().post(entity);
+
+        assertThat(response.getStatus(), is(201));
+    }
 }
