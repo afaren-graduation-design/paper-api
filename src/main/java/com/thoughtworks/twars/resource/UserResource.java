@@ -370,21 +370,21 @@ public class UserResource extends Resource {
     @POST
     @Path("/user-authority")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response insertUser(Map data){
-        User user  = new User();
+    public Response insertUser(Map data) {
+        User user = new User();
         user.setEmail((String) data.get("email"));
-        user.setMobilePhone((String)data.get("mobilePhone"));
+        user.setMobilePhone((String) data.get("mobilePhone"));
         user.setPassword((String) data.get("password"));
         user.setUserName((String) data.get("userName"));
 
         ArrayList<Integer> roles = (ArrayList<Integer>) data.get("role");
-        if(roles.size() == 0) {
+        if (roles.size() == 0) {
             user.setRole("0");
             userMapper.insertUser(user);
             return Response.status(Response.Status.CREATED).build();
         }
 
-        for(Integer userRole : roles) {
+        for (Integer userRole : roles) {
             user.setRole(userRole + "");
             userMapper.insertUser(user);
         }
