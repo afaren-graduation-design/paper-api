@@ -81,8 +81,23 @@ baseUri: http://api.bronzesword.com/
             properties:
               uri: string
   /user-authority:
+    get:
+      description: 在 admin 权限下获取所有用户信息
+      responses:
+        200:
+          body:
+            application/json:
+              properties:
+                items :
+                  properties:
+                    []:
+                    email: string
+                    mobilePhone: string
+                    password: string
+                    role: array
+                    userName: string
     post:
-      description: 管理员权限下创建一个新用户
+      description: 在 admin 权限下创建一个新用户
       body:
         application/json:
           properties:
@@ -96,7 +111,7 @@ baseUri: http://api.bronzesword.com/
     put:
       queryParameters:
         email: string
-      description: 在管理员权限下，更新用户权限
+      description: 在 admin 权限下，更新用户权限
       body:
         application/json:
           properties:
