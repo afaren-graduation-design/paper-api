@@ -378,6 +378,12 @@ public class UserResource extends Resource {
         user.setUserName((String) data.get("userName"));
 
         ArrayList<Integer> roles = (ArrayList<Integer>) data.get("role");
+        if(roles.size() == 0) {
+            user.setRole("0");
+            userMapper.insertUser(user);
+            return Response.status(Response.Status.CREATED).build();
+        }
+
         for(Integer userRole : roles) {
             user.setRole(userRole + "");
             userMapper.insertUser(user);
