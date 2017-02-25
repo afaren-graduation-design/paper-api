@@ -277,5 +277,17 @@ public class UserMapperTest extends TestBase {
         assertThat(mentorIds.size(), is(2));
     }
 
+    @Test
+    public void should_return_1_when_delete_user_by_email() {
+        int reslut = userMapper.deleteUserByEmail("z@z.com");
+        assertThat(reslut, is(1));
+    }
+
+    @Test
+    public void should_return_0_when_delete_user_by_email() {
+        int reslut = userMapper.deleteUserByEmail("11");
+        assertThat(reslut, is(0));
+    }
+
 }
 
