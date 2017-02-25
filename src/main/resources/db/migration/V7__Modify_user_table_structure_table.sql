@@ -1,1 +1,1 @@
-ALTER TABLE users ADD COLUMN userName varchar(11);
+alter table users modify column role enum('0','1','2','3','4','5','6','7','8','9');
