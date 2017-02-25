@@ -467,7 +467,8 @@ public class UserResourceTest extends TestBase {
         data.put("role",role);
 
         Entity entity = Entity.entity(data, MediaType.APPLICATION_JSON_TYPE);
-        Response response = target(basePath + "/user-authority").queryParam("email","z@z.com").request().put(entity);
+        Response response = target(basePath + "/user-authority")
+                .queryParam("email","z@z.com").request().put(entity);
 
         assertThat(response.getStatus(), is(204));
     }
