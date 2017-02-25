@@ -421,14 +421,14 @@ public class UserResourceTest extends TestBase {
     public void should_return_201_when_admin_create_user() {
 
         Map data = new HashMap();
-        data.put("email","test.com");
-        data.put("mobliePhone","13999999999");
-        data.put("password","123456");
-        data.put("userName","zh");
+        data.put("email", "test.com");
+        data.put("mobliePhone", "13999999999");
+        data.put("password", "123456");
+        data.put("userName", "zh");
         ArrayList<Integer> role = new ArrayList();
         role.add(1);
         role.add(2);
-        data.put("role",role);
+        data.put("role", role);
 
         Entity entity = Entity.entity(data, MediaType.APPLICATION_JSON_TYPE);
         Response response = target(basePath + "/user-authority").request().post(entity);
@@ -440,12 +440,12 @@ public class UserResourceTest extends TestBase {
     public void should_return_201_when_admin_create_user_and_role_is_null() {
 
         Map data = new HashMap();
-        data.put("email","test.com");
-        data.put("mobliePhone","13999999999");
-        data.put("password","123456");
-        data.put("userName","zh");
+        data.put("email", "test.com");
+        data.put("mobliePhone", "13999999999");
+        data.put("password", "123456");
+        data.put("userName", "zh");
         ArrayList<Integer> role = new ArrayList();
-        data.put("role",role);
+        data.put("role", role);
 
         Entity entity = Entity.entity(data, MediaType.APPLICATION_JSON_TYPE);
         Response response = target(basePath + "/user-authority").request().post(entity);
@@ -457,19 +457,27 @@ public class UserResourceTest extends TestBase {
     public void should_return_204_when_admin_update_role_by_email() {
 
         Map data = new HashMap();
-        data.put("email","test.com");
-        data.put("mobliePhone","13999999999");
-        data.put("password","123456");
-        data.put("userName","zh");
+        data.put("email", "test.com");
+        data.put("mobliePhone", "13999999999");
+        data.put("password", "123456");
+        data.put("userName", "zh");
         ArrayList<Integer> role = new ArrayList();
         role.add(2);
         role.add(3);
-        data.put("role",role);
+        data.put("role", role);
 
         Entity entity = Entity.entity(data, MediaType.APPLICATION_JSON_TYPE);
         Response response = target(basePath + "/user-authority")
-                .queryParam("email","z@z.com").request().put(entity);
+                .queryParam("email", "z@z.com").request().put(entity);
 
         assertThat(response.getStatus(), is(204));
+    }
+
+    @Test
+    public void should_return_all_user_authority() {
+
+        Response response = target(basePath + "/user-authority").request().get();
+
+        assertThat(response.getStatus(), is(200));
     }
 }

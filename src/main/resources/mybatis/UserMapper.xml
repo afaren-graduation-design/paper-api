@@ -23,6 +23,15 @@
         <result column="userName" property="userName"></result>
     </resultMap>
 
+    <resultMap id="userAuthorityMap" type="com.thoughtworks.twars.bean.User">
+        <id property="id" column="id"></id>
+        <result column="email" property="email"></result>
+        <result column="mobilePhone" property="mobilePhone"></result>
+        <result column="userName" property="userName"></result>
+        <result column="password" property="password"></result>
+        <result column="role" property="role"></result>
+    </resultMap>
+
     <resultMap id="userInformationMap" type="java.util.Map">
         <id property="userId" column="userId"></id>
         <result column="school" property="school"></result>
@@ -139,6 +148,9 @@
     <delete id="deleteUserByEmail" parameterType="java.lang.String">
         delete from users where email = #{email};
     </delete>
+    <select id="getUserAuthority" resultMap="userAuthorityMap">
+        select * from users ;
+    </select>
 
 </mapper>
 

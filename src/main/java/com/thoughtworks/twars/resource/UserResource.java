@@ -420,5 +420,47 @@ public class UserResource extends Resource {
     }
 
 
+    @GET
+    @Path("/user-authority")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response searchUsersDetail() {
+        List<User> users = userMapper.getUserAuthority();
+
+        List<Map> result = new ArrayList<>();
+
+        for (int i = 0; i < users.size(); i++) {
+
+            List<String> roleList = new ArrayList<>();
+            roleList.add(users.get(i).getRole());
+
+            Map map = new HashMap();
+
+            map.put("mobilePhone", users.get(i).getMobilePhone());
+            map.put("userName", users.get(i).getUserName());
+            map.put("password", users.get(i).getPassword());
+            map.put("email", users.get(i).getEmail());
+
+            for (int j = i + 1; j < users.size(); j++) {
+                if (users.get(i).getEmail().equals(users.get(j).getEmail())) {
+                    roleList.add(users.get(j).getRole());
+                    users.remove(j);
+                }
+
+                if ((i + 1) == users.size()) {
+                    roleList.add(users.get(i).getRole());
+
+                }
+            }
+
+            map.put("roleList", roleList);
+            result.add(map);
+        }
+
+        Map resultList = new HashMap();
+        resultList.put("users", result);
+
+        return Response.status(Response.Status.OK).entity(resultList).build();
+
+    }
 
 }

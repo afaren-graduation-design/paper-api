@@ -1,5 +1,10 @@
 package com.thoughtworks.twars.bean;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 public class User {
     private int id;
     private String email;
@@ -64,4 +69,17 @@ public class User {
                 + ", email='" + email + '\''
                 + '}';
     }
+
+    public Map toMap() {
+        Map result = new HashMap<>();
+        result.put("email", getEmail());
+        result.put("mobilePhone", getMobilePhone());
+        result.put("password", getPassword());
+        result.put("role", getRole());
+        result.put("userName", getRole());
+
+        return result;
+    }
+
+
 }

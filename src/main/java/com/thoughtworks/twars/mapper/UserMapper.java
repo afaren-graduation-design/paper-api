@@ -50,4 +50,8 @@ public interface UserMapper {
     List<Integer> findStudentIdsByMentorId(Integer id);
 
     int deleteUserByEmail(String email);
+
+    List<User> getUserAuthority();
+
+
 }

@@ -289,5 +289,10 @@ public class UserMapperTest extends TestBase {
         assertThat(reslut, is(0));
     }
 
+    @Test
+    public void should_return_all_user_authority() {
+        List<User> allUsers = userMapper.getUserAuthority();
+        assertThat(allUsers.size(), is(8));
+    }
 }
 
