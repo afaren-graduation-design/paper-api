@@ -50,7 +50,7 @@ public class PaperOperation {
         this.paperId = paperId;
     }
 
-    public Map toMap(){
+    public Map toMap() {
         Map result = new HashMap<>();
 
         result.put("id", getId());

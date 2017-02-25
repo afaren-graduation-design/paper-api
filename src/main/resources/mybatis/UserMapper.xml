@@ -20,6 +20,7 @@
         <id property="id" column="id"></id>
         <result column="email" property="email"></result>
         <result column="mobilePhone" property="mobilePhone"></result>
+        <result column="userName" property="userName"></result>
     </resultMap>
 
     <resultMap id="userInformationMap" type="java.util.Map">
@@ -60,8 +61,8 @@
     </select>
 
     <insert id="insertUser" parameterType="com.thoughtworks.twars.bean.User" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO users(email, mobilePhone, password, createDate)
-        VALUES (#{email}, #{mobilePhone}, MD5(#{password}), UNIX_TIMESTAMP())
+        INSERT INTO users(email, mobilePhone, password, userName,role,createDate)
+        VALUES (#{email}, #{mobilePhone}, MD5(#{password}),#{userName},#{role},UNIX_TIMESTAMP())
     </insert>
 
     <insert id="updateUserDetail" parameterType="com.thoughtworks.twars.bean.UserDetail" useGeneratedKeys="true"

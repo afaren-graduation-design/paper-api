@@ -64,6 +64,8 @@ public class UserMapperTest extends TestBase {
         user.setEmail("test3@163.com");
         user.setMobilePhone("123456789012");
         user.setPassword("18928392811");
+        user.setRole(null);
+        user.setUserName("hah");
 
         userMapper.insertUser(user);
 
@@ -133,6 +135,9 @@ public class UserMapperTest extends TestBase {
         newUser.setEmail("jingjing@qq.com");
         newUser.setMobilePhone("13576826262");
         newUser.setPassword("123");
+        newUser.setRole(null);
+        newUser.setUserName("liu");
+
         int result = userMapper.insertUser(newUser);
         int userId = newUser.getId();
         User addedUser = userMapper.getUserById(userId);
