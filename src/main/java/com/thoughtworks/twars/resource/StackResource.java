@@ -41,7 +41,7 @@ public class StackResource extends Resource {
     @Produces(MediaType.APPLICATION_JSON)
 
     public Response getStackById(
-            @PathParam("stackId") int stackId) {
+            @PathParam("stackId") Integer stackId) {
         Stack stack = stackMapper.getStackById(stackId);
 
         if (stack == null) {

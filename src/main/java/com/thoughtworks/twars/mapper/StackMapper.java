@@ -7,7 +7,7 @@ import java.util.List;
 public interface StackMapper {
     List<Stack> getAllStack();
 
-    Stack getStackById(int stackId);
+    Stack getStackById(Integer stackId);
 
     Stack getStackByTitle(String title);
 

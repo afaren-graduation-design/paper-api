@@ -60,7 +60,7 @@ public class QuizItemResource extends Resource {
     @Path("/{param}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getQuizItem(
-            @PathParam("param") int id) {
+            @PathParam("param") Integer id) {
 
         QuizItem quizItem = quizItemMapper.getQuizItemById(id);
 

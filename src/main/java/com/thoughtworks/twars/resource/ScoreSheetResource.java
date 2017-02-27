@@ -52,9 +52,9 @@ public class ScoreSheetResource extends Resource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertScoreSheet(Map data) {
 
-        int examerId = (int) data.get("examerId");
-        int paperId = (int) data.get("paperId");
-        int scoreSheetId;
+        Integer examerId = (Integer) data.get("examerId");
+        Integer paperId = (Integer) data.get("paperId");
+        Integer scoreSheetId;
 
         ScoreSheet scoreSheet = new ScoreSheet();
         scoreSheet.setPaperId(paperId);
@@ -106,7 +106,7 @@ public class ScoreSheetResource extends Resource {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response findOne(
-            @PathParam("id") int id
+            @PathParam("id") Integer id
     ) {
         ScoreSheet scoreSheet = scoreSheetMapper.findOne(id);
 

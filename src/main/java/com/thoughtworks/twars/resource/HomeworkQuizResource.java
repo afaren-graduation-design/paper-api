@@ -28,12 +28,12 @@ public class HomeworkQuizResource extends Resource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllHomeworkQuiz(
-            @DefaultValue("1") @QueryParam("page") int page,
-            @DefaultValue("15") @QueryParam("pageSize") int pageSize,
+            @DefaultValue("1") @QueryParam("page") Integer page,
+            @DefaultValue("15") @QueryParam("pageSize") Integer pageSize,
             @QueryParam("homeworkName") String homeworkName,
             @QueryParam("stackId") Integer stackId
     ) {
-        int startPage = Math.max(page - 1, 0);
+        Integer startPage = Math.max(page - 1, 0);
         List<HomeworkQuiz> allHomeworkQuizzes = homeworkQuizMapper
                 .findHomeworkQuizzes(homeworkName, stackId, startPage * pageSize, pageSize);
         List<Map> items = allHomeworkQuizzes

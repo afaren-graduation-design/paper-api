@@ -8,9 +8,9 @@ public interface BlankQuizMapper {
 
     List<BlankQuiz> findAll();
 
-    List<BlankQuiz> findBySectionId(int sectionId);
+    List<BlankQuiz> findBySectionId(Integer sectionId);
 
-    BlankQuiz findOne(int id);
+    BlankQuiz findOne(Integer id);
 
     int insertBlankQuiz(BlankQuiz blankQuiz);
 

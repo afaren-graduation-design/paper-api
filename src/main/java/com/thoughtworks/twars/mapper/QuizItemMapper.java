@@ -10,15 +10,15 @@ public interface QuizItemMapper {
 
     int insertQuizItem(QuizItem quizItem);
 
-    QuizItem getQuizItemById(int id);
+    QuizItem getQuizItemById(Integer id);
 
-    List<QuizItem> getEasyItems(int easyCount);
+    List<QuizItem> getEasyItems(Integer easyCount);
 
-    List<QuizItem> getNormalItems(int normalCount);
+    List<QuizItem> getNormalItems(Integer normalCount);
 
-    List<QuizItem> getHardItems(int hardItems);
+    List<QuizItem> getHardItems(Integer hardItems);
 
-    List<QuizItem> getExampleItems(int exampleCount);
+    List<QuizItem> getExampleItems(Integer exampleCount);
 
     List<QuizItem> getExamples();
 }

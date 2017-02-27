@@ -12,6 +12,6 @@ public interface HomeworkSubmitMapper {
     List<HomeworkSubmit> findByScoreSheetId(int scoreSheetId);
 
     HomeworkSubmit findByScoreSheetIdAndQuizId(
-            @Param("scoreSheetId") int scoreSheetId,
-            @Param("homeworkQuizId") int homeworkQuizId);
+            @Param("scoreSheetId") Integer scoreSheetId,
+            @Param("homeworkQuizId") Integer homeworkQuizId);
 }

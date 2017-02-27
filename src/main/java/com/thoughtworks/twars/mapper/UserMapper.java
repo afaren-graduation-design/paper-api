@@ -11,7 +11,7 @@ public interface UserMapper {
 
     int insertUser(User user);
 
-    User getUserById(int id);
+    User getUserById(Integer id);
 
     User getUserByEmail(String email);
 
@@ -21,7 +21,7 @@ public interface UserMapper {
 
     User getUserByMobilePhoneAndPassWord(User user);
 
-    UserDetail getUserDetailById(int userId);
+    UserDetail getUserDetailById(Integer userId);
 
     int updateUserDetail(UserDetail detail);
 
@@ -52,6 +52,5 @@ public interface UserMapper {
     int deleteUserByEmail(String email);
 
     List<User> getUserAuthority();
-
 
 }

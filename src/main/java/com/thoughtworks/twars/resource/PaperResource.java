@@ -44,8 +44,8 @@ public class PaperResource extends Resource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllPapers(
-            @DefaultValue("1") @QueryParam("page") int page,
-            @DefaultValue("15") @QueryParam("pageSize") int pageSize
+            @DefaultValue("1") @QueryParam("page") Integer page,
+            @DefaultValue("15") @QueryParam("pageSize") Integer pageSize
     ) {
 
         int startPage = Math.max(page - 1, 0);
@@ -120,7 +120,7 @@ public class PaperResource extends Resource {
     }
 
 
-    public String insertDefinitionByQuizType(Map section, int paperId) {
+    public String insertDefinitionByQuizType(Map section, Integer paperId) {
         Map blankQuizzes = (Map) section.get("blankQuizzes");
         Map homeworkQuizzes = (Map) section.get("homeworkQuizzes");
 
@@ -153,7 +153,7 @@ public class PaperResource extends Resource {
     @Path("/{param}/usersDetail")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserDetailByPaperId(
-            @PathParam("param") int id) {
+            @PathParam("param") Integer id) {
         List<Integer> examerIds = scoreSheetMapper.findUserIdsByPaperId(id);
         List<UserDetail> userDetails = userMapper.findUserDetailsByUserIds(examerIds);
         List<User> users = userMapper.findUsersByUserIds(examerIds);
@@ -188,7 +188,7 @@ public class PaperResource extends Resource {
     @Path("/{param}/logicPuzzle")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getLogicPuzzleByPaperId(
-            @PathParam("param") int id
+            @PathParam("param") Integer id
     ) {
 
         List<ScoreSheet> scoreSheets = scoreSheetMapper.findByPaperId(id);

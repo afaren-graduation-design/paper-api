@@ -8,5 +8,5 @@ public interface HomeworkPostHistoryMapper {
 
     int insertHomeworkPostHistory(HomeworkPostHistory homeworkPostHistory);
 
-    List<HomeworkPostHistory> findByHomeworkSubmitId(int homeworkSubmitId);
+    List<HomeworkPostHistory> findByHomeworkSubmitId(Integer homeworkSubmitId);
 }

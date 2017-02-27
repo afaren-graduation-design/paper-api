@@ -7,12 +7,12 @@ import java.util.List;
 
 public interface HomeworkQuizMapper {
 
-    List<HomeworkQuiz> findBySectionId(int id);
+    List<HomeworkQuiz> findBySectionId(Integer id);
 
-    HomeworkQuiz findById(int id);
+    HomeworkQuiz findById(Integer id);
 
     int insertHomeworkQuiz(HomeworkQuiz homeworkQuiz);
 
     List<HomeworkQuiz> findHomeworkQuizzes(
-            String homeworkName, Integer stackId, int page, int pageSize);
+            String homeworkName, Integer stackId, Integer page, Integer pageSize);
 }

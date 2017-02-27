@@ -8,5 +8,5 @@ public interface BlankQuizSubmitMapper {
 
     int insertBlankQuizSubmit(BlankQuizSubmit blankQuizSubmit);
 
-    List<BlankQuizSubmit> findByScoreSheetId(int scoreSheetId);
+    List<BlankQuizSubmit> findByScoreSheetId(Integer scoreSheetId);
 }

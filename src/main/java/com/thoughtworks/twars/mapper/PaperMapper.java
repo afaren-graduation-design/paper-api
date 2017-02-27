@@ -5,15 +5,15 @@ import com.thoughtworks.twars.bean.Paper;
 import java.util.List;
 
 public interface PaperMapper {
-    List<Paper> findPapersByProgramId(int programId);
+    List<Paper> findPapersByProgramId(Integer programId);
 
     List<Paper> findAll();
 
-    Paper getPaperById(int id);
+    Paper getPaperById(Integer id);
 
-    List<Paper> getAllPapers(int page, int pageSize);
+    List<Paper> getAllPapers(Integer page, Integer pageSize);
 
-    Paper getOnePaper(int id);
+    Paper getOnePaper(Integer id);
 
     int insertPaper(Paper paper);
 

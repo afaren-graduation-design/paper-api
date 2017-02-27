@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface LoginDetailMapper {
 
-    List<LoginDetail> getLoginDetailByUserId(int userId);
+    List<LoginDetail> getLoginDetailByUserId(Integer userId);
 
-    int insertLoginDetail(int userId);
+    int insertLoginDetail(Integer userId);
 
     int updateLoginDetail(String token);
 
-    int updateLoginDetailById(int id);
+    int updateLoginDetailById(Integer id);
 
     LoginDetail getLoginDetailByToken(String token);
 

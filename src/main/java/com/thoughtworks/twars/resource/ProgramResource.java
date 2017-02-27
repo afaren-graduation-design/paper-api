@@ -38,7 +38,7 @@ public class ProgramResource extends Resource {
     @Path("/{programId}/papers")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPapersByProgramId(
-            @PathParam("programId") int programId) {
+            @PathParam("programId") Integer programId) {
         List<PaperAndOperation> papers = paperAndOperationMapper.findPapersByProgramId(programId);
 
         List<Map> items = papers
@@ -58,7 +58,7 @@ public class ProgramResource extends Resource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertPapers(
             @ApiParam(name = "data", value = "insert paper", required = true) Map data,
-            @PathParam("programId") int programId) {
+            @PathParam("programId") Integer programId) {
 
         Integer makerId = (Integer) data.get("makerId");
         String paperName = (String) data.get("paperName");
@@ -153,8 +153,8 @@ public class ProgramResource extends Resource {
     @Path("/{programId}/papers/{paperId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOnePaper(
-            @PathParam("programId") int programId,
-            @PathParam("paperId") int paperId) {
+            @PathParam("programId") Integer programId,
+            @PathParam("paperId") Integer paperId) {
 
         Paper paper = paperMapper.getOnePaper(paperId);
         if (paper == null || programId != paper.getProgramId()) {
@@ -169,7 +169,7 @@ public class ProgramResource extends Resource {
     @Path("/{programId}/users")
     @Produces(MediaType.APPLICATION_JSON)
     public Response findUsersIdByProgramId(
-            @PathParam("programId") int programId) {
+            @PathParam("programId") Integer programId) {
         List<Integer> users = programMapper.findUsersIdByProgramId(programId);
         if (users.size() != 0) {
 
@@ -194,13 +194,13 @@ public class ProgramResource extends Resource {
     @Path("/{programId}/papers/{paperId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertPaperOperation(
-            @PathParam("programId") int programId,
-            @PathParam("paperId") int paperId, Map data) {
+            @PathParam("programId") Integer programId,
+            @PathParam("paperId") Integer paperId, Map data) {
         try {
 
             String operationType = (String) data.get("operation");
-            int operatorId = (int) data.get("makerId");
-            int operatingTime = (int) data.get("createTime");
+            Integer operatorId = (Integer) data.get("makerId");
+            Integer operatingTime = (Integer) data.get("createTime");
 
             PaperOperation paperOperation = new PaperOperation();
             paperOperation.setOperationType(operationType);
@@ -221,11 +221,11 @@ public class ProgramResource extends Resource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllPrograms(
-            @DefaultValue("1") @QueryParam("page") int page,
-            @DefaultValue("15") @QueryParam("pageSize") int pageSize
+            @DefaultValue("1") @QueryParam("page") Integer page,
+            @DefaultValue("15") @QueryParam("pageSize") Integer pageSize
     ) {
 
-        int startPage = Math.max(page - 1, 0);
+        Integer startPage = Math.max(page - 1, 0);
         List<Program> programs = programMapper.getAllPrograms(startPage * pageSize, pageSize);
         Map result = new HashMap();
 
@@ -260,7 +260,7 @@ public class ProgramResource extends Resource {
     @Path("/{programId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response updatePrograms(
-            @PathParam("programId") int programId, Map data) {
+            @PathParam("programId") Integer programId, Map data) {
 
         Program program = new Program();
         program.setId(programId);

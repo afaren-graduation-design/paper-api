@@ -8,15 +8,15 @@ public interface ScoreSheetMapper {
 
     List<ScoreSheet> findAll();
 
-    ScoreSheet findOne(int id);
+    ScoreSheet findOne(Integer id);
 
     int insertScoreSheet(ScoreSheet scoreSheet);
 
     ScoreSheet selectScoreSheet(ScoreSheet scoreSheet);
 
-    ScoreSheet findOneByUserId(int userId);
+    ScoreSheet findOneByUserId(Integer userId);
 
-    List<ScoreSheet> findByPaperId(int paperId);
+    List<ScoreSheet> findByPaperId(Integer paperId);
 
-    List<Integer> findUserIdsByPaperId(int paperId);
+    List<Integer> findUserIdsByPaperId(Integer paperId);
 }

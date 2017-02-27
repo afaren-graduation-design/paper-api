@@ -37,7 +37,7 @@ public class UserResource extends Resource {
     @Path("/{param}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUser(
-            @PathParam("param") int userId) {
+            @PathParam("param") Integer userId) {
 
         User user = userMapper.getUserById(userId);
 
@@ -58,7 +58,7 @@ public class UserResource extends Resource {
     @Path("/{param}/logicPuzzle")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserLogicPuzzle(
-            @PathParam("param") int userId) {
+            @PathParam("param") Integer userId) {
         ScoreSheet scoreSheet = scoreSheetMapper.findOneByUserId(userId);
 
         if (scoreSheet == null) {
@@ -140,7 +140,7 @@ public class UserResource extends Resource {
     @Path("/{param}/programs")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getProgramById(
-            @PathParam("param") int userId) {
+            @PathParam("param") Integer userId) {
         List<Integer> programIds = userMapper.findProgramsById(userId);
 
         if (programIds == null) {
@@ -190,7 +190,7 @@ public class UserResource extends Resource {
     @Path("/{param}/detail")
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateUserDetail(
-            @PathParam("param") int userId,
+            @PathParam("param") Integer userId,
             UserDetail userDetail
     ) {
         userMapper.updateUserDetail(userDetail);
@@ -234,14 +234,13 @@ public class UserResource extends Resource {
     @Path("/{param}/password")
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateUserPassword(
-            @PathParam("param") int userId,
+            @PathParam("param") Integer userId,
             Map userPasswordMap
     ) {
         String oldPassword = (String) userPasswordMap.get("oldPassword");
         String password = (String) userPasswordMap.get("password");
 
-        int result = userMapper
-                .updatePassword(userId, oldPassword, password);
+        int result = userMapper.updatePassword(userId, oldPassword, password);
 
         if (1 == result) {
             Map<String, Object> map = new HashMap<>();

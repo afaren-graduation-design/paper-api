@@ -8,5 +8,5 @@ public interface ItemPostMapper {
 
     int insertItemPost(ItemPost itemPost);
     
-    List<ItemPost> findByBlankQuizSubmit(int blankQuizSubmitId);
+    List<ItemPost> findByBlankQuizSubmit(Integer blankQuizSubmitId);
 }

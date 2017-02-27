@@ -6,12 +6,12 @@ import java.util.List;
 
 public interface ProgramMapper {
 
-    List<Integer> findUsersIdByProgramId(int id);
+    List<Integer> findUsersIdByProgramId(Integer id);
 
-    List<Program> getAllPrograms(int page,int pageSize);
+    List<Program> getAllPrograms(Integer page,Integer pageSize);
 
-    Integer insertPrograms(Program program);
+    int insertPrograms(Program program);
 
-    Integer updatePrograms(Program program);
+    int updatePrograms(Program program);
 
 }

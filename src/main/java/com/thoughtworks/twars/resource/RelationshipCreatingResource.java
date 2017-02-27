@@ -21,8 +21,8 @@ public class RelationshipCreatingResource extends Resource {
     @Path("/{mentorId}/students/{studentId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertMentorUser(
-            @PathParam("mentorId") int mentorId,
-            @PathParam("studentId") int studentId) {
+            @PathParam("mentorId") Integer mentorId,
+            @PathParam("studentId") Integer studentId) {
         try {
             Integer isCreating = userMapper.insertStudentMentor(mentorId, studentId);
             if (isCreating == 1) {
