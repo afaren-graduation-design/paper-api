@@ -15,7 +15,7 @@
     </select>
 
     <select id="findByScoreSheetIdAndQuizId" resultType="com.thoughtworks.twars.bean.HomeworkSubmit">
-        SELECT * FROM homeworkSubmit WHERE scoreSheetId = #{scoreSheetId} and homeworkQuizId = #{homeworkQuizId} limit 1
+        SELECT * FROM homeworkSubmit WHERE scoreSheetId = #{scoreSheetId} AND homeworkQuizId = #{homeworkQuizId} limit 1
     </select>
 
     <insert id="insertHomeworkSubmit" parameterType="com.thoughtworks.twars.bean.HomeworkSubmit" useGeneratedKeys="true" keyProperty="id">

@@ -14,11 +14,11 @@
     <insert id="insertItemPost" parameterType="com.thoughtworks.twars.bean.ItemPost" useGeneratedKeys="true"
             keyProperty="id">
         INSERT INTO itemPost(blankQuizSubmitId,quizItemId,userAnswer)
-        VALUES (#{blankQuizSubmitId}, #{quizItemId}, #{userAnswer})
+        VALUES (#{blankQuizSubmitId}, #{quizItemId}, #{userAnswer});
     </insert>
 
     <select id="findByBlankQuizSubmit" resultMap="itemPostListMap">
-        SELECT * FROM itemPost WHERE blankQuizSubmitId = #{blankQuizSubmitId}
+        SELECT * FROM itemPost WHERE blankQuizSubmitId = #{blankQuizSubmitId};
     </select>
 
 </mapper>

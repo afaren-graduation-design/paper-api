@@ -48,15 +48,15 @@
     </resultMap>
 
     <select id="getUserById" resultType="com.thoughtworks.twars.bean.User">
-        select * from users where id = #{id}
+        SELECT * FROM users WHERE id = #{id}
     </select>
 
     <select id="getUserByEmail" resultType="com.thoughtworks.twars.bean.User">
-        select * from users where binary email = #{email} LIMIT 1
+        SELECT * FROM users WHERE binary email = #{email} LIMIT 1
     </select>
 
     <select id="getUserByMobilePhone" resultType="com.thoughtworks.twars.bean.User">
-        select * from users where mobilePhone = #{mobilePhone} LIMIT 1
+        SELECT * FROM users WHERE mobilePhone = #{mobilePhone} LIMIT 1
     </select>
 
     <select id="getUserByEmailAndPassWord" parameterType="com.thoughtworks.twars.bean.User"
@@ -112,21 +112,21 @@
     </select>
 
     <select id="findUsersByInformation" resultMap="userInformationMap">
-        select userDetail.* ,users.email,users.mobilePhone
-        from users inner join userDetail join userPrivilege
-        on
+        SELECT userDetail.* ,users.email,users.mobilePhone
+        FROM users INNER JOIN userDetail JOIN userPrivilege
+        ON
         users.id = userDetail.userId
-        and
+        AND
         users.id = userPrivilege.userId
         <where>
             <if test="param1 != null">
-                users.email like concat("%",#{param1},"%")
+                users.email LIKE concat("%",#{param1},"%")
             </if>
             <if test="param2 != null">
-                and userPrivilege.privilege = #{param2}
+                AND userPrivilege.privilege = #{param2}
             </if>
         </where>
-        limit #{param3},#{param4};
+        LIMIT #{param3},#{param4};
     </select>
 
     <insert id="insertStudentMentor" parameterType="java.lang.Integer">
@@ -138,18 +138,18 @@
     </insert>
 
     <select id="findMentorIdsByStudentId" resultType="java.lang.Integer">
-        select mentorId from studentMentor where studentId = #{id};
+        SELECT mentorId FROM studentMentor WHERE studentId = #{id};
     </select>
 
     <select id="findStudentIdsByMentorId" resultType="java.lang.Integer">
-        select studentId from studentMentor where mentorId = #{id};
+        SELECT studentId FROM studentMentor WHERE mentorId = #{id};
     </select>
 
     <delete id="deleteUserByEmail" parameterType="java.lang.String">
-        delete from users where email = #{email};
+        DELETE FROM users WHERE email = #{email};
     </delete>
     <select id="getUserAuthority" resultMap="userAuthorityMap">
-        select * from users;
+        SELECT * FROM users;
     </select>
 
 </mapper>

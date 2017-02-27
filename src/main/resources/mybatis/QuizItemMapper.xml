@@ -13,38 +13,41 @@
     </resultMap>
 
     <select id="getAllQuizItems" resultType="com.thoughtworks.twars.bean.QuizItem">
-        SELECT * FROM quizItem
+        SELECT * FROM quizItem;
     </select>
 
-    <insert id="insertQuizItem" parameterType="com.thoughtworks.twars.bean.QuizItem" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO quizItem(initializedBox,stepsString,count,questionZh,stepsLength,answer,maxUpdateTimes,descriptionZh,chartPath,infoPath)
-        VALUES (#{initializedBox},#{stepsString},#{count},#{questionZh},#{stepsLength},#{answer},#{maxUpdateTimes},#{descriptionZh},#{chartPath},#{infoPath})
+    <insert id="insertQuizItem" parameterType="com.thoughtworks.twars.bean.QuizItem" useGeneratedKeys="true"
+            keyProperty="id">
+        INSERT INTO
+        quizItem(initializedBox,stepsString,count,questionZh,stepsLength,answer,maxUpdateTimes,descriptionZh,chartPath,infoPath)
+        VALUES
+        (#{initializedBox},#{stepsString},#{count},#{questionZh},#{stepsLength},#{answer},#{maxUpdateTimes},#{descriptionZh},#{chartPath},#{infoPath});
     </insert>
 
-    <select id="getQuizItemById" resultType="com.thoughtworks.twars.bean.QuizItem" >
-        SELECT * FROM quizItem WHERE id = #{id}
+    <select id="getQuizItemById" resultType="com.thoughtworks.twars.bean.QuizItem">
+        SELECT * FROM quizItem WHERE id = #{id};
     </select>
 
     <select id="getEasyItems" resultMap="quizItemListMap" flushCache="true" useCache="false">
-        select * from quizItem where count between 21 and 25 order by rand() limit #{easyCount}
+        SELECT * FROM quizItem WHERE count BETWEEN 21 AND 25 ORDER BY rand() LIMIT #{easyCount};
     </select>
 
     <select id="getNormalItems" resultMap="quizItemListMap" flushCache="true" useCache="false">
-        select * from quizItem where count between 26 and 33 order by rand()  limit #{normalCount}
+        SELECT * FROM quizItem WHERE count BETWEEN 26 AND 33 ORDER BY rand() LIMIT #{normalCount};
     </select>
 
     <select id="getHardItems" resultMap="quizItemListMap" flushCache="true" useCache="false">
-        select * from quizItem where count between 34 and 50 order by rand()  limit #{hardCount}
+        SELECT * FROM quizItem WHERE count BETWEEN 34 AND 50 ORDER BY rand() LIMIT #{hardCount};
     </select>
 
     <select id="getExampleItems" resultMap="quizItemListMap">
         <![CDATA[
-            select * from quizItem where count  <  15 limit #{exampleCount};
+            SELECT * FROM quizItem WHERE count  <  15 LIMIT #{exampleCount};
         ]]>
     </select>
 
     <select id="getExamples" resultMap="quizItemListMap" flushCache="true" useCache="false">
-        select * from quizItem order by count limit 2;
+        SELECT * FROM quizItem ORDER BY count LIMIT 2;
     </select>
 
 </mapper>

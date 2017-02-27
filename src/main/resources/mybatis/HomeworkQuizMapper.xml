@@ -20,7 +20,7 @@
     </resultMap>
 
     <select id="findBySectionId" resultMap="homeworkQuizListMap">
-        select a.* from homeworkQuiz a, sectionQuiz b where a.id = b.quizId AND b.sectionId = #{sectionId};
+        SELECT a.* FROM homeworkQuiz a, sectionQuiz b WHERE a.id = b.quizId AND b.sectionId = #{sectionId};
     </select>
 
     <select id="findById" resultType="com.thoughtworks.twars.bean.HomeworkQuiz">
@@ -35,16 +35,16 @@
     </insert>
 
     <select id="findHomeworkQuizzes" resultMap="homeworkQuizListMap">
-        select * from homeworkQuiz
+        SELECT * FROM homeworkQuiz
         <where>
             <if test="param1 != null">
-                homeworkName like concat("%",#{param1},"%")
+                homeworkName LIKE concat("%",#{param1},"%")
             </if>
             <if test="param2 != null">
                 AND stackId = #{param2}
             </if>
         </where>
-        limit #{param3},#{param4};
+        LIMIT #{param3},#{param4};
     </select>
 
 </mapper>

@@ -93,8 +93,7 @@ public class BlankQuizResource {
                     map.put("exampleCount", item.getExampleCount());
 
                     return map;
-                })
-                .collect(Collectors.toList());
+                }).collect(Collectors.toList());
 
         return Response.status(Response.Status.OK).entity(result).build();
     }

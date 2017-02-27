@@ -4,24 +4,26 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.thoughtworks.twars.mapper.ProgramMapper">
     <resultMap id="programsMap" type="com.thoughtworks.twars.bean.Program">
-        <id column="id" property="id" ></id>
+        <id column="id" property="id"></id>
         <result column="name" property="name"></result>
     </resultMap>
 
     <select id="findUsersIdByProgramId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
-        select userId from userProgram where userProgram.programId = #{id}
+        SELECT userId FROM userProgram WHERE userProgram.programId = #{id}
     </select>
 
     <select id="getAllPrograms" resultMap="programsMap">
-        select * from programs
-        limit #{param1},#{param2}
+        SELECT * FROM programs
+        LIMIT #{param1},#{param2};
     </select>
 
-    <insert id="insertPrograms" parameterType="com.thoughtworks.twars.bean.Program" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertPrograms" parameterType="com.thoughtworks.twars.bean.Program" useGeneratedKeys="true"
+            keyProperty="id">
         INSERT INTO programs (name, uriEnable) VALUES (#{name},#{uriEnable});
     </insert>
 
-    <update id="updatePrograms" parameterType="com.thoughtworks.twars.bean.Program" useGeneratedKeys="true" keyProperty="id">
-        update programs set name = #{name},uriEnable = #{uriEnable} where id = #{id} ;
+    <update id="updatePrograms" parameterType="com.thoughtworks.twars.bean.Program" useGeneratedKeys="true"
+            keyProperty="id">
+        UPDATE programs SET name = #{name},uriEnable = #{uriEnable} WHERE id = #{id};
     </update>
 </mapper>

@@ -11,15 +11,15 @@
     </resultMap>
 
     <select id="getAllStack" resultMap="stackListMap">
-        select * from stack order by stackId;
+        SELECT * FROM stack ORDER BY stackId;
     </select>
 
     <select id="getStackById" resultMap="stackListMap">
-        select * from stack where stackId = #{stackId}
+        SELECT * FROM stack WHERE stackId = #{stackId};
     </select>
 
     <select id="getStackByTitle" resultMap="stackListMap">
-        select * from stack where title = #{title}
+        SELECT * FROM stack WHERE title = #{title};
     </select>
 
     <insert id="insertStack" parameterType="com.thoughtworks.twars.bean.Stack" useGeneratedKeys="true"

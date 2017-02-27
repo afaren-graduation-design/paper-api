@@ -14,15 +14,15 @@
     </resultMap>
 
     <select id="findAll" resultMap="blankQuizListMap">
-        select * from blankQuiz;
+        SELECT * FROM blankQuiz;
     </select>
 
     <select id="findBySectionId" resultMap="blankQuizListMap">
-        select a.* from blankQuiz a , sectionQuiz b where a.id = b.quizId AND b.sectionId = #{sectionId};
+        SELECT a.* FROM blankQuiz a , sectionQuiz b WHERE a.id = b.quizId AND b.sectionId = #{sectionId};
     </select>
 
     <select id="findOne" resultType="com.thoughtworks.twars.bean.BlankQuiz">
-        select * from blankQuiz where id = #{id};
+        SELECT * FROM blankQuiz WHERE id = #{id};
     </select>
 
     <insert id="insertBlankQuiz" parameterType="com.thoughtworks.twars.bean.BlankQuiz" useGeneratedKeys="true"
