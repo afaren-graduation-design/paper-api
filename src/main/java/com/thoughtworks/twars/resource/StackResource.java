@@ -3,8 +3,6 @@ package com.thoughtworks.twars.resource;
 import com.thoughtworks.twars.bean.Stack;
 import com.thoughtworks.twars.mapper.StackMapper;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 
 
 import javax.inject.Inject;
