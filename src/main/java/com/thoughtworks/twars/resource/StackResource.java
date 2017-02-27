@@ -27,13 +27,13 @@ public class StackResource extends Resource {
     public Response getAllStack() {
         List<Stack> stackList = stackMapper.getAllStack();
 
-        Map map = new HashMap<>();
+        Map result = new HashMap<>();
         List<Map> stackListInfo = stackList.stream()
                 .map(stack -> stack.toMap())
                 .collect(Collectors.toList());
-        map.put("items", stackListInfo);
+        result.put("items", stackListInfo);
 
-        return Response.status(Response.Status.OK).entity(map).build();
+        return Response.status(Response.Status.OK).entity(result).build();
     }
 
     @GET
@@ -61,11 +61,11 @@ public class StackResource extends Resource {
         }
         stackMapper.insertStack(stack);
 
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> result = new HashMap<>();
 
-        map.put("stackId", stack.getStackId());
-        map.put("uri", "stack/" + stack.getStackId());
+        result.put("stackId", stack.getStackId());
+        result.put("uri", "stack/" + stack.getStackId());
 
-        return Response.status(Response.Status.CREATED).entity(map).build();
+        return Response.status(Response.Status.CREATED).entity(result).build();
     }
 }

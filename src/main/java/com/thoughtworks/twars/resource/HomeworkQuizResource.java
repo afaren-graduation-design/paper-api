@@ -102,10 +102,10 @@ public class HomeworkQuizResource extends Resource {
             homeworkQuizMapper.insertHomeworkQuiz(homeworkQuiz);
             Integer id = homeworkQuiz.getId();
 
-            Map map = new HashMap();
-            map.put("uri", "homeworkQuizzes/" + id);
+            Map result = new HashMap();
+            result.put("uri", "homeworkQuizzes/" + id);
 
-            return Response.status(Response.Status.OK).entity(map).build();
+            return Response.status(Response.Status.OK).entity(result).build();
         } catch (Exception exception) {
             session.rollback();
         }

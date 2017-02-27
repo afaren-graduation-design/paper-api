@@ -49,10 +49,10 @@ public class QuizItemResource extends Resource {
 
         quizItemMapper.insertQuizItem(quizItem);
 
-        Map map = new HashMap();
-        map.put("uri", "quizItems/" + quizItem.getId());
+        Map result = new HashMap();
+        result.put("uri", "quizItems/" + quizItem.getId());
 
-        return Response.status(Response.Status.CREATED).entity(map).build();
+        return Response.status(Response.Status.CREATED).entity(result).build();
     }
 
 
@@ -68,15 +68,15 @@ public class QuizItemResource extends Resource {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        Map map = new HashMap();
-        map.put("id", quizItem.getId());
-        map.put("description", quizItem.getDescriptionZh());
-        map.put("chartPath", quizItem.getChartPath());
-        map.put("question", quizItem.getQuestionZh());
-        map.put("initializedBox", quizItem.getInitializedBox());
+        Map result = new HashMap();
+        result.put("id", quizItem.getId());
+        result.put("description", quizItem.getDescriptionZh());
+        result.put("chartPath", quizItem.getChartPath());
+        result.put("question", quizItem.getQuestionZh());
+        result.put("initializedBox", quizItem.getInitializedBox());
 
 
-        return Response.status(Response.Status.OK).entity(map).build();
+        return Response.status(Response.Status.OK).entity(result).build();
     }
 
     @GET

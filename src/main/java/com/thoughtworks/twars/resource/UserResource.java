@@ -45,13 +45,13 @@ public class UserResource extends Resource {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        Map<String, Object> map = new HashMap<>();
-        map.put("id", user.getId());
-        map.put("email", user.getEmail());
-        map.put("mobilePhone", user.getMobilePhone());
-        map.put("role", user.getRole());
+        Map<String, Object> result = new HashMap<>();
+        result.put("id", user.getId());
+        result.put("email", user.getEmail());
+        result.put("mobilePhone", user.getMobilePhone());
+        result.put("role", user.getRole());
 
-        return Response.status(Response.Status.OK).entity(map).build();
+        return Response.status(Response.Status.OK).entity(result).build();
     }
 
     @GET
@@ -70,13 +70,13 @@ public class UserResource extends Resource {
 
         List<ItemPost> itemPostList = itemPostMapper.findByBlankQuizSubmit(blankQuizSubmit.getId());
 
-        Map map = new HashMap();
-        map.put("startTime", blankQuizSubmit.getStartTime());
-        map.put("endTime", blankQuizSubmit.getEndTime());
-        map.put("itemNumber", itemPostList.size());
-        map.put("correctNumber", calculateCorrectNumber(itemPostList));
+        Map result = new HashMap();
+        result.put("startTime", blankQuizSubmit.getStartTime());
+        result.put("endTime", blankQuizSubmit.getEndTime());
+        result.put("itemNumber", itemPostList.size());
+        result.put("correctNumber", calculateCorrectNumber(itemPostList));
 
-        return Response.status(Response.Status.OK).entity(map).build();
+        return Response.status(Response.Status.OK).entity(result).build();
     }
 
     public int calculateCorrectNumber(List<ItemPost> itemPostList) {
@@ -147,10 +147,10 @@ public class UserResource extends Resource {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        Map<String, Object> map = new HashMap<>();
-        map.put("programIds", programIds);
+        Map<String, Object> result = new HashMap<>();
+        result.put("programIds", programIds);
 
-        return Response.status(Response.Status.OK).entity(map).build();
+        return Response.status(Response.Status.OK).entity(result).build();
     }
 
     @GET
@@ -163,10 +163,10 @@ public class UserResource extends Resource {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        Map map = new HashMap<>();
-        map.put("mentorIds", mentorIds);
+        Map result = new HashMap<>();
+        result.put("mentorIds", mentorIds);
 
-        return Response.status(Response.Status.OK).entity(map).build();
+        return Response.status(Response.Status.OK).entity(result).build();
     }
 
     @GET
@@ -179,10 +179,10 @@ public class UserResource extends Resource {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        Map map = new HashMap<>();
-        map.put("studentIds", studentIds);
+        Map result = new HashMap<>();
+        result.put("studentIds", studentIds);
 
-        return Response.status(Response.Status.OK).entity(map).build();
+        return Response.status(Response.Status.OK).entity(result).build();
     }
 
 
@@ -195,10 +195,10 @@ public class UserResource extends Resource {
     ) {
         userMapper.updateUserDetail(userDetail);
 
-        Map<String, Object> map = new HashMap<>();
-        map.put("uri", "userDetail/" + userDetail.getUserId());
+        Map<String, Object> result = new HashMap<>();
+        result.put("uri", "userDetail/" + userDetail.getUserId());
 
-        return Response.status(Response.Status.OK).entity(map).build();
+        return Response.status(Response.Status.OK).entity(result).build();
     }
 
 
@@ -216,18 +216,18 @@ public class UserResource extends Resource {
             user = userMapper.getUserByMobilePhone(value);
         }
 
-        Map<String, String> map = new HashMap<>();
+        Map<String, String> result = new HashMap<>();
 
         if (null != user) {
 
-            map.put("uri", "users/" + user.getId());
+            result.put("uri", "users/" + user.getId());
 
-            return Response.status(Response.Status.OK).entity(map).build();
+            return Response.status(Response.Status.OK).entity(result).build();
         }
 
-        map.put("uri", null);
+        result.put("uri", null);
 
-        return Response.status(Response.Status.OK).entity(map).build();
+        return Response.status(Response.Status.OK).entity(result).build();
     }
 
     @PUT
@@ -240,13 +240,13 @@ public class UserResource extends Resource {
         String oldPassword = (String) userPasswordMap.get("oldPassword");
         String password = (String) userPasswordMap.get("password");
 
-        int result = userMapper.updatePassword(userId, oldPassword, password);
+        int id = userMapper.updatePassword(userId, oldPassword, password);
 
-        if (1 == result) {
-            Map<String, Object> map = new HashMap<>();
-            map.put("uri", "users/" + userId);
+        if (1 == id) {
+            Map<String, Object> result = new HashMap<>();
+            result.put("uri", "users/" + userId);
 
-            return Response.status(Response.Status.OK).entity(map).build();
+            return Response.status(Response.Status.OK).entity(result).build();
         }
 
         return Response.status(Response.Status.BAD_REQUEST).build();
@@ -260,14 +260,14 @@ public class UserResource extends Resource {
             @QueryParam("value") String value
     ) {
         User user = userMapper.getUserByEmail(value);
-        Map<String, String> map = new HashMap<>();
+        Map<String, String> result = new HashMap<>();
         String token = null;
 
         if (null == user) {
-            map.put("status", "404");
-            map.put("token", token);
+            result.put("status", "404");
+            result.put("token", token);
 
-            return Response.status(Response.Status.OK).entity(map).build();
+            return Response.status(Response.Status.OK).entity(result).build();
         }
 
         PasswordRetrieveDetail passwordRetrieveDetail =
@@ -275,17 +275,17 @@ public class UserResource extends Resource {
 
         if (passwordRetrieveDetail != null) {
             token = passwordRetrieveDetail.getToken();
-            map.put("status", "200");
-            map.put("token", token);
+            result.put("status", "200");
+            result.put("token", token);
 
-            return Response.status(Response.Status.OK).entity(map).build();
+            return Response.status(Response.Status.OK).entity(result).build();
         } else {
             passwordRetrieveDetailMapper.updateDetailByEmail(value);
             token = passwordRetrieveDetailMapper.getDetailByEmail(value).getToken();
-            map.put("status", "200");
-            map.put("token", token);
+            result.put("status", "200");
+            result.put("token", token);
 
-            return Response.status(Response.Status.OK).entity(map).build();
+            return Response.status(Response.Status.OK).entity(result).build();
         }
     }
 
@@ -315,14 +315,14 @@ public class UserResource extends Resource {
         String token = (String) data.get("token");
         int timeLimit = 86400;
 
-        Map map = new HashMap<>();
+        Map result = new HashMap<>();
 
         PasswordRetrieveDetail passwordRetrieveDetail =
                 passwordRetrieveDetailMapper.getDetailByToken(token);
 
         if (passwordRetrieveDetail == null) {
-            map.put("status", "403");
-            return Response.status(Response.Status.OK).entity(map).build();
+            result.put("status", "403");
+            return Response.status(Response.Status.OK).entity(result).build();
         }
 
         long timeInterval = Calendar.getInstance().getTimeInMillis() / 1000
@@ -336,12 +336,12 @@ public class UserResource extends Resource {
             userMapper.resetPassword(user);
 
             passwordRetrieveDetailMapper.setNullToken(user.getEmail());
-            map.put("status", "201");
+            result.put("status", "201");
         } else {
-            map.put("status", "412");
+            result.put("status", "412");
         }
 
-        return Response.status(Response.Status.OK).entity(map).build();
+        return Response.status(Response.Status.OK).entity(result).build();
     }
 
     @GET
@@ -360,10 +360,10 @@ public class UserResource extends Resource {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        Map map = new HashMap<>();
-        map.put("usersDetail", usersDetail);
+        Map result = new HashMap<>();
+        result.put("usersDetail", usersDetail);
 
-        return Response.status(Response.Status.OK).entity(map).build();
+        return Response.status(Response.Status.OK).entity(result).build();
     }
 
     @POST
@@ -423,7 +423,7 @@ public class UserResource extends Resource {
     public Response getUserAuthority() {
         List<User> users = userMapper.getUserAuthority();
 
-        List<Map> result = new ArrayList<>();
+        List<Map> resultList = new ArrayList<>();
 
         for (int i = 0; i < users.size(); i++) {
 
@@ -450,13 +450,13 @@ public class UserResource extends Resource {
             }
 
             map.put("role", roleList);
-            result.add(map);
+            resultList.add(map);
         }
 
-        Map resultList = new HashMap();
-        resultList.put("users", result);
+        Map result = new HashMap();
+        result.put("users", resultList);
 
-        return Response.status(Response.Status.OK).entity(resultList).build();
+        return Response.status(Response.Status.OK).entity(result).build();
 
     }
 

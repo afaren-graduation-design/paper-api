@@ -108,17 +108,16 @@ public class PaperResource extends Resource {
 
             paperMapper.insertPaper(paper);
             int paperId = paper.getId();
-            Map map = new HashMap();
-            map.put("uri", insertDefinitionByQuizType(section, paperId));
+            Map result = new HashMap();
+            result.put("uri", insertDefinitionByQuizType(section, paperId));
 
-            return Response.status(Response.Status.OK).entity(map).build();
+            return Response.status(Response.Status.OK).entity(result).build();
         } catch (Exception exception) {
             exception.printStackTrace();
             session.rollback();
         }
         return Response.status(Response.Status.UNSUPPORTED_MEDIA_TYPE).build();
     }
-
 
     public String insertDefinitionByQuizType(Map section, Integer paperId) {
         Map blankQuizzes = (Map) section.get("blankQuizzes");

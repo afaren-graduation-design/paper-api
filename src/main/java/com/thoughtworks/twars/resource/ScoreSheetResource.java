@@ -119,13 +119,13 @@ public class ScoreSheetResource extends Resource {
         examerUri.put("uri", "users/" + scoreSheet.getExamerId());
         paperUri.put("uri", "papers/" + scoreSheet.getPaperId());
 
-        Map map = new HashMap<>();
-        map.put("examer", examerUri);
-        map.put("paper", paperUri);
-        map.put("blankQuizSubmits", blankQuizScoreSheet.getQuizScoreSheet(id));
-        map.put("homeworkSubmits", homeworkQuizScoreSheet.getQuizScoreSheet(id));
+        Map result = new HashMap<>();
+        result.put("examer", examerUri);
+        result.put("paper", paperUri);
+        result.put("blankQuizSubmits", blankQuizScoreSheet.getQuizScoreSheet(id));
+        result.put("homeworkSubmits", homeworkQuizScoreSheet.getQuizScoreSheet(id));
 
-        return Response.status(Response.Status.OK).entity(map).build();
+        return Response.status(Response.Status.OK).entity(result).build();
     }
 
 }

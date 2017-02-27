@@ -28,17 +28,17 @@ public class RegisterResource extends Resource {
         userMapper.insertUser(user);
         userMapper.insertUserProgram(user.getId(), 1);
 
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> result = new HashMap<>();
         Map<String, String> userInfo = new HashMap<>();
         Map<String, String> theUser = new HashMap<>();
 
-        map.put("id", user.getId());
+        result.put("id", user.getId());
         userInfo.put("uri", "userInfo/" + user.getId());
         theUser.put("uri", "user/" + user.getId());
 
-        map.put("userInfo", userInfo);
-        map.put("user", theUser);
+        result.put("userInfo", userInfo);
+        result.put("user", theUser);
 
-        return Response.status(Response.Status.OK).entity(map).build();
+        return Response.status(Response.Status.OK).entity(result).build();
     }
 }
