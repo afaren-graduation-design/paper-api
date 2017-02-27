@@ -149,7 +149,7 @@
         delete from users where email = #{email};
     </delete>
     <select id="getUserAuthority" resultMap="userAuthorityMap">
-        select * from users ;
+        select * from users;
     </select>
 
 </mapper>

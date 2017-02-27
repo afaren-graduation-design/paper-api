@@ -423,7 +423,7 @@ public class UserResource extends Resource {
     @GET
     @Path("/user-authority")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response searchUsersDetail() {
+    public Response getUserAuthority() {
         List<User> users = userMapper.getUserAuthority();
 
         List<Map> result = new ArrayList<>();
@@ -452,7 +452,7 @@ public class UserResource extends Resource {
                 }
             }
 
-            map.put("roleList", roleList);
+            map.put("role", roleList);
             result.add(map);
         }
 
