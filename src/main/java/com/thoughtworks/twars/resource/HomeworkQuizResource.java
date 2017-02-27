@@ -46,10 +46,10 @@ public class HomeworkQuizResource extends Resource {
     }
 
     @GET
-    @Path("/{param}")
+    @Path("/{homeworkQuizIds}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOneHomeworkQuiz(
-            @PathParam("param") String ids) {
+            @PathParam("homeworkQuizIds") String ids) {
         List homeworkQuizzes = new ArrayList();
         String[] idList = ids.split(",");
 

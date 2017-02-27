@@ -66,9 +66,9 @@ public class BlankQuizResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("/{param}")
+    @Path("/{sectionId}")
     public Response getBlankQuizzesBySectionId(
-            @PathParam("param") Integer sectionId
+            @PathParam("sectionId") Integer sectionId
     ) {
 
         List<BlankQuiz> blankQuizzes = blankQuizMapper
@@ -96,9 +96,9 @@ public class BlankQuizResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("/{param}/items")
+    @Path("/{blankQuizId}/items")
     public Response getItems(
-            @PathParam("param") Integer blankQuizId) {
+            @PathParam("blankQuizId") Integer blankQuizId) {
 
         BlankQuiz blankQuiz = blankQuizMapper.findOne(blankQuizId);
 

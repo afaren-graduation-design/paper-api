@@ -135,10 +135,10 @@ public class PaperResource extends Resource {
 
 
     @GET
-    @Path("/{param}")
+    @Path("/{paperId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOnePaper(
-            @PathParam("param") int id) {
+            @PathParam("paperId") int id) {
         Paper paper = paperMapper.getOnePaper(id);
         if (paper == null) {
             return Response.status(Response.Status.NOT_FOUND).build();

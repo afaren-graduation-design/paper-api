@@ -34,10 +34,10 @@ public class UserResource extends Resource {
 
 
     @GET
-    @Path("/{param}")
+    @Path("/{userId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUser(
-            @PathParam("param") Integer userId) {
+            @PathParam("userId") Integer userId) {
 
         User user = userMapper.getUserById(userId);
 
@@ -55,10 +55,10 @@ public class UserResource extends Resource {
     }
 
     @GET
-    @Path("/{param}/logicPuzzle")
+    @Path("/{userId}/logicPuzzle")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserLogicPuzzle(
-            @PathParam("param") Integer userId) {
+            @PathParam("userId") Integer userId) {
         ScoreSheet scoreSheet = scoreSheetMapper.findOneByUserId(userId);
 
         if (scoreSheet == null) {
@@ -92,10 +92,10 @@ public class UserResource extends Resource {
     }
 
     @GET
-    @Path("/{param}/detail")
+    @Path("/{userIds}/detail")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserDetail(
-            @PathParam("param") String userIds) {
+            @PathParam("userIds") String userIds) {
         String[] ids = userIds.split(",");
         List userList = new ArrayList();
         for (String i : ids) {
@@ -137,10 +137,10 @@ public class UserResource extends Resource {
     }
 
     @GET
-    @Path("/{param}/programs")
+    @Path("/{userId}/programs")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getProgramById(
-            @PathParam("param") Integer userId) {
+            @PathParam("userId") Integer userId) {
         List<Integer> programIds = userMapper.findProgramsById(userId);
 
         if (programIds == null) {
@@ -154,10 +154,10 @@ public class UserResource extends Resource {
     }
 
     @GET
-    @Path("/{param}/mentors")
+    @Path("/{studentId}/mentors")
     @Produces(MediaType.APPLICATION_JSON)
     public Response findMentorIdsByStudentId(
-            @PathParam("param") Integer id) {
+            @PathParam("studentId") Integer id) {
         List<Integer> mentorIds = userMapper.findMentorIdsByStudentId(id);
         if (mentorIds == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -170,10 +170,10 @@ public class UserResource extends Resource {
     }
 
     @GET
-    @Path("/{param}/mentees")
+    @Path("/{mentorId}/mentees")
     @Produces(MediaType.APPLICATION_JSON)
     public Response findStudentIdsByMentorId(
-            @PathParam("param") Integer id) {
+            @PathParam("mentorId") Integer id) {
         List<Integer> studentIds = userMapper.findStudentIdsByMentorId(id);
         if (studentIds == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -187,10 +187,10 @@ public class UserResource extends Resource {
 
 
     @PUT
-    @Path("/{param}/detail")
+    @Path("/{userId}/detail")
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateUserDetail(
-            @PathParam("param") Integer userId,
+            @PathParam("userId") Integer userId,
             UserDetail userDetail
     ) {
         userMapper.updateUserDetail(userDetail);
@@ -231,10 +231,10 @@ public class UserResource extends Resource {
     }
 
     @PUT
-    @Path("/{param}/password")
+    @Path("/{userId}/password")
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateUserPassword(
-            @PathParam("param") Integer userId,
+            @PathParam("userId") Integer userId,
             Map userPasswordMap
     ) {
         String oldPassword = (String) userPasswordMap.get("oldPassword");
