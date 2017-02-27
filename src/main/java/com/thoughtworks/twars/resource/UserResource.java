@@ -368,7 +368,7 @@ public class UserResource extends Resource {
     }
 
     @POST
-    @Path("/user-authority")
+    @Path("/user-role-manage")
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertUser(Map data) {
         User user = new User();
@@ -391,7 +391,7 @@ public class UserResource extends Resource {
     }
 
     @PUT
-    @Path("/user-authority")
+    @Path("/user-role-manage")
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateUser(Map data, @QueryParam("email") String email) {
 
@@ -419,7 +419,7 @@ public class UserResource extends Resource {
 
 
     @GET
-    @Path("/user-authority")
+    @Path("/user-role-manage")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserAuthority() {
         List<User> users = userMapper.getUserAuthority();

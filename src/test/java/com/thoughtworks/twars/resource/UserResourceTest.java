@@ -431,7 +431,7 @@ public class UserResourceTest extends TestBase {
         data.put("role", role);
 
         Entity entity = Entity.entity(data, MediaType.APPLICATION_JSON_TYPE);
-        Response response = target(basePath + "/user-authority").request().post(entity);
+        Response response = target(basePath + "/user-role-manage").request().post(entity);
 
         assertThat(response.getStatus(), is(201));
     }
@@ -448,7 +448,7 @@ public class UserResourceTest extends TestBase {
         data.put("role", role);
 
         Entity entity = Entity.entity(data, MediaType.APPLICATION_JSON_TYPE);
-        Response response = target(basePath + "/user-authority").request().post(entity);
+        Response response = target(basePath + "/user-role-manage").request().post(entity);
 
         assertThat(response.getStatus(), is(201));
     }
@@ -467,7 +467,7 @@ public class UserResourceTest extends TestBase {
         data.put("role", role);
 
         Entity entity = Entity.entity(data, MediaType.APPLICATION_JSON_TYPE);
-        Response response = target(basePath + "/user-authority")
+        Response response = target(basePath + "/user-role-manage")
                 .queryParam("email", "z@z.com").request().put(entity);
 
         assertThat(response.getStatus(), is(204));
@@ -476,7 +476,7 @@ public class UserResourceTest extends TestBase {
     @Test
     public void should_return_all_user_authority() {
 
-        Response response = target(basePath + "/user-authority").request().get();
+        Response response = target(basePath + "/user-role-manage").request().get();
 
         assertThat(response.getStatus(), is(200));
     }
