@@ -379,7 +379,6 @@ public class UserResource extends Resource {
 
         ArrayList<Integer> roles = (ArrayList<Integer>) data.get("role");
         if (roles.size() == 0) {
-            user.setRole("0");
             userMapper.insertUser(user);
             return Response.status(Response.Status.CREATED).build();
         }
@@ -406,7 +405,6 @@ public class UserResource extends Resource {
 
         ArrayList<Integer> roles = (ArrayList<Integer>) data.get("role");
         if (roles.size() == 0) {
-            user.setRole("0");
             userMapper.insertUser(user);
             return Response.status(Response.Status.CREATED).build();
         }

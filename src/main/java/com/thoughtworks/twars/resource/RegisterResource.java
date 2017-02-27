@@ -3,19 +3,15 @@ package com.thoughtworks.twars.resource;
 import com.thoughtworks.twars.bean.User;
 import com.thoughtworks.twars.mapper.UserMapper;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 
-import java.util.HashMap;
-import java.util.Map;
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.HashMap;
+import java.util.Map;
 
 @Path("/register")
 @Api
@@ -28,6 +24,7 @@ public class RegisterResource extends Resource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Response createUser(User user) {
+        user.setRole("0");
         userMapper.insertUser(user);
         userMapper.insertUserProgram(user.getId(), 1);
 
