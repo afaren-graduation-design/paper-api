@@ -39,13 +39,5 @@ public class Program {
         return result;
     }
 
-    @Override
-    public String toString() {
-        return "Program{"
-                + "id=" + id
-                + ", name='" + name + '\''
-                + ", uriEnable='" + uriEnable + '\''
-                + '}';
-    }
 }
 

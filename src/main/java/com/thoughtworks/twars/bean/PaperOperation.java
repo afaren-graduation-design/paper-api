@@ -61,21 +61,4 @@ public class PaperOperation {
 
         return result;
     }
-
-    @Override
-    public String toString() {
-        return "PaperOperation{"
-                +
-                "id=" + id
-                +
-                ", operationType='" + operationType + '\''
-                +
-                ", operatorId=" + operatorId
-                +
-                ", operatingTime=" + operatingTime
-                +
-                ", paperId=" + paperId
-                +
-                '}';
-    }
 }

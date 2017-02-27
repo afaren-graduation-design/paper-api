@@ -60,14 +60,6 @@ public class User {
         this.role = role;
     }
 
-    @Override
-    public String toString() {
-        return "User{"
-                + "id=" + id
-                + ", email='" + email + '\''
-                + '}';
-    }
-
     public Map toMap() {
         Map result = new HashMap<>();
         result.put("email", getEmail());
