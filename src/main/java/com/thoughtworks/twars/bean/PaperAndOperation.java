@@ -95,7 +95,7 @@ public class PaperAndOperation {
         this.operationType = operationType;
     }
 
-    public Map getPapersInfo() {
+    public Map toMap() {
         Map result = new HashMap<>();
 
         result.put("uri", "papers/" + getPaperId());

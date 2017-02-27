@@ -129,8 +129,8 @@ public class QuizItemResourceTest extends TestBase {
         secondItem.put("infoPath", "logic-puzzle/33.json");
 
         when(quizItemMapper.getExamples()).thenReturn(Arrays.asList(firstQuizItem, secondQuizItem));
-        when(firstQuizItem.getResponseInfo()).thenReturn(firstItem);
-        when(secondQuizItem.getResponseInfo()).thenReturn(secondItem);
+        when(firstQuizItem.toMap()).thenReturn(firstItem);
+        when(secondQuizItem.toMap()).thenReturn(secondItem);
 
         Response response = target(basePath + "/examples").request().get();
         assertThat(response.getStatus(), is(200));

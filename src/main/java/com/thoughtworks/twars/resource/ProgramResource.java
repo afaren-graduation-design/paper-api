@@ -43,7 +43,7 @@ public class ProgramResource extends Resource {
 
         List<Map> items = papers
                 .stream()
-                .map(item -> item.getPapersInfo())
+                .map(item -> item.toMap())
                 .collect(Collectors.toList());
 
         Map result = new HashMap();
@@ -162,7 +162,7 @@ public class ProgramResource extends Resource {
         }
 
         return Response.status(Response.Status.OK)
-                .entity(paper.getResponseInfo()).build();
+                .entity(paper.toMap()).build();
     }
 
     @GET
@@ -230,8 +230,9 @@ public class ProgramResource extends Resource {
         Map result = new HashMap();
 
         List<Map> programsInfo = programs.stream()
-                .map(program -> program.getResponseInfo())
+                .map(program -> program.toMap())
                 .collect(Collectors.toList());
+
 
         result.put("programs", programsInfo);
         return Response.status(Response.Status.OK).entity(result).build();

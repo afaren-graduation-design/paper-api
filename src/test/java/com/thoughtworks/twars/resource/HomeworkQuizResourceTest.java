@@ -51,7 +51,7 @@ public class HomeworkQuizResourceTest extends TestBase {
         h1.put("makerDetailUri", "users/1/detail");
 
 
-        when(homeworkQuiz.getResponseInfo()).thenReturn(h1);
+        when(homeworkQuiz.toMap()).thenReturn(h1);
 
         Response response = target(basePath + "/1").request().get();
         assertThat(response.getStatus(), is(200));
@@ -86,7 +86,7 @@ public class HomeworkQuizResourceTest extends TestBase {
         h1.put("answerPath", "homework-answer/check-readme");
         h1.put("makerDetailUri", "users/1/detail");
 
-        when(homeworkQuiz.getResponseInfo()).thenReturn(h1);
+        when(homeworkQuiz.toMap()).thenReturn(h1);
 
         when(homeworkQuizMapper.findById(2)).thenReturn(homeworkQuiz01);
 
@@ -106,7 +106,7 @@ public class HomeworkQuizResourceTest extends TestBase {
         h2.put("answerPath", "homework-answer/calculate_median");
         h2.put("makerDetailUri", "users/2/detail");
 
-        when(homeworkQuiz01.getResponseInfo()).thenReturn(h2);
+        when(homeworkQuiz01.toMap()).thenReturn(h2);
 
         Response response = target(basePath + "/1,2").request().get();
         assertThat(response.getStatus(), is(200));
@@ -150,7 +150,7 @@ public class HomeworkQuizResourceTest extends TestBase {
         h1.put("answerPath", "homework-answer/check-readme");
         h1.put("makerDetailUri", "users/1/detail");
 
-        when(homeworkQuiz.getResponseInfo()).thenReturn(h1);
+        when(homeworkQuiz.toMap()).thenReturn(h1);
         Response response = target("homeworkQuizzes/1").request().get();
 
         assertThat(response.getStatus(), is(200));
@@ -185,7 +185,7 @@ public class HomeworkQuizResourceTest extends TestBase {
         h1.put("stackId", 2);
         h1.put("makerDetailUri", "users/1/detail");
 
-        when(homeworkQuiz.getResponseInfo()).thenReturn(h1);
+        when(homeworkQuiz.toMap()).thenReturn(h1);
 
         when(homeworkQuiz01.getMakerId()).thenReturn(2);
         when(homeworkQuiz01.getDescription()).thenReturn("这是一道普通难度的题目");
@@ -202,7 +202,7 @@ public class HomeworkQuizResourceTest extends TestBase {
         h2.put("answerPath", "/homework-answer/check-readme");
         h2.put("stackId", 2);
         h2.put("makerDetailUri", "users/2/detail");
-        when(homeworkQuiz01.getResponseInfo()).thenReturn(h2);
+        when(homeworkQuiz01.toMap()).thenReturn(h2);
 
 
         when(homeworkQuizMapper.findHomeworkQuizzes(null, null, 0, 15))

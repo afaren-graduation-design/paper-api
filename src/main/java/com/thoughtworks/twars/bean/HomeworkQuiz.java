@@ -86,7 +86,7 @@ public class HomeworkQuiz {
         this.stackId = stack;
     }
 
-    public Map<String, Object> getResponseInfo() {
+    public Map<String, Object> toMap() {
         Map<String, Object> result = new HashMap<>();
 
         result.put("id", getId());

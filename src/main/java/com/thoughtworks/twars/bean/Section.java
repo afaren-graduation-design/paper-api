@@ -54,7 +54,7 @@ public class Section {
         this.quizzes = quizzes;
     }
 
-    public Map getResponseInfo() {
+    public Map toMap() {
         Map result = new HashMap<>();
         result.put("id", id);
         result.put("description", description);

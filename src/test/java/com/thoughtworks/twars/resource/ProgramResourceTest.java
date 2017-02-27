@@ -101,7 +101,7 @@ public class ProgramResourceTest extends TestBase {
         data.put("operationId", 2);
         data.put("operationType", "DISTRIBUTION");
 
-        when(firstPaper.getPapersInfo()).thenReturn(data);
+        when(firstPaper.toMap()).thenReturn(data);
 
         when(secondPaper.getPaperId()).thenReturn(5);
         when(secondPaper.getPaperName()).thenReturn("普通的试卷");
@@ -126,7 +126,7 @@ public class ProgramResourceTest extends TestBase {
         m2.put("operationId", 1);
         m2.put("operationType", "UNDISTRIBUTION");
 
-        when(secondPaper.getPapersInfo()).thenReturn(m2);
+        when(secondPaper.toMap()).thenReturn(m2);
 
         Response response = target(basePath + "/6/papers").request().get();
         Assert.assertThat(response.getStatus(), is(200));
@@ -241,8 +241,8 @@ public class ProgramResourceTest extends TestBase {
         Map m2 = new HashMap();
         m2.put("id", 2);
         m2.put("name", "222");
-        when(firstProgram.getResponseInfo()).thenReturn(m1);
-        when(secondProgram.getResponseInfo()).thenReturn(m2);
+        when(firstProgram.toMap()).thenReturn(m1);
+        when(secondProgram.toMap()).thenReturn(m2);
 
         when(programMapper.getAllPrograms(0, 15))
                 .thenReturn(Arrays.asList(firstProgram, secondProgram));

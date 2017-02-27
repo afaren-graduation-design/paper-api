@@ -123,7 +123,7 @@ public class QuizItem {
         this.infoPath = infoPath;
     }
 
-    public Map getResponseInfo() {
+    public Map toMap() {
         Map quizItem = new HashMap();
 
         quizItem.put("id", getId());

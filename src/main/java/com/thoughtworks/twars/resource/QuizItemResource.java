@@ -87,7 +87,7 @@ public class QuizItemResource extends Resource {
         List<QuizItem> exampleItems = quizItemMapper.getExamples();
         List<Map> examples = exampleItems
                 .stream()
-                .map(item -> item.getResponseInfo())
+                .map(item -> item.toMap())
                 .collect(Collectors.toList());
         Map reslut = new HashMap();
         reslut.put("items",examples);

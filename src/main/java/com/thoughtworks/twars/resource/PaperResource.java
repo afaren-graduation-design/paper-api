@@ -54,7 +54,7 @@ public class PaperResource extends Resource {
 
         List<Map> items = papers
                 .stream()
-                .map(item -> item.getPapersInfo())
+                .map(item -> item.toMap())
                 .collect(Collectors.toList());
 
 
@@ -146,7 +146,7 @@ public class PaperResource extends Resource {
         }
 
         return Response.status(Response.Status.OK)
-                .entity(paper.getResponseInfo()).build();
+                .entity(paper.toMap()).build();
     }
 
     @GET

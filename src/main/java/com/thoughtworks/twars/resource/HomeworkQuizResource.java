@@ -38,7 +38,7 @@ public class HomeworkQuizResource extends Resource {
                 .findHomeworkQuizzes(homeworkName, stackId, startPage * pageSize, pageSize);
         List<Map> items = allHomeworkQuizzes
                 .stream()
-                .map(item -> item.getResponseInfo())
+                .map(item -> item.toMap())
                 .collect(Collectors.toList());
         Map result = new HashMap<>();
         result.put("homeworkQuizzes", items);
@@ -57,7 +57,7 @@ public class HomeworkQuizResource extends Resource {
             Integer id = Integer.parseInt(i);
             HomeworkQuiz homeworkQuiz = homeworkQuizMapper.findById(id);
 
-            Map homeworkItem = homeworkQuiz.getResponseInfo();
+            Map homeworkItem = homeworkQuiz.toMap();
 
             homeworkQuizzes.add(homeworkItem);
         }

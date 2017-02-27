@@ -47,13 +47,13 @@ public class Paper {
         this.sections = sections;
     }
 
-    public Map getResponseInfo() {
+    public Map toMap() {
         Map result = new HashMap<>();
         result.put("paperName", getPaperName());
         result.put("id", getId());
 
         List<Map> sectionsInfo = sections.stream()
-                .map(section -> section.getResponseInfo())
+                .map(section -> section.toMap())
                 .collect(Collectors.toList());
 
         result.put("sections", sectionsInfo);

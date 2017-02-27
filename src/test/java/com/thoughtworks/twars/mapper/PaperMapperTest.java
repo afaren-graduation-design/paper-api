@@ -32,7 +32,7 @@ public class PaperMapperTest extends TestBase {
     public void should_return_paper_with_data() throws Exception {
         Paper paper = paperMapper.getOnePaper(1);
         Gson gson = new GsonBuilder().create();
-        final String responseInfoStr = gson.toJson(paper.getResponseInfo());
+        final String responseInfoStr = gson.toJson(paper.toMap());
 
         assertThat(paper.getId(), is(1));
         assertThat(paper.getMakerId(), is(1));
