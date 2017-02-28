@@ -49,6 +49,7 @@ public class TestBase extends JerseyTest {
             mock(HomeworkQuizScoreSheetService.class);
     protected ProgramMapper programMapper = mock(ProgramMapper.class);
     protected StackMapper stackMapper = mock(StackMapper.class);
+    protected ReportsMapper reportsMapper = mock(ReportsMapper.class);
 
     @Override
     protected Application configure() {
@@ -83,6 +84,7 @@ public class TestBase extends JerseyTest {
                 bind(thirdPartyMapper).to(ThirdPartyMapper.class);
                 bind(programMapper).to(ProgramMapper.class);
                 bind(stackMapper).to(StackMapper.class);
+                bind(reportsMapper).to(ReportsMapper.class);
             }
         }).packages("com.thoughtworks.twars.resource");
     }

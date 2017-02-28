@@ -25,7 +25,6 @@ public class ScoreSheetMapperTest extends com.thoughtworks.twars.mapper.TestBase
         assertThat(scoreSheetList.size(),is(4));
     }
 
-
     @Test
     public void  should_insert_score_sheet() {
         ScoreSheet scoreSheet = new ScoreSheet();
