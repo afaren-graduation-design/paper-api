@@ -66,7 +66,7 @@ public class PaperResourceTest extends TestBase {
         m1.put("makerId", 3);
         m1.put("paperType", "practice");
 
-        when(firstPaper.toMap()).thenReturn(m1);
+        when(firstPaper.getPapersInfo()).thenReturn(m1);
 
         when(secondPaper.getId()).thenReturn(5);
         when(secondPaper.getPaperName()).thenReturn("普通的试卷");
@@ -84,7 +84,7 @@ public class PaperResourceTest extends TestBase {
         m2.put("makerId", 2);
         m2.put("paperType", "exam");
 
-        when(secondPaper.toMap()).thenReturn(m2);
+        when(secondPaper.getPapersInfo()).thenReturn(m2);
 
         Response response = target(basePath).queryParam("page", 1)
                 .queryParam("pageSize", 2).request().get();
@@ -94,19 +94,23 @@ public class PaperResourceTest extends TestBase {
 
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
-        assertThat(jsonStr, is("{\"paperInfo\":[{\"paperType\":\"practice\""
-                + ",\"createTime\":\"1111111\""
-                + ",\"paperName\":\"简单的试卷\""
-                + ",\"description\":\"easy\""
-                + ",\"uri\":\"papers/1\""
-                + ",\"makerId\":3}"
-                + ",{\"paperType\":\"exam\""
-                + ",\"createTime\":\"2222222\""
-                + ",\"paperName\":\"普通的试卷\""
-                + ",\"description\":\"common\""
-                + ",\"uri\":\"papers/5\""
-                + ",\"makerId\":2}]"
-                + ",\"paperCount\":2}"));
+
+        assertThat(jsonStr, is("{\"paperInfo\":[" +
+                "{\"paperType\":\"practice\","
+                + "\"createTime\":\"1111111\","
+                + "\"paperName\":\"简单的试卷\","
+                + "\"description\":\"easy\","
+                + "\"uri\":\"papers/1\","
+                + "\"makerId\":3},"
+                + "" +
+                "{\"paperType\":\"exam\","
+                + "\"createTime\":\"2222222\","
+                + "\"paperName\":\"普通的试卷\","
+                + "\"description\":\"common\","
+                + "\"uri\":\"papers/5\","
+                + "\"makerId\":2}" +
+                "],"
+                + "\"paperCount\":2}"));
     }
 
     @Test
@@ -130,7 +134,7 @@ public class PaperResourceTest extends TestBase {
         m1.put("makerId", 3);
         m1.put("paperType", "exam");
 
-        when(firstPaper.toMap()).thenReturn(m1);
+        when(firstPaper.getPapersInfo()).thenReturn(m1);
 
         when(secondPaper.getId()).thenReturn(5);
         when(secondPaper.getPaperName()).thenReturn("普通的试卷");
@@ -147,7 +151,7 @@ public class PaperResourceTest extends TestBase {
         m2.put("createTime", "1111111");
         m2.put("makerId", 3);
         m2.put("paperType", "practice");
-        when(secondPaper.toMap()).thenReturn(m2);
+        when(secondPaper.getPapersInfo()).thenReturn(m2);
 
         Response response = target(basePath).request().get();
         assertThat(response.getStatus(), is(200));
@@ -156,6 +160,7 @@ public class PaperResourceTest extends TestBase {
 
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
+        
         assertThat(jsonStr, is("{\"paperInfo\":[{\"paperType\":\"exam\""
                 + ",\"createTime\":\"1111111\""
                 + ",\"paperName\":\"简单的试卷\""
