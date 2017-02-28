@@ -151,18 +151,6 @@
         DELETE FROM users WHERE email = #{email};
     </delete>
 
-    <select id="getUserAuthority" resultMap="userAuthorityMap">
-        SELECT * FROM users;
-    </select>
-
-    <select id="getGruopEmail" resultType="java.lang.String">
-        SELECT email FROM users GROUP BY email;
-    </select>
-
-    <select id="findUserByEmail" resultType="com.thoughtworks.twars.bean.User" parameterType="java.lang.String" >
-        SELECT * FROM users WHERE email = #{email} ;
-    </select>
-
     <select id="groupUserByEmail" resultType="com.thoughtworks.twars.bean.User">
         SELECT email,userName,mobilePhone,password FROM users GROUP BY email,userName,mobilePhone,password;
     </select>
