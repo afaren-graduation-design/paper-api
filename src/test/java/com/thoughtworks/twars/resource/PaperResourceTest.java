@@ -95,21 +95,20 @@ public class PaperResourceTest extends TestBase {
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
 
-        assertThat(jsonStr, is("{\"paperInfo\":[" +
-                "{\"paperType\":\"practice\","
+        assertThat(jsonStr, is("{\"paperInfo\":["
+                + "{\"paperType\":\"practice\","
                 + "\"createTime\":\"1111111\","
                 + "\"paperName\":\"简单的试卷\","
                 + "\"description\":\"easy\","
                 + "\"uri\":\"papers/1\","
                 + "\"makerId\":3},"
-                + "" +
-                "{\"paperType\":\"exam\","
+                + "{\"paperType\":\"exam\","
                 + "\"createTime\":\"2222222\","
                 + "\"paperName\":\"普通的试卷\","
                 + "\"description\":\"common\","
                 + "\"uri\":\"papers/5\","
-                + "\"makerId\":2}" +
-                "],"
+                + "\"makerId\":2}"
+                + "],"
                 + "\"paperCount\":2}"));
     }
 
@@ -160,7 +159,7 @@ public class PaperResourceTest extends TestBase {
 
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
-        
+
         assertThat(jsonStr, is("{\"paperInfo\":[{\"paperType\":\"exam\""
                 + ",\"createTime\":\"1111111\""
                 + ",\"paperName\":\"简单的试卷\""

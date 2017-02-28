@@ -64,7 +64,6 @@ public class User {
         Map result = new HashMap<>();
         result.put("email", getEmail());
         result.put("mobilePhone", getMobilePhone());
-        result.put("password", getPassword());
         result.put("userName", getUserName());
 
         return result;

@@ -71,57 +71,46 @@ baseUri: http://api.bronzesword.com/
 
 /users:
   get:
-    queryParameters:
-      field: string
-      value: string
+    description: 在获取所有用户信息
     responses:
       200:
         body:
           application/json:
             properties:
-              uri: string
-  /user-role-manage:
-    get:
-      description: 在 admin 权限下获取所有用户信息
-      responses:
-        200:
-          body:
-            application/json:
-              properties:
-                items :
-                  properties:
-                    []:
-                    email: string
-                    mobilePhone: string
-                    password: string
-                    role: array
-                    userName: string
-    post:
-      description: 在 admin 权限下创建一个新用户
-      body:
-        application/json:
-          properties:
-            email: string
-            mobilePhone: string
-            password: string
-            role: array
-            userName: string
-      responses:
-        201:
-    put:
-      queryParameters:
-        email: string
-      description: 在 admin 权限下，更新用户权限
-      body:
-        application/json:
-          properties:
-            email: string
-            mobilePhone: string
-            password: string
-            role: array
-            userName: string
-      responses:
-        204:
+              items :
+                properties:
+                  []:
+                  email: string
+                  mobilePhone: string
+                  password: string
+                  role: array
+                  userName: string
+  post:
+    description: 在 admin 权限下创建一个新用户
+    body:
+      application/json:
+        properties:
+          email: string
+          mobilePhone: string
+          password: string
+          role: array
+          userName: string
+    responses:
+      201:
+  put:
+    queryParameters:
+      email: string
+    description: 在 admin 权限下，更新用户权限
+    body:
+      application/json:
+        properties:
+          email: string
+          mobilePhone: string
+          password: string
+          role: array
+          userName: string
+    responses:
+      204:
   /{id}:
     get:
       responses:
