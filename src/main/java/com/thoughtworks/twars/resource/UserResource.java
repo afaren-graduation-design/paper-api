@@ -201,35 +201,6 @@ public class UserResource extends Resource {
         return Response.status(Response.Status.OK).entity(result).build();
     }
 
-
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getUserByField(
-            @QueryParam("field") String field,
-            @QueryParam("value") String value
-    ) {
-        User user = null;
-
-        if ("email".equals(field)) {
-            user = userMapper.getUserByEmail(value);
-        } else if ("mobilePhone".equals(field)) {
-            user = userMapper.getUserByMobilePhone(value);
-        }
-
-        Map<String, String> result = new HashMap<>();
-
-        if (null != user) {
-
-            result.put("uri", "users/" + user.getId());
-
-            return Response.status(Response.Status.OK).entity(result).build();
-        }
-
-        result.put("uri", null);
-
-        return Response.status(Response.Status.OK).entity(result).build();
-    }
-
     @PUT
     @Path("/{userId}/password")
     @Produces(MediaType.APPLICATION_JSON)
@@ -368,7 +339,6 @@ public class UserResource extends Resource {
     }
 
     @POST
-    @Path("/user-role-manage")
     @Produces(MediaType.APPLICATION_JSON)
     public Response insertUser(Map data) {
         User user = new User();
@@ -391,7 +361,6 @@ public class UserResource extends Resource {
     }
 
     @PUT
-    @Path("/user-role-manage")
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateUser(Map data, @QueryParam("email") String email) {
 
@@ -418,7 +387,6 @@ public class UserResource extends Resource {
     }
 
     @GET
-    @Path("/user-role-manage")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserAuthority() {
         List<User> users = userMapper.groupUserByEmail();
