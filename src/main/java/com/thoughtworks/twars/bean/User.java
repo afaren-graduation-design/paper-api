@@ -65,8 +65,7 @@ public class User {
         result.put("email", getEmail());
         result.put("mobilePhone", getMobilePhone());
         result.put("password", getPassword());
-        result.put("role", getRole());
-        result.put("userName", getRole());
+        result.put("userName", getUserName());
 
         return result;
     }

@@ -2,7 +2,7 @@ package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.bean.*;
 import com.thoughtworks.twars.mapper.*;
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -417,48 +417,26 @@ public class UserResource extends Resource {
         return Response.status(Response.Status.NO_CONTENT).build();
     }
 
-
     @GET
     @Path("/user-role-manage")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserAuthority() {
-        List<User> users = userMapper.getUserAuthority();
+        List<User> users = userMapper.groupUserByEmail();
 
-        List<Map> resultList = new ArrayList<>();
+        List<Map> resultCollection = new ArrayList<>();
 
-        for (int i = 0; i < users.size(); i++) {
-
-            List<String> roleList = new ArrayList<>();
-            roleList.add(users.get(i).getRole());
-
-            Map map = new HashMap();
-
-            map.put("mobilePhone", users.get(i).getMobilePhone());
-            map.put("userName", users.get(i).getUserName());
-            map.put("password", users.get(i).getPassword());
-            map.put("email", users.get(i).getEmail());
-
-            for (int j = i + 1; j < users.size(); j++) {
-                if (users.get(i).getEmail().equals(users.get(j).getEmail())) {
-                    roleList.add(users.get(j).getRole());
-                    users.remove(j);
-                }
-
-                if ((i + 1) == users.size()) {
-                    roleList.add(users.get(i).getRole());
-
-                }
-            }
-
-            map.put("role", roleList);
-            resultList.add(map);
+        for (User user : users) {
+            ArrayList<String> role = (ArrayList<String>) userMapper
+                            .getUserRolesByEmail(user.getEmail());
+            Map  map = user.toMap();
+            map.put("role",role);
+            resultCollection.add(map);
         }
 
         Map result = new HashMap();
-        result.put("users", resultList);
+        result.put("items", resultCollection);
 
         return Response.status(Response.Status.OK).entity(result).build();
-
     }
 
 }

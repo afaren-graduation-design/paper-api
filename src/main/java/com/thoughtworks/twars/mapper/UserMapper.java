@@ -58,6 +58,8 @@ public interface UserMapper {
 
     int deleteUserByEmail(String email);
 
-    List<User> getUserAuthority();
+    List<User> groupUserByEmail();
+
+    List<String> getUserRolesByEmail(String email);
 
 }

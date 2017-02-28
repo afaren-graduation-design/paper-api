@@ -290,9 +290,16 @@ public class UserMapperTest extends TestBase {
     }
 
     @Test
-    public void should_return_all_user_authority() {
-        List<User> allUsers = userMapper.getUserAuthority();
+    public void should_return_users_group_by_email() {
+        List<User> allUsers = userMapper.groupUserByEmail();
         assertThat(allUsers.size(), is(8));
     }
+
+    @Test
+    public void should_return_users_roles_by_email() {
+        List<String> allUsers = userMapper.getUserRolesByEmail("admin@admin.com");
+        assertThat(allUsers.size(), is(1));
+    }
+    
 }
 
