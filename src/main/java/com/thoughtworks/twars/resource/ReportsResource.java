@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 
 
-
 @Path("/reports")
 public class ReportsResource {
 
@@ -22,17 +21,14 @@ public class ReportsResource {
     private ReportsMapper reportsMapper;
 
     @GET
-    @Path("/score-sheet/{type}")
+    @Path("/{type}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllPapersByProgramId(@PathParam("type") Integer type,
                                             @QueryParam("data") String data) {
 
         Map sqlString = new HashMap();
-        System.out.println(type);
-        System.out.println(data);
-
         sqlString.put(1, "select * from paper where programId = #{programId};");
-        
+
         Gson gson = new Gson();
         Map map = gson.fromJson(data, java.util.Map.class);
         map.put("sql", sqlString.get(type));

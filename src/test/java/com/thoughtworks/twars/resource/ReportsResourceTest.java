@@ -24,7 +24,7 @@ public class ReportsResourceTest extends TestBase {
     @Test
     public void should_return_selected_data() throws Exception {
 
-        Response response = target(basePath + "/score-sheet/1")
+        Response response = target(basePath + "/1")
                 .queryParam("data", "%7B%22programId%22%3A1%7D").request().get();
 
         Map result = response.readEntity(Map.class);
