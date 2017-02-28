@@ -42,6 +42,6 @@ public class StackMapperTest extends TestBase {
     @Test
     public void should_return_stack_by_stackId() {
         Stack stack = stackMapper.getStackById(1);
-        assertThat(stack.getTitle(), is("Java"));
+        assertThat(stack.getTitle(), is("Php"));
     }
 }

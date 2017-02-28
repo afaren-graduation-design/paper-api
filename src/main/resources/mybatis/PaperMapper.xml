@@ -44,7 +44,7 @@
     </select>
 
     <select id="getAllPapers" resultMap="paperListMap">
-        SELECT * FROM paper LIMIT #{param1},#{param2};
+        SELECT * FROM paper LIMIT #{newPage},#{pageSize};
     </select>
 
     <select id="findPapersByProgramId" parameterType="java.lang.Integer" resultMap="paperListMap">

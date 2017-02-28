@@ -2,6 +2,7 @@ package com.thoughtworks.twars.mapper;
 
 
 import com.thoughtworks.twars.bean.HomeworkQuiz;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -14,5 +15,8 @@ public interface HomeworkQuizMapper {
     int insertHomeworkQuiz(HomeworkQuiz homeworkQuiz);
 
     List<HomeworkQuiz> findHomeworkQuizzes(
-            String homeworkName, Integer stackId, Integer page, Integer pageSize);
+            @Param("homeworkName") String homeworkName,
+            @Param("stackId") Integer stackId,
+            @Param("newPage") Integer newPage,
+            @Param("pageSize") Integer pageSize);
 }

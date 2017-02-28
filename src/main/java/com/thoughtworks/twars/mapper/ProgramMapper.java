@@ -1,6 +1,7 @@
 package com.thoughtworks.twars.mapper;
 
 import com.thoughtworks.twars.bean.Program;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -8,7 +9,9 @@ public interface ProgramMapper {
 
     List<Integer> findUsersIdByProgramId(Integer id);
 
-    List<Program> getAllPrograms(Integer page,Integer pageSize);
+    List<Program> getAllPrograms(
+            @Param("newPage") Integer newPage,
+            @Param("pageSize") Integer pageSize);
 
     int insertPrograms(Program program);
 

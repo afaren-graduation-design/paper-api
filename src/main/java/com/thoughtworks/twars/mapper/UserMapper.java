@@ -38,12 +38,19 @@ public interface UserMapper {
 
     List<Integer> findProgramsById(Integer id);
 
-    Integer insertStudentMentor(Integer mentorId, Integer studentId);
+    Integer insertStudentMentor(
+            @Param("mentorId") Integer mentorId,
+            @Param("studentId") Integer studentId);
 
-    Integer insertUserProgram(Integer userId, Integer programId);
+    Integer insertUserProgram(
+            @Param("userId") Integer userId,
+            @Param("programId") Integer programId);
 
     List<Map> findUsersByInformation(
-            String email, String privilege, Integer page, Integer pageSize);
+            @Param("email") String email,
+            @Param("privilege") String privilege,
+            @Param("newPage") Integer newPage,
+            @Param("pageSize") Integer pageSize);
 
     List<Integer> findMentorIdsByStudentId(Integer id);
 

@@ -49,7 +49,8 @@ public class PaperResource extends Resource {
     ) {
 
         int startPage = Math.max(page - 1, 0);
-        List<Paper> papers = paperMapper.getAllPapers(startPage * pageSize, pageSize);
+        Integer newPage = startPage * pageSize;
+        List<Paper> papers = paperMapper.getAllPapers(newPage, pageSize);
         Map result = new HashMap<>();
 
         List<Map> items = papers

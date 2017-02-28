@@ -14,7 +14,7 @@
 
     <select id="getAllPrograms" resultMap="programsMap">
         SELECT * FROM programs
-        LIMIT #{param1},#{param2};
+        LIMIT #{newPage},#{pageSize};
     </select>
 
     <insert id="insertPrograms" parameterType="com.thoughtworks.twars.bean.Program" useGeneratedKeys="true"

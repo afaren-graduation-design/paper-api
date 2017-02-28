@@ -119,22 +119,22 @@
         AND
         users.id = userPrivilege.userId
         <where>
-            <if test="param1 != null">
-                users.email LIKE concat("%",#{param1},"%")
+            <if test="email != null">
+                users.email LIKE concat("%",#{email},"%")
             </if>
-            <if test="param2 != null">
-                AND userPrivilege.privilege = #{param2}
+            <if test="privilege != null">
+                AND userPrivilege.privilege = #{privilege}
             </if>
         </where>
-        LIMIT #{param3},#{param4};
+        LIMIT #{newPage},#{pageSize};
     </select>
 
     <insert id="insertStudentMentor" parameterType="java.lang.Integer">
-        INSERT INTO studentMentor VALUES(#{param1},#{param2});
+        INSERT INTO studentMentor VALUES(#{mentorId},#{studentId});
     </insert>
 
     <insert id="insertUserProgram" parameterType="java.lang.Integer">
-        INSERT INTO userProgram VALUES(#{param1},#{param2});
+        INSERT INTO userProgram VALUES(#{userId},#{programId});
     </insert>
 
     <select id="findMentorIdsByStudentId" resultType="java.lang.Integer">

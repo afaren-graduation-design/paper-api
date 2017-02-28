@@ -34,8 +34,9 @@ public class HomeworkQuizResource extends Resource {
             @QueryParam("stackId") Integer stackId
     ) {
         Integer startPage = Math.max(page - 1, 0);
+        Integer newpage = startPage * pageSize;
         List<HomeworkQuiz> allHomeworkQuizzes = homeworkQuizMapper
-                .findHomeworkQuizzes(homeworkName, stackId, startPage * pageSize, pageSize);
+                .findHomeworkQuizzes(homeworkName, stackId, newpage, pageSize);
         List<Map> items = allHomeworkQuizzes
                 .stream()
                 .map(item -> item.toMap())

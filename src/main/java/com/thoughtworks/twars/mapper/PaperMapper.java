@@ -1,6 +1,7 @@
 package com.thoughtworks.twars.mapper;
 
 import com.thoughtworks.twars.bean.Paper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -11,7 +12,8 @@ public interface PaperMapper {
 
     Paper getPaperById(Integer id);
 
-    List<Paper> getAllPapers(Integer page, Integer pageSize);
+    List<Paper> getAllPapers(@Param("newPage") Integer newPage,
+                             @Param("pageSize") Integer pageSize);
 
     Paper getOnePaper(Integer id);
 

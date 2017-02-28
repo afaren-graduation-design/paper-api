@@ -37,14 +37,14 @@
     <select id="findHomeworkQuizzes" resultMap="homeworkQuizListMap">
         SELECT * FROM homeworkQuiz
         <where>
-            <if test="param1 != null">
-                homeworkName LIKE concat("%",#{param1},"%")
+            <if test="homeworkName != null">
+                homeworkName LIKE concat("%",#{homeworkName},"%")
             </if>
-            <if test="param2 != null">
-                AND stackId = #{param2}
+            <if test="stackId != null">
+                AND stackId = #{stackId}
             </if>
         </where>
-        LIMIT #{param3},#{param4};
+        LIMIT #{newPage},#{pageSize};
     </select>
 
 </mapper>

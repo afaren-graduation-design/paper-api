@@ -354,8 +354,9 @@ public class UserResource extends Resource {
             @QueryParam("privilege") String privilege
     ) {
         Integer pageStart = Math.max(page - 1, 0);
+        Integer newPage = pageStart * pageSize;
         List<Map> usersDetail = userMapper
-                .findUsersByInformation(email, privilege, pageStart * pageSize, pageSize);
+                .findUsersByInformation(email, privilege, newPage, pageSize);
         if (usersDetail == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
