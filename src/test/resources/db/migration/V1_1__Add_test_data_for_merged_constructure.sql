@@ -91,7 +91,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `paper` WRITE;
 /*!40000 ALTER TABLE `paper` DISABLE KEYS */;
-INSERT INTO `paper` VALUES (1,1,'简单的试卷','simple',2016,1,1),(2,2,'一般的试卷','standard',2016,0,3),(3,2,'很难的试卷','hard',2016,1,2),(4,2,'测试试卷','f',2016,0,6),(5,3,'java','a',2017,0,6),(6,2,'js','b',2014,0,6),(7,2,'c++','c',2013,0,6),(8,5,'c','d',2016,0,6),(9,2,'ruby','e',2015,1,6),(10,3,'scale','e',2015,1,6),(11,7,'react','e',2015,1,6);
+INSERT INTO `paper` VALUES (1,1,'简单的试卷','simple',2016,1,1),(2,2,'一般的试卷','standard',2016,0,3),(4,2,'测试试卷','f',2016,0,6),(5,3,'java','a',2017,0,6),(6,2,'js','b',2014,0,6),(7,2,'c++','c',2013,0,6),(8,5,'c','d',2016,0,6),(9,2,'ruby','e',2015,1,6),(10,3,'scale','e',2015,1,6),(11,7,'react','e',2015,1,6);
 /*!40000 ALTER TABLE `paper` ENABLE KEYS */;
 UNLOCK TABLES;
 

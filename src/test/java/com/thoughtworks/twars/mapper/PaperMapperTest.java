@@ -24,7 +24,7 @@ public class PaperMapperTest extends TestBase {
     @Test
     public void should_return_all_papers() throws Exception {
         List<Paper> papers = paperMapper.findAll();
-        assertThat(papers.size(), is(11));
+        assertThat(papers.size(), is(10));
         assertThat(papers.get(0).getMakerId(), is(1));
     }
 
