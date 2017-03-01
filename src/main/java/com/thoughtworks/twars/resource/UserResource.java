@@ -34,6 +34,33 @@ public class UserResource extends Resource {
 
 
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUser(
+            @DefaultValue("1") @QueryParam("page") Integer page,
+            @DefaultValue("15") @QueryParam("pageSize") Integer pageSize,
+            @QueryParam("email") String email
+    ) {
+
+        Integer startPage = Math.max(page - 1, 0);
+        Integer newPage = startPage * pageSize;
+        List<User> users = userMapper.groupUserByEmail(newPage, pageSize,email);
+        List<Map> resultCollection = new ArrayList<>();
+
+        for (User user : users) {
+            ArrayList<String> role = (ArrayList<String>) userMapper
+                    .getUserRolesByEmail(user.getEmail());
+            Map map = user.toMap();
+            map.put("role", role);
+            resultCollection.add(map);
+        }
+
+        Map result = new HashMap();
+        result.put("items", resultCollection);
+
+        return Response.status(Response.Status.OK).entity(result).build();
+    }
+
+    @GET
     @Path("/{userId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUser(
@@ -386,31 +413,5 @@ public class UserResource extends Resource {
         return Response.status(Response.Status.NO_CONTENT).build();
     }
 
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getUser(
-            @DefaultValue("1") @QueryParam("page") Integer page,
-            @DefaultValue("15") @QueryParam("pageSize") Integer pageSize,
-            @QueryParam("email") String email
-    ) {
-
-        Integer startPage = Math.max(page - 1, 0);
-        Integer newPage = startPage * pageSize;
-        List<User> users = userMapper.groupUserByEmail(newPage, pageSize,email);
-        List<Map> resultCollection = new ArrayList<>();
-
-        for (User user : users) {
-            ArrayList<String> role = (ArrayList<String>) userMapper
-                    .getUserRolesByEmail(user.getEmail());
-            Map map = user.toMap();
-            map.put("role", role);
-            resultCollection.add(map);
-        }
-
-        Map result = new HashMap();
-        result.put("items", resultCollection);
-
-        return Response.status(Response.Status.OK).entity(result).build();
-    }
 
 }

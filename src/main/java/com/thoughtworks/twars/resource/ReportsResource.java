@@ -1,8 +1,7 @@
 package com.thoughtworks.twars.resource;
 
-import com.thoughtworks.twars.mapper.ProgramMapper;
-import com.thoughtworks.twars.mapper.ReportsMapper;
 import com.google.gson.Gson;
+import com.thoughtworks.twars.mapper.ReportsMapper;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -26,7 +25,10 @@ public class ReportsResource {
                                             @QueryParam("data") String data) {
 
         Map sqlString = new HashMap();
-        sqlString.put(1, "select p.*, count(*) AS examerCount from paper p,scoreSheet s where p.programId =#{programId} and p.id = s.paperId group by p.id;");
+        sqlString.put(1, "select p.*, count(*) AS examerCount"
+                + " from paper p,scoreSheet s "
+                + "where p.programId =#{programId} and p.id = s.paperId "
+                + "group by p.id;");
 
         Gson gson = new Gson();
         Map map = gson.fromJson(data, java.util.Map.class);
