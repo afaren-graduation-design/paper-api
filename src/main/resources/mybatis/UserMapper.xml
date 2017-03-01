@@ -157,11 +157,6 @@
     <select id="getUserRolesByEmail" resultType="java.lang.Integer"  parameterType="java.lang.String">
         SELECT role FROM users WHERE email = #{email} ;
     </select>
-
-
-
-
-
 </mapper>
 
 
