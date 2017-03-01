@@ -49,7 +49,7 @@ public interface UserMapper {
     List<Map> findUsersByInformation(
             @Param("email") String email,
             @Param("privilege") String privilege,
-            @Param("newPage") Integer newPage,
+            @Param("page") Integer page,
             @Param("pageSize") Integer pageSize);
 
     List<Integer> findMentorIdsByStudentId(Integer id);

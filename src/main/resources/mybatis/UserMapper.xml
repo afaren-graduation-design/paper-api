@@ -128,7 +128,7 @@
                 AND userPrivilege.privilege = #{privilege}
             </if>
         </where>
-        LIMIT #{newPage},#{pageSize};
+        LIMIT #{page},#{pageSize};
     </select>
 
     <insert id="insertStudentMentor" parameterType="java.lang.Integer">
