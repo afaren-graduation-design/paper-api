@@ -72,6 +72,10 @@ baseUri: http://api.bronzesword.com/
 /users:
   get:
     description: 在获取所有用户信息
+    queryParameters:
+      page: integer # deault : 1
+      pageSize: integer # default :15
+      email: string
     responses:
       200:
         body:
@@ -82,7 +86,6 @@ baseUri: http://api.bronzesword.com/
                   []:
                   email: string
                   mobilePhone: string
-                  password: string
                   role: array
                   userName: string
   post:
@@ -106,7 +109,6 @@ baseUri: http://api.bronzesword.com/
         properties:
           email: string
           mobilePhone: string
-          password: string
           role: array
           userName: string
     responses:
