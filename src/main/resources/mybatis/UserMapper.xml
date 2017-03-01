@@ -23,15 +23,6 @@
         <result column="userName" property="userName"></result>
     </resultMap>
 
-    <resultMap id="userAuthorityMap" type="com.thoughtworks.twars.bean.User">
-        <id property="id" column="id"></id>
-        <result column="email" property="email"></result>
-        <result column="mobilePhone" property="mobilePhone"></result>
-        <result column="userName" property="userName"></result>
-        <result column="password" property="password"></result>
-        <result column="role" property="role"></result>
-    </resultMap>
-
     <resultMap id="userInformationMap" type="java.util.Map">
         <id property="userId" column="userId"></id>
         <result column="school" property="school"></result>
@@ -161,8 +152,6 @@
         </where>
         group by email,userName,mobilePhone,password
         LIMIT #{page},#{pageSize};
-
---         SELECT email,userName,mobilePhone,password FROM users GROUP BY email,userName,mobilePhone,password
     </select>
 
     <select id="getUserRolesByEmail" resultType="java.lang.Integer"  parameterType="java.lang.String">

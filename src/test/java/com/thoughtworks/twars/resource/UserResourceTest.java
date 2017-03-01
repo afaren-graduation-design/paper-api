@@ -456,7 +456,7 @@ public class UserResourceTest extends TestBase {
     }
 
     @Test
-    public void should_return_all_user_authority() {
+    public void should_return_all_user() {
 
         Response response = target(basePath).request().get();
 

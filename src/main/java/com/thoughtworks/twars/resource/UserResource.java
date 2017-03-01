@@ -388,7 +388,7 @@ public class UserResource extends Resource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUserAuthority(
+    public Response getUser(
             @DefaultValue("1") @QueryParam("page") Integer page,
             @DefaultValue("15") @QueryParam("pageSize") Integer pageSize,
             @QueryParam("email") String email
