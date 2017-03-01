@@ -390,12 +390,13 @@ public class UserResource extends Resource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserAuthority(
             @DefaultValue("1") @QueryParam("page") Integer page,
-            @DefaultValue("15") @QueryParam("pageSize") Integer pageSize
+            @DefaultValue("15") @QueryParam("pageSize") Integer pageSize,
+            @QueryParam("email") String email
     ) {
 
         Integer startPage = Math.max(page - 1, 0);
         Integer newPage = startPage * pageSize;
-        List<User> users = userMapper.groupUserByEmail(newPage, pageSize);
+        List<User> users = userMapper.groupUserByEmail(newPage, pageSize,email);
         List<Map> resultCollection = new ArrayList<>();
 
         for (User user : users) {
