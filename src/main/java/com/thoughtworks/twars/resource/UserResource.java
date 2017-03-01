@@ -388,16 +388,21 @@ public class UserResource extends Resource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUserAuthority() {
-        List<User> users = userMapper.groupUserByEmail();
+    public Response getUserAuthority(
+            @DefaultValue("1") @QueryParam("page") Integer page,
+            @DefaultValue("15") @QueryParam("pageSize") Integer pageSize
+    ) {
 
+        Integer startPage = Math.max(page - 1, 0);
+        Integer newPage = startPage * pageSize;
+        List<User> users = userMapper.groupUserByEmail(newPage, pageSize);
         List<Map> resultCollection = new ArrayList<>();
 
         for (User user : users) {
             ArrayList<String> role = (ArrayList<String>) userMapper
-                            .getUserRolesByEmail(user.getEmail());
-            Map  map = user.toMap();
-            map.put("role",role);
+                    .getUserRolesByEmail(user.getEmail());
+            Map map = user.toMap();
+            map.put("role", role);
             resultCollection.add(map);
         }
 
