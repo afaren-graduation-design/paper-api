@@ -291,8 +291,8 @@ public class UserMapperTest extends TestBase {
 
     @Test
     public void should_return_users_group_by_email() {
-        List<User> allUsers = userMapper.groupUserByEmail();
-        assertThat(allUsers.size(), is(8));
+        List<User> allUsers = userMapper.groupUserByEmail(0,2);
+        assertThat(allUsers.size(), is(2));
     }
 
     @Test
