@@ -1,5 +1,6 @@
 package com.thoughtworks.twars.resource;
 
+import com.google.gson.Gson;
 import com.thoughtworks.twars.bean.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -458,8 +459,30 @@ public class UserResourceTest extends TestBase {
     @Test
     public void should_return_all_user() {
 
-        Response response = target(basePath).request().get();
+        when(userMapper.groupUserByEmail(0,1,null)).thenReturn(Arrays.asList(user));
+        when(user.getEmail()).thenReturn("email");
 
+        Map map = new HashMap();
+        map.put("email","email");
+        map.put("userName","userName");
+        map.put("mobilePhone","11111");
+
+        when(user.toMap()).thenReturn(map);
+
+        ArrayList roles = new ArrayList();
+        roles.add("1");
+        roles.add("2");
+        when(userMapper.getUserRolesByEmail(user.getEmail())).thenReturn(roles);
+
+        Response response = target(basePath)
+                .queryParam("page",1).queryParam("pageSize",1).request().get();
+        Map reslut  = response.readEntity(Map.class);
+        String jsonStr = new Gson().toJson(reslut);
+
+        assertThat(jsonStr,is("{\"items\":[{\"role\":[\"1\",\"2\"],"
+                + "\"mobilePhone\":\"11111\","
+                + "\"userName\":\"userName\","
+                + "\"email\":\"email\"}]}"));
         assertThat(response.getStatus(), is(200));
     }
 }
