@@ -1,8 +1,6 @@
-package com.thoughtworks.twars.homeworkQuizOperationMapper;
+package com.thoughtworks.twars.mapper;
 
 import com.thoughtworks.twars.bean.HomeworkQuizOperation;
-import com.thoughtworks.twars.mapper.HomeworkQuizOperationMapper;
-import com.thoughtworks.twars.mapper.TestBase;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,14 +17,14 @@ public class HomeworkQuizOperationMapperTest extends TestBase {
     }
 
     @Test
-    public void should_insert_paper_operation() {
+    public void should_insert_homework_quiz_operation() {
         HomeworkQuizOperation homeworkQuizOperation = new HomeworkQuizOperation();
         homeworkQuizOperation.setOperationType("delete");
         homeworkQuizOperation.setOperatorId(1);
         homeworkQuizOperation.setHomeworkQuizId(2);
 
         int result = homeworkQuizOperationMapper.insertHomeworkQuizOperation(homeworkQuizOperation);
-        System.out.println(result);
+
         assertThat(result, is(1));
     }
 }

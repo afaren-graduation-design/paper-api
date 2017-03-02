@@ -1,9 +1,10 @@
 package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.bean.HomeworkQuiz;
+import com.thoughtworks.twars.bean.HomeworkQuizOperation;
 import com.thoughtworks.twars.mapper.HomeworkQuizMapper;
+import com.thoughtworks.twars.mapper.HomeworkQuizOperationMapper;
 import com.thoughtworks.twars.mapper.UserMapper;
-import io.swagger.annotations.*;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -16,13 +17,35 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Path("/homeworkQuizzes")
-@Api
 public class HomeworkQuizResource extends Resource {
     @Inject
     private HomeworkQuizMapper homeworkQuizMapper;
 
     @Inject
     private UserMapper userMapper;
+
+    @Inject
+    private HomeworkQuizOperationMapper homeworkQuizOperationMapper;
+
+    @PUT
+    @Path("/{homeworkQuizId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateHomeworkQuiz(
+            @PathParam("homeworkQuizId") Integer id, Map data
+    ) {
+        if (homeworkQuizMapper.findById(id) == null) {
+            Response.status(Response.Status.PRECONDITION_FAILED).build();
+        }
+        HomeworkQuizOperation homeworkQuizOperation = new HomeworkQuizOperation();
+        homeworkQuizOperation.setHomeworkQuizId(id);
+        homeworkQuizOperation.setOperationType((String) data.get("operationType"));
+        homeworkQuizOperation.setOperatingTime((Integer) data.get("operatingTime"));
+        homeworkQuizOperation.setOperatorId((Integer) data.get("operatorId"));
+
+        homeworkQuizOperationMapper.insertHomeworkQuizOperation(homeworkQuizOperation);
+        return Response.status(Response.Status.NO_CONTENT).build();
+    }
+
 
 
     @GET
@@ -112,5 +135,6 @@ public class HomeworkQuizResource extends Resource {
         }
         return Response.status(Response.Status.UNSUPPORTED_MEDIA_TYPE).build();
     }
+
 
 }

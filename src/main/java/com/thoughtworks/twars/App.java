@@ -101,6 +101,9 @@ public class App extends ResourceConfig {
         final ReportsMapper reportsMapper = session
                 .getMapper(ReportsMapper.class);
 
+        final HomeworkQuizOperationMapper homeworkQuizOperationMapper = session
+                .getMapper(HomeworkQuizOperationMapper.class);
+
         register(OpenSessionRequestFilter.class);
         register(CloseSessionResponseFilter.class);
         register(CacheContorlFilter.class);
@@ -133,7 +136,7 @@ public class App extends ResourceConfig {
                         bind(programMapper).to(ProgramMapper.class);
                         bind(stackMapper).to(StackMapper.class);
                         bind(reportsMapper).to(ReportsMapper.class);
-
+                        bind(homeworkQuizOperationMapper).to(HomeworkQuizOperationMapper.class);
                         bind(session).to(SqlSessionManager.class);
                     }
                 });

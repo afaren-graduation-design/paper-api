@@ -1,7 +1,7 @@
 package com.thoughtworks.twars.mapper;
 
-import com.thoughtworks.twars.bean.PaperOperation;
+import com.thoughtworks.twars.bean.HomeworkQuizOperation;
 
-public  interface PaperOperationMapper {
-    int insertPaperOperation(PaperOperation paperOperation);
+public  interface HomeworkQuizOperationMapper {
+    int insertHomeworkQuizOperation(HomeworkQuizOperation homeworkQuizOperation);
 }

@@ -3,9 +3,8 @@ package com.thoughtworks.twars.resource;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.thoughtworks.twars.bean.HomeworkQuiz;
-import com.thoughtworks.twars.bean.UserDetail;
+import com.thoughtworks.twars.bean.HomeworkQuizOperation;
 import org.hamcrest.MatcherAssert;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -14,7 +13,9 @@ import org.mockito.runners.MockitoJUnitRunner;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -266,6 +267,28 @@ public class HomeworkQuizResourceTest extends TestBase {
         Map result = response.readEntity(Map.class);
 
         MatcherAssert.assertThat(result.size(), is(1));
+    }
+
+    @Test
+    public void should_return_204_when_delete_homework_quiz() {
+
+        when(homeworkQuizMapper.findById(1)).thenReturn(homeworkQuiz);
+        HomeworkQuizOperation hqo = mock(HomeworkQuizOperation.class);
+        when(homeworkQuizOperationMapper
+                .insertHomeworkQuizOperation(hqo)).thenReturn(1);
+
+        Map map = new HashMap();
+
+        map.put("operationType", "delete");
+        map.put("operatorId", 1);
+        map.put("operatingTime", 123456);
+        map.put("homeworkQuizId", 1);
+
+        Entity entity = Entity.entity(map, MediaType.APPLICATION_JSON);
+
+        Response response = target(basePath + "/1").request().put(entity);
+
+        MatcherAssert.assertThat(response.getStatus(), is(204));
     }
 }
 

@@ -3,20 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.thoughtworks.twars.mapper.PaperOperationMapper">
+<mapper namespace="com.thoughtworks.twars.mapper.HomeworkQuizOperationMapper">
 
-    <resultMap id="paperOperationMap" type="com.thoughtworks.twars.bean.PaperOperation">
-        <id property="id" column="id"></id>
-        <result column="operatorId" property="operatorId"></result>
-        <result column="operatingTime" property="operatingTime"></result>
-        <result column="paperId" property="paperId"></result>
-        <result column="operationType" property="operationType"></result>
-    </resultMap>
-
-    <insert id="insertPaperOperation" parameterType="com.thoughtworks.twars.bean.PaperOperation" useGeneratedKeys="true"
+    <insert id="insertHomeworkQuizOperation"
+            parameterType="com.thoughtworks.twars.bean.HomeworkQuizOperation" useGeneratedKeys="true"
             keyProperty="id">
-        INSERT INTO paperOperation(operationType, operatorId,operatingTime,paperId)
-        VALUES (#{operationType}, #{operatorId},#{operatingTime},#{paperId});
+        INSERT INTO homeworkQuizOperation (operationType, operatorId,operatingTime,homeworkQuizId)
+        VALUES (#{operationType}, #{operatorId},#{operatingTime},#{homeworkQuizId});
     </insert>
 
 </mapper>

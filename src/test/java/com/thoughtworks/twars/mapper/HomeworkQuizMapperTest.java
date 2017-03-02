@@ -10,7 +10,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 
-public class HomeWorkQuizMapperTest extends TestBase {
+public class HomeworkQuizMapperTest extends TestBase {
     private HomeworkQuizMapper homeworkQuizMapper;
 
     @Before

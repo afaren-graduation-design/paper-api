@@ -1,7 +1,5 @@
 package com.thoughtworks.twars.resource;
 
-import com.thoughtworks.twars.bean.PaperAndOperation;
-import com.thoughtworks.twars.bean.PaperOperation;
 import com.thoughtworks.twars.mapper.*;
 import com.thoughtworks.twars.resource.quiz.definition.BlankQuizDefinitionService;
 import com.thoughtworks.twars.resource.quiz.definition.HomeworkQuizDefinitionService;
@@ -50,6 +48,7 @@ public class TestBase extends JerseyTest {
     protected ProgramMapper programMapper = mock(ProgramMapper.class);
     protected StackMapper stackMapper = mock(StackMapper.class);
     protected ReportsMapper reportsMapper = mock(ReportsMapper.class);
+    protected HomeworkQuizOperationMapper homeworkQuizOperationMapper = mock(HomeworkQuizOperationMapper.class);
 
     @Override
     protected Application configure() {
@@ -85,6 +84,7 @@ public class TestBase extends JerseyTest {
                 bind(programMapper).to(ProgramMapper.class);
                 bind(stackMapper).to(StackMapper.class);
                 bind(reportsMapper).to(ReportsMapper.class);
+                bind(homeworkQuizOperationMapper).to(HomeworkQuizOperationMapper.class);
             }
         }).packages("com.thoughtworks.twars.resource");
     }

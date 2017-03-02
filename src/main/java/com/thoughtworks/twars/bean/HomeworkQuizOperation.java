@@ -3,12 +3,12 @@ package com.thoughtworks.twars.bean;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PaperOperation {
+public class HomeworkQuizOperation {
     private int id;
     private String operationType;
     private int operatorId;
     private int operatingTime;
-    private int paperId;
+    private int homeworkQuizId;
 
     public int getId() {
         return id;
@@ -42,22 +42,22 @@ public class PaperOperation {
         this.operatingTime = operatingTime;
     }
 
-    public int getPaperId() {
-        return paperId;
+    public int getHomeworkQuizId() {
+        return homeworkQuizId;
     }
 
-    public void setPaperId(int paperId) {
-        this.paperId = paperId;
+    public void setHomeworkQuizId(int homeworkQuizId) {
+        this.homeworkQuizId = homeworkQuizId;
     }
 
     public Map toMap() {
         Map result = new HashMap<>();
 
-        result.put("id", getId());
-        result.put("operatorId", getOperatorId());
-        result.put("operatingTime", getOperatingTime());
-        result.put("paperId", getPaperId());
-        result.put("operationType", getOperationType());
+        result.put("id", id);
+        result.put("operatorId", operatorId);
+        result.put("operatingTime", operatingTime);
+        result.put("homeworkQuizId", homeworkQuizId);
+        result.put("operationType", operationType);
 
         return result;
     }
