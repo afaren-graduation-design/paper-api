@@ -113,6 +113,17 @@ baseUri: http://api.bronzesword.com/
           userName: string
     responses:
       204:
+  /verification:
+    get:
+      queryParameters:
+        field: string
+        value: string
+      responses:
+        200:
+          body:
+            application/json:
+              properties:
+                uri: string
   /{id}:
     get:
       responses:
@@ -123,27 +134,26 @@ baseUri: http://api.bronzesword.com/
                 id: integer
                 email: string
                 mobilePhone: string
-  /{id}/programs/{programId}:
-    post:
-      responses:
-        201:
-          body:
-            application/json:
-              properties:
-                status: number
+    /programs/{programId}:
+      post:
+        responses:
+          201:
+            body:
+              application/json:
+                properties:
+                  status: number
 
-
-  /logicPuzzle:
-    get:
-      responses:
-        200:
-          body:
-            application/json:
-              properties:
-                correctNumber: integer
-                itemNumber: integer
-                startTime: integer
-                endTime: integer
+    /logicPuzzle:
+      get:
+        responses:
+          200:
+            body:
+              application/json:
+                properties:
+                  correctNumber: integer
+                  itemNumber: integer
+                  startTime: integer
+                  endTime: integer
     /detail:
       get:
         description: 获取用户信息
