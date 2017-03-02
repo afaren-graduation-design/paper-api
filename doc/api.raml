@@ -614,6 +614,20 @@ baseUri: http://api.bronzesword.com/
                           properties:
                             []:
                             uri: string
+    put:
+      description: 添加对指定homeworkQuiz的操作
+      body:
+        application/json:
+          properties:
+            operationType: string # default enum('DELETE','DISTRIBUTION','UNDISTRIBUTION')
+            operatorId: integer
+            operatingTime: integer
+            homeworkQuizId: integer
+      responses:
+        204:
+          description: 操作成功
+        412:
+          description: 操作失败，不满足前提条件
 
 /programs:
   get:
