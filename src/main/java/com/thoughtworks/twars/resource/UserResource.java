@@ -413,5 +413,32 @@ public class UserResource extends Resource {
         return Response.status(Response.Status.NO_CONTENT).build();
     }
 
+    @GET
+    @Path("/verification")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUserByField(
+            @QueryParam("field") String field,
+            @QueryParam("value") String value
+    ) {
+        User user = null;
+
+        if ("email".equals(field)) {
+            user = userMapper.getUserByEmail(value);
+        } else if ("mobilePhone".equals(field)) {
+            user = userMapper.getUserByMobilePhone(value);
+        }
+
+        Map<String, String> map = new HashMap<>();
+
+        if (null != user) {
+            map.put("uri", "users/" + user.getId());
+            return Response.status(Response.Status.OK).entity(map).build();
+        }
+        map.put("uri", null);
+
+        return Response.status(Response.Status.OK).entity(map).build();
+    }
+
+
 
 }

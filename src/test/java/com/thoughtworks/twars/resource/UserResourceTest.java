@@ -485,4 +485,22 @@ public class UserResourceTest extends TestBase {
                 + "\"email\":\"email\"}]}"));
         assertThat(response.getStatus(), is(200));
     }
+
+    @Test
+    public void should_return_user_by_field() {
+        when(userMapper.getUserByEmail(anyString())).thenReturn(user);
+        when(user.getId()).thenReturn(10);
+
+        Response response = target(basePath + "/verification")
+                .queryParam("field", "email")
+                .queryParam("value", "abc@test.com")
+                .request().get();
+
+        assertThat(response.getStatus(), is(200));
+
+        Map result = response.readEntity(Map.class);
+
+        assertThat((String) result.get("uri"), is("users/10"));
+
+    }
 }
