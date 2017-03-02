@@ -4,6 +4,7 @@ import com.thoughtworks.twars.bean.Paper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PaperMapper {
     List<Paper> findPapersByProgramId(Integer programId);
@@ -18,6 +19,8 @@ public interface PaperMapper {
     Paper getOnePaper(Integer id);
 
     int insertPaper(Paper paper);
+
+    Map getExamerCountByPaperId(Integer paperId);
 
 
 }

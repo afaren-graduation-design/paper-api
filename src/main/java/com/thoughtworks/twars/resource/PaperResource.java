@@ -231,4 +231,17 @@ public class PaperResource extends Resource {
         });
         return Response.status(Response.Status.OK).entity(result).build();
     }
+
+    @GET
+    @Path("/{paperId}/userCount")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getScoreSheetByPaperId(
+            @PathParam("paperId") Integer paperId) {
+        Map scoreSheet = paperMapper.getExamerCountByPaperId(paperId);
+
+        Map result = new HashMap();
+        result.put("scoreSheet", scoreSheet);
+
+        return Response.status(Response.Status.OK).entity(scoreSheet).build();
+    }
 }

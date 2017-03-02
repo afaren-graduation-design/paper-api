@@ -48,11 +48,15 @@
     </select>
 
     <select id="findPapersByProgramId" parameterType="java.lang.Integer" resultMap="paperListMap">
-        SELECT * FROM WHERE programId = #{programId};
+        SELECT * FROM paper WHERE programId = #{programId};
     </select>
 
     <insert id="insertPaper" parameterType="com.thoughtworks.twars.bean.Paper" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO paper(makerId, paperName,programId,description,createTime,paperType)
         VALUES (#{makerId}, #{paperName},#{programId},#{description},#{createTime},#{paperType});
     </insert>
+
+    <select id="getExamerCountByPaperId" resultType="java.util.HashMap">
+        select scoreSheet.paperId, count(distinct scoreSheet.examerId) AS userCount  FROM scoreSheet WHERE scoreSheet.paperId = 1 group by scoreSheet.paperId;
+    </select>
 </mapper>
