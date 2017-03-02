@@ -149,6 +149,9 @@
             <if test="email != null">
                 users.email LIKE concat("%",#{email},"%")
             </if>
+            <if test="email != null">
+                users.mobilePhone = #{mobilePhone}
+            </if>
         </where>
         group by email,userName,mobilePhone,password
         LIMIT #{page},#{pageSize};

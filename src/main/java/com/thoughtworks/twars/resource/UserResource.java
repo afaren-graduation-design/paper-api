@@ -38,12 +38,13 @@ public class UserResource extends Resource {
     public Response getUser(
             @DefaultValue("1") @QueryParam("page") Integer page,
             @DefaultValue("15") @QueryParam("pageSize") Integer pageSize,
-            @QueryParam("email") String email
+            @QueryParam("email") String email,
+            @QueryParam("mobilePhone") String mobilePhone
     ) {
 
         Integer startPage = Math.max(page - 1, 0);
         Integer newPage = startPage * pageSize;
-        List<User> users = userMapper.groupUserByEmail(newPage, pageSize,email);
+        List<User> users = userMapper.groupUserByEmail(newPage, pageSize,email,mobilePhone);
         List<Map> resultCollection = new ArrayList<>();
 
         for (User user : users) {
@@ -409,7 +410,6 @@ public class UserResource extends Resource {
             user.setRole(userRole + "");
             userMapper.insertUser(user);
         }
-
         return Response.status(Response.Status.NO_CONTENT).build();
     }
 

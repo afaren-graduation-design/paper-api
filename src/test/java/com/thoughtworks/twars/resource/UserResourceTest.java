@@ -459,7 +459,7 @@ public class UserResourceTest extends TestBase {
     @Test
     public void should_return_all_user() {
 
-        when(userMapper.groupUserByEmail(0,1,null)).thenReturn(Arrays.asList(user));
+        when(userMapper.groupUserByEmail(0,1,null,null)).thenReturn(Arrays.asList(user));
         when(user.getEmail()).thenReturn("email");
 
         Map map = new HashMap();
