@@ -56,7 +56,7 @@
         VALUES (#{makerId}, #{paperName},#{programId},#{description},#{createTime},#{paperType});
     </insert>
 
-    <select id="getExamerCountByPaperId" resultType="java.util.HashMap">
-        select scoreSheet.paperId, count(distinct scoreSheet.examerId) AS userCount  FROM scoreSheet WHERE scoreSheet.paperId = 1 group by scoreSheet.paperId;
+    <select id="getUserCountByPaperId" resultType="java.util.HashMap">
+        SELECT scoreSheet.paperId, COUNT(DISTINCT scoreSheet.examerId) AS userCount  FROM scoreSheet WHERE scoreSheet.paperId = #{paperId} GROUP BY scoreSheet.paperId;
     </select>
 </mapper>

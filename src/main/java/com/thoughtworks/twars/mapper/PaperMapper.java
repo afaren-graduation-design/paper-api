@@ -20,7 +20,5 @@ public interface PaperMapper {
 
     int insertPaper(Paper paper);
 
-    Map getExamerCountByPaperId(Integer paperId);
-
-
+    Map<String, Integer> getUserCountByPaperId(Integer paperId);
 }

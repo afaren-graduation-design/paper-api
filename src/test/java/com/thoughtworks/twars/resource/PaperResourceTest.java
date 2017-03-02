@@ -346,6 +346,13 @@ public class PaperResourceTest extends TestBase {
         assertThat(response.getStatus(), is(200));
         assertThat(result.size(), is(1));
     }
+
+    @Test
+    public void should_return_user_count_by_paper_id() {
+
+        Response response = target(basePath + "/1/userCount").request().get();
+        assertThat(response.getStatus(), is(200));
+    }
 }
 
 

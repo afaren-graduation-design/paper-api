@@ -235,13 +235,11 @@ public class PaperResource extends Resource {
     @GET
     @Path("/{paperId}/userCount")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getScoreSheetByPaperId(
+    public Response getUserCountByPaperId(
             @PathParam("paperId") Integer paperId) {
-        Map scoreSheet = paperMapper.getExamerCountByPaperId(paperId);
+        Map<String,Integer> result = paperMapper.getUserCountByPaperId(paperId);
 
-        Map result = new HashMap();
-        result.put("scoreSheet", scoreSheet);
 
-        return Response.status(Response.Status.OK).entity(scoreSheet).build();
+        return Response.status(Response.Status.OK).entity(result).build();
     }
 }

@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -76,4 +77,11 @@ public class PaperMapperTest extends TestBase {
         assertThat(papers.size(), is(3));
         assertThat(papers.get(1).getMakerId(), is(2));
     }
+
+    @Test
+    public void should_return_userCount_by_paperId() throws Exception {
+        Map<String, Integer> users = paperMapper.getUserCountByPaperId(1);
+        assertThat(users.get("paperId"), is(1));
+    }
+
 }
