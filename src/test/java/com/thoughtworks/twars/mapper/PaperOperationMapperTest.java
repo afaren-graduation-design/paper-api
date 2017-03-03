@@ -4,6 +4,8 @@ import com.thoughtworks.twars.bean.PaperOperation;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 

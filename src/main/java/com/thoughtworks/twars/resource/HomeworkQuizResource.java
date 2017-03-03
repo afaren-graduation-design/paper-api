@@ -34,7 +34,7 @@ public class HomeworkQuizResource extends Resource {
             @PathParam("homeworkQuizId") Integer id, Map data
     ) {
         if (homeworkQuizMapper.findById(id) == null) {
-            Response.status(Response.Status.PRECONDITION_FAILED).build();
+            return Response.status(Response.Status.PRECONDITION_FAILED).build();
         }
         HomeworkQuizOperation homeworkQuizOperation = new HomeworkQuizOperation();
         homeworkQuizOperation.setHomeworkQuizId(id);
@@ -45,7 +45,6 @@ public class HomeworkQuizResource extends Resource {
         homeworkQuizOperationMapper.insertHomeworkQuizOperation(homeworkQuizOperation);
         return Response.status(Response.Status.NO_CONTENT).build();
     }
-
 
 
     @GET

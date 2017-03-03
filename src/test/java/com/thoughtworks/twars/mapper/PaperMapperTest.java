@@ -84,4 +84,10 @@ public class PaperMapperTest extends TestBase {
         assertThat(users.get("paperId"), is(1));
     }
 
+    @Test
+    public void should_get_paper_by_id() throws Exception {
+        Paper paper = paperMapper.getPaperById(1);
+        assertThat(paper.getMakerId(), is(1));
+    }
+
 }

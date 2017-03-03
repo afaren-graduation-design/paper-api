@@ -27,6 +27,8 @@ public class PaperResource extends Resource {
     @Inject
     private UserMapper userMapper;
     @Inject
+    private PaperOperationMapper paperOperationMapper;
+    @Inject
     private HomeworkQuizDefinitionService homeworkQuizDefinition;
     @Inject
     private BlankQuizDefinitionService blankQuizDefinition;
@@ -40,6 +42,7 @@ public class PaperResource extends Resource {
     private QuizItemMapper quizItemMapper;
     @Inject
     private BlankQuizMapper blankQuizMapper;
+
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -237,9 +240,28 @@ public class PaperResource extends Resource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserCountByPaperId(
             @PathParam("paperId") Integer paperId) {
-        Map<String,Integer> result = paperMapper.getUserCountByPaperId(paperId);
+        Map<String, Integer> result = paperMapper.getUserCountByPaperId(paperId);
 
 
         return Response.status(Response.Status.OK).entity(result).build();
+    }
+
+    @PUT
+    @Path("/{paperId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updatePaperOperation(
+            @PathParam("paperId") Integer paperId, Map data) {
+        if (paperMapper.getPaperById(paperId) == null) {
+            return Response.status(Response.Status.PRECONDITION_FAILED).build();
+        }
+        PaperOperation paperOperation = new PaperOperation();
+        paperOperation.setOperationType((String) data.get("operationType"));
+        paperOperation.setOperatingTime((Integer) data.get("operatingTime"));
+        paperOperation.setOperatorId((Integer) data.get("operatorId"));
+        paperOperation.setPaperId(paperId);
+
+        paperOperationMapper.insertPaperOperation(paperOperation);
+
+        return Response.status(Response.Status.NO_CONTENT).build();
     }
 }

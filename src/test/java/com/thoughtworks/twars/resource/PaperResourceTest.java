@@ -3,6 +3,8 @@ package com.thoughtworks.twars.resource;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.thoughtworks.twars.bean.*;
+import com.thoughtworks.twars.mapper.PaperOperationMapper;
+import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -16,6 +18,7 @@ import java.util.*;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -43,6 +46,12 @@ public class PaperResourceTest extends TestBase {
 
     @Mock
     List list;
+
+    @Mock
+    PaperOperation paperOperation;
+
+    @Mock
+    Paper paper;
 
     @Test
     public void should_list_all_papers_by_page_and_pageSize() throws Exception {
@@ -352,6 +361,25 @@ public class PaperResourceTest extends TestBase {
 
         Response response = target(basePath + "/1/userCount").request().get();
         assertThat(response.getStatus(), is(200));
+    }
+
+    @Test
+    public void should_update_paper_operation() {
+
+        when(paperMapper.getPaperById(5)).thenReturn(paper);
+        PaperOperation paperOperation = mock(PaperOperation.class);
+        when(paperOperationMapper.insertPaperOperation(paperOperation)).thenReturn(1);
+
+        Map items = new HashMap();
+        items.put("operatingTime", 23343434);
+        items.put("operatorId", 3);
+        items.put("operationType", "DELETE");
+        items.put("paperId", 5);
+
+        Entity entity = Entity.entity(items, MediaType.APPLICATION_JSON);
+        Response response = target(basePath + "/5").request().put(entity);
+
+        assertThat(response.getStatus(), is(204));
     }
 }
 
