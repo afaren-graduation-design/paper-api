@@ -28,5 +28,6 @@
         FROM paperOperation
         WHERE paperId=O.paperId
         ) AND P.programId = #{programId}
+
     </select>
 </mapper>

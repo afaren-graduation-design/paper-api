@@ -35,16 +35,18 @@
     </insert>
 
     <select id="findHomeworkQuizzes" resultMap="homeworkQuizListMap">
-        SELECT * FROM homeworkQuiz
-        <where>
-            <if test="homeworkName != null">
-                homeworkName LIKE concat("%",#{homeworkName},"%")
-            </if>
-            <if test="stackId != null">
-                AND stackId = #{stackId}
-            </if>
-        </where>
+        select H.* from homeworkQuiz H
+        LEFT JOIN homeworkQuizOperation O ON H.id = O.homeworkQuizId
+        WHERE O.id = (select MAX(id) FROM homeworkQuizOperation WHERE homeworkQuizId = O.homeworkQuizId)
+        AND O.operationType = "DISTRIBUTION"
+        <if test="homeworkName != null">
+            AND H.homeworkName LIKE concat("%",#{homeworkName},"%")
+        </if>
+        <if test="stackId != null">
+            AND H.stackId = #{stackId}
+        </if>
         LIMIT #{newPage},#{pageSize};
+
     </select>
 
 </mapper>

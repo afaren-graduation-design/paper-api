@@ -55,29 +55,29 @@ public class HomeworkQuizMapperTest extends TestBase {
     public void should_return_homework_quizzes_by_search_name_and_stackId() {
         List<HomeworkQuiz> homeworkQuizzes = homeworkQuizMapper
                 .findHomeworkQuizzes("hom", 1, 0, 15);
-        System.out.println(homeworkQuizzes.size());
-        assertThat(homeworkQuizzes.size(), is(3));
+        assertThat(homeworkQuizzes.size(), is(2));
     }
 
     @Test
     public void should_return_homework_quizzes_by_search_homework_name() {
         List<HomeworkQuiz> homeworkQuizzes = homeworkQuizMapper
                 .findHomeworkQuizzes("hom", null, 0, 15);
-        assertThat(homeworkQuizzes.size(), is(8));
+        assertThat(homeworkQuizzes.size(), is(4));
     }
 
     @Test
     public void should_return_homework_quizzes_by_search_homework_stackId() {
         List<HomeworkQuiz> homeworkQuizzes = homeworkQuizMapper
                 .findHomeworkQuizzes(null, 1, 0, 15);
-        assertThat(homeworkQuizzes.size(), is(3));
+        System.out.println(homeworkQuizzes.size());
+        assertThat(homeworkQuizzes.size(), is(2));
     }
 
     @Test
     public void should_return_homework_quizzes_by_search() {
         List<HomeworkQuiz> homeworkQuizzes = homeworkQuizMapper
                 .findHomeworkQuizzes(null, null, 0, 15);
-        assertThat(homeworkQuizzes.size(), is(8));
+        assertThat(homeworkQuizzes.size(), is(4));
     }
 
     @Test
