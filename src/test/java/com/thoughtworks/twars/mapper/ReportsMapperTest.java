@@ -27,8 +27,6 @@ public class ReportsMapperTest extends TestBase {
         map.put("sql","select * from paper where programId = #{programId};");
         map.put("programId", 1);
         List<Map> result = reportsMapper.selectData(map);
-        System.out.println(result);
-
         assertThat(result.size(),is(1) );
     }
 }

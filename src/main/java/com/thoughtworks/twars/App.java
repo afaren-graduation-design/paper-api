@@ -103,6 +103,13 @@ public class App extends ResourceConfig {
 
         final HomeworkQuizOperationMapper homeworkQuizOperationMapper = session
                 .getMapper(HomeworkQuizOperationMapper.class);
+        final SingleChoiceMapper singleChoiceMapper = session
+                .getMapper(SingleChoiceMapper.class);
+        final MultipleChoiceMapper multipleChoiceMapper = session
+                .getMapper(MultipleChoiceMapper.class);
+        final BasicBlankQuizMapper basicBlankQuizMapper = session
+                .getMapper(BasicBlankQuizMapper.class);
+
 
         register(OpenSessionRequestFilter.class);
         register(CloseSessionResponseFilter.class);
@@ -137,6 +144,9 @@ public class App extends ResourceConfig {
                         bind(stackMapper).to(StackMapper.class);
                         bind(reportsMapper).to(ReportsMapper.class);
                         bind(homeworkQuizOperationMapper).to(HomeworkQuizOperationMapper.class);
+                        bind(singleChoiceMapper).to(SingleChoiceMapper.class);
+                        bind(multipleChoiceMapper).to(MultipleChoiceMapper.class);
+                        bind(basicBlankQuizMapper).to(BasicBlankQuizMapper.class);
                         bind(session).to(SqlSessionManager.class);
                     }
                 });

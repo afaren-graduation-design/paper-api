@@ -63,6 +63,9 @@
         <mapper resource="mybatis/PaperAndOperationMapper.xml"></mapper>
         <mapper resource="mybatis/ReportsMapper.xml"></mapper>
         <mapper resource="mybatis/HomeworkQuizOperationMapper.xml"></mapper>
+        <mapper resource="mybatis/SingleChoiceMapper.xml"></mapper>
+        <mapper resource="mybatis/BasicBlankQuizMapper.xml"></mapper>
+        <mapper resource="mybatis/MultipleChoiceMapper.xml"></mapper>
 
     </mappers>
 </configuration>
