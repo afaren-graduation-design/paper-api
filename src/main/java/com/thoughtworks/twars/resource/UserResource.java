@@ -147,6 +147,7 @@ public class UserResource extends Resource {
             map.put("name", detail.getName());
             map.put("gender", detail.getGender());
             map.put("email", user.getEmail());
+            map.put("userName", user.getUserName());
             map.put("mobilePhone", user.getMobilePhone());
             map.put("schoolProvince", detail.getSchoolProvince());
             map.put("schoolCity", detail.getSchoolCity());
