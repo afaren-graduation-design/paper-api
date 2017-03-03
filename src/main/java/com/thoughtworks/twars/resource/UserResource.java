@@ -58,6 +58,8 @@ public class UserResource extends Resource {
         Map result = new HashMap();
         result.put("items", resultCollection);
 
+        result.put("totalCount",userMapper.getUserCount());
+
         return Response.status(Response.Status.OK).entity(result).build();
     }
 

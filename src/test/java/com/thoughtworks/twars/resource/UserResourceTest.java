@@ -473,16 +473,20 @@ public class UserResourceTest extends TestBase {
         roles.add("1");
         roles.add("2");
         when(userMapper.getUserRolesByEmail(user.getEmail())).thenReturn(roles);
+        when(userMapper.getUserCount()).thenReturn(1);
 
         Response response = target(basePath)
                 .queryParam("page",1).queryParam("pageSize",1).request().get();
         Map reslut  = response.readEntity(Map.class);
         String jsonStr = new Gson().toJson(reslut);
-
-        assertThat(jsonStr,is("{\"items\":[{\"role\":[\"1\",\"2\"],"
+        assertThat(jsonStr,is("{\"totalCount\":1,"
+                + "\"items\":["
+                + "{\"role\":[\"1\",\"2\"],"
                 + "\"mobilePhone\":\"11111\","
                 + "\"userName\":\"userName\","
-                + "\"email\":\"email\"}]}"));
+                + "\"email\":\"email\""
+                + "}]"
+                + "}"));
         assertThat(response.getStatus(), is(200));
     }
 

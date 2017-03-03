@@ -306,6 +306,12 @@ public class UserMapperTest extends TestBase {
         List<String> allUsers = userMapper.getUserRolesByEmail("admin@admin.com");
         assertThat(allUsers.size(), is(1));
     }
+
+    @Test
+    public void should_return_users_count() {
+        Integer count = userMapper.getUserCount();
+        assertThat(count, is(8));
+    }
     
 }
 

@@ -65,4 +65,6 @@ public interface UserMapper {
 
     List<String> getUserRolesByEmail(String email);
 
+    Integer getUserCount();
+
 }
