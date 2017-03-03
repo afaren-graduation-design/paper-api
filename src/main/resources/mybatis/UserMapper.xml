@@ -147,10 +147,10 @@
         FROM users
         <where>
             <if test="email != null">
-                users.email LIKE concat("%",#{email},"%")
+                email LIKE concat("%",#{email},"%")
             </if>
-            <if test="email != null">
-                users.mobilePhone = #{mobilePhone}
+            <if test="mobilePhone != null">
+                mobilePhone = #{mobilePhone}
             </if>
         </where>
         GROUP BY email,userName,mobilePhone,password

@@ -48,7 +48,8 @@ public class TestBase extends JerseyTest {
     protected ProgramMapper programMapper = mock(ProgramMapper.class);
     protected StackMapper stackMapper = mock(StackMapper.class);
     protected ReportsMapper reportsMapper = mock(ReportsMapper.class);
-    protected HomeworkQuizOperationMapper homeworkQuizOperationMapper = mock(HomeworkQuizOperationMapper.class);
+    protected HomeworkQuizOperationMapper
+            homeworkQuizOperationMapper = mock(HomeworkQuizOperationMapper.class);
 
     @Override
     protected Application configure() {
