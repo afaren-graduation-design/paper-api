@@ -365,7 +365,6 @@ baseUri: http://api.bronzesword.com/
                    isDistribution: boolean
               paperCount: integer
 
-
   post:
     description: 提交一份考卷定义，含section定义
     body:
@@ -430,6 +429,22 @@ baseUri: http://api.bronzesword.com/
                                 definition_uri: string
                                 [items_uri]: string
                         maker_uri: string
+
+    put:
+      description: 添加对指定paper的操作
+      body:
+        application/json:
+          properties:
+            operationType: string # default enum('DELETE','DISTRIBUTION','UNDISTRIBUTION')
+            operatorId: integer
+            operatingTime: integer
+            paperId: integer
+      responses:
+        204:
+          description: 操作成功
+        412:
+          description: 操作失败，不满足前提条件
+
 
 /blankQuizzes:
   get:
@@ -824,3 +839,17 @@ baseUri: http://api.bronzesword.com/
                 title: string
                 description: string
                 definition: string
+/baisc-quizzes:
+  post:
+    description: 添加基础题
+    body:
+      application/json:
+        properties:
+            []:
+            description: string
+            type: string
+            answer: string
+            choices: string
+
+    responses:
+      201:
