@@ -76,11 +76,13 @@ baseUri: http://api.bronzesword.com/
       page: integer # deault : 1
       pageSize: integer # default :15
       email: string
+      mobilePhome: string
     responses:
       200:
         body:
           application/json:
             properties:
+              totalCount : integer
               items :
                 properties:
                   []:
