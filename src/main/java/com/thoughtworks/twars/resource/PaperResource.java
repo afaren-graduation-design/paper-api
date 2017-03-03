@@ -207,7 +207,7 @@ public class PaperResource extends Resource {
                     .findByBlankQuizSubmit(blankQuizSubmit.getId());
 
             int paperId = item.getPaperId();
-            BlankQuiz blankQuiz = blankQuizMapper.findOne(paperId);
+            BlankQuiz blankQuiz = blankQuizMapper.findOne(blankQuizSubmit.getBlankQuizId());
 
             List<String> correctList = new ArrayList<>();
             itemPostList.forEach(val -> {
@@ -233,7 +233,7 @@ public class PaperResource extends Resource {
     }
 
     @GET
-    @Path("/{paperId}/userCount")
+        @Path("/{paperId}/userCount")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserCountByPaperId(
             @PathParam("paperId") Integer paperId) {
