@@ -66,7 +66,7 @@ CREATE TABLE `homeworkPostHistory` (
   `status` int(11) NOT NULL,
   `commitTime` int(11) DEFAULT NULL,
   `startTime` int(11) DEFAULT NULL,
-  `result` text,
+  `result` VARCHAR(300),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -80,7 +80,7 @@ DROP TABLE IF EXISTS `homeworkQuiz`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `homeworkQuiz` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `description` text NOT NULL,
+  `description` VARCHAR(300) NOT NULL,
   `evaluateScript` varchar(2048) NOT NULL,
   `templateRepository` varchar(512) NOT NULL,
   `makerId` int(11) NOT NULL,
