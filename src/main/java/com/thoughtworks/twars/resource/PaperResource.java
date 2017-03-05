@@ -54,6 +54,7 @@ public class PaperResource extends Resource {
         int startPage = Math.max(page - 1, 0);
         Integer newPage = startPage * pageSize;
         List<Paper> papers = paperMapper.getAllPapers(newPage, pageSize);
+        System.out.println(papers);
         Map result = new HashMap<>();
 
         List<Map> items = papers
@@ -63,10 +64,7 @@ public class PaperResource extends Resource {
 
 
         result.put("paperInfo", items);
-
-        int paperCount = paperMapper.findAll().size();
-
-        result.put("paperCount", paperCount);
+        result.put("paperCount", items.size());
 
         return Response.status(Response.Status.OK).entity(result).build();
     }
@@ -236,7 +234,7 @@ public class PaperResource extends Resource {
     }
 
     @GET
-        @Path("/{paperId}/userCount")
+    @Path("/{paperId}/userCount")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserCountByPaperId(
             @PathParam("paperId") Integer paperId) {

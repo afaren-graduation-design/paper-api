@@ -73,8 +73,9 @@ public class PaperMapperTest extends TestBase {
 
     @Test
     public void should_return_papers_by_page_and_pageSize() throws Exception {
-        List<Paper> papers = paperMapper.getAllPapers(1, 3);
-        assertThat(papers.size(), is(3));
+        List<Paper> papers = paperMapper.getAllPapers(0, 3);
+        assertThat(papers.size(), is(2));
+        assertThat(papers.get(0).getMakerId(), is(1));
         assertThat(papers.get(1).getMakerId(), is(2));
     }
 

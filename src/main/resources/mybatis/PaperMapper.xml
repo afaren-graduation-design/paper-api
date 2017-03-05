@@ -44,7 +44,8 @@
     </select>
 
     <select id="getAllPapers" resultMap="paperListMap">
-        SELECT * FROM paper LIMIT #{newPage},#{pageSize};
+        SELECT * FROM paper WHERE id in ((SELECT paperId FROM paperOperation WHERE id IN (SELECT  MAX(id) FROM paperOperation  GROUP BY paperId) AND operationType = "DISTRIBUTION"))
+        LIMIT #{newPage},#{pageSize};
     </select>
 
     <select id="findPapersByProgramId" parameterType="java.lang.Integer" resultMap="paperListMap">
