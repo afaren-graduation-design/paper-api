@@ -444,8 +444,29 @@ baseUri: http://api.bronzesword.com/
           description: 操作成功
         412:
           description: 操作失败，不满足前提条件
-
-
+  /users:
+    /{examerId}:
+      get:
+        description: 获取某张试卷下某个用户的homework题的所有记录
+        responses:
+          200:
+            body:
+              application/json:
+                properties:
+                  items:
+                    properties:
+                      []:
+                      result: string
+                      homeworkQuizId: integer
+                      commitTime: integer
+                      startTime: integer
+                      id: integer
+                      homeworkSubmitId: integer
+                      userAnswerRepo: string
+                      version: string
+                      branch: string
+                      status: integer
+                      examerId: integer
 /blankQuizzes:
   get:
     # description: 获得所有的填空题定义
