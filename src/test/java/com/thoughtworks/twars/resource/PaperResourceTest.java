@@ -3,8 +3,6 @@ package com.thoughtworks.twars.resource;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.thoughtworks.twars.bean.*;
-import com.thoughtworks.twars.mapper.PaperOperationMapper;
-import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -380,6 +378,33 @@ public class PaperResourceTest extends TestBase {
         Response response = target(basePath + "/5").request().put(entity);
 
         assertThat(response.getStatus(), is(204));
+    }
+
+    @Test
+    public void shuold_return_homework_history_about_user(){
+        List items = new ArrayList();
+        Map item = new HashMap();
+        item.put("result","jasmine not found");
+        item.put("homeworkQuizId",1);
+        item.put("commitTime",1453287441);
+        item.put("startTime",1453287449);
+        item.put("id",1);
+        item.put("homeworkSubmitId",1);
+        item.put("userAnswerRepo","github.com/purple/1");
+        item.put("version","d8160f56ebbb5d40368048f271328eefa87cb97d");
+        item.put("branch", "master");
+        item.put("status",3);
+        item.put("examerId",1);
+
+        items.add(item);
+
+        when(homeworkPostHistoryMapper.getHistoryByExamerIdAndPaperId(1,1)).thenReturn(items);
+
+        Response response = target(basePath + "/1/users/1/homeworkHistory").request().get();
+        String jsonStr = new Gson().toJson(response.readEntity(Map.class));
+        
+        assertThat(response.getStatus(),is(200));
+        assertThat(jsonStr,is("{\"items\":[{\"result\":\"jasmine not found\",\"homeworkQuizId\":1,\"commitTime\":1453287441,\"startTime\":1453287449,\"id\":1,\"homeworkSubmitId\":1,\"userAnswerRepo\":\"github.com/purple/1\",\"version\":\"d8160f56ebbb5d40368048f271328eefa87cb97d\",\"branch\":\"master\",\"status\":3,\"examerId\":1}]}"));
     }
 }
 

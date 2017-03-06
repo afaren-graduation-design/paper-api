@@ -1,2 +1,4 @@
-INSERT INTO multipleChoice VALUES(null,"这是第一道单选题","1,2,3,4","MULTIPLE_CHOICE","3，4");
-INSERT INTO multipleChoice VALUES(null,"这是第二道单选题","5,6,7,8","MULTIPLE_CHOICE","5，6");
+UPDATE homeworkPostHistory SET startTime = 1453287441, commitTime = 1453287449 WHERE id = 1;
+UPDATE homeworkPostHistory SET startTime = 1453287500, commitTime = 1453287550 WHERE id = 2;
+UPDATE homeworkPostHistory SET startTime = 1453287610, commitTime = 1453287641 WHERE id = 3;
+UPDATE homeworkPostHistory SET startTime = 1453287711, commitTime = 1453287755 WHERE id = 4;
