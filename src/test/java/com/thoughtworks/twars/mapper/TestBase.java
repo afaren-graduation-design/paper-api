@@ -12,7 +12,6 @@ import java.io.IOException;
 public class TestBase {
 
     protected SqlSessionManager session;
-
     {
         String env = EnvUtil.getVariable("ci_test") != null ? "ci_test" : "test";
         session = DatabaseUtil.getSession(env);
@@ -41,8 +40,8 @@ public class TestBase {
     @Before
     public void setUp() throws Exception {
         Process exec = Runtime.getRuntime().exec(new String[]{"/bin/sh", "-c",
-                "docker exec -i assembly_mysql_1 mysql -u root -pthoughtworks" +
-                        "  BronzeSword < ./data.sql;"});
+                "docker exec -i assembly_mysql_1 mysql -u root -pthoughtworks"
+                        + "  BronzeSword < ./data.sql;"});
         exec.waitFor();
         session.startManagedSession();
 

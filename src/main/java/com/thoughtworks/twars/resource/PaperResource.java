@@ -237,7 +237,7 @@ public class PaperResource extends Resource {
     }
 
     @GET
-        @Path("/{paperId}/userCount")
+    @Path("/{paperId}/userCount")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserCountByPaperId(
             @PathParam("paperId") Integer paperId) {
@@ -270,12 +270,12 @@ public class PaperResource extends Resource {
     @Path("/{paperId}/users/{examerId}/homeworkHistory")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getHistoryByUser(
-            @PathParam("paperId") Integer paperId, @PathParam("examerId") Integer examerId){
+            @PathParam("paperId") Integer paperId, @PathParam("examerId") Integer examerId) {
 
         List<Map> homeworkHistory = homeworkPostHistoryMapper
-                .getHistoryByExamerIdAndPaperId(examerId,paperId);
+                .getHistoryByExamerIdAndPaperId(examerId, paperId);
         Map result = new HashMap();
-        result.put("items",homeworkHistory);
+        result.put("items", homeworkHistory);
 
         return Response.status(Response.Status.OK).entity(result).build();
     }

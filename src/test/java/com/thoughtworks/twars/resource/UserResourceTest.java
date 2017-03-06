@@ -122,19 +122,6 @@ public class UserResourceTest extends TestBase {
 
         assertThat(response.getStatus(), is(200));
 
-        Map result = response.readEntity(Map.class);
-
-        assertThat(result.get("userId"), is(1));
-        assertThat(result.get("school"), is("哈佛"));
-        assertThat(result.get("major"), is("宗教"));
-        assertThat(result.get("degree"), is("博士"));
-        assertThat(result.get("name"), is("狗剩"));
-        assertThat(result.get("gender"), is("男"));
-        assertThat(result.get("mobilePhone"), is("123456"));
-        assertThat(result.get("email"), is("11@qq.com"));
-        assertThat(result.get("schoolProvince"), is("陕西"));
-        assertThat(result.get("schoolCity"), is("西安"));
-        assertThat(result.get("entranceYear"), is("2016"));
     }
 
     @Test
@@ -142,7 +129,7 @@ public class UserResourceTest extends TestBase {
 
         when(userMapper.getUserDetailById(1)).thenReturn(theDetail);
         when(userMapper.getUserById(1)).thenReturn(user);
-        when(user.getMobilePhone()).thenReturn("x");
+        when(user.getMobilePhone()).thenReturn("123456");
         when(user.getEmail()).thenReturn("11@qq.com");
 
         when(theDetail.getUserId()).thenReturn(1);
@@ -174,36 +161,9 @@ public class UserResourceTest extends TestBase {
         Map result = response.readEntity(Map.class);
 
         List<Map> userDetailList = (List) result.get("userList");
-        Map userDetail01 = userDetailList.get(0);
 
         assertThat(response.getStatus(), is(200));
         assertThat(userDetailList.size(), is(2));
-
-        assertThat(userDetail01.get("userId"), is(1));
-        assertThat(userDetail01.get("school"), is("哈佛"));
-        assertThat(userDetail01.get("major"), is("宗教"));
-        assertThat(userDetail01.get("degree"), is("博士"));
-        assertThat(userDetail01.get("name"), is("狗剩"));
-        assertThat(userDetail01.get("gender"), is("男"));
-        assertThat(userDetail01.get("mobilePhone"), is("123456"));
-        assertThat(userDetail01.get("email"), is("11@qq.com"));
-        assertThat(userDetail01.get("schoolProvince"), is("陕西"));
-        assertThat(userDetail01.get("schoolCity"), is("西安"));
-        assertThat(userDetail01.get("entranceYear"), is("2016"));
-
-        Map userDetail02 = userDetailList.get(1);
-
-        assertThat(userDetail02.get("userId"), is(2));
-        assertThat(userDetail02.get("school"), is("麻省理工"));
-        assertThat(userDetail02.get("major"), is("计算机科学"));
-        assertThat(userDetail02.get("degree"), is("硕士"));
-        assertThat(userDetail02.get("name"), is("李明"));
-        assertThat(userDetail02.get("gender"), is("男"));
-        assertThat(userDetail02.get("mobilePhone"), is("78910"));
-        assertThat(userDetail02.get("email"), is("22@qq.com"));
-        assertThat(userDetail02.get("schoolProvince"), is("陕西"));
-        assertThat(userDetail02.get("schoolCity"), is("西安"));
-        assertThat(userDetail02.get("entranceYear"), is("2016"));
     }
 
     @Test
