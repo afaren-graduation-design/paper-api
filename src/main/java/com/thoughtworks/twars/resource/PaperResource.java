@@ -21,7 +21,8 @@ import java.util.stream.Collectors;
 @Path("/papers")
 @Api
 public class PaperResource extends Resource {
-
+    @Inject
+    private HomeworkPostHistoryMapper homeworkPostHistoryMapper;
     @Inject
     private PaperMapper paperMapper;
     @Inject
@@ -54,7 +55,6 @@ public class PaperResource extends Resource {
         int startPage = Math.max(page - 1, 0);
         Integer newPage = startPage * pageSize;
         List<Paper> papers = paperMapper.getAllPapers(newPage, pageSize);
-        System.out.println(papers);
         Map result = new HashMap<>();
 
         List<Map> items = papers
@@ -64,7 +64,10 @@ public class PaperResource extends Resource {
 
 
         result.put("paperInfo", items);
-        result.put("paperCount", items.size());
+
+        int paperCount = paperMapper.findAll().size();
+
+        result.put("paperCount", paperCount);
 
         return Response.status(Response.Status.OK).entity(result).build();
     }
@@ -234,7 +237,7 @@ public class PaperResource extends Resource {
     }
 
     @GET
-    @Path("/{paperId}/userCount")
+        @Path("/{paperId}/userCount")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserCountByPaperId(
             @PathParam("paperId") Integer paperId) {
@@ -261,5 +264,19 @@ public class PaperResource extends Resource {
         paperOperationMapper.insertPaperOperation(paperOperation);
 
         return Response.status(Response.Status.NO_CONTENT).build();
+    }
+
+    @GET
+    @Path("/{paperId}/users/{examerId}/homeworkHistory")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getHistoryByUser(
+            @PathParam("paperId") Integer paperId, @PathParam("examerId") Integer examerId){
+
+        List<Map> homeworkHistory = homeworkPostHistoryMapper
+                .getHistoryByExamerIdAndPaperId(examerId,paperId);
+        Map result = new HashMap();
+        result.put("items",homeworkHistory);
+
+        return Response.status(Response.Status.OK).entity(result).build();
     }
 }
