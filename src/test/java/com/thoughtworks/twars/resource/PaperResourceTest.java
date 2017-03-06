@@ -402,7 +402,6 @@ public class PaperResourceTest extends TestBase {
 
         Response response = target(basePath + "/1/users/1/homeworkHistory").request().get();
         String jsonStr = new Gson().toJson(response.readEntity(Map.class));
-        
         assertThat(response.getStatus(),is(200));
         assertThat(jsonStr,is("{\"items\":[{\"result\":\"jasmine not found\",\"homeworkQuizId\":1,\"commitTime\":1453287441,\"startTime\":1453287449,\"id\":1,\"homeworkSubmitId\":1,\"userAnswerRepo\":\"github.com/purple/1\",\"version\":\"d8160f56ebbb5d40368048f271328eefa87cb97d\",\"branch\":\"master\",\"status\":3,\"examerId\":1}]}"));
     }

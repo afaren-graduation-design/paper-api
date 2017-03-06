@@ -68,6 +68,7 @@ public class UserMapperTest extends TestBase {
         user.setUserName("hah");
 
         userMapper.insertUser(user);
+        System.out.println(user.getId());
 
         assertThat(user.getId(), is(9));
     }

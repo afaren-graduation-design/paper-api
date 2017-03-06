@@ -34,7 +34,6 @@ public class StackMapperTest extends TestBase {
 
         stackMapper.insertStack(stack);
 
-        System.out.println(stack.getStackId());
         assertThat(stack.getStackId(), is(4));
     }
 

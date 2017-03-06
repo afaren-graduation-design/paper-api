@@ -47,7 +47,7 @@ public class HomeworkPostHistoryMapperTest extends TestBase {
         assertThat(homeworkPostHistoryList.get(0).getUserAnswerRepo(), is("github.com/purple/1"));
         assertThat(homeworkPostHistoryList.get(0).getId(), is(1));
         assertThat(homeworkPostHistoryList.get(0).getStatus(), is(3));
-        assertThat(homeworkPostHistoryList.get(0).getCommitTime(), is(1453287441));
+        assertThat(homeworkPostHistoryList.get(0).getCommitTime(), is(1453287449));
     }
 
     @Test
