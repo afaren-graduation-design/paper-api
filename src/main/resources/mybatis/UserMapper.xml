@@ -164,7 +164,22 @@
     </select>
 
     <select id="getUserCount" resultType="java.lang.Integer">
-        SELECT count(*) FROM (SELECT email FROM users GROUP BY email) us;
+
+    select count(*) from (SELECT email,userName,mobilePhone,password
+        FROM users
+        <where>
+            <if test="email != null">
+                email LIKE concat("%",#{email},"%")
+            </if>
+            <if test="mobilePhone != null">
+                AND mobilePhone = #{mobilePhone}
+            </if>
+            <if test="role != null">
+                AND role = #{role}
+            </if>
+        </where>
+        GROUP BY email,userName,mobilePhone,password) tmp
+        Group BY email;
     </select>
 </mapper>
 

@@ -24,6 +24,7 @@ public class UserResourceTest extends TestBase {
 
     User user = mock(User.class);
     User user01 = mock(User.class);
+    User user02 = mock(User.class);
 
     UserDetail theDetail = mock(UserDetail.class);
     UserDetail theDetail01 = mock(UserDetail.class);
@@ -141,7 +142,7 @@ public class UserResourceTest extends TestBase {
 
         when(userMapper.getUserDetailById(1)).thenReturn(theDetail);
         when(userMapper.getUserById(1)).thenReturn(user);
-        when(user.getMobilePhone()).thenReturn("123456");
+        when(user.getMobilePhone()).thenReturn("x");
         when(user.getEmail()).thenReturn("11@qq.com");
 
         when(theDetail.getUserId()).thenReturn(1);
@@ -459,7 +460,7 @@ public class UserResourceTest extends TestBase {
     @Test
     public void should_return_all_user() {
 
-        when(userMapper.groupUserByEmail(0, 1, null, null, "")).thenReturn(Arrays.asList(user));
+        when(userMapper.groupUserByEmail(0, 1, null, null, null)).thenReturn(Arrays.asList(user));
         when(user.getEmail()).thenReturn("email");
 
         Map map = new HashMap();
@@ -474,19 +475,26 @@ public class UserResourceTest extends TestBase {
         roles.add("1");
         roles.add("2");
         when(userMapper.getUserRolesByEmail(user.getEmail())).thenReturn(roles);
-        when(userMapper.getUserCount()).thenReturn(1);
+        when(userMapper.getUserCount(null, null, null)).thenReturn(Arrays.asList(user02));
+
+        Map map1 = new HashMap();
+        map1.put("email", "email");
+        map1.put("userName", "userName");
+        map1.put("mobilePhone", "11111");
+
+
+        when(user02.toMap()).thenReturn(map1);
 
         Response response = target(basePath)
-                .queryParam("page", 1).queryParam("pageSize", 1)
-                .queryParam("role", "").request().get();
+                .queryParam("page", 1).queryParam("pageSize", 1).request().get();
         Map result = response.readEntity(Map.class);
         String jsonStr = new Gson().toJson(result);
-        assertThat(jsonStr, is("{\"totalCount\":1,"
-                + "\"items\":[{\"mobilePhone\":\"11111\","
-                + "\"roles\":[\"1\","
-                + "\"2\"],"
-                + "\"userName\":\"userName\","
-                + "\"email\":\"email\"}]}"));
+        assertThat(jsonStr, is("{\"totalCount\":1"
+                + ",\"items\":[{\"role\":[\"1\""
+                + ",\"2\"]"
+                + ",\"mobilePhone\":\"11111\""
+                + ",\"userName\":\"userName\""
+                + ",\"email\":\"email\"}]}"));
         assertThat(response.getStatus(),
                 is(200));
     }

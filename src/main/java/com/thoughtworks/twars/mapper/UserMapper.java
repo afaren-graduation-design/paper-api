@@ -67,6 +67,8 @@ public interface UserMapper {
 
     List<String> getUserRolesByEmail(String email);
 
-    Integer getUserCount();
+    List<User> getUserCount(@Param("email") String email,
+                            @Param("mobilePhone") String mobilePhone,
+                            @Param("role") String role);
 
 }

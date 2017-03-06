@@ -310,9 +310,9 @@ public class UserMapperTest extends TestBase {
 
     @Test
     public void should_return_users_count() {
-        Integer count = userMapper.getUserCount();
-        assertThat(count, is(8));
+        List<User> users = userMapper.getUserCount(null,null,null);
+        assertThat(users.size(), is(8));
     }
-    
+
 }
 

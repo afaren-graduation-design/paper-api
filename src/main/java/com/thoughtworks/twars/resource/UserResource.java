@@ -60,7 +60,7 @@ public class UserResource extends Resource {
         Map result = new HashMap();
         result.put("items", resultCollection);
 
-        result.put("totalCount", userMapper.getUserCount());
+        result.put("totalCount", userMapper.getUserCount(email, mobilePhone, role).size());
 
         return Response.status(Response.Status.OK).entity(result).build();
     }
@@ -140,10 +140,10 @@ public class UserResource extends Resource {
             }
 
             Map map = user.toMap();
-            map.put("role",userMapper.getUserRolesByEmail(user.getEmail()));
+            map.put("role", userMapper.getUserRolesByEmail(user.getEmail()));
 
             UserDetail detail = userMapper.getUserDetailById(userId);
-            if(null != detail) {
+            if (null != detail) {
                 map.put("userId", detail.getUserId());
                 map.put("school", detail.getSchool());
                 map.put("major", detail.getMajor());
