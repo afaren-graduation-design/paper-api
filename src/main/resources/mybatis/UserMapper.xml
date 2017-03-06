@@ -39,7 +39,6 @@
     </resultMap>
 
 
-
     <select id="getUserById" resultType="com.thoughtworks.twars.bean.User">
         SELECT * FROM users WHERE id = #{id}
     </select>
@@ -150,14 +149,17 @@
                 email LIKE concat("%",#{email},"%")
             </if>
             <if test="mobilePhone != null">
-                mobilePhone = #{mobilePhone}
+                AND mobilePhone = #{mobilePhone}
+            </if>
+            <if test="role != null">
+                AND role = #{role}
             </if>
         </where>
         GROUP BY email,userName,mobilePhone,password
         LIMIT #{page},#{pageSize};
     </select>
 
-    <select id="getUserRolesByEmail" resultType="java.lang.Integer"  parameterType="java.lang.String">
+    <select id="getUserRolesByEmail" resultType="java.lang.Integer" parameterType="java.lang.String">
         SELECT role FROM users WHERE email = #{email} ;
     </select>
 

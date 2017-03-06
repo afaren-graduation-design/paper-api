@@ -459,13 +459,14 @@ public class UserResourceTest extends TestBase {
     @Test
     public void should_return_all_user() {
 
-        when(userMapper.groupUserByEmail(0,1,null,null)).thenReturn(Arrays.asList(user));
+        when(userMapper.groupUserByEmail(0, 1, null, null, "")).thenReturn(Arrays.asList(user));
         when(user.getEmail()).thenReturn("email");
 
         Map map = new HashMap();
-        map.put("email","email");
-        map.put("userName","userName");
-        map.put("mobilePhone","11111");
+        map.put("email", "email");
+        map.put("userName", "userName");
+        map.put("mobilePhone", "11111");
+
 
         when(user.toMap()).thenReturn(map);
 
@@ -476,19 +477,20 @@ public class UserResourceTest extends TestBase {
         when(userMapper.getUserCount()).thenReturn(1);
 
         Response response = target(basePath)
-                .queryParam("page",1).queryParam("pageSize",1).request().get();
-        Map reslut  = response.readEntity(Map.class);
-        String jsonStr = new Gson().toJson(reslut);
-        assertThat(jsonStr,is("{\"totalCount\":1,"
-                + "\"items\":["
-                + "{\"role\":[\"1\",\"2\"],"
-                + "\"mobilePhone\":\"11111\","
+                .queryParam("page", 1).queryParam("pageSize", 1)
+                .queryParam("role", "").request().get();
+        Map result = response.readEntity(Map.class);
+        String jsonStr = new Gson().toJson(result);
+        assertThat(jsonStr, is("{\"totalCount\":1,"
+                + "\"items\":[{\"mobilePhone\":\"11111\","
+                + "\"roles\":[\"1\","
+                + "\"2\"],"
                 + "\"userName\":\"userName\","
-                + "\"email\":\"email\""
-                + "}]"
-                + "}"));
-        assertThat(response.getStatus(), is(200));
+                + "\"email\":\"email\"}]}"));
+        assertThat(response.getStatus(),
+                is(200));
     }
+
 
     @Test
     public void should_return_user_by_field() {

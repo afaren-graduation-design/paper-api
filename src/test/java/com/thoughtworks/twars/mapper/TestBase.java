@@ -23,10 +23,13 @@ public class TestBase {
     public static void oneTimeSetUp() {
         try {
             Process exec = Runtime.getRuntime().exec(new String[]{"/bin/sh", "-c",
-                    "docker exec -i assembly_mysql_1 mysqldump -u root -pthoughtworks -t BronzeSword > ./data.sql"
-                            + "docker exec -i assembly_mysql_1 mysqldump -u root -pthoughtworks -d BronzeSword > ./BronzeSword.sql;"
+                    "docker exec -i assembly_mysql_1 mysqldump -u root "
+                            + "-pthoughtworks -t BronzeSword > ./data.sql"
+                            + "docker exec -i assembly_mysql_1 mysqldump "
+                            + "-u root -pthoughtworks -d BronzeSword > ./BronzeSword.sql;"
                             + "sed -i \"s/InnoDB/MEMORY/g\" BronzeSword.sql;"
-                            + "docker exec -i assembly_mysql_1 mysql -u root -pthoughtworks BronzeSword < ./BronzeSword.sql;"});
+                            + "docker exec -i assembly_mysql_1 mysql -u root"
+                            + " -pthoughtworks BronzeSword < ./BronzeSword.sql;"});
             exec.waitFor();
         } catch (IOException e) {
             e.printStackTrace();
@@ -38,9 +41,11 @@ public class TestBase {
     @Before
     public void setUp() throws Exception {
         Process exec = Runtime.getRuntime().exec(new String[]{"/bin/sh", "-c",
-                "docker exec -i assembly_mysql_1 mysql -u root -pthoughtworks  BronzeSword < ./data.sql;"});
+                "docker exec -i assembly_mysql_1 mysql -u root -pthoughtworks" +
+                        "  BronzeSword < ./data.sql;"});
         exec.waitFor();
         session.startManagedSession();
+
     }
 
     @After

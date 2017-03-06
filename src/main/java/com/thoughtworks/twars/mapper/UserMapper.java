@@ -61,7 +61,9 @@ public interface UserMapper {
     List<User> groupUserByEmail(@Param("page") Integer page,
                                 @Param("pageSize") Integer pageSize,
                                 @Param("email") String email,
-                                @Param("mobilePhone") String mobilePhone);
+                                @Param("mobilePhone") String mobilePhone,
+                                @Param("role") String role);
+
 
     List<String> getUserRolesByEmail(String email);
 
