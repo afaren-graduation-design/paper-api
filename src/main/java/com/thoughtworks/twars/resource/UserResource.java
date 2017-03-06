@@ -131,28 +131,27 @@ public class UserResource extends Resource {
         for (String i : ids) {
 
             Integer userId = Integer.parseInt(i);
-
-            UserDetail detail = userMapper.getUserDetailById(userId);
             User user = userMapper.getUserById(userId);
 
-            if (null == user || null == detail) {
+            if (null == user) {
                 return Response.status(Response.Status.NOT_FOUND).build();
             }
 
-            Map<String, Object> map = new HashMap<>();
-            map.put("userId", detail.getUserId());
-            map.put("school", detail.getSchool());
-            map.put("major", detail.getMajor());
-            map.put("degree", detail.getDegree());
-            map.put("name", detail.getName());
-            map.put("gender", detail.getGender());
-            map.put("email", user.getEmail());
-            map.put("userName", user.getUserName());
-            map.put("mobilePhone", user.getMobilePhone());
-            map.put("schoolProvince", detail.getSchoolProvince());
-            map.put("schoolCity", detail.getSchoolCity());
-            map.put("entranceYear", detail.getEntranceYear());
+            Map map = user.toMap();
+            map.put("role",userMapper.getUserRolesByEmail(user.getEmail()));
 
+            UserDetail detail = userMapper.getUserDetailById(userId);
+            if(null != detail) {
+                map.put("userId", detail.getUserId());
+                map.put("school", detail.getSchool());
+                map.put("major", detail.getMajor());
+                map.put("degree", detail.getDegree());
+                map.put("name", detail.getName());
+                map.put("gender", detail.getGender());
+                map.put("schoolProvince", detail.getSchoolProvince());
+                map.put("schoolCity", detail.getSchoolCity());
+                map.put("entranceYear", detail.getEntranceYear());
+            }
             userList.add(map);
         }
 
