@@ -4,6 +4,18 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.thoughtworks.twars.mapper.HomeworkPostHistoryMapper">
 
+    <resultMap id="homeworkHistoryMap" type="java.util.Map">
+        <id property="id" column="id"></id>
+        <result column="examerId" property="examerId"/>
+        <result column="homeworkQuizId" property="homeworkQuizId"/>
+        <result column="userAnswerRepo" property="userAnswerRepo"></result>
+        <result column="homeworkSubmitId" property="homeworkSubmitId"></result>
+        <result column="version" property="version"></result>
+        <result column="branch" property="branch"></result>
+        <result column="startTime" property="startTime"></result>
+        <result column="result" property="result"></result>
+    </resultMap>
+
     <resultMap id="homeworkPostHistoryListMap" type="com.thoughtworks.twars.bean.HomeworkPostHistory">
         <id property="id" column="id"></id>
         <result column="userAnswerRepo" property="userAnswerRepo"></result>
@@ -14,13 +26,22 @@
         <result column="result" property="result"></result>
     </resultMap>
 
-    <insert id="insertHomeworkPostHistory" parameterType="com.thoughtworks.twars.bean.HomeworkPostHistory" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertHomeworkPostHistory" parameterType="com.thoughtworks.twars.bean.HomeworkPostHistory"
+            useGeneratedKeys="true" keyProperty="id">
         INSERT INTO homeworkPostHistory(homeworkSubmitId,userAnswerRepo,branch,version,status,commitTime,startTime,result)
         VALUES (#{homeworkSubmitId},#{userAnswerRepo},#{branch},#{version},#{status},#{commitTime},#{startTime},#{result});
     </insert>
 
     <select id="findByHomeworkSubmitId" resultMap="homeworkPostHistoryListMap">
         SELECT * FROM homeworkPostHistory WHERE homeworkSubmitId = #{homeworkSubmitId}
+    </select>
+
+    <select id="getHistoryByExamerIdAndPaperId" resultMap="homeworkHistoryMap">
+        select examerId, homeworkQuizId,H.*
+        from homeworkPostHistory H,
+        (select hs.homeworkQuizId,s.examerId ,hs.id from homeworkSubmit hs,
+        (select * from scoreSheet where examerId = #{examerId} and paperId = #{paperId}) s where hs.scoreSheetId = s.id) O
+        where O.id = H.homeworkSubmitId;
     </select>
 
 </mapper>

@@ -135,5 +135,4 @@ public class HomeworkQuizResource extends Resource {
         return Response.status(Response.Status.UNSUPPORTED_MEDIA_TYPE).build();
     }
 
-
 }
