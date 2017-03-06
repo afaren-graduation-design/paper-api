@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -35,7 +36,6 @@ public class HomeworkPostHistoryMapperTest extends TestBase {
         assertThat(homeworkPostHistory.getId(), is(5));
     }
 
-
     @Test
     public void should_return_all_homework_post_history() {
         List<HomeworkPostHistory> homeworkPostHistoryList =
@@ -48,6 +48,13 @@ public class HomeworkPostHistoryMapperTest extends TestBase {
         assertThat(homeworkPostHistoryList.get(0).getId(), is(1));
         assertThat(homeworkPostHistoryList.get(0).getStatus(), is(3));
         assertThat(homeworkPostHistoryList.get(0).getCommitTime(), is(1453287441));
+    }
+
+    @Test
+    public void should_return_user_homework_post_history() {
+        List<Map> homeworkPostHistoryList =
+                homeworkPostHistoryMapper.getHistoryByExamerIdAndPaperId(1,1);
+        assertThat(homeworkPostHistoryList.size(), is(3));
     }
 
 }
