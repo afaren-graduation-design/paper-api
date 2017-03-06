@@ -53,7 +53,7 @@ public class UserResource extends Resource {
             ArrayList<String> roles = (ArrayList<String>) userMapper
                     .getUserRolesByEmail(user.getEmail());
             Map map = user.toMap();
-            map.put("roles", roles);
+            map.put("role", roles);
             resultCollection.add(map);
         }
 
