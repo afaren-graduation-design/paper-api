@@ -79,6 +79,7 @@ public class UserResource extends Resource {
 
         Map<String, Object> result = new HashMap<>();
         result.put("id", user.getId());
+        result.put("userName", user.getUserName());
         result.put("email", user.getEmail());
         result.put("mobilePhone", user.getMobilePhone());
         result.put("role", user.getRole());
