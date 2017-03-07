@@ -11,7 +11,6 @@ import static org.hamcrest.core.Is.is;
 public class SingleChoiceMapperTest extends TestBase {
 
     private SingleChoiceMapper singleChoiceMapper;
-
     @Before
     public void setUp() throws Exception {
         super.setUp();
