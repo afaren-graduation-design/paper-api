@@ -1,6 +1,7 @@
 package com.thoughtworks.twars.mapper;
 
 import com.thoughtworks.twars.bean.ScoreSheet;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -16,7 +17,8 @@ public interface ScoreSheetMapper {
 
     ScoreSheet findOneByUserId(Integer userId);
 
-    List<ScoreSheet> findByPaperId(Integer paperId);
+    List<ScoreSheet> findByPaperId(@Param("paperId") Integer id,
+                                   @Param("examerId") Integer examerId);
 
     List<Integer> findUserIdsByPaperId(Integer paperId);
 }

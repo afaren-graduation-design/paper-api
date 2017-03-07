@@ -37,7 +37,14 @@
     </select>
 
     <select id="findByPaperId" resultMap="scoreSheetsMap">
-        SELECT * FROM scoreSheet WHERE paperId = #{paperId};
+        SELECT * FROM scoreSheet
+         <where>
+             <if test="examerId != null">
+                 examerId = #{examerId}
+             </if>
+             AND paperId = #{paperId}
+         </where>
+
     </select>
     <select id="findUserIdsByPaperId" resultMap="examersMap">
         SELECT examerId FROM scoreSheet WHERE paperId = #{paperId};

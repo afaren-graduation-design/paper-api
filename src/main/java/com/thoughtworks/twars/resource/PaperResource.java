@@ -194,10 +194,11 @@ public class PaperResource extends Resource {
     @Path("/{param}/logicPuzzle")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getLogicPuzzleByPaperId(
-            @PathParam("param") Integer id
+            @PathParam("param") Integer id,
+            @QueryParam("userId") Integer examerId
     ) {
 
-        List<ScoreSheet> scoreSheets = scoreSheetMapper.findByPaperId(id);
+        List<ScoreSheet> scoreSheets = scoreSheetMapper.findByPaperId(id, examerId);
 
         if (scoreSheets.size() == 0) {
             return Response.status(Response.Status.NOT_FOUND).build();

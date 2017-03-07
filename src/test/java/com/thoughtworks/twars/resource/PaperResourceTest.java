@@ -293,7 +293,7 @@ public class PaperResourceTest extends TestBase {
         ScoreSheet scoreSheet = new ScoreSheet();
         scoreSheet.setExamerId(1);
         scoreSheet.setId(2);
-        when(scoreSheetMapper.findByPaperId(1)).thenReturn(Arrays.asList(
+        when(scoreSheetMapper.findByPaperId(1, null)).thenReturn(Arrays.asList(
                 scoreSheet));
 
         BlankQuizSubmit blankQuizSubmit = new BlankQuizSubmit();
@@ -401,7 +401,7 @@ public class PaperResourceTest extends TestBase {
         when(homeworkPostHistoryMapper.getHistoryByExamerIdAndPaperId(1, 1)).thenReturn(items);
 
         Response response = target(basePath + "/1/users/1/homeworkHistory")
-                .queryParam("sectionId", null).request().get();
+                .request().get();
         String jsonStr = new Gson().toJson(response.readEntity(Map.class));
         assertThat(response.getStatus(), is(200));
         assertThat(jsonStr, is("{\"items\":[{\"result\":\"jasmine not found\","

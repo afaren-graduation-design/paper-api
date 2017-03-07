@@ -67,7 +67,7 @@ public class ScoreSheetMapperTest extends com.thoughtworks.twars.mapper.TestBase
 
     @Test
     public void should_return_score_sheets_by_paper_id() {
-        List<ScoreSheet> scoreSheets = scoreSheetMapper.findByPaperId(1);
+        List<ScoreSheet> scoreSheets = scoreSheetMapper.findByPaperId(1, null);
 
         assertThat(scoreSheets.size(), is(2));
     }
