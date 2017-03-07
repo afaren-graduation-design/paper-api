@@ -270,10 +270,10 @@ public class PaperResource extends Resource {
     }
 
     @GET
-    @Path("/{paperId}/users/{examerId}/homeworkHistory")
+    @Path("/{paperId}/users/{userId}/homeworkHistory")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getHistoryByUser(
-            @PathParam("paperId") Integer paperId, @PathParam("examerId") Integer examerId,
+            @PathParam("paperId") Integer paperId, @PathParam("userId") Integer examerId,
             @QueryParam("sectionId") Integer sectionId) {
         Map result = new HashMap();
         List<Map> homeworkHistory = homeworkPostHistoryMapper
