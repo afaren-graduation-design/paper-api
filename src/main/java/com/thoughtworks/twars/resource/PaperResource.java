@@ -43,6 +43,8 @@ public class PaperResource extends Resource {
     private QuizItemMapper quizItemMapper;
     @Inject
     private BlankQuizMapper blankQuizMapper;
+    @Inject
+    private SectionQuizMapper sectionQuizMapper;
 
 
     @GET
@@ -270,12 +272,27 @@ public class PaperResource extends Resource {
     @Path("/{paperId}/users/{examerId}/homeworkHistory")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getHistoryByUser(
-            @PathParam("paperId") Integer paperId, @PathParam("examerId") Integer examerId) {
-
+            @PathParam("paperId") Integer paperId, @PathParam("examerId") Integer examerId,
+            @QueryParam("sectionId") Integer sectionId) {
+        Map result = new HashMap();
         List<Map> homeworkHistory = homeworkPostHistoryMapper
                 .getHistoryByExamerIdAndPaperId(examerId, paperId);
-        Map result = new HashMap();
-        result.put("items", homeworkHistory);
+        if (sectionId == null) {
+            result.put("items", homeworkHistory);
+        } else {
+
+            List<Map> items = new ArrayList<>();
+            for (int i = 0; i < homeworkHistory.size(); i++) {
+                Integer quizId = (Integer) homeworkHistory.get(i).get("homeworkQuizId");
+                Integer id = sectionQuizMapper
+                        .getSectionQuizIdBySectionIdAndQuizId(quizId, sectionId);
+                if (id != null) {
+                    items.add(homeworkHistory.get(i));
+                }
+            }
+            result.put("items", items);
+        }
+
 
         return Response.status(Response.Status.OK).entity(result).build();
     }

@@ -62,7 +62,7 @@
     </select>
 
     <select id = "getPaperById" parameterType="java.lang.Integer" resultMap="paperListMap">
-        select * from paper where id = #{id}
+        SELECT * FROM paper WHERE id = #{id}
     </select>
 
 </mapper>

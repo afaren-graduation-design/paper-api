@@ -19,4 +19,9 @@
         INSERT INTO sectionQuiz(sectionId,quizId)
         VALUES (#{sectionId},#{quizId});
     </insert>
+
+    <select id="getSectionQuizIdBySectionIdAndQuizId" parameterType="java.lang.Integer"
+            resultType="java.lang.Integer">
+        SELECT id from sectionQuiz WHERE sectionId = #{sectionId} AND quizId = #{quizId};
+    </select>
 </mapper>

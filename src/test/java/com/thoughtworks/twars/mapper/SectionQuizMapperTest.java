@@ -36,4 +36,10 @@ public class SectionQuizMapperTest extends TestBase {
 
         assertThat(sectionQuiz.getId(), is(29));
     }
+
+    @Test
+    public void should_return_sectionQuizId_by_sectionId_and_quizId() {
+        Integer id = sectionQuizMapper.getSectionQuizIdBySectionIdAndQuizId(1, 1);
+        assertThat(id, is(1));
+    }
 }

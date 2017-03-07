@@ -400,7 +400,8 @@ public class PaperResourceTest extends TestBase {
 
         when(homeworkPostHistoryMapper.getHistoryByExamerIdAndPaperId(1, 1)).thenReturn(items);
 
-        Response response = target(basePath + "/1/users/1/homeworkHistory").request().get();
+        Response response = target(basePath + "/1/users/1/homeworkHistory")
+                .queryParam("sectionId", null).request().get();
         String jsonStr = new Gson().toJson(response.readEntity(Map.class));
         assertThat(response.getStatus(), is(200));
         assertThat(jsonStr, is("{\"items\":[{\"result\":\"jasmine not found\","
