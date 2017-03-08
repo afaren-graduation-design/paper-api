@@ -2,35 +2,57 @@ package com.thoughtworks.twars.mapper;
 
 import com.thoughtworks.twars.bean.User;
 import com.thoughtworks.twars.bean.UserDetail;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 import java.util.Map;
 
 public interface UserMapper {
 
+    @Insert("INSERT INTO users(email, mobilePhone, password, userName,role,createDate)"
+            + "VALUES (#{email}, #{mobilePhone}, MD5(#{password}),#{userName},#{role}"
+            + ",UNIX_TIMESTAMP())")
+    @Options(useGeneratedKeys = true, keyProperty = "id")
     int insertUser(User user);
 
+    @Select("SELECT * FROM users WHERE id = #{id};")
     User getUserById(Integer id);
 
+
+    @Select("SELECT * FROM users WHERE binary email = #{email} LIMIT 1;")
     User getUserByEmail(String email);
 
+    @Select("SELECT * FROM users WHERE mobilePhone = #{mobilePhone} LIMIT 1;")
     User getUserByMobilePhone(String mobilePhone);
 
+    @Select(" SELECT * FROM users WHERE email regexp binary #{email} AND"
+            + " password = MD5(#{password}) LIMIT 1;")
     User getUserByEmailAndPassWord(User user);
 
+    @Select("SELECT * FROM users WHERE mobilePhone = #{email} AND "
+            + "password = MD5(#{password}) LIMIT 1;")
     User getUserByMobilePhoneAndPassWord(User user);
 
+    @Select("SELECT * FROM userDetail WHERE userId = #{userId};")
     UserDetail getUserDetailById(Integer userId);
 
+    @Insert("REPLACE INTO userDetail(userId,name,major,school,gender,"
+            + "degree,schoolProvince,schoolCity,entranceYear)"
+            + "values(#{userId}, #{name},#{major}, #{school}, #{gender},"
+            + "#{degree},#{schoolProvince},#{schoolCity},#{entranceYear})")
     int updateUserDetail(UserDetail detail);
 
+    @Update("UPDATE users SET password=MD5(#{password}) WHERE id = #{id} "
+            + "AND password=MD5(#{oldPassword});")
     int updatePassword(
             @Param("id") int id,
             @Param("oldPassword") String oldPassword,
             @Param("password") String password);
 
+
+    @Update("UPDATE users SET password=MD5(#{password}) WHERE binary email= #{email};")
     int resetPassword(User user);
+
 
     List<UserDetail> findUserDetailsByUserIds(List<Integer> userIds);
 

@@ -38,53 +38,6 @@
 
     </resultMap>
 
-
-    <select id="getUserById" resultType="com.thoughtworks.twars.bean.User">
-        SELECT * FROM users WHERE id = #{id}
-    </select>
-
-    <select id="getUserByEmail" resultType="com.thoughtworks.twars.bean.User">
-        SELECT * FROM users WHERE binary email = #{email} LIMIT 1
-    </select>
-
-    <select id="getUserByMobilePhone" resultType="com.thoughtworks.twars.bean.User">
-        SELECT * FROM users WHERE mobilePhone = #{mobilePhone} LIMIT 1
-    </select>
-
-    <select id="getUserByEmailAndPassWord" parameterType="com.thoughtworks.twars.bean.User"
-            resultType="com.thoughtworks.twars.bean.User">
-        SELECT * FROM users WHERE email regexp binary #{email} AND password = MD5(#{password}) LIMIT 1
-    </select>
-
-    <select id="getUserByMobilePhoneAndPassWord" parameterType="com.thoughtworks.twars.bean.User"
-            resultType="com.thoughtworks.twars.bean.User">
-        SELECT * FROM users WHERE mobilePhone = #{email} AND password = MD5(#{password}) LIMIT 1
-    </select>
-
-    <insert id="insertUser" parameterType="com.thoughtworks.twars.bean.User" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO users(email, mobilePhone, password, userName,role,createDate)
-        VALUES (#{email}, #{mobilePhone}, MD5(#{password}),#{userName},#{role},UNIX_TIMESTAMP())
-    </insert>
-
-    <insert id="updateUserDetail" parameterType="com.thoughtworks.twars.bean.UserDetail" useGeneratedKeys="true"
-            keyProperty="userId">
-        REPLACE INTO userDetail(userId,name,major,school,gender,degree,schoolProvince,schoolCity,entranceYear)
-        values(#{userId}, #{name},#{major}, #{school}, #{gender},
-        #{degree},#{schoolProvince},#{schoolCity},#{entranceYear})
-    </insert>
-
-    <select id="getUserDetailById" resultType="com.thoughtworks.twars.bean.UserDetail">
-        SELECT * FROM userDetail WHERE userId = #{userId};
-    </select>
-
-    <update id="updatePassword">
-        UPDATE users SET password=MD5(#{password}) WHERE id = #{id} AND password=MD5(#{oldPassword});
-    </update>
-
-    <update id="resetPassword" parameterType="com.thoughtworks.twars.bean.User">
-        UPDATE users SET password=MD5(#{password}) WHERE binary email= #{email};
-    </update>
-
     <select id="findUserDetailsByUserIds" resultMap="userDetailMap">
         SELECT * FROM userDetail WHERE userId IN
         <foreach item="userIds" index="index" collection="list" open="(" separator="," close=")">
