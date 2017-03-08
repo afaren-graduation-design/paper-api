@@ -54,6 +54,13 @@ public interface UserMapper {
     int resetPassword(User user);
 
 
+    @Select({"<script>",
+            "SELECT * FROM userDetail WHERE userId IN",
+            "<foreach item= 'userIds' index= 'index' collection='list' ",
+            "open='(' separator= ',' close= ')'>",
+            "#{userIds}",
+            "</foreach>",
+            "</script>"})
     List<UserDetail> findUserDetailsByUserIds(List<Integer> userIds);
 
     List<User> findUsersByUserIds(List<Integer> userIds);

@@ -38,13 +38,6 @@
 
     </resultMap>
 
-    <select id="findUserDetailsByUserIds" resultMap="userDetailMap">
-        SELECT * FROM userDetail WHERE userId IN
-        <foreach item="userIds" index="index" collection="list" open="(" separator="," close=")">
-            #{userIds}
-        </foreach>
-    </select>
-
     <select id="findUsersByUserIds" resultMap="userMap">
         SELECT * FROM users WHERE id IN
         <foreach item="userIds" index="index" collection="list" open="(" separator="," close=")">
