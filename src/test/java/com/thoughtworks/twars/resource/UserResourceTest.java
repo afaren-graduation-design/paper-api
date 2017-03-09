@@ -439,7 +439,7 @@ public class UserResourceTest extends TestBase {
         when(userMapper.getUserRolesByEmail(user.getEmail())).thenReturn(roles);
         when(userMapper.getUserCount(null, null, null)).thenReturn(Arrays.asList(user02));
         Map item = new HashMap();
-        item.put("role","1");
+        item.put("role", "1");
         item.put("count", 2);
         ArrayList roleCount = new ArrayList();
         roleCount.add(item);
@@ -458,13 +458,14 @@ public class UserResourceTest extends TestBase {
                 .queryParam("page", 1).queryParam("pageSize", 1).request().get();
         Map result = response.readEntity(Map.class);
         String jsonStr = new Gson().toJson(result);
-        System.out.println(jsonStr);
-        assertThat(jsonStr, is("{\"totalCount\":1"
-                + ",\"items\":[{\"role\":[\"1\""
-                + ",\"2\"]"
-                + ",\"mobilePhone\":\"11111\""
-                + ",\"userName\":\"userName\""
-                + ",\"email\":\"email\"}]}"));
+        assertThat(jsonStr, is("{\"roleCount\":[{\"role\":\"1\","
+                + "\"count\":2}],"
+                + "\"totalCount\":1,"
+                + "\"items\":[{\"role\":[\"1\","
+                + "\"2\"],"
+                + "\"mobilePhone\":\"11111\","
+                + "\"userName\":\"userName\","
+                + "\"email\":\"email\"}]}"));
         assertThat(response.getStatus(),
                 is(200));
     }
