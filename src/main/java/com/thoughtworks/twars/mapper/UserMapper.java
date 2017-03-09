@@ -63,6 +63,20 @@ public interface UserMapper {
             "</script>"})
     List<UserDetail> findUserDetailsByUserIds(List<Integer> userIds);
 
+
+    @Select({"<script>",
+            "SELECT * FROM users WHERE id IN",
+            "<foreach item= 'userIds' index='index' collection='list' ",
+            "open='(' separator= ','  close= ')'>",
+            "#{userIds}",
+            "</foreach>",
+            "</script>"})
+    @Results(value = {
+            @Result(id = true, property = "id", column = "id"),
+            @Result(property = "mobilePhone", column = "mobilePhone"),
+            @Result(id = true, property = "email", column = "email"),
+            @Result(id = true, property = "userName", column = "userName")
+    })
     List<User> findUsersByUserIds(List<Integer> userIds);
 
     List<Integer> findProgramsById(Integer id);

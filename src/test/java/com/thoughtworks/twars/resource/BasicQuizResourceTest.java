@@ -28,15 +28,16 @@ public class BasicQuizResourceTest extends TestBase {
     BasicBlankQuiz basicBlankQuiz = mock(BasicBlankQuiz.class);
 
     @Test
-    public void should_insert_basic_quiz(){
+    public void should_insert_basic_quiz() {
 
-        ArrayList<Map> items = new ArrayList<>();
 
         Map singleChoice = new HashMap();
         singleChoice.put("type", "SINGLE_CHOICE");
         singleChoice.put("description", "这是一道单选题");
         singleChoice.put("choices", "aa,bb,cc,dd");
         singleChoice.put("answer", "aa");
+
+        ArrayList<Map> items = new ArrayList<>();
         items.add(singleChoice);
 
         Map multipleChoice = new HashMap();
@@ -51,8 +52,7 @@ public class BasicQuizResourceTest extends TestBase {
 
         Response response = target(basePath).request().post(entity);
 
-        assertThat(response.getStatus(),is(201));
-
+        assertThat(response.getStatus(), is(201));
 
 
     }

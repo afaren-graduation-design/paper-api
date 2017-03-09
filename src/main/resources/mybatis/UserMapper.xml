@@ -38,13 +38,6 @@
 
     </resultMap>
 
-    <select id="findUsersByUserIds" resultMap="userMap">
-        SELECT * FROM users WHERE id IN
-        <foreach item="userIds" index="index" collection="list" open="(" separator="," close=")">
-            #{userIds}
-        </foreach>
-    </select>
-
     <select id="findProgramsById" resultType="java.lang.Integer">
         SELECT programId FROM userProgram WHERE userId = #{id}
     </select>
