@@ -94,7 +94,8 @@
                 AND role = #{role}
             </if>
         </where>
-        GROUP BY email,userName,mobilePhone,password
+        GROUP BY email,userName,mobilePhone,password,createDate
+        ORDER BY createDate DESC
         LIMIT #{page},#{pageSize};
     </select>
 
