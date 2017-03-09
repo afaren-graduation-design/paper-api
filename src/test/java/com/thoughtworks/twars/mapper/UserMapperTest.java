@@ -292,13 +292,13 @@ public class UserMapperTest extends TestBase {
 
     @Test
     public void should_return_users_group_by_email() {
-        List<User> allUsers = userMapper.groupUserByEmail(0,2,"@",null,"3");
+        List<User> allUsers = userMapper.groupUserByEmail(0, 2, "@", null, "3");
         assertThat(allUsers.size(), is(1));
     }
 
     @Test
     public void should_return_users_group_by_email_is_null() {
-        List<User> allUsers = userMapper.groupUserByEmail(0,3,null,null,"3");
+        List<User> allUsers = userMapper.groupUserByEmail(0, 3, null, null, "3");
         assertThat(allUsers.size(), is(1));
     }
 
@@ -310,8 +310,15 @@ public class UserMapperTest extends TestBase {
 
     @Test
     public void should_return_users_count() {
-        List<User> users = userMapper.getUserCount(null,null,null);
+        List<User> users = userMapper.getUserCount(null, null, null);
         assertThat(users.size(), is(8));
+    }
+
+    @Test
+    public void should_return_roles_and_roleCount() {
+        List<Map> items = userMapper.getAllRolesAndCount();
+        assertThat(items.size(), is(3));
+
     }
 
 }

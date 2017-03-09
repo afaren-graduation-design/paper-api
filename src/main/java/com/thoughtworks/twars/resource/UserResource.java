@@ -43,7 +43,6 @@ public class UserResource extends Resource {
             @QueryParam("role") String role
 
     ) {
-
         Integer startPage = Math.max(page - 1, 0);
         Integer newPage = startPage * pageSize;
         List<User> users = userMapper.groupUserByEmail(newPage, pageSize, email, mobilePhone, role);
@@ -62,7 +61,13 @@ public class UserResource extends Resource {
 
         result.put("totalCount", userMapper.getUserCount(email, mobilePhone, role).size());
 
-        return Response.status(Response.Status.OK).entity(result).build();
+        if (role != null) {
+            return Response.status(Response.Status.OK).entity(result).build();
+        } else {
+
+            result.put("roleCount", userMapper.getAllRolesAndCount());
+            return Response.status(Response.Status.OK).entity(result).build();
+        }
     }
 
     @GET

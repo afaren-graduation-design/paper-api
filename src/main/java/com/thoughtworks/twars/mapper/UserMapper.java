@@ -114,4 +114,9 @@ public interface UserMapper {
                             @Param("mobilePhone") String mobilePhone,
                             @Param("role") String role);
 
+    @Select("SELECT role, count(*) AS count FROM users WHERE role IS NOT NULL GROUP BY role;")
+    List<Map> getAllRolesAndCount();
+
+
+
 }

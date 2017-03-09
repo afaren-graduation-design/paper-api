@@ -9,6 +9,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.sql.Array;
 import java.util.*;
 
 import static org.hamcrest.core.Is.is;
@@ -427,6 +428,7 @@ public class UserResourceTest extends TestBase {
         map.put("email", "email");
         map.put("userName", "userName");
         map.put("mobilePhone", "11111");
+        map.put("role", "1");
 
 
         when(user.toMap()).thenReturn(map);
@@ -436,11 +438,18 @@ public class UserResourceTest extends TestBase {
         roles.add("2");
         when(userMapper.getUserRolesByEmail(user.getEmail())).thenReturn(roles);
         when(userMapper.getUserCount(null, null, null)).thenReturn(Arrays.asList(user02));
+        Map item = new HashMap();
+        item.put("role","1");
+        item.put("count", 2);
+        ArrayList roleCount = new ArrayList();
+        roleCount.add(item);
+        when(userMapper.getAllRolesAndCount()).thenReturn(roleCount);
 
         Map map1 = new HashMap();
         map1.put("email", "email");
         map1.put("userName", "userName");
         map1.put("mobilePhone", "11111");
+        map1.put("role", "1");
 
 
         when(user02.toMap()).thenReturn(map1);
@@ -449,6 +458,7 @@ public class UserResourceTest extends TestBase {
                 .queryParam("page", 1).queryParam("pageSize", 1).request().get();
         Map result = response.readEntity(Map.class);
         String jsonStr = new Gson().toJson(result);
+        System.out.println(jsonStr);
         assertThat(jsonStr, is("{\"totalCount\":1"
                 + ",\"items\":[{\"role\":[\"1\""
                 + ",\"2\"]"
