@@ -128,7 +128,14 @@ public class HomeworkQuizResource extends Resource {
             Map result = new HashMap();
             result.put("uri", "homeworkQuizzes/" + id);
 
-            return Response.status(Response.Status.OK).entity(result).build();
+            HomeworkQuizOperation homeworkQuizOperation = new HomeworkQuizOperation();
+            homeworkQuizOperation.setHomeworkQuizId(id);
+            homeworkQuizOperation.setOperatingTime((Integer) data.get("createTime"));
+            homeworkQuizOperation.setOperationType("DISTRIBUTION");
+            homeworkQuizOperation.setOperatorId((Integer) data.get("makerId"));
+            homeworkQuizOperationMapper.insertHomeworkQuizOperation(homeworkQuizOperation);
+
+            return Response.status(Response.Status.CREATED).entity(result).build();
         } catch (Exception exception) {
             session.rollback();
         }

@@ -263,7 +263,7 @@ public class HomeworkQuizResourceTest extends TestBase {
 
         Response response = target(basePath).request().post(entity);
 
-        MatcherAssert.assertThat(response.getStatus(), is(200));
+        MatcherAssert.assertThat(response.getStatus(), is(201));
         Map result = response.readEntity(Map.class);
 
         MatcherAssert.assertThat(result.size(), is(1));
