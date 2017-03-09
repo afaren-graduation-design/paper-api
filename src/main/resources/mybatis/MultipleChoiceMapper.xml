@@ -6,6 +6,6 @@
 <mapper namespace="com.thoughtworks.twars.mapper.MultipleChoiceMapper">
 
     <insert id="insertMultipleChoice"  useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO multipleChoice VALUES(NULL,#{description},#{choices},#{type},#{answer});
+        INSERT INTO multipleChoice VALUES(NULL,#{description},#{options},#{type},#{answer});
     </insert>
 </mapper>

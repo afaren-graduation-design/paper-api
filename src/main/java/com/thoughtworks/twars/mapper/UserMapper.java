@@ -76,7 +76,7 @@ public interface UserMapper {
             @Result(property = "mobilePhone", column = "mobilePhone"),
             @Result(id = true, property = "email", column = "email"),
             @Result(id = true, property = "userName", column = "userName")
-    })
+            })
     List<User> findUsersByUserIds(List<Integer> userIds);
 
     List<Integer> findProgramsById(Integer id);

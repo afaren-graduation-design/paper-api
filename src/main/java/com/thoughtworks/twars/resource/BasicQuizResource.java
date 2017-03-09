@@ -32,28 +32,30 @@ public class BasicQuizResource {
     @POST
     public Response insertBasicQuizzes(ArrayList<Map> data) {
 
+        Map result = new HashMap();
+
         for (int i = 0; i < data.size(); i++) {
             if (data.get(i).get("type").equals("SINGLE_CHOICE")) {
 
-                SingleChoice singleChoice  = new SingleChoice();
+                SingleChoice singleChoice = new SingleChoice();
                 singleChoice.setType((String) data.get(i).get("type"));
                 singleChoice.setDescription((String) data.get(i).get("description"));
                 singleChoice.setAnswer((String) data.get(i).get("answer"));
-                singleChoice.setChoices((String) data.get(i).get("choices"));
+                singleChoice.setOptions((String) data.get(i).get("options"));
                 singleChoiceMapper.insertSingleChoice(singleChoice);
             }
             if (data.get(i).get("type").equals("MULTIPLE_CHOICE")) {
 
-                MultipleChoice multipleChoice  = new MultipleChoice();
+                MultipleChoice multipleChoice = new MultipleChoice();
                 multipleChoice.setType((String) data.get(i).get("type"));
                 multipleChoice.setDescription((String) data.get(i).get("description"));
                 multipleChoice.setAnswer((String) data.get(i).get("answer"));
-                multipleChoice.setChoices((String) data.get(i).get("choices"));
+                multipleChoice.setOptions((String) data.get(i).get("options"));
                 multipleChoiceMapper.insertMultipleChoice(multipleChoice);
             }
             if (data.get(i).get("type").equals("BASIC_BLANK_QUIZ")) {
 
-                BasicBlankQuiz basicBlankQuiz  = new BasicBlankQuiz();
+                BasicBlankQuiz basicBlankQuiz = new BasicBlankQuiz();
                 basicBlankQuiz.setType((String) data.get(i).get("type"));
                 basicBlankQuiz.setDescription((String) data.get(i).get("description"));
                 basicBlankQuiz.setAnswer((String) data.get(i).get("answer"));

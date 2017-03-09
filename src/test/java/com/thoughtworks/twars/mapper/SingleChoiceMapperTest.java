@@ -24,7 +24,7 @@ public class SingleChoiceMapperTest extends TestBase {
         singleChoice.setType("SINGLE_CHOICE");
         singleChoice.setDescription("这是第三道单选题");
         singleChoice.setAnswer("ss");
-        singleChoice.setChoices("ss,cc,xx,zz");
+        singleChoice.setOptions("ss,aa,cc,ff");
         singleChoiceMapper.insertSingleChoice(singleChoice);
         assertThat(singleChoice.getId(), is(3));
 

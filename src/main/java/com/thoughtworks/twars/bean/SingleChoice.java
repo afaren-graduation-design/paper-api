@@ -3,9 +3,18 @@ package com.thoughtworks.twars.bean;
 public class SingleChoice {
     private int id;
     private String description;
+    private String options;
     private String type;
+
     private String answer;
-    private String choices;
+
+    public String getOptions() {
+        return options;
+    }
+
+    public void setOptions(String options) {
+        this.options = options;
+    }
 
     public int getId() {
         return id;
@@ -40,11 +49,4 @@ public class SingleChoice {
     }
 
 
-    public String getChoices() {
-        return choices;
-    }
-
-    public void setChoices(String choices) {
-        this.choices = choices;
-    }
 }

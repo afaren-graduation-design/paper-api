@@ -21,7 +21,7 @@ public class MultipleChoiceMapperTest extends TestBase {
     @Test
     public void should_insert_multipleChoice() throws Exception {
         MultipleChoice multipleChoice = new MultipleChoice();
-        multipleChoice.setChoices("ss,aa,cc,bb");
+        multipleChoice.setOptions("ss,aa,cc,bb");
         multipleChoice.setType("MULTIPLE_CHOICE");
         multipleChoice.setDescription("这是第三道多选题");
         multipleChoice.setAnswer("ss");

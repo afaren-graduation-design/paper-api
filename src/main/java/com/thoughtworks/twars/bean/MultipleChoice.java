@@ -5,8 +5,16 @@ public class MultipleChoice {
     private int id;
     private String description;
     private String type;
+    private String options;
     private String answer;
-    private String choices;
+
+    public String getOptions() {
+        return options;
+    }
+
+    public void setOptions(String options) {
+        this.options = options;
+    }
 
     public int getId() {
         return id;
@@ -40,12 +48,4 @@ public class MultipleChoice {
         this.answer = answer;
     }
 
-
-    public String getChoices() {
-        return choices;
-    }
-
-    public void setChoices(String choices) {
-        this.choices = choices;
-    }
 }
