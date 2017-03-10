@@ -20,6 +20,24 @@ public class HomeworkQuizMapperTest extends TestBase {
     }
 
     @Test
+    public void should_insert_homework_quiz() {
+        HomeworkQuiz homeworkQuiz = new HomeworkQuiz();
+
+        homeworkQuiz.setDescription("找出两个数组相同的数据");
+        homeworkQuiz.setEvaluateScript("https://github.com/zhangsan/pos_inspection");
+        homeworkQuiz.setTemplateRepository("https://github.com/zhangsan/pos_template");
+        homeworkQuiz.setMakerId(1);
+        homeworkQuiz.setCreateTime(1234);
+        homeworkQuiz.setHomeworkName("test");
+        homeworkQuiz.setStackId(1);
+        homeworkQuiz.setAnswerPath("/homework-answer/collection");
+        homeworkQuiz.setTag(0);
+        homeworkQuizMapper.insertHomeworkQuiz(homeworkQuiz);
+
+        assertThat(homeworkQuiz.getId(), is(10));
+    }
+
+    @Test
     public void should_return_homework_list_when_by_section_id() {
         List<HomeworkQuiz> homeworkQuizList = homeworkQuizMapper.findBySectionId(2);
 
@@ -32,23 +50,6 @@ public class HomeworkQuizMapperTest extends TestBase {
 
         assertThat(homeworkQuiz.getEvaluateScript(), is("/homework-script/check-readme.sh"));
         assertThat(homeworkQuiz.getTemplateRepository(), is(""));
-    }
-
-    @Test
-    public void should_insert_homework_quiz() {
-        HomeworkQuiz homeworkQuiz = new HomeworkQuiz();
-
-        homeworkQuiz.setDescription("找出两个数组相同的数据");
-        homeworkQuiz.setEvaluateScript("https://github.com/zhangsan/pos_inspection");
-        homeworkQuiz.setTemplateRepository("https://github.com/zhangsan/pos_template");
-        homeworkQuiz.setMakerId(1);
-        homeworkQuiz.setCreateTime(1234);
-        homeworkQuiz.setHomeworkName("test");
-        homeworkQuiz.setStackId(1);
-        homeworkQuiz.setAnswerPath("/homework-answer/collection");
-        homeworkQuizMapper.insertHomeworkQuiz(homeworkQuiz);
-
-        assertThat(homeworkQuiz.getId(), is(9));
     }
 
     @Test
@@ -69,7 +70,7 @@ public class HomeworkQuizMapperTest extends TestBase {
     public void should_return_homework_quizzes_by_search_homework_stackId() {
         List<HomeworkQuiz> homeworkQuizzes = homeworkQuizMapper
                 .findHomeworkQuizzes(null, 1, 0, 15);
-        System.out.println(homeworkQuizzes.size());
+
         assertThat(homeworkQuizzes.size(), is(2));
     }
 
@@ -87,4 +88,26 @@ public class HomeworkQuizMapperTest extends TestBase {
         assertThat(homeworkQuizzes.size(), is(0));
     }
 
+    @Test
+    public void should_insert_tag() {
+
+        HomeworkQuiz homeworkQuiz = new HomeworkQuiz();
+
+        homeworkQuiz.setDescription("找出两个数组相同的数据");
+        homeworkQuiz.setEvaluateScript("https://github.com/zhangsan/pos_inspection");
+        homeworkQuiz.setTemplateRepository("https://github.com/zhangsan/pos_template");
+        homeworkQuiz.setMakerId(1);
+        homeworkQuiz.setCreateTime(1234);
+        homeworkQuiz.setHomeworkName("test");
+        homeworkQuiz.setStackId(1);
+        homeworkQuiz.setAnswerPath("/homework-answer/collection");
+        homeworkQuiz.setTag(0);
+
+        homeworkQuizMapper.insertHomeworkQuiz(homeworkQuiz);
+        Integer id = homeworkQuiz.getId();
+        homeworkQuizMapper.updateTag(id);
+
+
+        assertThat(homeworkQuizMapper.findById(id).getTag(), is(id));
+    }
 }

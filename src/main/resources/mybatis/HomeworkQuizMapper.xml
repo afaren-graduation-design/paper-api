@@ -16,7 +16,6 @@
         <result column="homeworkName" property="homeworkName"></result>
         <result column="answerPath" property="answerPath"></result>
         <result column="stackId" property="stackId"></result>
-
     </resultMap>
 
     <select id="findBySectionId" resultMap="homeworkQuizListMap">
@@ -30,24 +29,28 @@
     <insert id="insertHomeworkQuiz" parameterType="com.thoughtworks.twars.bean.HomeworkQuiz" useGeneratedKeys="true"
             keyProperty="id">
         INSERT INTO homeworkQuiz(description, evaluateScript,
-        templateRepository,makerId,createTime,homeworkName,answerPath,stackId) VALUES(#{description}, #{evaluateScript},
-        #{templateRepository},#{makerId},#{createTime},#{homeworkName},#{answerPath},#{stackId});
+        templateRepository,makerId,createTime,homeworkName,answerPath,stackId,tag) VALUES(#{description},
+        #{evaluateScript},
+        #{templateRepository},#{makerId},#{createTime},#{homeworkName},#{answerPath},#{stackId},#{tag});
     </insert>
 
     <select id="findHomeworkQuizzes" resultMap="homeworkQuizListMap">
-        select H.* from homeworkQuiz H
-        LEFT JOIN homeworkQuizOperation O ON H.id = O.homeworkQuizId
-        WHERE O.id = (select MAX(id) FROM homeworkQuizOperation WHERE homeworkQuizId = O.homeworkQuizId)
-        AND O.operationType = "DISTRIBUTION"
+        SELECT * FROM homeworkQuiz h INNER JOIN homeworkQuizOperation o ON h.tag = o.homeworkQuizId
+        WHERE o.id IN
+        (SELECT MAX(id) FROM homeworkQuizOperation GROUP BY homeworkQuizId)
+        AND o.operationType != "DELETE"
         <if test="homeworkName != null">
-            AND H.homeworkName LIKE concat("%",#{homeworkName},"%")
+            AND h.homeworkName LIKE concat("%",#{homeworkName},"%")
         </if>
         <if test="stackId != null">
-            AND H.stackId = #{stackId}
+            AND h.stackId = #{stackId}
         </if>
         LIMIT #{newPage},#{pageSize};
-
     </select>
+
+    <update id="updateTag" parameterType="java.lang.Integer">
+        update homeworkQuiz set tag = #{id} where id = #{id};
+    </update>
 
 </mapper>
 
