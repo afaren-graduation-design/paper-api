@@ -13,6 +13,15 @@ public class HomeworkQuiz {
     private String homeworkName;
     private String answerPath;
     private int stackId;
+    private int tag;
+
+    public int getTag() {
+        return tag;
+    }
+
+    public void setTag(int tag) {
+        this.tag = tag;
+    }
 
     public String getAnswerPath() {
         return answerPath;

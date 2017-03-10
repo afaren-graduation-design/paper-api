@@ -217,7 +217,6 @@ public class HomeworkQuizResourceTest extends TestBase {
 
         Map result = response.readEntity(Map.class);
         String jsonStr = gson.toJson(result);
-        System.out.println(jsonStr);
         assertThat(jsonStr, is("{\"homeworkQuizzes\":[{\"evaluateScript\":\"www.baidu.com\","
                 + "\"templateRepository\":\"templateRepository\","
                 + "\"stackId\":2,"
@@ -274,20 +273,20 @@ public class HomeworkQuizResourceTest extends TestBase {
 
         when(homeworkQuizMapper.findById(1)).thenReturn(homeworkQuiz);
         HomeworkQuizOperation hqo = mock(HomeworkQuizOperation.class);
+
         when(homeworkQuizOperationMapper
                 .insertHomeworkQuizOperation(hqo)).thenReturn(1);
 
         Map map = new HashMap();
 
-        map.put("operationType", "delete");
-        map.put("operatorId", 1);
-        map.put("operatingTime", 123456);
+        map.put("operationType", "DELETE");
+        map.put("makerId", 1);
+        map.put("createTime", 123456);
         map.put("homeworkQuizId", 1);
 
         Entity entity = Entity.entity(map, MediaType.APPLICATION_JSON);
 
         Response response = target(basePath + "/1").request().put(entity);
-
         MatcherAssert.assertThat(response.getStatus(), is(204));
     }
 }

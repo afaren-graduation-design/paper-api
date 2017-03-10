@@ -36,11 +36,43 @@ public class HomeworkQuizResource extends Resource {
         if (homeworkQuizMapper.findById(id) == null) {
             return Response.status(Response.Status.PRECONDITION_FAILED).build();
         }
+
         HomeworkQuizOperation homeworkQuizOperation = new HomeworkQuizOperation();
-        homeworkQuizOperation.setHomeworkQuizId(id);
+        if (data.get("operationType").equals("UPDATE")) {
+
+            HomeworkQuiz homeworkQuiz = new HomeworkQuiz();
+            String description = (String) data.get("description");
+            homeworkQuiz.setDescription(description);
+            String evaluateScript = (String) data.get("evaluateScript");
+            homeworkQuiz.setEvaluateScript(evaluateScript);
+            String templateRepository = (String) data.get("templateRepository");
+            homeworkQuiz.setTemplateRepository(templateRepository);
+            int makerId = (int) data.get("makerId");
+            homeworkQuiz.setMakerId(makerId);
+            String homeworkName = (String) data.get("homeworkName");
+            homeworkQuiz.setHomeworkName(homeworkName);
+            int createTime = (int) data.get("createTime");
+            homeworkQuiz.setCreateTime(createTime);
+            String answerPath = (String) data.get("answerPath");
+            homeworkQuiz.setAnswerPath(answerPath);
+            int tag = homeworkQuizMapper.findById(id).getTag();
+            homeworkQuiz.setTag(tag);
+            int stackId = 1;
+            if (data.get("stackId") != null) {
+                stackId = (int) data.get("stackId");
+            }
+            homeworkQuiz.setStackId(stackId);
+            homeworkQuizMapper.insertHomeworkQuiz(homeworkQuiz);
+
+            homeworkQuizOperation.setHomeworkQuizId(tag);
+
+        } else {
+            homeworkQuizOperation.setHomeworkQuizId(id);
+        }
+
         homeworkQuizOperation.setOperationType((String) data.get("operationType"));
-        homeworkQuizOperation.setOperatingTime((Integer) data.get("operatingTime"));
-        homeworkQuizOperation.setOperatorId((Integer) data.get("operatorId"));
+        homeworkQuizOperation.setOperatingTime((Integer) data.get("createTime"));
+        homeworkQuizOperation.setOperatorId((Integer) data.get("makerId"));
 
         homeworkQuizOperationMapper.insertHomeworkQuizOperation(homeworkQuizOperation);
         return Response.status(Response.Status.NO_CONTENT).build();
@@ -112,10 +144,9 @@ public class HomeworkQuizResource extends Resource {
             homeworkQuiz.setHomeworkName(homeworkName);
             int createTime = (int) data.get("createTime");
             homeworkQuiz.setCreateTime(createTime);
-
             String answerPath = (String) data.get("answerPath");
             homeworkQuiz.setAnswerPath(answerPath);
-
+            homeworkQuiz.setTag(0);
             int stackId = 1;
             if (data.get("stackId") != null) {
                 stackId = (int) data.get("stackId");
@@ -124,6 +155,9 @@ public class HomeworkQuizResource extends Resource {
 
             homeworkQuizMapper.insertHomeworkQuiz(homeworkQuiz);
             Integer id = homeworkQuiz.getId();
+
+            homeworkQuizMapper.updateTag(id);
+
 
             Map result = new HashMap();
             result.put("uri", "homeworkQuizzes/" + id);
