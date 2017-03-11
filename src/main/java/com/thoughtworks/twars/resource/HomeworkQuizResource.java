@@ -37,11 +37,10 @@ public class HomeworkQuizResource extends Resource {
             return Response.status(Response.Status.PRECONDITION_FAILED).build();
         }
 
-        HomeworkQuiz homeworkQuiz = new HomeworkQuiz();
 
-        HomeworkQuizOperation homeworkQuizOperation = new HomeworkQuizOperation();
         if (data.get("operationType").equals("UPDATE")) {
 
+            HomeworkQuiz homeworkQuiz = new HomeworkQuiz();
             String description = (String) data.get("description");
             homeworkQuiz.setDescription(description);
             String evaluateScript = (String) data.get("evaluateScript");
@@ -56,8 +55,8 @@ public class HomeworkQuizResource extends Resource {
             homeworkQuiz.setCreateTime(createTime);
             String answerPath = (String) data.get("answerPath");
             homeworkQuiz.setAnswerPath(answerPath);
-            int tag = homeworkQuizMapper.findById(id).getTag();
-            homeworkQuiz.setTag(tag);
+            int rawId = homeworkQuizMapper.findById(id).getRawId();
+            homeworkQuiz.setRawId(rawId);
             int stackId = 1;
             if (data.get("stackId") != null) {
                 stackId = (int) data.get("stackId");
@@ -65,22 +64,23 @@ public class HomeworkQuizResource extends Resource {
             homeworkQuiz.setStackId(stackId);
             homeworkQuizMapper.insertHomeworkQuiz(homeworkQuiz);
 
-            homeworkQuizOperation.setHomeworkQuizId(tag);
+            Map result = new HashMap();
+            result.put("uri", "homeworkQuizzes/" + homeworkQuiz.getId());
 
+            return Response.status(Response.Status.CREATED).entity(result).build();
         } else {
+            HomeworkQuizOperation homeworkQuizOperation = new HomeworkQuizOperation();
             homeworkQuizOperation.setHomeworkQuizId(id);
+
+
+            homeworkQuizOperation.setOperationType((String) data.get("operationType"));
+            homeworkQuizOperation.setOperatingTime((Integer) data.get("createTime"));
+            homeworkQuizOperation.setOperatorId((Integer) data.get("makerId"));
+
+            homeworkQuizOperationMapper.insertHomeworkQuizOperation(homeworkQuizOperation);
+
+            return Response.status(Response.Status.NO_CONTENT).build();
         }
-
-        homeworkQuizOperation.setOperationType((String) data.get("operationType"));
-        homeworkQuizOperation.setOperatingTime((Integer) data.get("createTime"));
-        homeworkQuizOperation.setOperatorId((Integer) data.get("makerId"));
-
-        homeworkQuizOperationMapper.insertHomeworkQuizOperation(homeworkQuizOperation);
-        Map result = new HashMap();
-        result.put("uri", "homeworkQuizzes/" + homeworkQuiz.getId());
-        System.out.println(result);
-        
-        return Response.status(Response.Status.CREATED).entity(result).build();
     }
 
 
@@ -151,7 +151,7 @@ public class HomeworkQuizResource extends Resource {
             homeworkQuiz.setCreateTime(createTime);
             String answerPath = (String) data.get("answerPath");
             homeworkQuiz.setAnswerPath(answerPath);
-            homeworkQuiz.setTag(0);
+            homeworkQuiz.setRawId(0);
             int stackId = 1;
             if (data.get("stackId") != null) {
                 stackId = (int) data.get("stackId");
@@ -161,18 +161,11 @@ public class HomeworkQuizResource extends Resource {
             homeworkQuizMapper.insertHomeworkQuiz(homeworkQuiz);
             Integer id = homeworkQuiz.getId();
 
-            homeworkQuizMapper.updateTag(id);
+            homeworkQuizMapper.updateRawId(id);
 
 
             Map result = new HashMap();
             result.put("uri", "homeworkQuizzes/" + id);
-
-            HomeworkQuizOperation homeworkQuizOperation = new HomeworkQuizOperation();
-            homeworkQuizOperation.setHomeworkQuizId(id);
-            homeworkQuizOperation.setOperatingTime((Integer) data.get("createTime"));
-            homeworkQuizOperation.setOperationType("DISTRIBUTION");
-            homeworkQuizOperation.setOperatorId((Integer) data.get("makerId"));
-            homeworkQuizOperationMapper.insertHomeworkQuizOperation(homeworkQuizOperation);
 
             return Response.status(Response.Status.CREATED).entity(result).build();
         } catch (Exception exception) {

@@ -31,7 +31,7 @@ public class HomeworkQuizMapperTest extends TestBase {
         homeworkQuiz.setHomeworkName("test");
         homeworkQuiz.setStackId(1);
         homeworkQuiz.setAnswerPath("/homework-answer/collection");
-        homeworkQuiz.setTag(0);
+        homeworkQuiz.setRawId(0);
         homeworkQuizMapper.insertHomeworkQuiz(homeworkQuiz);
 
         assertThat(homeworkQuiz.getId(), is(10));
@@ -56,7 +56,8 @@ public class HomeworkQuizMapperTest extends TestBase {
     public void should_return_homework_quizzes_by_search_name_and_stackId() {
         List<HomeworkQuiz> homeworkQuizzes = homeworkQuizMapper
                 .findHomeworkQuizzes("hom", 1, 0, 15);
-        assertThat(homeworkQuizzes.size(), is(2));
+
+        assertThat(homeworkQuizzes.size(), is(1));
     }
 
     @Test
@@ -70,8 +71,7 @@ public class HomeworkQuizMapperTest extends TestBase {
     public void should_return_homework_quizzes_by_search_homework_stackId() {
         List<HomeworkQuiz> homeworkQuizzes = homeworkQuizMapper
                 .findHomeworkQuizzes(null, 1, 0, 15);
-
-        assertThat(homeworkQuizzes.size(), is(2));
+        assertThat(homeworkQuizzes.size(), is(1));
     }
 
     @Test
@@ -89,7 +89,7 @@ public class HomeworkQuizMapperTest extends TestBase {
     }
 
     @Test
-    public void should_insert_tag() {
+    public void should_insert_rawId() {
 
         HomeworkQuiz homeworkQuiz = new HomeworkQuiz();
 
@@ -101,13 +101,13 @@ public class HomeworkQuizMapperTest extends TestBase {
         homeworkQuiz.setHomeworkName("test");
         homeworkQuiz.setStackId(1);
         homeworkQuiz.setAnswerPath("/homework-answer/collection");
-        homeworkQuiz.setTag(0);
+        homeworkQuiz.setRawId(0);
 
         homeworkQuizMapper.insertHomeworkQuiz(homeworkQuiz);
         Integer id = homeworkQuiz.getId();
-        homeworkQuizMapper.updateTag(id);
+        homeworkQuizMapper.updateRawId(id);
 
 
-        assertThat(homeworkQuizMapper.findById(id).getTag(), is(id));
+        assertThat(homeworkQuizMapper.findById(id).getRawId(), is(id));
     }
 }

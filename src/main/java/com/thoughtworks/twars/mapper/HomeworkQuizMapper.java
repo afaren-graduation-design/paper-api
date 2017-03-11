@@ -15,7 +15,7 @@ public interface HomeworkQuizMapper {
 
     int insertHomeworkQuiz(HomeworkQuiz homeworkQuiz);
 
-    int updateTag(Integer id);
+    int updateRawId(Integer id);
 
     List<HomeworkQuiz> findHomeworkQuizzes(
             @Param("homeworkName") String homeworkName,
