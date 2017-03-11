@@ -37,10 +37,11 @@ public class HomeworkQuizResource extends Resource {
             return Response.status(Response.Status.PRECONDITION_FAILED).build();
         }
 
+        HomeworkQuiz homeworkQuiz = new HomeworkQuiz();
+
         HomeworkQuizOperation homeworkQuizOperation = new HomeworkQuizOperation();
         if (data.get("operationType").equals("UPDATE")) {
 
-            HomeworkQuiz homeworkQuiz = new HomeworkQuiz();
             String description = (String) data.get("description");
             homeworkQuiz.setDescription(description);
             String evaluateScript = (String) data.get("evaluateScript");
@@ -75,7 +76,11 @@ public class HomeworkQuizResource extends Resource {
         homeworkQuizOperation.setOperatorId((Integer) data.get("makerId"));
 
         homeworkQuizOperationMapper.insertHomeworkQuizOperation(homeworkQuizOperation);
-        return Response.status(Response.Status.NO_CONTENT).build();
+        Map result = new HashMap();
+        result.put("uri", "homeworkQuizzes/" + homeworkQuiz.getId());
+        System.out.println(result);
+        
+        return Response.status(Response.Status.CREATED).entity(result).build();
     }
 
 
