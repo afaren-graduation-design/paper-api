@@ -18,6 +18,11 @@
     </insert>
 
     <select id="getMultipleChoiceById" parameterType="java.lang.Integer" resultMap="multipleChoiceMap">
-        select * from multipleChoice where id = #{id};
+        SELECT * FROM multipleChoice WHERE id = #{id};
     </select>
+
+    <update id="updateMultipleChoice">
+        UPDATE multipleChoice SET description = #{description},type = #{type},options = #{options},answer = #{answer}
+        WHERE id = #{id}
+    </update>
 </mapper>

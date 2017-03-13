@@ -36,4 +36,17 @@ public class BasicBlankQuizMapperTest extends TestBase {
         assertThat(basicBlankQuiz.getAnswer(), is("javaScript"));
         assertThat(basicBlankQuiz.getType(), is("BASIC_BLANK_QUIZ"));
     }
+
+    @Test
+    public void should_update_basicBlankQuiz() {
+
+        BasicBlankQuiz basicBlankQuiz = new BasicBlankQuiz();
+        basicBlankQuiz.setId(1);
+        basicBlankQuiz.setAnswer("ss");
+        basicBlankQuiz.setDescription("这是一道填空题");
+        basicBlankQuiz.setType("BASIC_BLANK_QUIZ");
+
+        Integer id = basicBlankQuizMapper.updateBasicBlankQuiz(basicBlankQuiz);
+        assertThat(id, is(1));
+    }
 }

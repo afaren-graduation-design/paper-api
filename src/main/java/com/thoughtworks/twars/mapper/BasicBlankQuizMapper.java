@@ -10,4 +10,6 @@ public interface BasicBlankQuizMapper {
     int insertBasicBlankQuiz(BasicBlankQuiz basicBlankQuiz);
 
     BasicBlankQuiz getBasicBlankQuizById( Integer id);
+
+    Integer updateBasicBlankQuiz(BasicBlankQuiz basicBlankQuiz);
 }

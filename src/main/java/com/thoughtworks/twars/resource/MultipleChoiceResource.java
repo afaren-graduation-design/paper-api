@@ -46,7 +46,7 @@ public class MultipleChoiceResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
-    public Response getSingleChoiceById(@PathParam("id") Integer id) {
+    public Response getMultipleChoiceById(@PathParam("id") Integer id) {
 
         MultipleChoice multipleChoice = multipleChoiceMapper.getMultipleChoiceById(id);
 
@@ -54,5 +54,22 @@ public class MultipleChoiceResource {
 
         return Response.status(Response.Status.OK).entity(result).build();
 
+    }
+
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{id}")
+    public Response updateMultipleChoiceById(@PathParam("id") Integer id, Map data) {
+
+        MultipleChoice multipleChoice = new MultipleChoice();
+        multipleChoice.setOptions((String) data.get("options"));
+        multipleChoice.setType((String) data.get("type"));
+        multipleChoice.setDescription((String) data.get("description"));
+        multipleChoice.setAnswer((String) data.get("answer"));
+        multipleChoice.setId(id);
+
+        multipleChoiceMapper.updateMultipleChoice(multipleChoice);
+
+        return Response.status(Response.Status.NO_CONTENT).build();
     }
 }

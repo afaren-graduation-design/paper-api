@@ -1,5 +1,6 @@
 package com.thoughtworks.twars.resource;
 
+import com.thoughtworks.twars.bean.MultipleChoice;
 import com.thoughtworks.twars.bean.SingleChoice;
 import com.thoughtworks.twars.mapper.SingleChoiceMapper;
 import io.swagger.annotations.Api;
@@ -50,6 +51,23 @@ public class SingleChoiceResource {
         return Response.status(Response.Status.OK).entity(result).build();
 
 
+    }
+
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{id}")
+    public Response updateSingleChoices(@PathParam("id") Integer id, Map data) {
+
+        SingleChoice singleChoice = new SingleChoice();
+        singleChoice.setOptions((String) data.get("options"));
+        singleChoice.setType((String) data.get("type"));
+        singleChoice.setDescription((String) data.get("description"));
+        singleChoice.setAnswer((String) data.get("answer"));
+        singleChoice.setId(id);
+
+        singleChoiceMapper.updateSingleChoice(singleChoice);
+
+        return Response.status(Response.Status.NO_CONTENT).build();
     }
 }
 

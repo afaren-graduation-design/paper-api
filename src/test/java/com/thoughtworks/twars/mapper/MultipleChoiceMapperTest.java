@@ -39,4 +39,19 @@ public class MultipleChoiceMapperTest extends TestBase {
         assertThat(multipleChoice.getOptions(), is("1,2,3,4"));
         assertThat(multipleChoice.getType(), is("MULTIPLE_CHOICE"));
     }
+
+    @Test
+    public void should_update_multipleChoice_by_id() throws Exception {
+
+        MultipleChoice multipleChoice = new MultipleChoice();
+        multipleChoice.setOptions("ss,aa,cc,bb");
+        multipleChoice.setType("MULTIPLE_CHOICE");
+        multipleChoice.setDescription("这是第三道多选题");
+        multipleChoice.setAnswer("33");
+        multipleChoice.setId(1);
+
+        Integer id = multipleChoiceMapper.updateMultipleChoice(multipleChoice);
+
+        assertThat(id, is(1));
+    }
 }

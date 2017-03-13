@@ -9,4 +9,5 @@ public interface MultipleChoiceMapper {
 
     MultipleChoice getMultipleChoiceById(Integer id);
 
+    Integer updateMultipleChoice(MultipleChoice multipleChoice);
 }

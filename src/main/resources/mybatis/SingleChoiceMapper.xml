@@ -20,4 +20,9 @@
     <select id="getSingleChoiceById" parameterType="java.lang.Integer" resultMap="singleChoiceMap">
         select * from singleChoice where id = #{id}
     </select>
+
+    <update id="updateSingleChoice">
+        UPDATE singleChoice SET description = #{description},type = #{type},options = #{options},answer = #{answer}
+        WHERE id = #{id}
+    </update>
 </mapper>

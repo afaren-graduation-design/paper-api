@@ -1,6 +1,7 @@
 package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.bean.BasicBlankQuiz;
+import com.thoughtworks.twars.bean.MultipleChoice;
 import com.thoughtworks.twars.mapper.BasicBlankQuizMapper;
 import io.swagger.annotations.Api;
 
@@ -50,5 +51,21 @@ public class BasicBlankQuizResource {
 
         return Response.status(Response.Status.OK).entity(result).build();
 
+    }
+
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{id}")
+    public Response updateMultipleChoiceById(@PathParam("id") Integer id, Map data) {
+
+        BasicBlankQuiz basicBlankQuiz = new BasicBlankQuiz();
+        basicBlankQuiz.setType((String) data.get("type"));
+        basicBlankQuiz.setDescription((String) data.get("description"));
+        basicBlankQuiz.setAnswer((String) data.get("answer"));
+        basicBlankQuiz.setId(id);
+
+        basicBlankQuizMapper.updateBasicBlankQuiz(basicBlankQuiz);
+
+        return Response.status(Response.Status.NO_CONTENT).build();
     }
 }

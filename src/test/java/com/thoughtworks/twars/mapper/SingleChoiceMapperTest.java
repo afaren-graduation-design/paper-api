@@ -1,6 +1,7 @@
 package com.thoughtworks.twars.mapper;
 
 import com.thoughtworks.twars.bean.BasicBlankQuiz;
+import com.thoughtworks.twars.bean.MultipleChoice;
 import com.thoughtworks.twars.bean.SingleChoice;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,6 +40,21 @@ public class SingleChoiceMapperTest extends TestBase {
         assertThat(singleChoice.getAnswer(), is("3"));
         assertThat(singleChoice.getOptions(), is("1,2,3,4"));
         assertThat(singleChoice.getType(), is("SINGLE_CHOICE"));
+    }
+
+    @Test
+    public void should_update_singleChoice_by_id() throws Exception {
+
+        SingleChoice singleChoice = new SingleChoice();
+        singleChoice.setOptions("ss,aa,cc,bb");
+        singleChoice.setType("SINGLE_CHOICE");
+        singleChoice.setDescription("这是第三道单选题");
+        singleChoice.setAnswer("33");
+        singleChoice.setId(1);
+
+        Integer id = singleChoiceMapper.updateSingleChoice(singleChoice);
+
+        assertThat(id, is(1));
     }
 
 }

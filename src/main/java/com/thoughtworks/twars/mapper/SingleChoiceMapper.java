@@ -8,4 +8,6 @@ public interface SingleChoiceMapper {
     int insertSingleChoice(SingleChoice singleChoice);
 
     SingleChoice getSingleChoiceById(Integer id);
+
+    Integer updateSingleChoice(SingleChoice singleChoice);
 }

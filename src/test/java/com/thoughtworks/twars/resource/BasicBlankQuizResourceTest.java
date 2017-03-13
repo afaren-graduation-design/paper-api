@@ -29,6 +29,10 @@ public class BasicBlankQuizResourceTest extends TestBase {
     @Mock
     BasicBlankQuiz basicBlankQuiz1;
 
+    @Mock
+    BasicBlankQuiz basicBlankQuiz2;
+
+
     @Test
     public void should_insert_basic_blank_quiz() {
 
@@ -47,7 +51,7 @@ public class BasicBlankQuizResourceTest extends TestBase {
     }
 
     @Test
-    public void should_get_multiple_choice_by_id() {
+    public void should_get_basic_blank_quiz_by_id() {
 
         when(basicBlankQuiz1.getId()).thenReturn(1);
         when(basicBlankQuiz1.getDescription()).thenReturn("这是一道填空题");
@@ -75,5 +79,29 @@ public class BasicBlankQuizResourceTest extends TestBase {
         assertThat(jsonStr, is("{\"answer\":\"1\","
                 + "\"description\":\"这是一道填空题\","
                 + "\"type\":\"BASIC_BLANK_QUIZ\"}"));
+    }
+
+    @Test
+    public void should_update_basic_blank_quiz_by_id() {
+
+        when(basicBlankQuiz2.getId()).thenReturn(1);
+        when(basicBlankQuiz2.getDescription()).thenReturn("这是一道多选题");
+        when(basicBlankQuiz2.getAnswer()).thenReturn("1,2");
+        when(basicBlankQuiz2.getType()).thenReturn("MULTIPLE_CHOICE");
+
+        when(basicBlankQuizMapper.updateBasicBlankQuiz(basicBlankQuiz2)).thenReturn(1);
+
+
+        Map result = new HashMap<>();
+        result.put("description", "这是一道多选题");
+        result.put("answer", "1,2");
+        result.put("type", "MULTIPLE_CHOICE");
+        result.put("id", 1);
+
+
+        Response response = target(basePath + "/1").request().put(
+                Entity.entity(result, MediaType.APPLICATION_JSON), Response.class);
+        assertThat(response.getStatus(), is(204));
+
     }
 }
