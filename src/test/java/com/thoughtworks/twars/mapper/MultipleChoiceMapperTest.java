@@ -1,6 +1,7 @@
 package com.thoughtworks.twars.mapper;
 
 import com.thoughtworks.twars.bean.MultipleChoice;
+import com.thoughtworks.twars.bean.SingleChoice;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,5 +29,14 @@ public class MultipleChoiceMapperTest extends TestBase {
 
         multipleChoiceMapper.insertMultipleChoice(multipleChoice);
         assertThat(multipleChoice.getId(), is(3));
+    }
+
+    @Test
+    public void should_get_multipleChoice() throws Exception {
+        MultipleChoice multipleChoice = multipleChoiceMapper.getMultipleChoiceById(1);
+        assertThat(multipleChoice.getDescription(), is("这是第一道多选题"));
+        assertThat(multipleChoice.getAnswer(), is("3,4"));
+        assertThat(multipleChoice.getOptions(), is("1,2,3,4"));
+        assertThat(multipleChoice.getType(), is("MULTIPLE_CHOICE"));
     }
 }

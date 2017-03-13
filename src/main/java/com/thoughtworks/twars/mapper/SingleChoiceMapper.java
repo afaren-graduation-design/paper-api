@@ -6,4 +6,6 @@ import java.util.Map;
 
 public interface SingleChoiceMapper {
     int insertSingleChoice(SingleChoice singleChoice);
+
+    SingleChoice getSingleChoiceById(Integer id);
 }

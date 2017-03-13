@@ -1,5 +1,8 @@
 package com.thoughtworks.twars.bean;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MultipleChoice {
 
     private int id;
@@ -48,4 +51,18 @@ public class MultipleChoice {
         this.answer = answer;
     }
 
+    public Map toMap() {
+
+        Map result = new HashMap<>();
+
+        result.put("description", getDescription());
+        result.put("type", getType());
+        result.put("answer", getAnswer());
+        result.put("options", getOptions());
+
+        return result;
+    }
+
 }
+
+

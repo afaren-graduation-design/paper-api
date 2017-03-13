@@ -3,6 +3,8 @@ package com.thoughtworks.twars.resource;
 import com.thoughtworks.twars.bean.BlankQuiz;
 import com.thoughtworks.twars.bean.QuizItem;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
@@ -17,7 +19,7 @@ import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-
+@RunWith(MockitoJUnitRunner.class)
 public class BlankQuizResourceTest extends TestBase {
 
     String basePath = "blankQuizzes";

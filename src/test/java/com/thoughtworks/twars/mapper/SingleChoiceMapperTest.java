@@ -5,6 +5,8 @@ import com.thoughtworks.twars.bean.SingleChoice;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.ws.rs.core.Response;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -28,6 +30,15 @@ public class SingleChoiceMapperTest extends TestBase {
         singleChoiceMapper.insertSingleChoice(singleChoice);
         assertThat(singleChoice.getId(), is(3));
 
+    }
+
+    @Test
+    public void should_get_singleChoice() throws Exception {
+        SingleChoice singleChoice = singleChoiceMapper.getSingleChoiceById(1);
+        assertThat(singleChoice.getDescription(), is("这是第一道单选题"));
+        assertThat(singleChoice.getAnswer(), is("3"));
+        assertThat(singleChoice.getOptions(), is("1,2,3,4"));
+        assertThat(singleChoice.getType(), is("SINGLE_CHOICE"));
     }
 
 }

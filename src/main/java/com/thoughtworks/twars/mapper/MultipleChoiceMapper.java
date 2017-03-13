@@ -6,4 +6,7 @@ import java.util.Map;
 
 public interface MultipleChoiceMapper {
     int insertMultipleChoice(MultipleChoice multipleChoice);
+
+    MultipleChoice getMultipleChoiceById(Integer id);
+
 }

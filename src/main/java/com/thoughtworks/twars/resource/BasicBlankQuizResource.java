@@ -1,20 +1,13 @@
 package com.thoughtworks.twars.resource;
 
 import com.thoughtworks.twars.bean.BasicBlankQuiz;
-import com.thoughtworks.twars.bean.MultipleChoice;
-import com.thoughtworks.twars.bean.SingleChoice;
 import com.thoughtworks.twars.mapper.BasicBlankQuizMapper;
-import com.thoughtworks.twars.mapper.MultipleChoiceMapper;
-import com.thoughtworks.twars.mapper.SingleChoiceMapper;
 import io.swagger.annotations.Api;
 
 import javax.inject.Inject;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,7 +20,6 @@ public class BasicBlankQuizResource {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-
     public Response insertBasicQuizzes(Map data) {
 
         BasicBlankQuiz basicBlankQuiz = new BasicBlankQuiz();
@@ -39,8 +31,24 @@ public class BasicBlankQuizResource {
 
         Map result = new HashMap();
         result.put("uri", "basicBlankQuizzes/" + basicBlankQuiz.getId());
+        result.put("id", basicBlankQuiz.getId());
 
         return Response.status(Response.Status.CREATED).entity(result).build();
+
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{id}")
+    public Response getBasicBlankQuizById(@PathParam("id") Integer id) {
+
+        System.out.println(id);
+
+        BasicBlankQuiz basicBlankQuiz = basicBlankQuizMapper.getBasicBlankQuizById(id);
+
+        Map result = basicBlankQuiz.toMap();
+
+        return Response.status(Response.Status.OK).entity(result).build();
 
     }
 }

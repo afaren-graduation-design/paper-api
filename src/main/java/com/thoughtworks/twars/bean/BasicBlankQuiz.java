@@ -1,5 +1,8 @@
 package com.thoughtworks.twars.bean;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class BasicBlankQuiz {
     private int id;
     private String description;
@@ -36,5 +39,16 @@ public class BasicBlankQuiz {
 
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    public Map toMap() {
+
+        Map result = new HashMap();
+
+        result.put("description", getDescription());
+        result.put("type", getType());
+        result.put("answer", getAnswer());
+
+        return result;
     }
 }

@@ -5,9 +5,7 @@ import com.thoughtworks.twars.mapper.SingleChoiceMapper;
 import io.swagger.annotations.Api;
 
 import javax.inject.Inject;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.HashMap;
@@ -15,7 +13,6 @@ import java.util.Map;
 
 @Path("/singleChoices")
 @Api
-
 public class SingleChoiceResource {
 
     @Inject
@@ -34,9 +31,24 @@ public class SingleChoiceResource {
         singleChoiceMapper.insertSingleChoice(singleChoice);
 
         Map result = new HashMap();
+        System.out.println(singleChoice.getId());
+        result.put("id", singleChoice.getId());
         result.put("uri", "singleChoices/" + singleChoice.getId());
 
         return Response.status(Response.Status.CREATED).entity(result).build();
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{id}")
+    public Response getSingleChoiceById(@PathParam("id") Integer id) {
+
+        SingleChoice singleChoice = singleChoiceMapper.getSingleChoiceById(id);
+
+        Map result = singleChoice.toMap();
+
+        return Response.status(Response.Status.OK).entity(result).build();
+
 
     }
 }

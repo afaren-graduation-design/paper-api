@@ -1,9 +1,12 @@
 package com.thoughtworks.twars.resource;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.thoughtworks.twars.bean.BasicBlankQuiz;
-import com.thoughtworks.twars.bean.MultipleChoice;
-import com.thoughtworks.twars.bean.SingleChoice;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
@@ -13,16 +16,18 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class BasicBlankQuizResourceTest extends TestBase {
 
     String basePath = "/basicBlankQuizzes";
+
+    @Mock
+    BasicBlankQuiz basicBlankQuiz1;
 
     @Test
     public void should_insert_basic_blank_quiz() {
@@ -39,5 +44,36 @@ public class BasicBlankQuizResourceTest extends TestBase {
                 Entity.entity(basicBlankQuiz, MediaType.APPLICATION_JSON), Response.class);
         assertThat(response.getStatus(), is(201));
 
+    }
+
+    @Test
+    public void should_get_multiple_choice_by_id() {
+
+        when(basicBlankQuiz1.getId()).thenReturn(1);
+        when(basicBlankQuiz1.getDescription()).thenReturn("这是一道填空题");
+        when(basicBlankQuiz1.getAnswer()).thenReturn("1");
+        when(basicBlankQuiz1.getType()).thenReturn("BASIC_BLANK_QUIZ");
+
+
+        when(basicBlankQuizMapper.getBasicBlankQuizById(1)).thenReturn(basicBlankQuiz1);
+
+        Map result = new HashMap<>();
+        result.put("description", "这是一道填空题");
+        result.put("answer", "1");
+        result.put("type", "BASIC_BLANK_QUIZ");
+
+        when(basicBlankQuiz1.toMap()).thenReturn(result);
+
+
+        Response response = target(basePath + "/1").request().get();
+        assertThat(response.getStatus(), is(200));
+
+        Gson gson = new GsonBuilder().create();
+
+        Map map = response.readEntity(Map.class);
+        String jsonStr = gson.toJson(map);
+        assertThat(jsonStr, is("{\"answer\":\"1\","
+                + "\"description\":\"这是一道填空题\","
+                + "\"type\":\"BASIC_BLANK_QUIZ\"}"));
     }
 }

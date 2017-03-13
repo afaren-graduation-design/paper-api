@@ -8,4 +8,6 @@ import java.util.Map;
 public interface BasicBlankQuizMapper {
 
     int insertBasicBlankQuiz(BasicBlankQuiz basicBlankQuiz);
+
+    BasicBlankQuiz getBasicBlankQuizById( Integer id);
 }

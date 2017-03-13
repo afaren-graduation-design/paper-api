@@ -5,7 +5,19 @@
 
 <mapper namespace="com.thoughtworks.twars.mapper.SingleChoiceMapper">
 
-    <insert id="insertSingleChoice"  useGeneratedKeys="true" keyProperty="id">
+    <resultMap id="singleChoiceMap" type="com.thoughtworks.twars.bean.SingleChoice">
+        <id property="id" column="id"></id>
+        <result column="description" property="description"></result>
+        <result column="type" property="type"></result>
+        <result column="answer" property="answer"></result>
+        <result column="options" property="options"></result>
+    </resultMap>
+
+    <insert id="insertSingleChoice" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO singleChoice VALUES(NULL,#{description},#{options},#{type},#{answer});
     </insert>
+
+    <select id="getSingleChoiceById" parameterType="java.lang.Integer" resultMap="singleChoiceMap">
+        select * from singleChoice where id = #{id}
+    </select>
 </mapper>

@@ -5,7 +5,18 @@
 
 <mapper namespace="com.thoughtworks.twars.mapper.BasicBlankQuizMapper">
 
-    <insert id="insertBasicBlankQuiz"  useGeneratedKeys="true" keyProperty="id">
+    <resultMap id="basicBlankQuizMap" type="com.thoughtworks.twars.bean.BasicBlankQuiz">
+        <id property="id" column="id"></id>
+        <result column="description" property="description"></result>
+        <result column="type" property="type"></result>
+        <result column="answer" property="answer"></result>
+    </resultMap>
+
+    <insert id="insertBasicBlankQuiz" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO basicBlankQuiz VALUES(NULL,#{description},#{type},#{answer});
     </insert>
+
+    <select id="getBasicBlankQuizById" parameterType="java.lang.Integer" resultMap="basicBlankQuizMap">
+        select * from basicBlankQuiz where id =#{id}
+    </select>
 </mapper>

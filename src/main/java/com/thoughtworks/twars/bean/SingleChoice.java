@@ -1,5 +1,10 @@
 package com.thoughtworks.twars.bean;
 
+import scala.tools.nsc.doc.model.Public;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class SingleChoice {
     private int id;
     private String description;
@@ -48,5 +53,16 @@ public class SingleChoice {
         this.answer = answer;
     }
 
+    public Map toMap() {
+
+        Map result = new HashMap<>();
+
+        result.put("description", getDescription());
+        result.put("type", getType());
+        result.put("answer", getAnswer());
+        result.put("options", getOptions());
+
+        return result;
+    }
 
 }

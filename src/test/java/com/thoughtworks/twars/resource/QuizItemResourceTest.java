@@ -5,6 +5,8 @@ import com.google.gson.GsonBuilder;
 import com.thoughtworks.twars.bean.QuizItem;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
@@ -19,6 +21,8 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+
+@RunWith(MockitoJUnitRunner.class)
 public class QuizItemResourceTest extends TestBase {
 
     QuizItem firstQuizItem = mock(QuizItem.class);
@@ -142,35 +146,34 @@ public class QuizItemResourceTest extends TestBase {
 
         Assert.assertThat(jsonStr, is("{\"items\":["
                 + "{\"question\":\"question english instructions\","
-                    + "\"count\":13,"
-                    + "\"description\":\"english description\","
-                    + "\"infoPath\":\"logic-puzzle/17.json\","
-                    + "\"stepsLength\":11,"
-                    + "\"maxUpdateTimes\":4,"
-                    + "\"descriptionZh\":\"chinese description\","
-                    + "\"answer\":5,"
-                    + "\"stepsString\":\"step instructions\","
-                    + "\"questionZh\":\"question Chinese instructions\","
-                    + "\"id\":1,"
-                    + "\"chartPath\":\"logic-puzzle/17.png\","
-                    + "\"initializedBox\":\" [0,2,7,2,1,5,7,1,4,8]\""
+                + "\"count\":13,"
+                + "\"description\":\"english description\","
+                + "\"infoPath\":\"logic-puzzle/17.json\","
+                + "\"stepsLength\":11,"
+                + "\"maxUpdateTimes\":4,"
+                + "\"descriptionZh\":\"chinese description\","
+                + "\"answer\":5,"
+                + "\"stepsString\":\"step instructions\","
+                + "\"questionZh\":\"question Chinese instructions\","
+                + "\"id\":1,"
+                + "\"chartPath\":\"logic-puzzle/17.png\","
+                + "\"initializedBox\":\" [0,2,7,2,1,5,7,1,4,8]\""
                 + "},{"
-                    + "\"question\":\"question english instructions\","
-                    + "\"count\":14,"
-                    + "\"description\":\"english description\","
-                    + "\"infoPath\":\"logic-puzzle/33.json\","
-                    + "\"stepsLength\":11,"
-                    + "\"maxUpdateTimes\":4,"
-                    + "\"descriptionZh\":\"chinese description\","
-                    + "\"answer\":1,"
-                    + "\"stepsString\":\"step instructions\","
-                    + "\"questionZh\":\"question Chinese instructions\","
-                    + "\"id\":2,"
-                    + "\"chartPath\":\"logic-puzzle/33.png\","
-                    + "\"initializedBox\":\"[0,2,7,2,1,5,7,1,4,8]\""
+                + "\"question\":\"question english instructions\","
+                + "\"count\":14,"
+                + "\"description\":\"english description\","
+                + "\"infoPath\":\"logic-puzzle/33.json\","
+                + "\"stepsLength\":11,"
+                + "\"maxUpdateTimes\":4,"
+                + "\"descriptionZh\":\"chinese description\","
+                + "\"answer\":1,"
+                + "\"stepsString\":\"step instructions\","
+                + "\"questionZh\":\"question Chinese instructions\","
+                + "\"id\":2,"
+                + "\"chartPath\":\"logic-puzzle/33.png\","
+                + "\"initializedBox\":\"[0,2,7,2,1,5,7,1,4,8]\""
                 + "}"
-            + "]}"));
-
+                + "]}"));
 
 
     }
