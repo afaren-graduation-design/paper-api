@@ -51,7 +51,7 @@ public class TestBase extends JerseyTest {
     protected HomeworkQuizOperationMapper homeworkQuizOperationMapper = mock(HomeworkQuizOperationMapper.class);
     protected BasicBlankQuizMapper basicBlankQuizMapper = mock(BasicBlankQuizMapper.class);
     protected SingleChoiceMapper singleChoiceMapper = mock(SingleChoiceMapper.class);
-    protected MultipleChoiceMapper multipleChoiceMApper = mock(MultipleChoiceMapper.class);
+    protected MultipleChoiceMapper multipleChoiceMapper = mock(MultipleChoiceMapper.class);
 
     @Override
     protected Application configure() {
@@ -90,7 +90,7 @@ public class TestBase extends JerseyTest {
                 bind(homeworkQuizOperationMapper).to(HomeworkQuizOperationMapper.class);
                 bind(basicBlankQuizMapper).to(BasicBlankQuizMapper.class);
                 bind(singleChoiceMapper).to(SingleChoiceMapper.class);
-                bind(multipleChoiceMApper).to(MultipleChoiceMapper.class);
+                bind(multipleChoiceMapper).to(MultipleChoiceMapper.class);
             }
         }).packages("com.thoughtworks.twars.resource");
     }
