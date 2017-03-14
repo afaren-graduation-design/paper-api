@@ -58,19 +58,19 @@ public class LoginResource extends Resource {
 
         loginDetailMapper.insertLoginDetail(resultUser.getId());
 
-        Map<String, Object> map = new HashMap<>();
-        Map<String, String> userInfo = new HashMap<>();
+        Map result = resultUser.toMap();
+        result.put("role",userMapper.getUserRoleByUserId(resultUser.getId()));
 
-        map.put("id", resultUser.getId());
-        map.put("role", userMapper.getUserRoleByUserId(resultUser.getId()));
+        Map<String, String> userInfo = new HashMap<>();
         userInfo.put("uri", "users/" + resultUser.getId());
-        map.put("userInfo", userInfo);
-        
+
+        result.put("userInfo",userInfo);
+
         List<LoginDetail> loginDetailList = loginDetailMapper
                 .getLoginDetailByUserId(resultUser.getId());
         String token = loginDetailList.get(loginDetailList.size() - 1).getToken();
 
-        return Response.ok(map).header("token", token).build();
+        return Response.ok(result).header("token", token).build();
     }
 
 }
