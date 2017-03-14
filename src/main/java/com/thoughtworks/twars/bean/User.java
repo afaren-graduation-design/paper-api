@@ -53,15 +53,6 @@ public class User {
         this.password = password;
     }
 
-//    public List<Integer> getRole() {
-//        return role;
-//    }
-
-//    public void setRole(List<Integer> role) {
-//        this.role = role;
-//    }
-
-
     public List<Integer> getRoles() {
         return roles;
     }
@@ -75,7 +66,7 @@ public class User {
         result.put("email", getEmail());
         result.put("mobilePhone", getMobilePhone());
         result.put("userName", getUserName());
-//        result.put("role", role);
+        result.put("role", roles);
 
         return result;
     }
