@@ -136,6 +136,10 @@
     <select id="getUserById" parameterType="java.lang.Integer" resultMap ="userMap">
         SELECT * FROM users WHERE id = #{id};
     </select>
+
+    <insert id="insertUserRole" parameterType="java.lang.Integer">
+        INSERT INTO userRole VALUES(#{userId},#{role});
+    </insert>
 </mapper>
 
 

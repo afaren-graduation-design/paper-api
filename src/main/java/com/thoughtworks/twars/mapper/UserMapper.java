@@ -114,6 +114,7 @@ public interface UserMapper {
     @Select("SELECT role, count(*) AS count FROM users WHERE role IS NOT NULL GROUP BY role;")
     List<Map> getAllRolesAndCount();
 
+
     List<User> getAll(
             @Param("email") String email,
             @Param("mobilePhone") String mobilePhone,
@@ -122,4 +123,5 @@ public interface UserMapper {
 
     List<Integer> getUserRoleByUserId(Integer id);
 
+    int insertUserRole(@Param("userId") Integer userId, @Param("role") Integer role);
 }

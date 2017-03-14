@@ -24,8 +24,9 @@ public class RegisterResource extends Resource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Response createUser(User user) {
-//        user.setRole("0");
+
         userMapper.insertUser(user);
+
         userMapper.insertUserProgram(user.getId(), 1);
 
         Map<String, Object> result = new HashMap<>();

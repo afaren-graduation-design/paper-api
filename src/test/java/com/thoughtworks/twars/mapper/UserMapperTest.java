@@ -334,6 +334,13 @@ public class UserMapperTest extends TestBase {
         assertThat(roles.size(),is(2));
     }
 
+    @Test
+    public void should_insert_user_role(){
+        Integer id = userMapper.insertUserRole(1,2);
+        assertThat(id,is(1));
+    }
+
+
 
 
 }

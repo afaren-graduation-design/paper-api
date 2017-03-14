@@ -9,8 +9,8 @@ public class User {
     private String email;
     private String mobilePhone;
     private String password;
-    private List<Integer> roles;
     private String userName;
+    private List<Integer> roles;
 
     public String getUserName() {
         return userName;
@@ -19,7 +19,6 @@ public class User {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-
 
     public int getId() {
         return id;
