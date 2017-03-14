@@ -1,6 +1,7 @@
 package com.thoughtworks.twars.resource;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.thoughtworks.twars.bean.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,22 +35,25 @@ public class UserResourceTest extends TestBase {
     @Test
     public void should_return_user() {
         when(userMapper.getUserById(1)).thenReturn(user);
-
         when(user.getId()).thenReturn(1);
         when(user.getEmail()).thenReturn("111@222.com");
         when(user.getMobilePhone()).thenReturn("13111111111");
-//        when(user.getRole()).thenReturn("1");
 
-        Response response = target(basePath + "/1").request().get();
+        ArrayList<Integer> ids = new ArrayList<>();
+        ids.add(1);
+        when(userMapper.getUserIdsByRole(1)).thenReturn(ids);
 
-        assertThat(response.getStatus(), is(200));
+        ArrayList<Integer> userRoles = new ArrayList<>();
+        userRoles.add(1);
+        userRoles.add(2);
+        when(userMapper.getUserRoleByUserId(1)).thenReturn(userRoles);
+
+        Response response = target(basePath).queryParam("role", 1).request().get();
 
         Map result = response.readEntity(Map.class);
 
-        assertThat((Integer) result.get("id"), is(1));
-        assertThat((String) result.get("email"), is("111@222.com"));
-        assertThat((String) result.get("mobilePhone"), is("13111111111"));
-        assertThat((String) result.get("role"), is("1"));
+        assertThat(response.getStatus(), is(200));
+        assertThat( result.get("totalCount"), is(1));
     }
 
     @Test

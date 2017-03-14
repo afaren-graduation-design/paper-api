@@ -24,6 +24,9 @@ public interface UserMapper {
     @Select("SELECT * FROM users WHERE binary email = #{email} LIMIT 1;")
     User getUserByEmail(String email);
 
+    @Select("SELECT userId FROM userRole WHERE role = #{role};")
+    List<Integer> getUserIdsByRole(Integer role);
+
     @Select("SELECT * FROM users WHERE mobilePhone = #{mobilePhone} LIMIT 1;")
     User getUserByMobilePhone(String mobilePhone);
 

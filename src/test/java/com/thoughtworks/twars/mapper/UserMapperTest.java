@@ -23,6 +23,13 @@ public class UserMapperTest extends TestBase {
     }
 
     @Test
+    public void should_return_userIds_by_role() throws Exception {
+        List<Integer> userIds = userMapper.getUserIdsByRole(1);
+        assertThat(userIds.size(), is(3));
+
+    }
+
+    @Test
     public void should_return_user_by_id() throws Exception {
         User user = userMapper.getUserById(1);
         assertThat(user.getMobilePhone(), is("18798037893"));
