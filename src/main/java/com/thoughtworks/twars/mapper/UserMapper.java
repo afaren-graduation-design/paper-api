@@ -18,7 +18,7 @@ public interface UserMapper {
     //    @Select("SELECT * FROM users WHERE id = #{id};")
     User getUserById(Integer id);
 
-    @Select("DELETE from userRole where id = #{Id};")
+    @Select("DELETE from userRole where userId = #{id};")
     Integer deleteUserRole(Integer id);
 
     @Select("SELECT * FROM users WHERE binary email = #{email} LIMIT 1;")
