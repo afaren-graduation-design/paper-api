@@ -71,13 +71,10 @@ public class UserMapperTest extends TestBase {
         user.setEmail("test3@163.com");
         user.setMobilePhone("123456789012");
         user.setPassword("18928392811");
-//        user.setRole(null);
         user.setUserName("hah");
-
         userMapper.insertUser(user);
-        System.out.println(user.getId());
 
-        assertThat(user.getId(), is(9));
+        assertThat(user.getId(), is(10));
     }
 
     @Test
@@ -283,18 +280,7 @@ public class UserMapperTest extends TestBase {
         List<Integer> mentorIds = userMapper.findStudentIdsByMentorId(1);
         assertThat(mentorIds.size(), is(2));
     }
-
-    @Test
-    public void should_return_1_when_delete_user_by_email() {
-        int reslut = userMapper.deleteUserByEmail("z@z.com");
-        assertThat(reslut, is(1));
-    }
-
-    @Test
-    public void should_return_0_when_delete_user_by_email() {
-        int reslut = userMapper.deleteUserByEmail("11");
-        assertThat(reslut, is(0));
-    }
+    
 
     @Test
     public void should_return_users_count() {
@@ -306,7 +292,6 @@ public class UserMapperTest extends TestBase {
     public void should_return_roles_and_roleCount() {
         List<Map> items = userMapper.getAllRolesAndCount();
         assertThat(items.size(), is(3));
-
     }
 
     @Test

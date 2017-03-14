@@ -79,10 +79,6 @@
         SELECT studentId FROM studentMentor WHERE mentorId = #{id};
     </select>
 
-    <delete id="deleteUserByEmail" parameterType="java.lang.String">
-        DELETE FROM users WHERE email = #{email};
-    </delete>
-
     <select id="getUserCount" resultType="java.lang.Integer">
         SELECT count(*) FROM users
         <where>

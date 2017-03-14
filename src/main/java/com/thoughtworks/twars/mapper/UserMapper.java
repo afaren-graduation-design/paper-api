@@ -103,8 +103,6 @@ public interface UserMapper {
 
     List<Integer> findStudentIdsByMentorId(Integer id);
 
-    int deleteUserByEmail(String email);
-
     Integer getUserCount(@Param("email") String email,
                          @Param("mobilePhone") String mobilePhone);
 
