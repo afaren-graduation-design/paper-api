@@ -45,7 +45,7 @@ public class UserResource extends Resource {
         Integer startPage = Math.max(page - 1, 0);
         Integer newPage = startPage * pageSize;
 
-        List<User> users = userMapper.getAll( email, mobilePhone,newPage, pageSize);
+        List<User> users = userMapper.getAll(email, mobilePhone, newPage, pageSize);
         List<Map> userList = users.stream().map(item -> item.toMap()).collect(Collectors.toList());
 
         Map result = new HashMap();
@@ -74,7 +74,7 @@ public class UserResource extends Resource {
         if (user == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        
+
         return Response.status(Response.Status.OK).entity(user.toMap()).build();
     }
 
@@ -132,7 +132,6 @@ public class UserResource extends Resource {
             }
 
             Map map = user.toMap();
-            map.put("role", userMapper.getUserRolesByEmail(user.getEmail()));
 
             UserDetail detail = userMapper.getUserDetailById(userId);
             if (null != detail) {
