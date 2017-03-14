@@ -1,10 +1,13 @@
 package com.thoughtworks.twars.mapper;
 
 import com.thoughtworks.twars.bean.User;
+import com.thoughtworks.twars.bean.UserDetail;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -61,7 +64,7 @@ public class UserMapperTest extends TestBase {
         user.setEmail("test3@163.com");
         user.setMobilePhone("123456789012");
         user.setPassword("18928392811");
-        user.setRole(null);
+//        user.setRole(null);
         user.setUserName("hah");
 
         userMapper.insertUser(user);
@@ -133,7 +136,7 @@ public class UserMapperTest extends TestBase {
         newUser.setEmail("jingjing@qq.com");
         newUser.setMobilePhone("13576826262");
         newUser.setPassword("123");
-        newUser.setRole(null);
+//        newUser.setRole(null);
         newUser.setUserName("liu");
 
         int result = userMapper.insertUser(newUser);
@@ -322,6 +325,12 @@ public class UserMapperTest extends TestBase {
     public void should_return_all_users() {
         List<User> items = userMapper.getAll();
         assertThat(items.size(), is(8));
+    }
+
+    @Test
+    public void should_return_users_by_mobile_phone_and_password(){
+        List<Integer> roles = userMapper.getUserRoleByUserId(1);
+        assertThat(roles.size(),is(2));
     }
 
 

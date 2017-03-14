@@ -62,7 +62,7 @@ public class LoginResource extends Resource {
         Map<String, String> userInfo = new HashMap<>();
 
         map.put("id", resultUser.getId());
-        map.put("role", userMapper.getUserRolesByEmail(resultUser.getEmail()));
+        map.put("role", userMapper.getUserRoleByUserId(resultUser.getId()));
         userInfo.put("uri", "users/" + resultUser.getId());
         map.put("userInfo", userInfo);
         

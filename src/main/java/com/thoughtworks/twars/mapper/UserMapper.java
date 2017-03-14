@@ -29,8 +29,7 @@ public interface UserMapper {
             + " password = MD5(#{password}) LIMIT 1;")
     User getUserByEmailAndPassWord(User user);
 
-    @Select("SELECT * FROM users WHERE mobilePhone = #{email} AND "
-            + "password = MD5(#{password}) LIMIT 1;")
+    @Select("SELECT * FROM users WHERE mobilePhone = #{mobilePhone} LIMIT 1;")
     User getUserByMobilePhoneAndPassWord(User user);
 
     @Select("SELECT * FROM userDetail WHERE userId = #{userId};")
@@ -118,6 +117,7 @@ public interface UserMapper {
     List<Map> getAllRolesAndCount();
 
     List<User> getAll();
+
     List<Integer> getUserRoleByUserId(Integer id);
 
 }
