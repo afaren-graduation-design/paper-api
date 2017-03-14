@@ -62,7 +62,7 @@ public class UserResource extends Resource {
 
             }
             totalCount = userIds.size();
-            
+
         } else {
             users = userMapper.getAll(email, mobilePhone, newPage, pageSize);
             totalCount = userMapper.getUserCount(email, mobilePhone);
@@ -94,6 +94,23 @@ public class UserResource extends Resource {
 
         return Response.status(Response.Status.OK).entity(user.toMap()).build();
     }
+
+
+    @GET
+    @Path("/roleCount")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getRoleCount() {
+
+        List<Map> allRolesAndCount = userMapper.getAllRolesAndCount();
+        Integer userCount = userMapper.getUserCount(null, null);
+
+        Map result = new HashMap<>();
+        result.put("roleCount", allRolesAndCount);
+        result.put("totalCount", userCount);
+
+        return Response.status(Response.Status.OK).entity(result).build();
+    }
+
 
     @GET
     @Path("/{userId}/logicPuzzle")
@@ -397,7 +414,7 @@ public class UserResource extends Resource {
         }
 
         for (Integer userRole : roles) {
-            userMapper.insertUserRole(user.getId(),userRole);
+            userMapper.insertUserRole(user.getId(), userRole);
         }
 
         Map result = new HashMap();
@@ -425,7 +442,7 @@ public class UserResource extends Resource {
         }
         userMapper.deleteUserRole(id);
         for (Integer userRole : roles) {
-            userMapper.insertUserRole(id,userRole);
+            userMapper.insertUserRole(id, userRole);
         }
         return Response.status(Response.Status.NO_CONTENT).build();
     }

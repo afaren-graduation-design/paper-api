@@ -291,29 +291,30 @@ public class UserMapperTest extends TestBase {
     @Test
     public void should_return_roles_and_roleCount() {
         List<Map> items = userMapper.getAllRolesAndCount();
-        assertThat(items.size(), is(3));
+        assertThat(items.size(), is(6));
+        assertThat(items.get(0).get("count"), is(new Long(1)));
+        assertThat(items.get(3).get("count"), is(new Long(1)));
+        assertThat(items.get(4).get("count"), is(new Long(1)));
     }
 
     @Test
     public void should_return_all_users() {
-        List<User> items = userMapper.getAll("test@163.com","",1,3);
+        List<User> items = userMapper.getAll("test@163.com", "", 1, 3);
         System.out.println(items.size());
         assertThat(items.size(), is(0));
     }
 
     @Test
-    public void should_return_users_by_mobile_phone_and_password(){
+    public void should_return_users_by_mobile_phone_and_password() {
         List<Integer> roles = userMapper.getUserRoleByUserId(1);
-        assertThat(roles.size(),is(2));
+        assertThat(roles.size(), is(2));
     }
 
     @Test
-    public void should_insert_user_role(){
-        Integer id = userMapper.insertUserRole(1,2);
-        assertThat(id,is(1));
+    public void should_insert_user_role() {
+        Integer id = userMapper.insertUserRole(1, 2);
+        assertThat(id, is(1));
     }
-
-
 
 
 }

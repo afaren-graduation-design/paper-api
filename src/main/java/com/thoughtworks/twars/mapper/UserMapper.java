@@ -80,7 +80,7 @@ public interface UserMapper {
             @Result(property = "mobilePhone", column = "mobilePhone"),
             @Result(id = true, property = "email", column = "email"),
             @Result(id = true, property = "userName", column = "userName")
-    })
+            })
     List<User> findUsersByUserIds(List<Integer> userIds);
 
     List<Integer> findProgramsById(Integer id);
@@ -106,7 +106,8 @@ public interface UserMapper {
     Integer getUserCount(@Param("email") String email,
                          @Param("mobilePhone") String mobilePhone);
 
-    @Select("SELECT role, count(*) AS count FROM users WHERE role IS NOT NULL GROUP BY role;")
+    @Select("SELECT role, COUNT(userId) AS count FROM userRole "
+            + "WHERE role IS NOT NULL GROUP BY role ;")
     List<Map> getAllRolesAndCount();
 
 
@@ -120,7 +121,7 @@ public interface UserMapper {
 
     int insertUserRole(@Param("userId") Integer userId, @Param("role") Integer role);
 
-    @Update("UPDATE users SET email =#{email}, mobilePhone = #{mobilePhone}," +
-            "password=MD5(#{password}), userName=#{userName} where id = #{id};")
+    @Update("UPDATE users SET email =#{email}, mobilePhone = #{mobilePhone},"
+            + "password=MD5(#{password}), userName=#{userName} where id = #{id};")
     Integer updateUser(User user);
 }

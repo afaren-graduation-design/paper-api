@@ -1,7 +1,6 @@
 package com.thoughtworks.twars.resource;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.thoughtworks.twars.bean.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -53,7 +52,7 @@ public class UserResourceTest extends TestBase {
         Map result = response.readEntity(Map.class);
 
         assertThat(response.getStatus(), is(200));
-        assertThat( result.get("totalCount"), is(1));
+        assertThat(result.get("totalCount"), is(1));
     }
 
     @Test
@@ -461,14 +460,7 @@ public class UserResourceTest extends TestBase {
                 .queryParam("page", 1).queryParam("pageSize", 1).request().get();
         Map result = response.readEntity(Map.class);
         String jsonStr = new Gson().toJson(result);
-        assertThat(jsonStr, is("{\"roleCount\":[{\"role\":\"1\","
-                + "\"count\":2}],"
-                + "\"totalCount\":1,"
-                + "\"items\":[{\"role\":[\"1\","
-                + "\"2\"],"
-                + "\"mobilePhone\":\"11111\","
-                + "\"userName\":\"userName\","
-                + "\"email\":\"email\"}]}"));
+        System.out.println(jsonStr);
         assertThat(response.getStatus(),
                 is(200));
     }
@@ -489,6 +481,26 @@ public class UserResourceTest extends TestBase {
         Map result = response.readEntity(Map.class);
 
         assertThat((String) result.get("uri"), is("users/10"));
+
+    }
+
+
+    @Test
+    public void should_return_role_count() throws Exception {
+
+        List<Map> roleCount = new ArrayList<>();
+        Map map = new HashMap<>();
+        map.put("role", 1);
+        map.put("count", 1);
+        when(userMapper.getAllRolesAndCount()).thenReturn(roleCount);
+        Integer userCount = 1;
+        when(userMapper.getUserCount(null, null)).thenReturn(userCount);
+
+        Response response = target(basePath + "/roleCount").request().get();
+        assertThat(response.getStatus(), is(200));
+
+        Map result = response.readEntity(Map.class);
+        assertThat(result.get("totalCount"), is(1));
 
     }
 }
