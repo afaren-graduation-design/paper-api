@@ -83,33 +83,29 @@
         DELETE FROM users WHERE email = #{email};
     </delete>
 
-    <select id="groupUserByEmail" resultType="com.thoughtworks.twars.bean.User">
-        SELECT email,userName,mobilePhone,password
-        FROM users
-        <where>
-            <if test="email != null">
-                email LIKE concat("%",#{email},"%")
-            </if>
-            <if test="mobilePhone != null">
-                AND mobilePhone = #{mobilePhone}
-            </if>
-            <!--<if test="role != null">-->
-                <!--AND role = #{role}-->
-            <!--</if>-->
-        </where>
-        GROUP BY email,userName,mobilePhone,password,createDate
-        ORDER BY createDate DESC
-        LIMIT #{page},#{pageSize};
-    </select>
+    <!--<select id="groupUserByEmail" resultType="com.thoughtworks.twars.bean.User">-->
+    <!--SELECT email,userName,mobilePhone,password-->
+    <!--FROM users-->
+    <!--<where>-->
+    <!--<if test="email != null">-->
+    <!--email LIKE concat("%",#{email},"%")-->
+    <!--</if>-->
+    <!--<if test="mobilePhone != null">-->
+    <!--AND mobilePhone = #{mobilePhone}-->
+    <!--</if>-->
+    <!---->
+    <!--</where>-->
+    <!--GROUP BY email,userName,mobilePhone,password,createDate-->
+    <!--ORDER BY createDate DESC-->
+    <!--LIMIT #{page},#{pageSize};-->
+    <!--</select>-->
 
     <!--<select id="getUserRolesByEmail" resultType="java.lang.Integer" parameterType="java.lang.String">-->
-        <!--SELECT role FROM users WHERE email = #{email} ;-->
+    <!--SELECT role FROM users WHERE email = #{email} ;-->
     <!--</select>-->
 
     <select id="getUserCount" resultType="java.lang.Integer">
-
-    select count(*) from (SELECT email,userName,mobilePhone,password
-        FROM users
+        SELECT count(*) FROM users
         <where>
             <if test="email != null">
                 email LIKE concat("%",#{email},"%")
@@ -117,16 +113,20 @@
             <if test="mobilePhone != null">
                 AND mobilePhone = #{mobilePhone}
             </if>
-            <!--<if test="role != null">-->
-                <!--AND role = #{role}-->
-            <!--</if>-->
         </where>
-        GROUP BY email,userName,mobilePhone,password) tmp
-        Group BY email;
     </select>
 
     <select id="getAll" resultMap="userMap">
-        SELECT * from users;
+        SELECT * FROM users
+        <where>
+            <if test="email != null">
+                email LIKE concat("%",#{email},"%")
+            </if>
+            <if test="mobilePhone != null">
+                AND mobilePhone = #{mobilePhone}
+            </if>
+        </where>
+        limit #{page} ,#{pageSize};
     </select>
 
     <select id="getUserRoleByUserId" parameterType="java.lang.Integer" resultType="java.lang.Integer">

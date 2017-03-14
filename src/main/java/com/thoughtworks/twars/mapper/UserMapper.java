@@ -75,7 +75,7 @@ public interface UserMapper {
             @Result(property = "mobilePhone", column = "mobilePhone"),
             @Result(id = true, property = "email", column = "email"),
             @Result(id = true, property = "userName", column = "userName")
-            })
+    })
     List<User> findUsersByUserIds(List<Integer> userIds);
 
     List<Integer> findProgramsById(Integer id);
@@ -109,14 +109,17 @@ public interface UserMapper {
 
     List<String> getUserRolesByEmail(String email);
 
-    List<User> getUserCount(@Param("email") String email,
-                            @Param("mobilePhone") String mobilePhone,
-                            @Param("role") String role);
+    Integer getUserCount(@Param("email") String email,
+                            @Param("mobilePhone") String mobilePhone);
 
     @Select("SELECT role, count(*) AS count FROM users WHERE role IS NOT NULL GROUP BY role;")
     List<Map> getAllRolesAndCount();
 
-    List<User> getAll();
+    List<User> getAll(
+            @Param("email") String email,
+            @Param("mobilePhone") String mobilePhone,
+            @Param("page") Integer page,
+            @Param("pageSize") Integer pageSize);
 
     List<Integer> getUserRoleByUserId(Integer id);
 

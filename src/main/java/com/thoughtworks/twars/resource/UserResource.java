@@ -9,6 +9,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Path("/users")
 @Api
@@ -39,35 +40,27 @@ public class UserResource extends Resource {
             @DefaultValue("1") @QueryParam("page") Integer page,
             @DefaultValue("15") @QueryParam("pageSize") Integer pageSize,
             @QueryParam("email") String email,
-            @QueryParam("mobilePhone") String mobilePhone,
-            @QueryParam("role") String role
-
+            @QueryParam("mobilePhone") String mobilePhone
     ) {
         Integer startPage = Math.max(page - 1, 0);
         Integer newPage = startPage * pageSize;
-        List<User> users = userMapper.groupUserByEmail(newPage, pageSize, email, mobilePhone, role);
-        List<Map> resultCollection = new ArrayList<>();
 
-        for (User user : users) {
-            ArrayList<String> roles = (ArrayList<String>) userMapper
-                    .getUserRolesByEmail(user.getEmail());
-            Map map = user.toMap();
-            map.put("role", roles);
-            resultCollection.add(map);
-        }
+        List<User> users = userMapper.getAll( email, mobilePhone,newPage, pageSize);
+        List<Map> userList = users.stream().map(item -> item.toMap()).collect(Collectors.toList());
 
         Map result = new HashMap();
-        result.put("items", resultCollection);
+        result.put("items", userList);
+        result.put("totalCount", userMapper.getUserCount(email, mobilePhone));
 
-        result.put("totalCount", userMapper.getUserCount(email, mobilePhone, role).size());
+        return Response.status(Response.Status.OK).entity(result).build();
 
-        if (role != null) {
-            return Response.status(Response.Status.OK).entity(result).build();
-        } else {
-
-            result.put("roleCount", userMapper.getAllRolesAndCount());
-            return Response.status(Response.Status.OK).entity(result).build();
-        }
+//        if (role != null) {
+//            return Response.status(Response.Status.OK).entity(result).build();
+//        } else {
+//
+//            result.put("roleCount", userMapper.getAllRolesAndCount());
+//            return Response.status(Response.Status.OK).entity(result).build();
+//        }
     }
 
     @GET

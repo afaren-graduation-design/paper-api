@@ -310,7 +310,7 @@ public class UserMapperTest extends TestBase {
 
     @Test
     public void should_return_users_count() {
-        List<User> users = userMapper.getUserCount(null, null, null);
+        List<User> users = userMapper.getUserCount(null, null);
         assertThat(users.size(), is(8));
     }
 
@@ -323,8 +323,9 @@ public class UserMapperTest extends TestBase {
 
     @Test
     public void should_return_all_users() {
-        List<User> items = userMapper.getAll();
-        assertThat(items.size(), is(8));
+        List<User> items = userMapper.getAll("test@163.com","",1,3);
+        System.out.println(items.size());
+        assertThat(items.size(), is(0));
     }
 
     @Test
