@@ -436,7 +436,7 @@ public class UserResourceTest extends TestBase {
         roles.add("1");
         roles.add("2");
         when(userMapper.getUserRolesByEmail(user.getEmail())).thenReturn(roles);
-        when(userMapper.getUserCount(null, null)).thenReturn(Arrays.asList(user02));
+        when(userMapper.getUserCount(null, null)).thenReturn(2);
         Map item = new HashMap();
         item.put("role", "1");
         item.put("count", 2);
