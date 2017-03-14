@@ -9,8 +9,8 @@ import java.util.Map;
 
 public interface UserMapper {
 
-    @Insert("INSERT INTO users(email, mobilePhone, password, userName,role,createDate)"
-            + "VALUES (#{email}, #{mobilePhone}, MD5(#{password}),#{userName},#{role}"
+    @Insert("INSERT INTO users(email, mobilePhone, password, userName,createDate)"
+            + "VALUES (#{email}, #{mobilePhone}, MD5(#{password}),#{userName}"
             + ",UNIX_TIMESTAMP())")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int insertUser(User user);
