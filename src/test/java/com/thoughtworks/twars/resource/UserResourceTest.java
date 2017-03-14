@@ -416,7 +416,7 @@ public class UserResourceTest extends TestBase {
 
         Entity entity = Entity.entity(data, MediaType.APPLICATION_JSON_TYPE);
         Response response = target(basePath)
-                .queryParam("email", "z@z.com").request().put(entity);
+                .queryParam("id", 1).request().put(entity);
 
         assertThat(response.getStatus(), is(204));
     }
@@ -424,7 +424,7 @@ public class UserResourceTest extends TestBase {
     @Test
     public void should_return_all_user() {
 
-        when(userMapper.groupUserByEmail(0, 1, null, null, null)).thenReturn(Arrays.asList(user));
+
         when(user.getEmail()).thenReturn("email");
 
         Map map = new HashMap();
@@ -439,7 +439,7 @@ public class UserResourceTest extends TestBase {
         ArrayList roles = new ArrayList();
         roles.add("1");
         roles.add("2");
-        when(userMapper.getUserRolesByEmail(user.getEmail())).thenReturn(roles);
+
         when(userMapper.getUserCount(null, null)).thenReturn(2);
         Map item = new HashMap();
         item.put("role", "1");
