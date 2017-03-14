@@ -385,25 +385,24 @@ public class UserResource extends Resource {
 
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateUser(Map data, @QueryParam("email") String email) {
-
-        userMapper.deleteUserByEmail(email);
+    public Response updateUser(Map data, @QueryParam("id") Integer id) {
 
         User user = new User();
+        user.setId(id);
         user.setEmail((String) data.get("email"));
         user.setMobilePhone((String) data.get("mobilePhone"));
         user.setPassword((String) data.get("password"));
         user.setUserName((String) data.get("userName"));
 
+        userMapper.updateUser(user);
+
         ArrayList<Integer> roles = (ArrayList<Integer>) data.get("role");
         if (roles.size() == 0) {
-            userMapper.insertUser(user);
             return Response.status(Response.Status.CREATED).build();
         }
-
+        userMapper.deleteUserRole(id);
         for (Integer userRole : roles) {
-//            user.setRole(userRole + "");
-            userMapper.insertUser(user);
+            userMapper.insertUserRole(id,userRole);
         }
         return Response.status(Response.Status.NO_CONTENT).build();
     }

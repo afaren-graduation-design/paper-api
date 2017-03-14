@@ -9,14 +9,17 @@ import java.util.Map;
 
 public interface UserMapper {
 
-    @Insert("INSERT INTO users(email, mobilePhone, password, userName,role,createDate)"
-            + "VALUES (#{email}, #{mobilePhone}, MD5(#{password}),#{userName},#{role}"
+    @Insert("INSERT INTO users(email, mobilePhone, password, userName,createDate)"
+            + "VALUES (#{email}, #{mobilePhone}, MD5(#{password}),#{userName}"
             + ",UNIX_TIMESTAMP())")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int insertUser(User user);
 
-//    @Select("SELECT * FROM users WHERE id = #{id};")
+    //    @Select("SELECT * FROM users WHERE id = #{id};")
     User getUserById(Integer id);
+
+    @Select("DELETE from userRole where id = #{Id};")
+    Integer deleteUserRole(Integer id);
 
     @Select("SELECT * FROM users WHERE binary email = #{email} LIMIT 1;")
     User getUserByEmail(String email);
@@ -109,7 +112,7 @@ public interface UserMapper {
     List<String> getUserRolesByEmail(String email);
 
     Integer getUserCount(@Param("email") String email,
-                            @Param("mobilePhone") String mobilePhone);
+                         @Param("mobilePhone") String mobilePhone);
 
     @Select("SELECT role, count(*) AS count FROM users WHERE role IS NOT NULL GROUP BY role;")
     List<Map> getAllRolesAndCount();
@@ -124,4 +127,8 @@ public interface UserMapper {
     List<Integer> getUserRoleByUserId(Integer id);
 
     int insertUserRole(@Param("userId") Integer userId, @Param("role") Integer role);
+
+    @Update("UPDATE users SET email =#{email}, mobilePhone = #{mobilePhone}," +
+            "password=MD5(#{password}), userName=#{userName} where id = #{id};")
+    Integer updateUser(User user);
 }
