@@ -21,7 +21,10 @@
         <result column="email" property="email"></result>
         <result column="mobilePhone" property="mobilePhone"></result>
         <result column="userName" property="userName"></result>
+        <collection property="roles" column="id" javaType="java.util.ArrayList" ofType="java.lang.Integer"
+                    select="getUserRoleByUserId"/>
     </resultMap>
+
 
     <resultMap id="userInformationMap" type="java.util.Map">
         <id property="userId" column="userId"></id>
@@ -90,18 +93,18 @@
             <if test="mobilePhone != null">
                 AND mobilePhone = #{mobilePhone}
             </if>
-            <if test="role != null">
-                AND role = #{role}
-            </if>
+            <!--<if test="role != null">-->
+                <!--AND role = #{role}-->
+            <!--</if>-->
         </where>
         GROUP BY email,userName,mobilePhone,password,createDate
         ORDER BY createDate DESC
         LIMIT #{page},#{pageSize};
     </select>
 
-    <select id="getUserRolesByEmail" resultType="java.lang.Integer" parameterType="java.lang.String">
-        SELECT role FROM users WHERE email = #{email} ;
-    </select>
+    <!--<select id="getUserRolesByEmail" resultType="java.lang.Integer" parameterType="java.lang.String">-->
+        <!--SELECT role FROM users WHERE email = #{email} ;-->
+    <!--</select>-->
 
     <select id="getUserCount" resultType="java.lang.Integer">
 
@@ -114,12 +117,20 @@
             <if test="mobilePhone != null">
                 AND mobilePhone = #{mobilePhone}
             </if>
-            <if test="role != null">
-                AND role = #{role}
-            </if>
+            <!--<if test="role != null">-->
+                <!--AND role = #{role}-->
+            <!--</if>-->
         </where>
         GROUP BY email,userName,mobilePhone,password) tmp
         Group BY email;
+    </select>
+
+    <select id="getAll" resultMap="userMap">
+        SELECT * from users;
+    </select>
+
+    <select id="getUserRoleByUserId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT role FROM userRole WHERE userId= #{id};
     </select>
 </mapper>
 

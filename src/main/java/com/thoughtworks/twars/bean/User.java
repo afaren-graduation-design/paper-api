@@ -1,6 +1,7 @@
 package com.thoughtworks.twars.bean;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class User {
@@ -8,7 +9,7 @@ public class User {
     private String email;
     private String mobilePhone;
     private String password;
-    private String role;
+    private List<Integer> roles;
     private String userName;
 
     public String getUserName() {
@@ -52,12 +53,21 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
+//    public List<Integer> getRole() {
+//        return role;
+//    }
+
+//    public void setRole(List<Integer> role) {
+//        this.role = role;
+//    }
+
+
+    public List<Integer> getRoles() {
+        return roles;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoles(List<Integer> roles) {
+        this.roles = roles;
     }
 
     public Map toMap() {
@@ -65,6 +75,7 @@ public class User {
         result.put("email", getEmail());
         result.put("mobilePhone", getMobilePhone());
         result.put("userName", getUserName());
+//        result.put("role", role);
 
         return result;
     }

@@ -1,13 +1,10 @@
 package com.thoughtworks.twars.mapper;
 
 import com.thoughtworks.twars.bean.User;
-import com.thoughtworks.twars.bean.UserDetail;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -320,6 +317,14 @@ public class UserMapperTest extends TestBase {
         assertThat(items.size(), is(3));
 
     }
+
+    @Test
+    public void should_return_all_users() {
+        List<User> items = userMapper.getAll();
+        assertThat(items.size(), is(8));
+    }
+
+
 
 }
 

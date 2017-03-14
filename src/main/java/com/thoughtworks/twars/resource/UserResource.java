@@ -87,7 +87,7 @@ public class UserResource extends Resource {
         result.put("userName", user.getUserName());
         result.put("email", user.getEmail());
         result.put("mobilePhone", user.getMobilePhone());
-        result.put("role", user.getRole());
+//        result.put("role", user.getRole());
 
         return Response.status(Response.Status.OK).entity(result).build();
     }
@@ -392,7 +392,7 @@ public class UserResource extends Resource {
         }
 
         for (Integer userRole : roles) {
-            user.setRole(userRole + "");
+//            user.setRole(userRole + "");
             userMapper.insertUser(user);
         }
         return Response.status(Response.Status.CREATED).build();
@@ -417,7 +417,7 @@ public class UserResource extends Resource {
         }
 
         for (Integer userRole : roles) {
-            user.setRole(userRole + "");
+//            user.setRole(userRole + "");
             userMapper.insertUser(user);
         }
         return Response.status(Response.Status.NO_CONTENT).build();

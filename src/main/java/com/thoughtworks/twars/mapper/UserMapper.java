@@ -117,6 +117,7 @@ public interface UserMapper {
     @Select("SELECT role, count(*) AS count FROM users WHERE role IS NOT NULL GROUP BY role;")
     List<Map> getAllRolesAndCount();
 
-
+    List<User> getAll();
+    List<Integer> getUserRoleByUserId(Integer id);
 
 }

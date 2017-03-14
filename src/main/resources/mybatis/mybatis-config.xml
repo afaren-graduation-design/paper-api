@@ -41,8 +41,9 @@
         </environment>
 
     </environments>
+
     <mappers>
-        <mapper class="com.thoughtworks.twars.mapper.UserMapper"></mapper>
+        <!--<mapper class="com.thoughtworks.twars.mapper.UserMapper"></mapper>-->
         <mapper resource="mybatis/UserMapper.xml"/>
         <mapper resource="mybatis/QuizItemMapper.xml"/>
         <mapper resource="mybatis/PaperMapper.xml"/>

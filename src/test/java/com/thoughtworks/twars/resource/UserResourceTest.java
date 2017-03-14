@@ -9,7 +9,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.sql.Array;
 import java.util.*;
 
 import static org.hamcrest.core.Is.is;
@@ -39,7 +38,7 @@ public class UserResourceTest extends TestBase {
         when(user.getId()).thenReturn(1);
         when(user.getEmail()).thenReturn("111@222.com");
         when(user.getMobilePhone()).thenReturn("13111111111");
-        when(user.getRole()).thenReturn("1");
+//        when(user.getRole()).thenReturn("1");
 
         Response response = target(basePath + "/1").request().get();
 
