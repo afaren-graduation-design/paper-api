@@ -83,27 +83,6 @@
         DELETE FROM users WHERE email = #{email};
     </delete>
 
-    <!--<select id="groupUserByEmail" resultType="com.thoughtworks.twars.bean.User">-->
-    <!--SELECT email,userName,mobilePhone,password-->
-    <!--FROM users-->
-    <!--<where>-->
-    <!--<if test="email != null">-->
-    <!--email LIKE concat("%",#{email},"%")-->
-    <!--</if>-->
-    <!--<if test="mobilePhone != null">-->
-    <!--AND mobilePhone = #{mobilePhone}-->
-    <!--</if>-->
-    <!---->
-    <!--</where>-->
-    <!--GROUP BY email,userName,mobilePhone,password,createDate-->
-    <!--ORDER BY createDate DESC-->
-    <!--LIMIT #{page},#{pageSize};-->
-    <!--</select>-->
-
-    <!--<select id="getUserRolesByEmail" resultType="java.lang.Integer" parameterType="java.lang.String">-->
-    <!--SELECT role FROM users WHERE email = #{email} ;-->
-    <!--</select>-->
-
     <select id="getUserCount" resultType="java.lang.Integer">
         SELECT count(*) FROM users
         <where>

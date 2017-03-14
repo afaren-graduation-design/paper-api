@@ -102,15 +102,6 @@ public interface UserMapper {
 
     int deleteUserByEmail(String email);
 
-    List<User> groupUserByEmail(@Param("page") Integer page,
-                                @Param("pageSize") Integer pageSize,
-                                @Param("email") String email,
-                                @Param("mobilePhone") String mobilePhone,
-                                @Param("role") String role);
-
-
-    List<String> getUserRolesByEmail(String email);
-
     Integer getUserCount(@Param("email") String email,
                          @Param("mobilePhone") String mobilePhone);
 
