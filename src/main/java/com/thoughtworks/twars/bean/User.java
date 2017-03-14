@@ -63,6 +63,7 @@ public class User {
 
     public Map toMap() {
         Map result = new HashMap<>();
+        result.put("id",getId());
         result.put("email", getEmail());
         result.put("mobilePhone", getMobilePhone());
         result.put("userName", getUserName());
