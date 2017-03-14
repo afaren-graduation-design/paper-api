@@ -15,9 +15,8 @@ public interface UserMapper {
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int insertUser(User user);
 
-    @Select("SELECT * FROM users WHERE id = #{id};")
+//    @Select("SELECT * FROM users WHERE id = #{id};")
     User getUserById(Integer id);
-
 
     @Select("SELECT * FROM users WHERE binary email = #{email} LIMIT 1;")
     User getUserByEmail(String email);

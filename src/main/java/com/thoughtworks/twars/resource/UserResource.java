@@ -74,15 +74,8 @@ public class UserResource extends Resource {
         if (user == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-
-        Map<String, Object> result = new HashMap<>();
-        result.put("id", user.getId());
-        result.put("userName", user.getUserName());
-        result.put("email", user.getEmail());
-        result.put("mobilePhone", user.getMobilePhone());
-//        result.put("role", user.getRole());
-
-        return Response.status(Response.Status.OK).entity(result).build();
+        
+        return Response.status(Response.Status.OK).entity(user.toMap()).build();
     }
 
     @GET
