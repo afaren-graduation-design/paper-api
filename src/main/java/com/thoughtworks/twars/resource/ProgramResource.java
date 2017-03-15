@@ -56,9 +56,7 @@ public class ProgramResource extends Resource {
     @POST
     @Path("/{programId}/papers")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response insertPapers(
-            @ApiParam(name = "data", value = "insert paper", required = true) Map data,
-            @PathParam("programId") Integer programId) {
+    public Response insertPapers(Map data, @PathParam("programId") Integer programId) {
 
         Integer makerId = (Integer) data.get("makerId");
         String paperName = (String) data.get("paperName");
@@ -87,6 +85,7 @@ public class ProgramResource extends Resource {
         paperOperationMapper.insertPaperOperation(paperOperation);
 
         List sections = (List) data.get("sections");
+
         for (Object sectionItem : sections) {
             Map section = (Map) sectionItem;
             String sectionDescription = (String) section.get("description");
@@ -142,7 +141,23 @@ public class ProgramResource extends Resource {
 
                 }
             }
+            if (sectionType.equals("basicQuizzes")) {
+
+                List item = (List) section.get("items");
+
+                for (Object basicQuizItem : item) {
+
+                    Map basicQuiz = (Map) basicQuizItem;
+                    Integer id = (Integer) basicQuiz.get("id");
+
+                    SectionQuiz sectionQuiz = new SectionQuiz();
+                    sectionQuiz.setQuizId(id);
+                    sectionQuiz.setSectionId(sectionId);
+                    sectionQuizMapper.insertSectionQuiz(sectionQuiz);
+                }
+            }
         }
+
         Map result = new HashMap();
         result.put("uri", "programs/" + programId + "/papers/" + paperId);
 
